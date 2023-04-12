@@ -11,7 +11,7 @@ export default function User(){
             <div className={style.volverButton}>
            <Link to="/login"><Button text="X"/></Link>
             </div>
-            <h2>Crea tu Cuenta ! </h2>
+            <h2>Crea tu Cuenta! </h2>
                 <div className={style.inputContainer}>
 
                     <label htmlFor="email">Mail: </label>
