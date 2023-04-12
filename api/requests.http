@@ -1,0 +1,28 @@
+###
+GET http://localhost:3001/products HTTP/1.1
+
+###
+POST http://localhost:3001/products HTTP/1.1
+Content-Type: application/json 
+
+{
+	"name" : "Chocolate negro",
+    "price" : "30",
+    "stock" : "2",
+    "ingredients" : ["chau"],
+    "image": "url.com",
+    "score" : "3",
+    "types" : "Chocolate",
+    "categories" : ["Sin gluten", "Sin tac"]
+}
+
+### 
+GET http://localhost:3001/categories HTTP/1.1
+
+### 
+POST http://localhost:3001/categories HTTP/1.1
+Content-Type: application/json 
+
+{
+	"name" : "Sin tac"
+}

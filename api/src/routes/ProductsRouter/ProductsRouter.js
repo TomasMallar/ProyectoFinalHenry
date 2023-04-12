@@ -1,9 +1,13 @@
-const { getAllProducts } = require('../../handlers/ProductsHandler')
+const {
+  getAllProducts,
+  postProducts,
+} = require("../../handlers/ProductsHandler");
 
-const { Router } = require('express')
+const { Router } = require("express");
 
-const routerProducts = Router()
+const routerProducts = Router();
 
-routerProducts.get('/', getAllProducts) // Traer todos los chocolates
+routerProducts.get("/", getAllProducts); // Traer todos los chocolates
+routerProducts.post("/", postProducts);
 
-module.exports = routerProducts
+module.exports = routerProducts;
