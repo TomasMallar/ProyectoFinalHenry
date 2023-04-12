@@ -2,8 +2,8 @@ const { Product, Category } = require("../db");
 
 // Controller para traer todos los chocolates
 const getAllProductsFromDB = async () => {
-  // const allProductsFromDB = await Product.findAll();
-  const allProductsFromDB = await Product.findAll({
+  const allProductsFromDB = await Product.findAll();
+  /*const allProductsFromDB = await Product.findAll({
     include: {
       model: Category,
       attributes: ["name"],
@@ -11,27 +11,27 @@ const getAllProductsFromDB = async () => {
         attributes: [],
       },
     },
-  });
+  });*/
 
-  const allProductsWithCategoryNames = allProductsFromDB.map((product) => {
+  /*const allProductsWithCategoryNames = allProductsFromDB.map((product) => {
     const categories = product.categories.map((category) => category.name);
     return {
       ...product.dataValues,
       categories,
     };
-  });
+  });*/
 
-  // const allProducts = allProductsFromDB.map((chocolate) => {
-  //   return {
-  //     name: chocolate.name,
-  //     price: chocolate.price,
-  //     image: chocolate.image,
-  //     score: chocolate.score,
-  //   };
-  // });
+   const allProducts = allProductsFromDB.map((chocolate) => {
+     return {
+       name: chocolate.name,
+       price: chocolate.price,
+       image: chocolate.image,
+       score: chocolate.score,
+     };
+   });
 
-  // return allProducts;
-  return allProductsWithCategoryNames;
+   return allProducts;
+  //return allProductsWithCategoryNames;
 };
 
 const postProductsDB = async (data) => {
