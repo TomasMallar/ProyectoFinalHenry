@@ -7,3 +7,4 @@ const routerProducts = Router()
 routerProducts.get('/', getAllProducts) // Traer todos los chocolates
 
 module.exports = routerProducts
+module.exports = routerProducts
