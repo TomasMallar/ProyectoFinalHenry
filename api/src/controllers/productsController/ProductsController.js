@@ -1,4 +1,4 @@
-const { Product, Category } = require("../db");
+const { Product, Category } = require("../../db");
 
 // Controller para traer todos los chocolates
 const getAllProductsFromDB = async () => {
