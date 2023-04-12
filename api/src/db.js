@@ -6,7 +6,7 @@ const {
   DB_USER, DB_PASSWORD, DB_HOST,
 } = process.env;
 
-const sequelize = new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/videogames`, { // <== cambiar endpoint al nombre de la DB 
+const sequelize = new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/chocolates`, { // <== cambiar endpoint al nombre de la DB 
   logging: false,
   native: false, 
 });
@@ -26,7 +26,10 @@ let entries = Object.entries(sequelize.models);
 let capsEntries = entries.map((entry) => [entry[0][0].toUpperCase() + entry[0].slice(1), entry[1]]);
 sequelize.models = Object.fromEntries(capsEntries);
 
-const { /* Nombre del modelo */ } = sequelize.models;
+const { Product, User, Category } = sequelize.models;
+
+Product.belongsToMany(Category, {through: {model: 'ProductsCategory'}, timestamps: false})
+Category.belongsToMany(Product, {through: {model: 'ProductsCategory'}, timestamps: false})
 
 module.exports = {
   ...sequelize.models,
