@@ -6,6 +6,6 @@ const router = Router();
 
 // Ruta para los chocolates
 router.use("/products", routerProducts);
-router.use("categories", routerCategories);
+router.use("/categories", routerCategories);
 
 module.exports = router;

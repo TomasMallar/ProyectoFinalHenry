@@ -45,7 +45,7 @@ Category.belongsToMany(Product, {
   timestamps: false,
 });
 
-//Relación entre los productos y los usuarios
+//Relación entre los productos y los usuarios | Habría que modificar aquí así se hace con Favoritos como dicen
 User.belongsToMany(Product, {
   through: { model: "UsersProducts" },
   timestamps: false,

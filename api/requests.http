@@ -1,25 +1,28 @@
-### 
-POST http://localhost:3001/categories HTTP/1.1
-Content-Type: application/json 
-
-{
-	"name" : "Sin gluten"
-}
+###
+GET http://localhost:3001/products HTTP/1.1
 
 ###
 POST http://localhost:3001/products HTTP/1.1
 Content-Type: application/json 
 
 {
-	"name" : "Chocolate en Barra Negro",
+	"name" : "Chocolate en Barra Azul",
     "price" : "30",
     "stock" : "2",
     "ingredients" : ["chau"],
     "image": "url.com",
     "score" : "3",
     "types" : "Chocolate",
-    "categories" : ["sin gluten", "sin tac"]
+    "categories" : ["Sin gluten", "Sin tac"]
 }
 
-###
-GET http://localhost:3001/products HTTP/1.1
+### 
+GET http://localhost:3001/categories HTTP/1.1
+
+### 
+POST http://localhost:3001/categories HTTP/1.1
+Content-Type: application/json 
+
+{
+	"name" : "Sin tac"
+}

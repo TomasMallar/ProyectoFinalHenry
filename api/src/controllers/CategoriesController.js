@@ -1,13 +1,19 @@
 const { Category } = require("../db");
 
+const getCategoriesFromDB = async () => {
+  const allCategoriesFromDB = await Category.findAll();
+
+  return allCategoriesFromDB;
+};
+
 const postCategoriesDB = async (data) => {
   const { name } = data;
 
   if (!name) throw new Error("Missing required data");
 
-  await Category.findOrCreate({ where: { name } });
+  const newCategory = await Category.findOrCreate({ where: { name } });
 
-  return "Product was created successfully";
+  return newCategory[0];
 };
 
-module.exports = { postCategoriesDB };
+module.exports = { getCategoriesFromDB, postCategoriesDB };

@@ -51,7 +51,7 @@ const postProductsDB = async (data) => {
 
   createNewProduct.addCategory(findCategories);
 
-  return "Product was created successfully";
+  return createNewProduct;
 };
 
 module.exports = {

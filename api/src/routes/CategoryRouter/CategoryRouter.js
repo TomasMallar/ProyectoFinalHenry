@@ -1,10 +1,12 @@
-const { postCategories } = require("../../handlers/CategoriesHandler");
-
 const { Router } = require("express");
+const {
+  getCategories,
+  postCategories,
+} = require("../../handlers/CategoriesHandler");
 
 const routerCategories = Router();
 
-// routerCategories.get("/");
+routerCategories.get("/", getCategories);
 routerCategories.post("/", postCategories);
 
 module.exports = routerCategories;
