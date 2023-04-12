@@ -11,9 +11,11 @@ const postCategoriesDB = async (data) => {
 
   if (!name) throw new Error("Missing required data");
 
-  const newCategory = await Category.findOrCreate({ where: { name } });
+  const [newCategory] = await Category.findOrCreate({
+    where: { name },
+  });
 
-  return newCategory[0];
+  return { message: "Successfully created", newCategory };
 };
 
 module.exports = { getCategoriesFromDB, postCategoriesDB };
