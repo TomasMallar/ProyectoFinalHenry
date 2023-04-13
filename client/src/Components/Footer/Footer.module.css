@@ -1,5 +1,65 @@
+@font-face
+{
+    font-family: "ArimaMadurai";
+    src: url("../../Formatting/ArimaMadurai-ExtraBold.ttf");
+}
+
+@font-face {
+    font-family: "Source Sans Pro";
+    src: url("../../Formatting/SourceSansPro-Regular.ttf");
+}
+
+
 .PieDePag {
-    background-color: aqua;
+
+    display: flex;
+    background-color: #D7CBB9;
+    justify-content: space-between;
+    position: absolute;
+    bottom:0%;
+    width: 100%;
+    height: 250px;
 
 }
+
+.copyright {
+    display: block;
+}
+
+h1 {
+    font-family: "ArimaMadurai";
+    margin-block-start: 0%;
+    margin-block-end: 0%;
+}
+
+h2 {
+    font-family: "Source Sans Pro";
+    font-size: 16.3px;
+    font-weight: lighter;
+    letter-spacing: 2mm;
+    margin-block-start: 0%;
+    margin-block-end: 0%;
+}
+
+h3 {
+    font-family: "ArimaMadurai";
+    position: absolute;
+    margin-left: 20px;
+    bottom: 0;
+}
+
+.contacts {
+    align-items:flex-start;
+
+}
+
+.logosImg {
+    display: flex;
+    width: 4.5%;
+}
+
+.logoChoco {
+    width: 15%;
+}
+
 
