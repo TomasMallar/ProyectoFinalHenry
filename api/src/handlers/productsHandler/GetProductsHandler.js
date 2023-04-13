@@ -1,5 +1,5 @@
-const { getProductbyName } = require("../../controllers/productsControllers/getProductByName");
-const { getProductsAll } = require("../../controllers/productsControllers/getProductsAll");
+const { getProductbyName } = require("../../controllers/productsController/getProductByNameController");
+const { getProductsAll } = require("../../controllers/productsController/getProductsAll");
 
 const getProductsHandler = async (req,res) => {
     const {name} = req.query;

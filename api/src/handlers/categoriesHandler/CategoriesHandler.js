@@ -1,7 +1,7 @@
 const {
   getCategoriesFromDB,
   postCategoriesDB,
-} = require("../controllers/CategoriesController");
+} = require("../../controllers/categoriesController/categoriesController");
 
 const getCategories = async (req, res) => {
   try {

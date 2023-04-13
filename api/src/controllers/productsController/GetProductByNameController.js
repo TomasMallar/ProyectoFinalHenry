@@ -1,6 +1,6 @@
 const { Op } = require('sequelize');
 const {Product,Category} = require ('../../db');
-const { cleanArrayProduct } = require('../../helpers/cleanArrayProduct ');
+const { cleanArrayProduct } = require('../../helpers/cleanArrayProduct');
 
 const getProductByName = async (name) => {
 
