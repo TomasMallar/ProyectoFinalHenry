@@ -1,5 +1,5 @@
 import style from './NewUser.module.css'
-import Button from '../../Components/Button'
+import Button from "../../Components/Button/Button"
 import { Link } from 'react-router-dom'
 export default function User(){
     
