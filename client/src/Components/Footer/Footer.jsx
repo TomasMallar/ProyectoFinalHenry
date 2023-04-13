@@ -11,9 +11,15 @@ const Footer = (props) => {
         <h3>Copyright © 2022 - Todos los derechos reservados </h3>
       </div>
       <div className={style.contacts}>
-        <img src='https://cdn-icons-png.flaticon.com/512/87/87390.png' alt="LogoInst" className={style.logosImg} /> <a href="https://www.instagram.com/the_chocolatehub/?hl=es">@chocolate_hub</a>
-        <img src='https://www.freeiconspng.com/thumbs/email-icon/email-icon--clipart-best-22.png' alt="LogoMail" className={style.logosImg}/> <a href="mailto:chocolatehub@email.com">chocolatehub@email.com</a>
-        <img src='https://cdn-icons-png.flaticon.com/512/20/20673.png' alt="LogoFacebook" className={style.logosImg} />
+        <div className={style.lineContact}> 
+          <img src='https://cdn-icons-png.flaticon.com/512/87/87390.png' alt="LogoInst" className={style.logosImg} /> <a href="https://www.instagram.com/the_chocolatehub/?hl=es">@chocolate_hub</a>
+        </div>
+        <div className={style.lineContact}>
+          <img src='https://www.freeiconspng.com/thumbs/email-icon/email-icon--clipart-best-22.png' alt="LogoMail" className={style.logosImg}/> <a href="mailto:chocolatehub@email.com">chocolatehub@email.com</a>
+        </div>
+        <div className={style.lineContact}>
+          <img src='https://cdn-icons-png.flaticon.com/512/20/20673.png' alt="LogoFacebook" className={style.logosImg} /> <a href="https://www.facebook.com/people/The-chocolate-hub/100054213501503/">The Chocolate Hub</a>
+        </div>
       </div>
     </div>
   )

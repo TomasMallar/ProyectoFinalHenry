@@ -9,6 +9,11 @@
     src: url("../../Formatting/SourceSansPro-Regular.ttf");
 }
 
+@font-face {
+    font-family: "ArimaMadurai-Medium";
+    src: url("../../Formatting/ArimaMadurai-Medium.ttf");
+}
+
 
 .PieDePag {
 
@@ -42,19 +47,28 @@ h2 {
 }
 
 h3 {
-    font-family: "ArimaMadurai";
+    font-family: "ArimaMadurai-Medium";
+    font-weight: lighter;
     position: absolute;
     margin-left: 20px;
     bottom: 0;
 }
 
 .contacts {
-    align-items:flex-start;
+    font-family: "ArimaMadurai-Medium";
+    font-weight: lighter;
 
 }
 
-.logosImg {
+.lineContact{
+    width: auto;
     display: flex;
+    margin-block-start: 30px;
+}
+
+.logosImg {
+    float: left;
+    margin-right: 5px;
     width: 4.5%;
 }
 
