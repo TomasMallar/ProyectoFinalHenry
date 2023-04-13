@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom"
 import style from './NavBar.module.css'
-import Button from "../Button"
+import Button from "../Button/Button"
 export default function NavBar() {
 
 

@@ -1,4 +1,4 @@
-import Button from "../../Components/Button";
+import Button from '../../Components/Button/Button.jsx'
 import style from './Login.module.css'
 import { Link } from "react-router-dom";
 

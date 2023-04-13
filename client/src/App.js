@@ -4,6 +4,7 @@ import { Switch, Route } from 'react-router-dom'
 import HomePage from './Pages/Home'
 import Error from './Pages/Error'
 import Login from './Pages/Login/Login'
+import Footer from './Components/Footer/Footer';
 import CreateProduct from './Pages/CreateProduct';
 import User from './Pages/NewUser/NewUser';
 
@@ -15,7 +16,7 @@ function App() {
 
       {/* Routing  */}
       <Switch>
-        <Route path="/home" > <HomePage/> <NavBar/></Route>
+        <Route path="/home" > <HomePage/> <NavBar/> <Footer/></Route>
         <Route path="/login"><Login/></Route>
         <Route path="/createProduct"><CreateProduct/> <NavBar/></Route>
         <Route path="/newUser"> <User/> </Route>
