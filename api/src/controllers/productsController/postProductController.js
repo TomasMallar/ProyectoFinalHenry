@@ -4,17 +4,16 @@ const postProductController = async (name,price,stock,ingredients,image,score,ty
 
     const newProduct = await Product.create({name,price,stock,ingredients,image,score,types});
 
-    // const categoryDb = await Category.findAll({
-    //     where: {
-    //         name: categories,
-    //     },
-    // });
+    const categoryDb = await Category.findAll({
+        where: {
+            name: categories,
+        },
+    });
 
-    // newPokemon.addCategory(categoryDb);
-    // categ= categoryDb.map(elem => elem.name)
-    // return {...newProduct.dataValues,categories:categ};
+    newProduct.addCategory(categoryDb);
+    categ= categoryDb.map(elem => elem.name)
+    return {...newProduct.dataValues,categories:categ};
 
-    return newProduct
 };
 
 module.exports = {postProductController};
