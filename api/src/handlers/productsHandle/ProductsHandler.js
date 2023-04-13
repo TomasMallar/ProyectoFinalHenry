@@ -1,7 +1,7 @@
 const {
   getAllProductsFromDB,
   postProductsDB,
-} = require("../controllers/ProductsController");
+} = require("../../controllers/productsController/ProductsController");
 
 // Handler para traer todos los chocolates
 const getAllProducts = async (req, res) => {
