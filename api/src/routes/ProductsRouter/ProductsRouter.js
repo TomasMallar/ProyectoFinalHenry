@@ -1,7 +1,7 @@
 const {
   getAllProducts,
   postProducts,
-} = require("../../handlers/ProductsHandler");
+} = require("../../handlers/productsHandle/ProductsHandler");
 
 const { Router } = require("express");
 
