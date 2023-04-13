@@ -6,6 +6,6 @@ const { Router } = require("express");
 const routerProducts = Router();
 
 routerProducts.get("/", getProductsHandler); // Traer chocolates, sea todos o por name
-pokemonsRouter.post('/', postProductHandler);
+routerProducts.post('/', postProductHandler);
 
 module.exports = routerProducts;
