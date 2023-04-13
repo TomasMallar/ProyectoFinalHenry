@@ -1,0 +1,18 @@
+.container{
+
+    background-color: #F5DEB3;
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    margin: 0%;
+}
+
+.listItem{
+list-style: none;
+  text-decoration: none;
+}
+
+.listItem:last-child{
+    margin-right: 0;
+}
