@@ -37,10 +37,6 @@ module.exports = (sequelize) => {
                     isDate: true
                 }
             },
-            favorites: {
-                type: DataTypes.ARRAY(DataTypes.INTEGER),
-                allowNull: false
-            },
             password: {
                 type: DataTypes.STRING,
                 allowNull: false

@@ -28,10 +28,6 @@ module.exports = (sequelize) => {
                     isNumeric: true,
                 }
             },
-            ingredients: {
-                type: DataTypes.ARRAY(DataTypes.STRING),
-                allowNull: false
-            },
             image: {
                 type: DataTypes.STRING,
                 allowNull: false,
@@ -46,10 +42,6 @@ module.exports = (sequelize) => {
                     max: 5,
                     min: 0
                 }
-            },
-            types: {
-                type: DataTypes.STRING,
-                allowNull: false
             }
         },
         {
