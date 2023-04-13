@@ -50,6 +50,10 @@ module.exports = (sequelize) => {
             types: {
                 type: DataTypes.STRING,
                 allowNull: false
+            },
+            is_deleted: {
+                type: DataTypes.BOOLEAN,
+                defaultValue: true
             }
         },
         {
