@@ -8,6 +8,7 @@ const cleanArrayProduct = (chocolate) => {
         score: chocolate.score,
         categories: chocolate.categories.map((category)=>category.name),
         types: chocolate.types.map((type)=>type.name),
+        ingredients: chocolate.ingredients.map((ingredient)=>ingredient.name),
         create: chocolate.create,
     };
 };
