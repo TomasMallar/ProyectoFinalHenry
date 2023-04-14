@@ -8,14 +8,15 @@ const {
     postLoginUserHandler 
 } = require("../../handlers/userHandler/UserHandler");
 
-const validatePostUser = require("../../middlewares/validateUser/validatePost");
+const validatePostRetgister = require("../../middlewares/validateUser/validatePostRegister");
+const validatePostLogin = require("../../middlewares/validateUser/validatePostLogin")
 
 const routerUser = Router();
 
 routerUser.get("/", getAllUserHandler);
-routerUser.post("/register", validatePostUser, postNewtUserHandler);
-routerUser.post("/login", postLoginUserHandler)
-routerUser.put("/:id", updateUserHandler);
-// routerUser.delete("/:id", deleteUser);
+routerUser.post("/register", validatePostRetgister, postNewtUserHandler);
+routerUser.post("/login", validatePostLogin, postLoginUserHandler)
+routerUser.put("/update/:id", updateUserHandler);
+routerUser.delete("/delete/:id", deleteUser);
 
 module.exports = routerUser

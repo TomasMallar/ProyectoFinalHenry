@@ -61,7 +61,11 @@ const updateUserHandler = async (req, res) => {
 }
 
 const deleteUser = async (req, res) => {
-
+    try {
+        
+    } catch (error) {
+        
+    }
 }
 
 module.exports = {

@@ -1,4 +1,4 @@
-const { User } = require("../../db")
+const { User, Rol } = require("../../db")
 const { encrypt, compare } = require("../../helpers/password/bcryptHelper")
 
 const getAllUser = async () => {
@@ -13,6 +13,8 @@ const postNewUser = async ({ name, surname, password, phone, mail, date_of_birth
     try {
         const passwordHash = await encrypt(password);
 
+        const roles = await Rol.findOne({ where: { rol_name: 'user' } });
+
         const [ user, created ] = await User.findOrCreate({
             where: { mail },
             defaults: {
@@ -21,9 +23,11 @@ const postNewUser = async ({ name, surname, password, phone, mail, date_of_birth
                 password: passwordHash,
                 phone,
                 mail,
-                date_of_birth
+                date_of_birth,
+                rolId: roles.id
             }
         });
+
 
         if(!created) throw new Error("The email is already registered");
 
