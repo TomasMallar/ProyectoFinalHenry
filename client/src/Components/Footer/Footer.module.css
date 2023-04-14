@@ -29,15 +29,23 @@
 
 .copyright {
     display: block;
+
+}
+.copyrightText{
+    font-family: "ArimaMadurai-Medium";
+    font-weight: lighter;
+    position: absolute;
+    margin-left: 20px;
+    bottom: 0;
 }
 
-h1 {
+.logoText {
     font-family: "ArimaMadurai";
     margin-block-start: 0%;
     margin-block-end: 0%;
 }
 
-h2 {
+.sublogoText {
     font-family: "Source Sans Pro";
     font-size: 16.3px;
     font-weight: lighter;
@@ -46,13 +54,6 @@ h2 {
     margin-block-end: 0%;
 }
 
-h3 {
-    font-family: "ArimaMadurai-Medium";
-    font-weight: lighter;
-    position: absolute;
-    margin-left: 20px;
-    bottom: 0;
-}
 
 .contacts {
     font-family: "ArimaMadurai-Medium";

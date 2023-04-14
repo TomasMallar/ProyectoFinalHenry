@@ -7,6 +7,7 @@ import Login from './Pages/Login/Login'
 import Footer from './Components/Footer/Footer';
 import CreateProduct from './Pages/CreateProduct';
 import User from './Pages/NewUser/NewUser';
+import Detail from './Pages/detail/detail';
 
 function App() {
 
@@ -20,7 +21,9 @@ function App() {
         <Route path="/login"><Login/></Route>
         <Route path="/createProduct"><CreateProduct/> <NavBar/></Route>
         <Route path="/newUser"> <User/> </Route>
+        <Route path='/products/:id'> <Detail/> </Route>
         <Route path="/*"><Error/><NavBar/></Route>
+
       </Switch>
     </div>
   );
