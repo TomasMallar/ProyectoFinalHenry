@@ -34,7 +34,7 @@ let capsEntries = entries.map((entry) => [
 ]);
 sequelize.models = Object.fromEntries(capsEntries);
 
-const { Product, User, Category } = sequelize.models;
+const { Product, User, Category, Ingredient, Type, Rol, Taste } = sequelize.models;
 
 Product.belongsToMany(Category, {
   through: { model: "ProductsCategory" },
@@ -47,11 +47,45 @@ Category.belongsToMany(Product, {
 
 //Relación entre los productos y los usuarios | Habría que modificar aquí así se hace con Favoritos como dicen
 User.belongsToMany(Product, {
-  through: { model: "UsersProducts" },
+  through: { model: "Favorites" },
   timestamps: false,
 });
 Product.belongsToMany(User, {
-  through: { model: "UsersProducts" },
+  through: { model: "Favorites" },
+  timestamps: false,
+});
+
+// Relacion entre productos e ingredientes 
+Product.belongsToMany(Ingredient, {
+  through: { model: "ProductsIngredients" },
+  timestamps: false,
+});
+Ingredient.belongsToMany(Product, {
+  through: { model: "ProductsIngredients" },
+  timestamps: false,
+});
+
+// Relacion entre productos y tipos de chocolates 
+Product.belongsToMany(Type, {
+  through: { model: "ProductsTypes" },
+  timestamps: false,
+});
+Type.belongsToMany(Product, {
+  through: { model: "ProductsTypes" },
+  timestamps: false,
+});
+
+//Relacion entre rol y usuarios 
+User.belongsTo(Rol)
+Rol.hasMany(User)
+
+// Relacio entre usuarios y gustos favoritos
+User.belongsToMany(Taste, {
+  through: { model: "UserFavoriteTastes" },
+  timestamps: false,
+});
+Taste.belongsToMany(User, {
+  through: { model: "UserFavoriteTastes" },
   timestamps: false,
 });
 

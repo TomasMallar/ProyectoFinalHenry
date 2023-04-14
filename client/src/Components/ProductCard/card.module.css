@@ -1,0 +1,26 @@
+.container{
+    border: 1px solid #68a8b4; 
+    border-radius: 10px;
+    background-color: #90d9e658;
+  padding: 10px;
+  width: 200px;
+  max-height: 1000px;
+  margin: 4px;
+  box-shadow: 0 8px 0px 0 rgba(0, 0, 0, 0.467); 
+}
+
+.container:hover {
+  filter: brightness(130%) saturate(90%) contrast(90%);
+}
+
+.cardLink {
+    color:  rgb(255, 255, 255);
+    margin: auto;
+    text-decoration: none;
+    display: inline-block;
+    
+  }
+
+.pictures{
+  width: 200px;
+}
