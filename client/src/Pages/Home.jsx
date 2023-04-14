@@ -6,18 +6,22 @@ import { getAllChocolates } from "../Redux/Actions/Actions";
 
 const HomePage = (props) => {
 
-  let allProducts = props.allProducts
+  // let allProducts = props.allProducts
+
   const dispatch = useDispatch()
 
   useEffect(()=> {
     dispatch(getAllChocolates())
 }, [dispatch])
 
+let allProducts = useSelector((state) => state.chocolates)
+
+
 
 
   return (
     <div>
-      Cards
+      Our products:
       
         {/* Map each product into a single card using map */}
         {
