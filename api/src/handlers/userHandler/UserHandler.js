@@ -1,6 +1,12 @@
-const { getAllUser, postNewUser, postLoginUser, updateUser } = require("../../controllers/userController/UserController");
-const validatePutUser = require("../../helpers/validateUser/validatePutUser")
+const { 
+    getAllUser, 
+    postNewUser, 
+    postLoginUser, 
+    updateUser, 
+    deleteUser 
+} = require("../../controllers/userController/UserController");
 
+const validatePutUser = require("../../helpers/validateUser/validatePutUser")
 
 const getAllUserHandler = async (req, res) => {
     try {
@@ -60,11 +66,15 @@ const updateUserHandler = async (req, res) => {
     }
 }
 
-const deleteUser = async (req, res) => {
+const deleteUserHandler = async (req, res) => {
     try {
-        
+        const { id } = req.params;
+
+        const userDelete = await deleteUser(id);
+
+        res.status(200).json(userDelete);
     } catch (error) {
-        
+        res.status(400).json({ message: error.message });
     }
 }
 
@@ -73,7 +83,6 @@ module.exports = {
     postNewtUserHandler,
     postLoginUserHandler,
     updateUserHandler,
-    deleteUser,
-
+    deleteUserHandler,
 }
 
