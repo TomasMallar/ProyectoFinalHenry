@@ -6,14 +6,14 @@ const {
   deleteCategories
 } = require("../../handlers/categoriesHandle/CategoriesHandler");
 
-const validatePostCategory = require('../../middlewares/validateCategories/validatePostCategory')
-const validatePutCategory = require('../../middlewares/validateCategories/validatePutCategory')
+const validatePost = require('../../middlewares/validateCategories&Tastes&Ingredients/validatePost')
+const validatePut = require('../../middlewares/validateCategories&Tastes&Ingredients/validatePut')
 
 const routerCategories = Router();
 
 routerCategories.get("/", getCategories);
-routerCategories.post("/", validatePostCategory, postCategories);
-routerCategories.put("/:id", validatePutCategory, updateCategories)
+routerCategories.post("/", validatePost, postCategories);
+routerCategories.put("/:id", validatePut, updateCategories)
 routerCategories.delete("/:id", deleteCategories)
 
 module.exports = routerCategories;
