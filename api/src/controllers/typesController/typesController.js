@@ -1,15 +1,20 @@
 const {Op} = require('sequelize')
 const { Type } = require("../../db");
 
+const getTypesAll = async () => {
+    const allTypes = await Type.findAll()
+    const typesMaped = allTypes.map(type => type.name)
+    return typesMaped
+}
+
 const postType = async(name) => {
-    console.log(name)
     const [newType] = await Type.findOrCreate({
-        where: {name: { [Op.iLike]: `%${name}%` }}
+        where: {name}
     })
-    console.log(typeof newType)
     return newType
 }
 
 module.exports = {
     postType,
+    getTypesAll
 }
