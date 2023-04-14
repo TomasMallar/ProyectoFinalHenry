@@ -4,7 +4,7 @@ import { Switch, Route, Redirect } from 'react-router-dom'
 import HomePage from './Pages/Home'
 import Error from './Pages/Error'
 import Login from './Pages/login/login'
-import Footer from './Components/Footer/Footer';
+import Footer from './Components/footer/footer';
 import CreateProduct from './Pages/CreateProduct';
 import User from './Pages/NewUser/NewUser';
 import Detail from './Pages/detail/detail';
