@@ -35,7 +35,7 @@ const Detail = () => {
                 <h3> Score: {ChocolateDetail.score} </h3>
 
 
-                <h3> {ChocolateDetail.price} </h3>
+                <h3>$ {ChocolateDetail.price} </h3>
                 
             </div></>
     )

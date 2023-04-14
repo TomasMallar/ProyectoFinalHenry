@@ -1,9 +1,9 @@
 import './App.css';
 import NavBar from './Components/NavBar/NavBar';
-import { Switch, Route } from 'react-router-dom'
+import { Switch, Route, Redirect } from 'react-router-dom'
 import HomePage from './Pages/Home'
 import Error from './Pages/Error'
-import Login from './Pages/Login/Login'
+import Login from './Pages/login/login'
 import Footer from './Components/Footer/Footer';
 import CreateProduct from './Pages/CreateProduct';
 import User from './Pages/NewUser/NewUser';
@@ -17,6 +17,9 @@ function App() {
 
       {/* Routing  */}
       <Switch>
+      <Route exact path="/">
+      <Redirect to="/home" />
+      </Route>
         <Route path="/home" > <NavBar/> <HomePage/> <Footer/></Route>
         <Route path="/login"><Login/></Route>
         <Route path="/createProduct"><CreateProduct/> <NavBar/></Route>

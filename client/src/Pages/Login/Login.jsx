@@ -21,6 +21,7 @@ export default function Login (){
             <Button text='Ingresar'/>
 
             <p> ¿Aún no tienes una cuenta? <Link to="/newUser">Crear Cuenta</Link> </p>
+            <p> Volver al <Link to="/home">Home</Link> </p>
             
             </div>
 
