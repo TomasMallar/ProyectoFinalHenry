@@ -1,18 +1,63 @@
-.container{
+@font-face {
+  font-family: 'ArimaMadurai';
+  src: url('../../Formatting/ArimaMadurai-ExtraBold.ttf') format('ttf');
+  font-weight: normal;
+  font-style: normal;
+}
 
-    background-color: #F5DEB3;
+.container{
+    background-color: #F4EEE2;
     display: flex;
     justify-content: space-between;
-    padding: 10px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
-    margin: 0%;
 }
 
+.containerUlLinks{
+  display: flex;
+  padding: 20px;
+  align-items: center;
+  justify-content: space-between;
+}
 .listItem{
-list-style: none;
+  list-style: none;
+  padding-left: 15px;
   text-decoration: none;
+  color: #725e4f;
+  font-family: 'ArimaMadurai', sans-serif;
+  font-size: 25px;
 }
 
-.listItem:last-child{
-    margin-right: 0;
+.listItem .buttonNav{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.buttonNav{
+  padding: 15px;
+  border: none;
+  border-radius: 10px;
+  color: #ffffff;
+  background-color: #725e4f;
+  font-family: 'ArimaMadurai', sans-serif;
+  font-size: 20px;
+}
+
+.buttonNav:hover{
+  box-shadow: 2px 2px 1px rgba(0, 0, 0, 0.5);
+}
+
+.img{
+  margin-left: 20px;
+  width: 250px;
+}
+
+
+.car{
+  width: 30px;
+}
+
+.imgButton{
+  width: 20px;
+  margin-left: 10px;
 }

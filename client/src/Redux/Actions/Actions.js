@@ -39,7 +39,7 @@ export const getChocolatesByName = (name, Filter, sort, page) => {
     }
 }
 
-export const getVideogamesById = (id) => {
+export const getChocolatesById = (id) => {
     return async function(dispatch){
         try {
             const response = await axios(`http://localhost:3001/products/${id}`)

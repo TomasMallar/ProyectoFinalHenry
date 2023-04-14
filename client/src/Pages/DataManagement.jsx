@@ -11,7 +11,8 @@ export default function DataManagement(){
 
     //Brings the information from the global state with useSelector
     let allProducts = useSelector((state) => state.chocolates)
-
+    
+    
     let errors = useSelector((state) => state.errorMessage)
 
     if (errors.trim().length>0) { 
