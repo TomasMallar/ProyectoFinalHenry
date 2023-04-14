@@ -51,7 +51,7 @@ const updateUserHandler = async (req, res) => {
         const { id } = req.params;
         
         const updateData = validatePutUser(req.body);
-
+        
         const update = await updateUser(id, updateData);
 
         res.status(200).json(update);

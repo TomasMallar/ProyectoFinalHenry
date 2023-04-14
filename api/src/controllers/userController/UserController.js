@@ -2,7 +2,9 @@ const { User } = require("../../db")
 const { encrypt, compare } = require("../../helpers/password/bcryptHelper")
 
 const getAllUser = async () => {
-    const allUser = await User.findAll();
+    const allUser = await User.findAll({
+        attributes: { exclude: ['password'] }
+    });
 
     return allUser;
 }
@@ -25,7 +27,7 @@ const postNewUser = async ({ name, surname, password, phone, mail, date_of_birth
 
         if(!created) throw new Error("The email is already registered");
 
-        return "User created successfully";
+        return { message: "User created successfully"};
     } catch (error) {
         throw new Error(error.message);
     }
@@ -42,7 +44,7 @@ const postLoginUser = async ({ mail, password }) => {
 
         if(!checkPassword) throw new Error("Password is incorrect");
 
-        return { dataUpdate: user };
+        return { message: "User successfully logged in" };
 
     } catch (error) {
         throw new Error(error.message);
@@ -56,21 +58,30 @@ const updateUser = async (id, userData) => {
         if(!user) throw new Error("User not found");
 
         if(userData.password) {
-            const checkPassword = await compare(password, user.password);
+            const checkPassword = await compare(userData.password, user.password);
 
             if(checkPassword) {
                 throw new Error("the password is the same as the current one, you must type a new one")
             }
 
-            const passwordHash = await encrypt(password);
+            const passwordHash = await encrypt(userData.password);
             
             userData.password = passwordHash;
         }
 
-        await User.update(userData, { where: { id } });
-        console.log(user);
+        if(
+            userData.name === user.name || 
+            userData.surname === user.surname || 
+            userData.phone === user.phone || 
+            userData.date_of_birth === user.date_of_birth ||
+            userData.mail === user.mail
+            ) {
+                throw new Error("The data provided is the same as the current data. No update is necessary.")
+        }
 
-        return { data: user };
+        await User.update(userData, { where: { id } });
+
+        return { message: "User updated successfully" };
     } catch (error) {
         throw new Error(error.message);
     }
