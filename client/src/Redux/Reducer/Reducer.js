@@ -14,7 +14,6 @@ const initialState = {
     errorMessage:"",
     users:[]
 }
-
 const reducer = (state = initialState, action) => {
     switch (action.type) {
         case GET_ALL_CHOCOLATES:
