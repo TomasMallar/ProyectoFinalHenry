@@ -1,19 +1,29 @@
-const {Product, Category} = require ('../../db');
+const {Product, Category, Type} = require ('../../db');
 
-const postProductController = async (name,price,stock,image,score,categories) => {
+const postProductController = async (name,price,stock,image,score,categories,types) => {
     try{
-    const newProduct = await Product.create({name,price,stock,image,score});
+    const newProduct = await Product.create({name,price,stock,image,score,types});
 
     const categoryDb = await Category.findAll({
         where: {
             name: categories,
         },
     });
-    console.log(categoryDb)
-    console.log(categories)
+
     await newProduct.addCategory(categoryDb);
     categ= categoryDb.map(elem => elem.name)
-    return {...newProduct.dataValues,categories:categ};
+
+    const typeDb = await Type.findAll({
+        where: {
+            name: types,
+        },
+    });
+    await newProduct.addType(typeDb);
+    typ= typeDb.map(elem => elem.name)
+
+
+
+    return {...newProduct.dataValues,categories:categ,types:typ};
 }
 catch(error){
     return error.message;}

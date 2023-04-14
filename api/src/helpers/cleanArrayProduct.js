@@ -8,6 +8,7 @@
         image: chocolate.image,
         score: chocolate.score,
         categories: chocolate.categories.map((category)=>category.name),
+        types: chocolate.types.map((type)=>type.name),
         create: chocolate.create,
       };
     };

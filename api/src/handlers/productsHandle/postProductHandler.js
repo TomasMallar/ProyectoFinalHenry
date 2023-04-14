@@ -2,9 +2,9 @@ const {postProductController} = require("../../controllers/productsController/po
 
 const postProductHandler = async (req,res)=>{
     try{
-        const{name,price,stock,image,score,categories} = req.body;
+        const{name,price,stock,image,score,categories,types} = req.body;
 
-        const newProduct = await postProductController (name,price,stock,image,score,categories);
+        const newProduct = await postProductController (name,price,stock,image,score,categories,types);
         res.status(200).json(newProduct);
     }
     catch(error){
