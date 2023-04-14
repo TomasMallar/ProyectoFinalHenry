@@ -16,7 +16,7 @@ function App() {
 
       {/* Routing  */}
       <Switch>
-        <Route path="/home" > <HomePage/> <NavBar/> <Footer/></Route>
+        <Route path="/home" > <NavBar/> <HomePage/> <Footer/></Route>
         <Route path="/login"><Login/></Route>
         <Route path="/createProduct"><CreateProduct/> <NavBar/></Route>
         <Route path="/newUser"> <User/> </Route>

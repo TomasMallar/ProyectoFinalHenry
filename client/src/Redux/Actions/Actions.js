@@ -1,3 +1,5 @@
+import axios from "axios"
+
 import { 
     GET_ALL_CHOCOLATES, 
     GET_CHOCOLATE_BYID, 
@@ -10,7 +12,7 @@ import {
 
 export const getAllChocolates = () => {
     return async function(dispatch){
-        const response = await axios(`backendlink`)
+        const response = await axios(`http://localhost:3001/products`)
         return dispatch ({
             type: GET_ALL_CHOCOLATES,
             payload: response.data
@@ -21,7 +23,7 @@ export const getAllChocolates = () => {
 export const getChocolatesByName = (name, Filter, sort, page) => {
     return async function(dispatch){
         try {
-            const response =  await axios(`backendlink?name=${name||""}&Filter=${Filter||""}&sort=${sort||""}&page=${page}`)
+            const response =  await axios(`http://localhost:3001/products?name=${name||""}&Filter=${Filter||""}&sort=${sort||""}&page=${page}`)
     
             return dispatch ({
                 type: GET_CHOCOLATE_BYNAME,
@@ -40,7 +42,7 @@ export const getChocolatesByName = (name, Filter, sort, page) => {
 export const getVideogamesById = (id) => {
     return async function(dispatch){
         try {
-            const response = await axios(`backendlink/${id}`)
+            const response = await axios(`http://localhost:3001/products/${id}`)
                 
             return dispatch ({
                 type: GET_CHOCOLATE_BYID,
