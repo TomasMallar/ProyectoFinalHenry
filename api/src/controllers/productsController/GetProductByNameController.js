@@ -1,5 +1,5 @@
 const { Op } = require('sequelize');
-const {Product,Category,Type} = require ('../../db');
+const {Product,Category,Type,Ingredient} = require ('../../db');
 const { cleanArrayProduct } = require('../../helpers/cleanArrayProduct');
 
 const getProductByName = async (name) => {
@@ -21,7 +21,15 @@ const getProductByName = async (name) => {
 					through: {
 					attributes: [],
 					},
-			}]
+				},
+				{
+					model: Ingredient,
+					attributes: ['name'],
+					through: {
+					attributes: [],
+					},
+				}
+		]
 		});
 		
 		const dBfiltered = dBProduct.map(elem=>cleanArrayProduct(elem));
