@@ -1,4 +1,5 @@
 import { useState } from "react"
+import DataManagement from "../DataManagement"
 
 export default function SortingAndFiltering (){
     const [queries, setQueries] = useState({
@@ -14,12 +15,19 @@ export default function SortingAndFiltering (){
         event.preventDefault()
         setQueries({ ...queries, name: event.target.value, page: 1 })
     }
+
+    
     return (
+        <><div>
         <div>
-        <div>
-          <input type="search" name="searchProduct " value={queries.name} onChange= {handleOnChangeSearchBar} placeholder="Busca tu producto" />
+          <input type="search" name="searchProduct " value={queries.name} onChange={(event) => handleOnChangeSearchBar(event)} placeholder="Busca tu producto" />
         </div>
       </div>
+      <DataManagement
+        name= {queries.name}
+      />
+      </>
+      
     )
 
 }
