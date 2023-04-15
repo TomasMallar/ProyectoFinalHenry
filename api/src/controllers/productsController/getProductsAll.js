@@ -1,4 +1,4 @@
-const {Product,Category,Type} = require ('../../db');
+const {Product,Category,Type,Ingredient} = require ('../../db');
 const { cleanArrayProduct } = require('../../helpers/cleanArrayProduct');
 
 const getProductsAll = async () => {
@@ -15,8 +15,15 @@ const getProductsAll = async () => {
 					},
 				},
 				{
-					model: Type, // Incluye el modelo Type aquí
-					attributes: ['name'], // Asume que Type también tiene un atributo "name"
+					model: Type,
+					attributes: ['name'],
+					through: {
+					attributes: [],
+					},
+				},
+				{
+					model: Ingredient,
+					attributes: ['name'],
 					through: {
 					attributes: [],
 					},
