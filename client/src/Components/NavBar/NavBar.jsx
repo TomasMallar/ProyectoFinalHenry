@@ -15,7 +15,7 @@ export default function NavBar() {
                     <Link to="/products" className={style.listItem}><li>Products</li> </Link>
                     <Link to="/about" className={style.listItem}><li>About Us</li> </Link>
                     <Link to="/carrito" className={style.listItem}><li> <img src={carImagen} alt="" className={style.car}/></li></Link>
-                    <Link to="/login" className={style.listItem}><li><button className={style.buttonNav}> Logout  <img src="https://homepagereferences.my.canva.site/images/3be2725b25654ed759a755525de91b77.svg" alt="" className={style.imgButton}/></button></li></Link>
+                    <Link to="/login" className={style.listItem}><li><button className={style.buttonNav}> Logout  <img src="https://HomePagereferences.my.canva.site/images/3be2725b25654ed759a755525de91b77.svg" alt="" className={style.imgButton}/></button></li></Link>
                     {/* <Link to="/createProduct"><li className={style.listItem}> <Button text="Create your Product" /> </li> </Link> */}
                 </ul>
         </div>

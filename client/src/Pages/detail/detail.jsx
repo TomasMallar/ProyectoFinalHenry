@@ -17,7 +17,7 @@ const Detail = () => {
     return (
         <>
         <div>
-        <Link to={`/home`}>
+        <Link to={`/products`}>
             <input
                 type="image"
                 src="https://cdn-icons-png.flaticon.com/512/10009/10009304.png"

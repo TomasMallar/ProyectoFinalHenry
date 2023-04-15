@@ -1,11 +1,12 @@
 import React from "react"
-import ProductCard from "../Components/ProductCard/ProductCard";
+import ProductCard from "../../Components/ProductCard/ProductCard";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import { getAllChocolates } from "../Redux/Actions/Actions";
-import SortingAndFiltering from "./sortingAndFiltering/sortingAndFiltering";
+import { getAllChocolates } from "../../Redux/Actions/Actions";
+import SortingAndFiltering from "../sortingAndFiltering/sortingAndFiltering";
+import styles from "./home.module.css"
 
-const HomePage = (props) => {
+const Products = (props) => {
  
   // let allProducts = props.allProducts
 
@@ -24,8 +25,8 @@ const HomePage = (props) => {
         <SortingAndFiltering/>
       </div>
       
-      <h4>Our products:</h4>
-
+      <h4 className={styles.ourProducts}>Our products:</h4>
+    <div className={styles.cardsGrid}>
       {/* Map each product into a single card using map */}
       {
         allProducts?.map((product) => {
@@ -42,7 +43,8 @@ const HomePage = (props) => {
           )
         })}
     </div>
+    </div>
   )
 };
 
-export default HomePage;
+export default Products;
