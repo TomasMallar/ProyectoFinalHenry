@@ -2,10 +2,13 @@ const { getProductByName } = require("../../controllers/productsController/GetPr
 const { getProductsAll } = require("../../controllers/productsController/getProductsAll");
 
 const getProductsHandler = async (req,res) => {
-
-    const {name} = req.query;
-    const results =  name ? await getProductByName(name) : await getProductsAll();
-    res.status(200).json(results);
+    try {
+        const {name} = req.query;
+        const results =  name ? await getProductByName(name) : await getProductsAll();
+        res.status(200).json(results);     
+    } catch (error) {
+        res.status(400).json({error: error.message})
+    }
 
 };
 
