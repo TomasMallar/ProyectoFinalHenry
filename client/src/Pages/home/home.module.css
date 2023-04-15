@@ -1,0 +1,13 @@
+.cardsGrid{
+    display: flex;
+    justify-content: space-between;
+}
+
+.ourProducts {
+    font-family: "Source Sans Pro";
+    font-size: 30px;
+    font-weight: lighter;
+    letter-spacing: 2mm;
+    margin-block-start: 0%;
+    margin-block-end: 0%;
+}
