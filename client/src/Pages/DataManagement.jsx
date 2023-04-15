@@ -9,13 +9,16 @@ export default function DataManagement(props){
 const dispatch = useDispatch()
 
 const name = props.name
+const type = props.type
+const sort = props.sort
+const page = props.page
+const sortDirection= props.sortDirection.trim()
+
 
     //Brings the information from the global state with useSelector
-
     useEffect(()=> {
-        dispatch(getChocolatesByName(name))
-    }, [name])
-    
+        dispatch(getChocolatesByName(name, type, sort, sortDirection, page))
+    }, [name,sort, sortDirection])
     let errors = useSelector((state) => state.errorMessage)
 
     if (errors.trim().length>0) { 
