@@ -31,12 +31,14 @@ const getProductByName = async (name) => {
 				}
 		]
 		});
+
+		if(dBProduct.length === 0) throw Error('No results for the specified name')
 		
 		const dBfiltered = dBProduct.map(elem=>cleanArrayProduct(elem));
 		return dBfiltered;
 
 	} catch (error) {
-		throw Error(error.message);
+		throw error;
 	}
 
 };
