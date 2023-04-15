@@ -6,6 +6,7 @@ const routerUser = require("./UserRouter/UserRouter");
 const routerRoles = require("./RolesRouter/RolRouter");
 const routerTastes = require("./TastesRouter/TastesRouter")
 const routerIngredient = require("./IngredientRouter/IngredientRouter")
+const routerScore = require('./PutScoreRouter/PutScoreRouter')
 
 const router = Router();
 
@@ -20,5 +21,7 @@ router.use("/ingredient", routerIngredient)
 //Rutas para usuarios y roles
 router.use("/users", routerUser);
 router.use("/roles", routerRoles);
+
+router.use("/score", routerScore)
 
 module.exports = router;
