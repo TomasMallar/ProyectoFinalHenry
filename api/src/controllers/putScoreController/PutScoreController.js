@@ -1,27 +1,23 @@
 const { Product } = require('../../db')
 
-const updateScoreFromDB = async(score, id)=> {
-
-    const currentScore = await Product.findByPk(Number(id))
-    if(currentScore)
-    {
-        let suma = currentScore.score.suma === undefined  ? currentScore.score.score : currentScore.score.suma
-
-        currentScore.cont++
-        suma += score
-        
-        let promedio = suma / currentScore.cont
-        
-        currentScore.score = {
-            score: promedio,
-            suma: suma
-        }
-        const result = await currentScore.save()
-        return result
+const updateScoreFromDB = async (score, id) => {
+  try {
+    const product = await Product.findByPk(Number(id));
+    if (product) {
+      let { cont, suma } = product.score;
+      cont++;
+      suma += score;
+      const currentScore = suma / cont;
+      const newScore = { currentScore, cont, suma };
+      product.score = newScore;
+      const result = await product.save();
+      return result;
     }
-
+  } catch (error) {
+    return error.message;
+  }
 }
 
 module.exports = {
-    updateScoreFromDB
-}
+  updateScoreFromDB,
+};

@@ -4,8 +4,8 @@ const postProductHandler = async (req,res) => {
 
     try {
 
-        const {name,price,stock,image,score,categories,types,ingredients} = req.body;
-        const newProduct = await postProductController (name,price,stock,image,score,categories,types,ingredients);
+        const {name,price,stock,image,categories,types,ingredients} = req.body;
+        const newProduct = await postProductController (name,price,stock,image,categories,types,ingredients);
         res.status(200).json(newProduct);
 
     }
