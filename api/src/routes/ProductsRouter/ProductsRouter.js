@@ -6,6 +6,7 @@ const {updateProductHandler} = require ('../../handlers/productsHandle/updatePro
 const {getProductByIdHandler} = require ('../../handlers/productsHandle/getProductByIdHandler')
 const {getProductsAdvanceHandler} = require ('../../handlers/productsHandle/getProductsAdvanceHandler')
 const {getDeletedProductsHandler} = require ('../../handlers/productsHandle/getDeletedProductsHandler')
+const {loadProductHandler} = require ('../../handlers/productsHandle/loadProductHandler')
 
 const validatePostProduct = require('../../middlewares/validateProducts/validatePostProduct')
 const validatePutProduct = require('../../middlewares/validateProducts/validatePutProduct')
@@ -23,5 +24,7 @@ routerProducts.post('/', validatePostProduct, postProductHandler);
 routerProducts.put('/:id/delete',deleteProductHandler)
 routerProducts.put('/:id/update', updateProductHandler)
 routerProducts.put('/:id/undodelete', undodeleteProductHandler)
+routerProducts.put('/load', loadProductHandler)
+
 
 module.exports = routerProducts;
