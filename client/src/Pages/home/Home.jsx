@@ -37,6 +37,7 @@ const Products = (props) => {
               id={product.id}
               name={product?.name}
               image={product?.image}
+              category={product?.categories}
               price={product?.price}
               score={product?.score}
             />

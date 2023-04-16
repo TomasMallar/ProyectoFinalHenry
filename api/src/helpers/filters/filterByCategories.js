@@ -1,6 +1,17 @@
-const filterByCategory = (products, name) => {
-    const productsFilteredByCategory = products.filter(product => product.categories.includes(name))
-    return productsFilteredByCategory
-}
+const filterByCategory = (products, categories) => {
 
-module.exports = filterByCategory
+    let categoriesArray = categories;
+
+    if (typeof categories === 'string') {
+        categoriesArray = [categories];
+    }
+
+    const productsFilteredByCategory = products.filter(product => 
+      categories.every(category => product.categories.includes(category))
+    );
+    
+    return productsFilteredByCategory;
+
+};
+  
+module.exports = filterByCategory;
