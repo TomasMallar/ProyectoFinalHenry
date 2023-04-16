@@ -5,15 +5,18 @@ const {undodeleteProductHandler} = require ('../../handlers/productsHandle/undod
 const {updateProductHandler} = require ('../../handlers/productsHandle/updateProductHandler')
 const {getProductByIdHandler} = require ('../../handlers/productsHandle/getProductByIdHandler')
 const {getProductsAdvanceHandler} = require ('../../handlers/productsHandle/getProductsAdvanceHandler')
+const {getDeletedProductsHandler} = require ('../../handlers/productsHandle/getDeletedProductsHandler')
 
 const validatePostProduct = require('../../middlewares/validateProducts/validatePostProduct')
 const validatePutProduct = require('../../middlewares/validateProducts/validatePutProduct')
+
 
 const { Router } = require("express");
 
 const routerProducts = Router();
 
 routerProducts.get("/", getProductsHandler); // Traer chocolates, sea todos o por name
+routerProducts.get("/deleted", getDeletedProductsHandler);
 routerProducts.get("/advanced-search", getProductsAdvanceHandler);
 routerProducts.get("/:id", getProductByIdHandler);
 routerProducts.post('/', validatePostProduct, postProductHandler);
