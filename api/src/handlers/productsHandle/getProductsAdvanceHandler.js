@@ -5,6 +5,9 @@ const getProductsAdvanceHandler = async (req, res) => {
 	try {
 
 		const {name,category,type,orderBy = 'id',orderDirection = 'ASC',page = 1,pageSize = 10} = req.query;
+		console.log(name)
+		console.log(category)
+		console.log(type)
 		const result = await getProductsAdvanceController(name,category, type, orderBy, orderDirection, page, pageSize);
 		res.json(result);
 
