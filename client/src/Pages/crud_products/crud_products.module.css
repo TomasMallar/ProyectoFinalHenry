@@ -1,0 +1,51 @@
+
+.container{
+    display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+  border: 1px solid black;
+  padding: 10px;
+}
+
+.cell{
+    width: 150px;
+    height: fit-content;
+    margin-right: 10px;
+    flex-basis: 150px;
+    text-align: center;
+    font-size: 15px;
+}
+.image{
+   width: 100px;
+   height: 70px;
+   overflow: hidden;
+}
+
+.searchBar{
+    display: flex;
+    padding: 10px;
+    align-items: center;
+    justify-content:center;
+height: fit-content;
+}
+
+.title{
+    padding-right: 5px;
+}
+
+.img{
+    width: 2%;
+    padding-right: 6px;
+}
+
+.buttonNewProd{
+    padding: 5px;
+    margin-left: 40px;
+    background-color: black;
+    color: white;
+}
+.buttonNewProd:hover{
+background-color: gainsboro;
+color: black;
+}
