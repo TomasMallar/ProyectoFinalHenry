@@ -4,12 +4,13 @@ const { sortProducts } = require("../../helpers/orders/orderBy");
 const { paginateProducts } = require("../../helpers/pagination/pagination");
 const { getProductsAll } = require("./getProductsAll");
 
-const getProductsAdvanceController = async (category, type, orderBy, orderDirection, page, pageSize) => {
+const getProductsAdvanceController = async (name,category, type, orderBy, orderDirection, page, pageSize) => {
 
 	try {
 		
 		const allProducts = await getProductsAll(orderBy, orderDirection, page, pageSize);
 		let filteredProducts = allProducts;
+		if (name) filteredProducts = filteredProducts.filter((product) => product.name.toLowerCase().indexOf(name.toLowerCase()) !== -1);
 		if (category) filteredProducts = filterByCategory(filteredProducts, category);
 		if (type) filteredProducts = filterByTypes(filteredProducts, type);
 		let filterOrderProducts = sortProducts(filteredProducts,orderBy,orderDirection)
