@@ -33,7 +33,8 @@ const postProductController = async (name,price,stock,image,categories,types,ing
         await newProduct.addIngredient(ingredientDb);
         ing= ingredientDb.map(elem => elem.name)       
 
-        return {...newProduct.dataValues,categories:categ,types:typ,ingredients:ing};
+        const { createdAt, updatedAt,deletedAt, ...filteredProduct } = newProduct.dataValues;
+        return { ...filteredProduct, categories: categ, types: typ, ingredients: ing };
 
     } catch (error) {
         return error.message;

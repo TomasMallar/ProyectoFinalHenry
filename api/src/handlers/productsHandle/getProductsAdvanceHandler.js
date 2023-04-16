@@ -8,7 +8,9 @@ const getProductsAdvanceHandler = async (req, res) => {
 		console.log(name)
 		console.log(category)
 		console.log(type)
-		const result = await getProductsAdvanceController(name,category, type, orderBy, orderDirection, page, pageSize);
+		const categories = category ? category.split(',') : null;
+		const types = type ? type.split(',') : null;
+		const result = await getProductsAdvanceController(name,categories, types, orderBy, orderDirection, page, pageSize);
 		res.json(result);
 
   	} catch (error) {
