@@ -37,41 +37,41 @@ const [fitlerTypes, setfitlerTypes] = useState([])
 //Set how the filters for categories will work in the query input 
 function handleClick(category,id) {
   if (id.target.id==="category") {
-      if (category==="Clear") return setQueries({...queries, category:""})
-      setQueries({...queries, category:category})
+      // if (category==="Clear") return setQueries({...queries, category:""})
+      // setQueries({...queries, category:category})
 
   //-------------------------SELECCIONAR MULTIPLES CATEGORIAS---------------------------------------
-    //       //if the category is already set as a filter, remove it from the list of filters
-    // if (category==="Clear") return setfitlerCategories([])
-    // if (fitlerCategories?.includes(category)) {
-    //     let aux = fitlerCategories.filter((el)=>el!==category)
-    //     setfitlerCategories(aux)
-    // } else {
-    // //if it is not, add it to the former array of categories
-    // setfitlerCategories([...fitlerCategories, category])
-    // }
+          //if the category is already set as a filter, remove it from the list of filters
+    if (category==="Clear") return setfitlerCategories([])
+    if (fitlerCategories?.includes(category)) {
+        let aux = fitlerCategories.filter((el)=>el!==category)
+        setfitlerCategories(aux)
+    } else {
+    //if it is not, add it to the former array of categories
+    setfitlerCategories([...fitlerCategories, category])
+    }
   }
   if (id.target.id==="types") {
-    if (category==="Clear") return setQueries({...queries, type:""})
-    setQueries({...queries, type:category})
+    // if (category==="Clear") return setQueries({...queries, type:""})
+    // setQueries({...queries, type:category})
 
   //-------------------------SELECCIONAR MULTIPLES TIPOS---------------------------------------
-//     //if the category is already set as a filter, remove it from the list of filters
-// if (category==="Clear") return setfitlerTypes([])
-// if (fitlerTypes?.includes(category)) {
-//   let aux = fitlerTypes.filter((el)=>el!==category)
-//   setfitlerTypes(aux)
-// } else {
-// //if it is not, add it to the former array of categories
-// setfitlerTypes([...fitlerTypes, category])
-// }
+    //if the category is already set as a filter, remove it from the list of filters
+if (category==="Clear") return setfitlerTypes([])
+if (fitlerTypes?.includes(category)) {
+  let aux = fitlerTypes.filter((el)=>el!==category)
+  setfitlerTypes(aux)
+} else {
+//if it is not, add it to the former array of categories
+setfitlerTypes([...fitlerTypes, category])
+}
 }
     }
-//     useEffect(() => {
-//       setQueries({...queries,category:fitlerCategories,type:fitlerTypes})
-//     }, [fitlerCategories, fitlerTypes]);
-// console.log("categories:", fitlerCategories);
-// console.log("Types:", fitlerTypes);
+    useEffect(() => {
+      setQueries({...queries,category:fitlerCategories,type:fitlerTypes})
+    }, [fitlerCategories, fitlerTypes]);
+console.log("categories:", fitlerCategories);
+console.log("Types:", fitlerTypes);
     return (
         <><div>
         <div>
@@ -83,13 +83,13 @@ function handleClick(category,id) {
                     <option value="id, ASC" >Ascending</option>
                     <option value="id, DESC">Descending</option>
                     </optgroup>
-                    <optgroup label="nombre">
-                    <option value="nombre, ASC" >Ascending</option>
-                    <option value="nombre, DESC">Descending</option>
+                    <optgroup label="name">
+                    <option value="name, ASC" >Ascending</option>
+                    <option value="name, DESC">Descending</option>
                     </optgroup>
-                    <optgroup label="precio">
-                    <option value="precio, ASC">Lowest to Highest (1-5)</option>
-                    <option value="precio, DESC">Highest to Lowest (1-5)</option>
+                    <optgroup label="price">
+                    <option value="price, ASC">Lowest to Highest (1-5)</option>
+                    <option value="price, DESC">Highest to Lowest (1-5)</option>
                     </optgroup>
                     <optgroup label="score">
                     <option value="score, ASC">Lowest to Highest (1-5)</option>
