@@ -7,7 +7,7 @@ const filterByTypes = (products, types) => {
     }
 
     const productsFilteredByType = products.filter(product => 
-        types.every(type => product.types.includes(type))
+        typesArray.some(type => product.types.includes(type))
       );    
 
     return productsFilteredByType
