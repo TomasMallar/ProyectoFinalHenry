@@ -30,27 +30,28 @@ function SortName(event) {
         </div>
         <select id="Sort" onChange={SortName} className={styles.dropdown}>
                     <option hidden defaultValue="">Select a sorting Option</option>
-                    <optgroup label="ID">
-                    <option value="ID, ASC" >Ascending</option>
-                    <option value="ID, DESC">Descending</option>
+                    <optgroup label="id">
+                    <option value="id, ASC" >Ascending</option>
+                    <option value="id, DESC">Descending</option>
                     </optgroup>
-                    <optgroup label="Name">
-                    <option value="Name, ASC" >Ascending</option>
-                    <option value="Name, DESC">Descending</option>
+                    <optgroup label="nombre">
+                    <option value="nombre, ASC" >Ascending</option>
+                    <option value="nombre, DESC">Descending</option>
                     </optgroup>
-                    <optgroup label="Price">
-                    <option value="Price, ASC">Lowest to Highest (1-5)</option>
-                    <option value="Price, DESC">Highest to Lowest (1-5)</option>
+                    <optgroup label="precio">
+                    <option value="precio, ASC">Lowest to Highest (1-5)</option>
+                    <option value="precio, DESC">Highest to Lowest (1-5)</option>
                     </optgroup>
-                    <optgroup label="Score">
-                    <option value="Score, ASC">Lowest to Highest (1-5)</option>
-                    <option value="Score, DESC">Highest to Lowest (1-5)</option>
+                    <optgroup label="score">
+                    <option value="score, ASC">Lowest to Highest (1-5)</option>
+                    <option value="score, DESC">Highest to Lowest (1-5)</option>
                     </optgroup>
                     <option value="">Remove sort</option>
                 </select>
       </div>
       <DataManagement
         name= {queries.name}
+        category= {queries.category}
         type= {queries.type}
         sort= {queries.sort}
         sortDirection= {queries.sortDirection}

@@ -20,16 +20,14 @@ export const getAllChocolates = () => {
     }
 }
 
-export const getChocolatesByName = (name, type, sort, sortDirection, page) => {
-    console.log(sort, sortDirection, name, "llega sort?");
-
+export const getChocolatesByName = (name, category, type, sort, sortDirection, page) => {
     return async function(dispatch){
         try {
-            const response =  await axios(`http://localhost:3001/products?name=${name||""}&type=${type||""}&orderBy=${sort||""}&orderDirection=${sortDirection||""}&page=${page}`)
-    console.log("Busqueda:", `http://localhost:3001/products?name=${name||""}&type=${type||""}&orderBy=${sort||""}&orderDirection=${sortDirection||""}&page=${page}`);
+            const response =  await axios(`http://localhost:3001/products/advanced-search?name=${name||""}&category=${category||""}&type=${type||""}&orderBy=${sort||""}&orderDirection=${sortDirection||""}&page=${page||1}`)
+            console.log("Busqueda:", `http://localhost:3001/products/advanced-search?name=${name||""}&category=${category||""}&type=${type||""}&orderBy=${sort||""}&orderDirection=${sortDirection||""}&page=${page||1}`);
             return dispatch ({
                 type: GET_CHOCOLATE_BYNAME,
-                payload: response.data
+                payload: response.data.products
             })
         } catch (error) {
             return dispatch ({
