@@ -35,11 +35,11 @@ const Detail = () => {
                 <h3> Score: {ChocolateDetail.score} </h3>
 
                 <div> {ChocolateDetail.categories?.map((c)=>{
-                    return <p>{c}</p>
+                    return <p key={c}>{c}</p>
                 
                 })} </div>
 
-                <h3> {ChocolateDetail.price} </h3>
+                <h3>$ {ChocolateDetail.price} </h3>
                 
             </div></>
     )
