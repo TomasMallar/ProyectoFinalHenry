@@ -5,6 +5,7 @@ import { useEffect } from "react";
 import { getAllChocolates } from "../../Redux/Actions/Actions";
 import SortingAndFiltering from "../sortingAndFiltering/sortingAndFiltering";
 import styles from "./home.module.css"
+import { all } from "axios";
 
 const Products = (props) => {
 
@@ -17,7 +18,6 @@ const Products = (props) => {
   }, [dispatch])
 
   let allProducts = useSelector((state) => state.chocolates)
-
   return (
 
     <div>
@@ -34,23 +34,24 @@ const Products = (props) => {
       </div>
 
       <h4 className={styles.ourProducts}>Our products:</h4>
-      <div className={styles.cardsGrid}>
-        {/* Map each product into a single card using map */}
-        {
-          allProducts?.map((product) => {
-            return (
-              <ProductCard
-                // as we are receiving info from the api with the "?" we make sure that we are getting the info and the app does not crash
-                key={product?.id}
-                id={product.id}
-                name={product?.name}
-                image={product?.image}
-                price={product?.price}
-                score={product?.score}
-              />
-            )
-          })}
-      </div>
+    <div className={styles.cardsGrid}>
+      {/* Map each product into a single card using map */}
+      {
+        allProducts?.map((product) => {
+          return (
+            <ProductCard
+              // as we are receiving info from the api with the "?" we make sure that we are getting the info and the app does not crash
+              key={product?.id}
+              id={product.id}
+              name={product?.name}
+              image={product?.image}
+              category={product?.categories}
+              price={product?.price}
+              score={product?.score}
+            />
+          )
+        })}
+    </div>
     </div>
   )
 };

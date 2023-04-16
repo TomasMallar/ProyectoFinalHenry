@@ -33,8 +33,12 @@ const Detail = () => {
                 <h1 className={styles.titleDetail}>{ChocolateDetail.name}</h1>
                 
 
+                <div> {ChocolateDetail.categories?.map((c)=>{
+                    return <p key={c}>{c}</p>
+                
+                })} </div>
 
-                <h3> {ChocolateDetail.price} </h3>
+                <h3>$ {ChocolateDetail.price} </h3>
                 
             </div></>
     )

@@ -5,7 +5,7 @@ const cleanArrayProduct = (chocolate) => {
         price: chocolate.price,
         stock: chocolate.stock,
         image: chocolate.image,
-        score: chocolate.score,
+        score: chocolate.score.currentScore,
         categories: chocolate.categories.map((category)=>category.name),
         types: chocolate.types.map((type)=>type.name),
         ingredients: chocolate.ingredients.map((ingredient)=>ingredient.name),

@@ -7,6 +7,10 @@ const { DB_USER, DB_PASSWORD, DB_HOST, DB_NAME } = process.env;
 const sequelize = new Sequelize(
   `postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/${DB_NAME}`,
   {
+    define: {
+      paranoid: true, // Agregar esta línea
+      timestamps: true // Asegúrate de que 'timestamps' esté habilitado
+    },
     //Agregué como variable de entorno el name de la db
     logging: false,
     native: false,
@@ -34,7 +38,7 @@ let capsEntries = entries.map((entry) => [
 ]);
 sequelize.models = Object.fromEntries(capsEntries);
 
-const { Product, User, Category, Ingredient, Type, Rol, Taste } = sequelize.models;
+const { Product, User, Category, Ingredient, Type, Rol } = sequelize.models;
 
 Product.belongsToMany(Category, {
   through: { model: "ProductsCategory" },
@@ -52,6 +56,15 @@ User.belongsToMany(Product, {
 });
 Product.belongsToMany(User, {
   through: { model: "Favorites" },
+  timestamps: false,
+});
+
+User.belongsToMany(Product, {
+  through: { model: "Purchased" },
+  timestamps: false,
+});
+Product.belongsToMany(User, {
+  through: { model: "Purchased" },
   timestamps: false,
 });
 
@@ -80,12 +93,12 @@ User.belongsTo(Rol)
 Rol.hasMany(User)
 
 // Relacio entre usuarios y gustos favoritos
-User.belongsToMany(Taste, {
-  through: { model: "UserFavoriteTastes" },
+User.belongsToMany(Type, {
+  through: { model: "UserFavoriteTypes" },
   timestamps: false,
 });
-Taste.belongsToMany(User, {
-  through: { model: "UserFavoriteTastes" },
+Type.belongsToMany(User, {
+  through: { model: "UserFavoriteTypes" },
   timestamps: false,
 });
 
