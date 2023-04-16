@@ -37,6 +37,7 @@ export default function CrudProducts() {
 
     const handleOnClickDelete = (id) => {
        // dispatch()
+       console.log(id)
     }
 
     const handleOnChangeFilter = (event) => {
@@ -50,7 +51,7 @@ export default function CrudProducts() {
 
     const handleOnClickEdit = (c)=>{
         console.log(c, "soy c")
-        EditProduct(c)
+       // EditProduct(c)
     }
     return (
         <div>
