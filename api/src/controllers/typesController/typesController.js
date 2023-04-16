@@ -4,7 +4,7 @@ const { Type } = require("../../db");
 const getTypesAll = async () => {
     const allTypes = await Type.findAll()
     const typesMaped = allTypes.map(type => type.name)
-    return typesMaped
+    return allTypes
 }
 
 const postType = async(name) => {
