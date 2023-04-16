@@ -17,6 +17,6 @@ routerProducts.get("/advanced-search", getProductsAdvanceHandler);
 routerProducts.get("/:id", getProductByIdHandler);
 routerProducts.post('/', validatePostProduct, postProductHandler);
 routerProducts.put('/:id/delete',deleteProductHandler)
-routerProducts.put('/:id/update', validatePutProduct, updateProductHandler)
+routerProducts.put('/:id/update', updateProductHandler)
 
 module.exports = routerProducts;
