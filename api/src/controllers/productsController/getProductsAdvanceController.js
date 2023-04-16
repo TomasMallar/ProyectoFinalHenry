@@ -7,6 +7,8 @@ const { getProductsAll } = require("./getProductsAll");
 const getProductsAdvanceController = async (name,category, type, orderBy, orderDirection, page, pageSize) => {
 
 	try {
+		console.log(orderBy)
+		console.log(name)
 		
 		const allProducts = await getProductsAll(orderBy, orderDirection, page, pageSize);
 		let filteredProducts = allProducts;
