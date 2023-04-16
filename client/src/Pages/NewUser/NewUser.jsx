@@ -48,7 +48,7 @@ export default function User() {
     const handleOnClickAdd = (event) => {
         event.preventDefault()
         const selectedFlavor = inputSelectFlavorsRef.current.value
-
+// eslint-disable-next-line
         if (!flavors.includes(selectedFlavor)) { return alert("Elige un sabor válido!" + " " + '\ud83e\udd28') }
         if (selectedFlavor && !selectedFlavors.includes(selectedFlavor)) {
             setSelectedFlavors([...selectedFlavors, selectedFlavor])
@@ -74,9 +74,11 @@ export default function User() {
         const arrayErrors = Object.keys(errors)
         // chequea si existe name para que si no pones nada en ningun campo no se cree el usuario 
         if (arrayErrors.length || !newUser.name) {
+// eslint-disable-next-line
             alert("Usuario no creado verificar errores en el formulario"+ " " + '\ud83e\uddd0')
         } else {
            // dispatch(addUser(newUser))
+// eslint-disable-next-line
             alert("Felicitaciones has creado tu usuario !!" + " "+ '\ud83c\udf0d')
             setNewUser({
                 name: "",

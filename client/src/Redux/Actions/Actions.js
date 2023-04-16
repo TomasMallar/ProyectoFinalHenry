@@ -7,7 +7,9 @@ import {
     ADD_CHOCOLATE,
     RESET_STATE,
     HANDLE_ERROR,
-    CREATE_USER
+    CREATE_USER,
+    GET_CATEGORIES,
+    GET_TYPES
 } from "../Action-types/Action-types"
 
 export const getAllChocolates = () => {
@@ -20,14 +22,14 @@ export const getAllChocolates = () => {
     }
 }
 
-export const getChocolatesByName = (name, Filter, sort, page) => {
+export const getChocolatesByName = (name, category, type, sort, sortDirection, page) => {
     return async function(dispatch){
         try {
-            const response =  await axios(`http://localhost:3001/products?name=${name||""}&Filter=${Filter||""}&sort=${sort||""}&page=${page}`)
-    
+            const response =  await axios(`http://localhost:3001/products/advanced-search?name=${name||""}&category=${category||""}&type=${type||""}&orderBy=${sort||""}&orderDirection=${sortDirection||""}&page=${page||1}`)
+            console.log("Busqueda:", `http://localhost:3001/products/advanced-search?name=${name||""}&category=${category||""}&type=${type||""}&orderBy=${sort||""}&orderDirection=${sortDirection||""}&page=${page||1}`);
             return dispatch ({
                 type: GET_CHOCOLATE_BYNAME,
-                payload: response.data
+                payload: response.data.products
             })
         } catch (error) {
             return dispatch ({
@@ -90,3 +92,62 @@ export const addUser = (newUser) => {
         alert(error)}
     }
 }
+
+export const getProductsAdvanceController = (name,category, type, orderBy, orderDirection, page) => {
+    return async function(dispatch){
+        try {
+            const response =  await axios(`http://localhost:3001/products/advanced-search?name=${name||""}&category=${category||""}&type=${type||""}&orderBy=${orderBy||""}&orderDirection=${orderDirection||""}&page=${page||1}`)
+    
+            return dispatch ({
+                type: GET_CHOCOLATE_BYNAME,
+                payload: response.data
+            })
+        } catch (error) {
+            return dispatch ({
+                type: HANDLE_ERROR,
+                payload: error.response.data.error
+            })
+        }
+      
+    }
+}
+
+export const GetAllCategories = () => {
+    return async function(dispatch){
+        try {
+            const response = await axios(`http://localhost:3001/categories`)
+                
+            return dispatch ({
+                type: GET_CATEGORIES,
+                payload: response.data
+            })
+        } catch (error) {
+            return dispatch ({
+                type: HANDLE_ERROR,
+                payload: error.response.data.error
+            })
+        }
+      
+    }
+
+}
+export const GetAllTypes = () => {
+    return async function(dispatch){
+        try {
+            const response = await axios(`http://localhost:3001/types`)
+                
+            return dispatch ({
+                type: GET_TYPES,
+                payload: response.data
+            })
+        } catch (error) {
+            return dispatch ({
+                type: HANDLE_ERROR,
+                payload: error.response.data.error
+            })
+        }
+      
+    }
+
+}
+

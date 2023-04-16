@@ -1,18 +1,18 @@
-const {DataTypes} = require('sequelize')
+const { DataTypes } = require('sequelize')
 
 module.exports = (sequelize) => {
     sequelize.define(
-        'rol',
+        'taste',
         {
             id: {
                 type: DataTypes.INTEGER,
                 primaryKey: true,
-                autoIncrement: true,
+                autoIncrement: true
             },
-            rol_name: {
+            name: {
                 type: DataTypes.STRING,
                 allowNull: false,
-                unique: true,
+                unique: true
             }
         },
         {

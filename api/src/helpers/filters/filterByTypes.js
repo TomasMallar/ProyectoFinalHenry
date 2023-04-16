@@ -1,5 +1,15 @@
-const filterByTypes = (products, name) => {
-    const productsFilteredByType = products.filter(product => product.types.includes(name))
+const filterByTypes = (products, types) => {
+
+    let typesArray = types;
+
+    if (typeof types === 'string') {
+        typesArray = [types];
+    }
+
+    const productsFilteredByType = products.filter(product => 
+        types.every(type => product.types.includes(type))
+      );    
+
     return productsFilteredByType
 }
 
