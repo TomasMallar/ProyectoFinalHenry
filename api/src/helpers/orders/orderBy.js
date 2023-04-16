@@ -20,7 +20,8 @@ const sortByProperty = (products, property, direction) => {
 };
   
 const sortProducts = (products, property, direction) => {
-    if (['id', 'nombre', 'precio', 'score'].includes(property)) {
+    console.log(property)
+    if (['id', 'name', 'price', 'score'].includes(property)) {
         return sortByProperty(products, property, direction);
     }
     return products;
