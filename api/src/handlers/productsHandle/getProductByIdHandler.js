@@ -1,4 +1,5 @@
 const { getProductByIdController } = require("../../controllers/productsController/getProductByIdController");
+const { cleanArrayProduct } = require("../../helpers/cleanArrayProduct");
 
 const getProductByIdHandler = async (req, res) => {
 
@@ -7,7 +8,7 @@ const getProductByIdHandler = async (req, res) => {
 		const { id } = req.params;
 		const product = await getProductByIdController(id);
 		if (product) {
-		res.status(200).json(product);
+		res.status(200).json(cleanArrayProduct(product));
 		} else {
 		res.status(404).json({ message: "Product not found" });
 		}
