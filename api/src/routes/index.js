@@ -24,6 +24,6 @@ router.use("/roles", routerRoles);
 
 router.use("/score", routerScore)
 
-router.use('/pago', routerPay)
+router.use('/pay', routerPay)
 
 module.exports = router;
