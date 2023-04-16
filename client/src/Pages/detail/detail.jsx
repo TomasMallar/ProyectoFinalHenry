@@ -32,7 +32,6 @@ const Detail = () => {
 
                 <h1 className={styles.titleDetail}>{ChocolateDetail.name}</h1>
                 
-                <h3> Score: {ChocolateDetail.score} </h3>
 
 
                 <h3> {ChocolateDetail.price} </h3>

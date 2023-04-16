@@ -1,12 +1,12 @@
-.container{
-    border: 1px solid #F4EEE2; 
-    border-radius: 10px;
-    background-color: #725e4f;
+.container {
+  border: 1px solid #F4EEE2;
+  border-radius: 10px;
+  background-color: #725e4f;
   padding: 10px;
   width: 300px;
   max-height: 1000px;
   margin: 4px;
-  box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.467); 
+  box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.467);
   font-family: 'ArimaMadurai', sans-serif;
   font-weight: lighter;
 }
@@ -16,13 +16,34 @@
 }
 
 .cardLink {
-    color:  rgb(255, 255, 255);
-    margin: auto;
-    text-decoration: none;
-    display: inline-block;
-    
-  }
+  color: rgb(255, 255, 255);
+  margin: auto;
+  text-decoration: none;
+  display: inline-block;
+}
 
-.pictures{
+.cardLink h1 {
+  margin: 0;
+
+}
+
+.cardLink h3 {
+  font-weight: 15px;
+}
+
+.pictures {
   width: 200px;
+}
+
+.carImagen {
+  width: 25px;
+  filter: invert(100%) brightness(200%);
+}
+
+.container button {
+  width: fit-content;
+  border: none;
+  background: none;
+  margin: 5px 0px 0px 250px;
+  cursor: pointer;
 }

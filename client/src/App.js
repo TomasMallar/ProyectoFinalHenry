@@ -26,7 +26,7 @@ function App() {
         <Route path="/createProduct"><CreateProduct/> <NavBar/></Route>
         <Route path="/newUser"> <User/> </Route>
         <Route path='/products/:id'> <Detail/> </Route>
-        <Route path="/*"><Error/><NavBar/></Route>
+        <Route exact path="/*"><Error/><NavBar/></Route>
 
       </Switch>
     </div>
