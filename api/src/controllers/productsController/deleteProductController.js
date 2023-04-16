@@ -7,7 +7,7 @@ const deleteProductController = async (id) => {
         if (!product) {
             throw new Error(`Product with ID ${id} not found.`);
         }
-
+        product.name = product.name + ` - Deleted (${id})`
         await product.destroy();
     } catch (error) {
         throw Error(error.message);
