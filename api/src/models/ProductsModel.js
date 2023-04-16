@@ -39,13 +39,10 @@ module.exports = (sequelize) => {
                 type: DataTypes.JSON,
                 
             },
-            is_deleted: {
-                type: DataTypes.BOOLEAN,
-                defaultValue: false
-            }
         },
         {
             timestamps: false,
+            paranoid: true,
         }
     )
 }

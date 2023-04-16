@@ -5,8 +5,8 @@ const updateProductHandler = async (req, res) => {
 	try {
 
 		const { id } = req.params;
-    	const updateData = req.body;
-	    const updatedProduct = await updateProductController(id, updateData);
+    	const {name,price,stock,image,categories,types,ingredients} = req.body;
+	    const updatedProduct = await updateProductController(id, name,price,stock,image,categories,types,ingredients);
 		res.status(200).json(updatedProduct);
 		
 	} catch (error) {
