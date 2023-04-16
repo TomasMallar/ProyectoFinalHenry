@@ -3,6 +3,7 @@ import { useEffect, useState } from "react"
 import { GetAllCategories, getProductsAdvanceController, GetAllTypes } from "../../Redux/Actions/Actions"
 import style from './crud_products.module.css'
 import { Link } from "react-router-dom"
+import EditProduct from "../editProduct/editProduct"
 
 
 export default function CrudProducts() {
@@ -34,8 +35,8 @@ export default function CrudProducts() {
         setQueries({ ...queries, [event.target.name]: event.target.value })
     }
 
-    const handleOnClickDelete = (event) => {
-        dispatch()
+    const handleOnClickDelete = (id) => {
+       // dispatch()
     }
 
     const handleOnChangeFilter = (event) => {
@@ -46,8 +47,11 @@ export default function CrudProducts() {
             setQueries({ ...queries, [event.target.name]: [""] })
         }
     }
-    console.log(queries, "soy queries")
 
+    const handleOnClickEdit = (c)=>{
+        console.log(c, "soy c")
+        EditProduct(c)
+    }
     return (
         <div>
             <div className={style.searchBar}>
@@ -129,8 +133,8 @@ export default function CrudProducts() {
                                     }
                                 </div>
 
-                                <button className={style.cell}  >Editar</button>
-                                <button className={style.cell} value={c.id} onClick={handleOnClickDelete}>Eliminar</button>
+                                <button className={style.cell} value={c} onClick={()=>{handleOnClickEdit(c)}} >Editar</button>
+                                <button className={style.cell} value={c.id} onClick={()=>{handleOnClickDelete(c.id)}}>Eliminar</button>
 
                             </div>
                         )

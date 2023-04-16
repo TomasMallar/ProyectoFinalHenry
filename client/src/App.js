@@ -9,6 +9,7 @@ import CreateProduct from './Pages/createProduct/CreateProduct';
 import User from './Pages/NewUser/NewUser';
 import Detail from './Pages/detail/detail';
 import CrudProducts from './Pages/crud_products/CrudProducts';
+import EditProduct from './Pages/editProduct/editProduct';
 function App() {
 
   return (
@@ -27,6 +28,7 @@ function App() {
         <Route path="/newUser"> <User/> </Route>
         <Route path='/products/:id'> <Detail/> </Route>
        <Route path="/crudProducts"> <NavBar/><CrudProducts/></Route>
+       <Route path="/editProduct"> <NavBar/><EditProduct/></Route>
         <Route path="/*"><Error/><NavBar/></Route>
 
       </Switch>
