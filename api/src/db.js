@@ -38,7 +38,7 @@ let capsEntries = entries.map((entry) => [
 ]);
 sequelize.models = Object.fromEntries(capsEntries);
 
-const { Product, User, Category, Ingredient, Type, Rol, Taste } = sequelize.models;
+const { Product, User, Category, Ingredient, Type, Rol } = sequelize.models;
 
 Product.belongsToMany(Category, {
   through: { model: "ProductsCategory" },
@@ -93,12 +93,12 @@ User.belongsTo(Rol)
 Rol.hasMany(User)
 
 // Relacio entre usuarios y gustos favoritos
-User.belongsToMany(Taste, {
-  through: { model: "UserFavoriteTastes" },
+User.belongsToMany(Type, {
+  through: { model: "UserFavoriteTypes" },
   timestamps: false,
 });
-Taste.belongsToMany(User, {
-  through: { model: "UserFavoriteTastes" },
+Type.belongsToMany(User, {
+  through: { model: "UserFavoriteTypes" },
   timestamps: false,
 });
 
