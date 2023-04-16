@@ -3,6 +3,7 @@ import { useEffect, useState } from "react"
 import { GetAllCategories, getProductsAdvanceController, GetAllTypes } from "../../Redux/Actions/Actions"
 import style from './crud_products.module.css'
 import { Link } from "react-router-dom"
+import EditProduct from "../editProduct/editProduct"
 
 
 export default function CrudProducts() {
@@ -19,6 +20,7 @@ export default function CrudProducts() {
     })
 
     const allProducts = useSelector((state) => state.chocolates)
+    console.log("admin allProd", allProducts)
     const allCategories = useSelector((state) => state.categories)
     const allTypes = useSelector((state) => state.types)
 
@@ -33,21 +35,24 @@ export default function CrudProducts() {
         setQueries({ ...queries, [event.target.name]: event.target.value })
     }
 
-    const handleOnClickDelete = (event) => {
-        dispatch()
+    const handleOnClickDelete = (id) => {
+       // dispatch()
+       console.log(id)
     }
 
     const handleOnChangeFilter = (event) => {
         if (event.target.value !== "CATEGORIAS" && event.target.value !== "TIPOS") {
             const selectedFilter = [event.target.value]
-
             setQueries({ ...queries, [event.target.name]: selectedFilter })
         } else {
             setQueries({ ...queries, [event.target.name]: [""] })
         }
     }
-    console.log(queries, "soy queries")
 
+    const handleOnClickEdit = (c)=>{
+        console.log(c, "soy c")
+       // EditProduct(c)
+    }
     return (
         <div>
             <div className={style.searchBar}>
@@ -62,24 +67,25 @@ export default function CrudProducts() {
                 <h3 className={style.cell}>PRECIO</h3>
                 <h3 className={style.cell}>STOCK</h3>
                 <h3 className={style.cell}>IMAGEN</h3>
+                <h3 className={style.cell}>INGREDIENTES</h3>
                 <select className={style.cell} name="type" onChange={handleOnChangeFilter}>
-                    <option value="TIPOS" defaultValue="TIPOS">TIPOS</option>
+                    <option className={style.cell} value="TIPOS" defaultValue="TIPOS">TIPOS</option>
                     {
                         allTypes.map(t => {
                             return (
 
-                                <option value={t}>{t}</option>
+                                <option className={style.cell} value={t}>{t}</option>
                             )
                         })
                     }
                 </select>
                 <select className={style.cell} name="category" onChange={handleOnChangeFilter}>
-                    <option value="CATEGORIAS" defaultValue="CATEGORIAS">CATEGORIAS</option>
+                    <option className={style.cell} value="CATEGORIAS" defaultValue="CATEGORIAS">CATEGORIAS</option>
                     {
                         allCategories.map(c => {
                             return (
 
-                                <option value={c.name}>{c.name}</option>
+                                <option className={style.cell} value={c.name}>{c.name}</option>
                             )
                         })
                     }
@@ -101,6 +107,15 @@ export default function CrudProducts() {
                                 <img src={c.image} alt={c.name} className={style.image} />
                                 <div>
                                     {
+                                        c.ingredients.length ? c.ingredients.map(i => {
+                                            return (
+                                                <p className={style.cell}>{i}</p>
+                                            )
+                                        }) : <p className={style.cell}>N/A</p>
+                                    }
+                                </div>
+                                <div>
+                                    {
                                         c.types.length ? c.types.map(t => {
                                             return (
                                                 <p className={style.cell}>{t}</p>
@@ -119,8 +134,8 @@ export default function CrudProducts() {
                                     }
                                 </div>
 
-                                <button className={style.cell}  >Editar</button>
-                                <button className={style.cell} value={c.id} onClick={handleOnClickDelete}>Eliminar</button>
+                                <button className={style.cell} value={c} onClick={()=>{handleOnClickEdit(c)}} >Editar</button>
+                                <button className={style.cell} value={c.id} onClick={()=>{handleOnClickDelete(c.id)}}>Eliminar</button>
 
                             </div>
                         )

@@ -7,7 +7,8 @@ import {
     RESET_STATE,
     HANDLE_ERROR,
     GET_CATEGORIES,
-    GET_TYPES
+    GET_TYPES,
+    GET_INGREDIENTS
 } from "../Action-types/Action-types"
 
 const initialState = {
@@ -17,6 +18,7 @@ const initialState = {
     users: [],
     categories: [],
     types: [],
+    ingredients:[]
 }
 const reducer = (state = initialState, action) => {
     switch (action.type) {
@@ -71,6 +73,11 @@ const reducer = (state = initialState, action) => {
                 ...state,
                 types: action.payload,
             }
+            case GET_INGREDIENTS:
+                return {
+                    ...state,
+                    ingredients: action.payload,
+                }
 
         default:
             return { ...state };

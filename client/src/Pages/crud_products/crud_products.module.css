@@ -9,7 +9,7 @@
 }
 
 .cell{
-    width: 150px;
+    width: 120px;
     height: fit-content;
     margin-right: 10px;
     flex-basis: 150px;
@@ -17,9 +17,8 @@
     font-size: 15px;
 }
 .image{
-   width: 100px;
-   height: 70px;
-   overflow: hidden;
+   width:90px;
+  height: 70px;
 }
 
 .searchBar{
