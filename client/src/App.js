@@ -23,10 +23,10 @@ function App() {
 
         <Route exact path="/products" > <NavBar/> <Products/> <Footer/></Route>
         <Route path="/login"><Login/></Route>
-        <Route path="/createProduct"><CreateProduct/> <NavBar/></Route>
+        <Route path="/createProduct"><NavBar/><CreateProduct/></Route>
         <Route path="/newUser"> <User/> </Route>
         <Route path='/products/:id'> <Detail/> </Route>
-       <Route path="/crudProducts"> <CrudProducts/></Route>
+       <Route path="/crudProducts"> <NavBar/><CrudProducts/></Route>
         <Route path="/*"><Error/><NavBar/></Route>
 
       </Switch>
