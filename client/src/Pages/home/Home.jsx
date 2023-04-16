@@ -5,6 +5,7 @@ import { useEffect } from "react";
 import { getAllChocolates } from "../../Redux/Actions/Actions";
 import SortingAndFiltering from "../sortingAndFiltering/sortingAndFiltering";
 import styles from "./home.module.css"
+import { all } from "axios";
 
 const Products = (props) => {
  
@@ -17,7 +18,6 @@ const Products = (props) => {
   }, [dispatch])
 
   let allProducts = useSelector((state) => state.chocolates)
-
   return (
 
     <div>
