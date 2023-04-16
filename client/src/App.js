@@ -5,7 +5,7 @@ import Products from './Pages/home/Home'
 import Error from './Pages/Error'
 import Login from './Pages/Login/Login'
 import Footer from './Components/Footer/Footer';
-import CreateProduct from './Pages/CreateProduct';
+import CreateProduct from './Pages/createProduct/CreateProduct';
 import User from './Pages/NewUser/NewUser';
 import Detail from './Pages/detail/detail';
 import CrudProducts from './Pages/crud_products/CrudProducts';

@@ -9,11 +9,12 @@
 }
 
 .cell{
-    width: 100px;
-    height: 70px;
+    width: 150px;
+    height: fit-content;
     margin-right: 10px;
     flex-basis: 150px;
-
+    text-align: center;
+    font-size: 15px;
 }
 .image{
    width: 100px;
@@ -36,4 +37,15 @@ height: fit-content;
 .img{
     width: 2%;
     padding-right: 6px;
+}
+
+.buttonNewProd{
+    padding: 5px;
+    margin-left: 40px;
+    background-color: black;
+    color: white;
+}
+.buttonNewProd:hover{
+background-color: gainsboro;
+color: black;
 }
