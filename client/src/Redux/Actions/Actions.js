@@ -200,7 +200,7 @@ export const GetAllIngredient = () => {
     export const PutProduct = (finalEditedProduct) => {
         return async function (dispatch) {
             try {
-                const resp = await axios.patch(`http://localhost:3001/products/update/${finalEditedProduct.id}`, finalEditedProduct)
+                const resp = await axios.put(`http://localhost:3001/products/update/${finalEditedProduct.id}`, finalEditedProduct)
                
                 const response = await axios(`http://localhost:3001/products/`)
         return dispatch({
