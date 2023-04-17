@@ -28,6 +28,7 @@ const Products = (props) => {
       <div>
         <SortingAndFiltering />
       </div>
+      <h4 className={styles.ourProducts}>Our products:</h4>
       <div className={styles.cardsGrid}>
         {/* Map each product into a single card using map */}
         {allProducts?.map((product) => {
@@ -44,6 +45,9 @@ const Products = (props) => {
             </>
           );
         })}
+      </div>
+      <div>
+        <Paginated />
       </div>
     </div>
     </>

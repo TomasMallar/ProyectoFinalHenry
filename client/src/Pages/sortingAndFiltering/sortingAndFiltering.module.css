@@ -60,6 +60,8 @@
 }
 
 .filteringButtons button {
+    width: fit-content;
+    max-width: 100px;
     background-color: #f4eee2;
     border: solid 0.5px #725e4f;
     border-radius: 1rem;

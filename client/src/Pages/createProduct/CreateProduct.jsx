@@ -54,7 +54,6 @@ export default function CreateProduct() {
     const handleOnClickAddType = (event) => {
         event.preventDefault()
         const selectedType = inputSelectedTypeRef.current.value
-// eslint-disable-next-line
         if (!types.includes(selectedType)) { return alert("Elige un tipo válido!" + " " + '\ud83e\udd28') }
         if (selectedType && !selectedTypes.includes(selectedType)) {
             setSelectedTypes([...selectedTypes, selectedType])
@@ -66,7 +65,6 @@ export default function CreateProduct() {
     const handleOnClickAddCategory = (event) => {
         event.preventDefault()
         const selectedCategory = inputSelectedCategoryRef.current.value
-// eslint-disable-next-line
         if (!categories.includes(selectedCategory)) { return alert("Elige una categoría válida!" + " " + '\ud83e\udd28') }
         if (selectedCategory && !selectedCategories.includes(selectedCategory)) {
             setSelectedCategories([...selectedCategories, selectedCategory])
