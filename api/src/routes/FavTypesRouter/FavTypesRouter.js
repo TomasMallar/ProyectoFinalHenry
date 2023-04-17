@@ -10,7 +10,7 @@ const validatePut = require('../../middlewares/validateCategories&Tastes&Ingredi
 
 const routerFavoriteTypes = Router()
 
-routerFavoriteTypes.get('/:id', getFavTypes)
+routerFavoriteTypes.get('/:id?', getFavTypes)
 routerFavoriteTypes.post('/:id', validatePost,postFavTypes)
 routerFavoriteTypes.delete('/:id', deleteFavTypes)
 
