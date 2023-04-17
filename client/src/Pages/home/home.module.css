@@ -26,6 +26,7 @@
 }
 
 .cardsGrid {
+    justify-content: center;
     display: grid;
     grid-template-columns: repeat(4, 300px);
     gap: 30px;

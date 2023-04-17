@@ -1,6 +1,6 @@
 import { useSelector } from "react-redux";
 import React, { useState } from "react";
-import DataManagement from "../DataManagement";
+import DataManagement from "../../Components/DataManagement";
 import CarouselCard from "../CarouselCard/carouselCard";
 import styles from "./carousel.module.css"
 
@@ -13,7 +13,7 @@ console.log(carouselItems, "items");
 //-----------------------------------------------------------------------------RETURN---------
 return(
 <>
-
+<h1 className={styles.nuevaColeccion}>NUEVA COLECCIÓN</h1>
     <div className={styles.carousel}>
 
             {
