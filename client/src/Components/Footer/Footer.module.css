@@ -20,7 +20,7 @@
     justify-content: space-between;
     position: absolute;
     width: 100%;
-    height: 250px;
+    height: 200px;
 }
 
 .logoChoco {
@@ -63,5 +63,5 @@
 }
 
 .logosImg {
-    width: 10%;
+    width: 40px;
 }

@@ -1,5 +1,7 @@
 import { Link } from "react-router-dom"
 import style from "./card.module.css"
+import carImagen from "../../img/shopping-cart.png"
+
 const ProductCard = ({id, name, image, price, category}) => {
     return (
         <div className={style.container}>
@@ -7,8 +9,8 @@ const ProductCard = ({id, name, image, price, category}) => {
             <Link className={style.cardLink} to= {`/products/${id}`}>
                 <h1> {name} </h1>
                 <img src={image} alt={name} className={style.pictures}/>
-                <div> {category?.map((c)=>{
-                    return <p>{c}</p>
+                <div className={style.ingredients}> {category?.map((c)=>{
+                    return <p>- {c}</p>
                 
                 })} </div>
                 <h3>$ {price}</h3>

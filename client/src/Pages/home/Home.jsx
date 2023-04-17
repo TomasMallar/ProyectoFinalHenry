@@ -2,10 +2,10 @@ import React from "react"
 import ProductCard from "../../Components/ProductCard/ProductCard";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import { getAllChocolates } from "../../Redux/Actions/Actions";
-import SortingAndFiltering from "../sortingAndFiltering/sortingAndFiltering";
+import { getProductsAdvanceController } from "../../Redux/Actions/Actions";
+import SortingAndFiltering from "../../Components/sortingAndFiltering/sortingAndFiltering";
+import Paginated from '../../Components/Paginated/paginated';
 import styles from "./home.module.css"
-import { all } from "axios";
 
 const Products = (props) => {
 
@@ -14,32 +14,28 @@ const Products = (props) => {
   const dispatch = useDispatch()
 
   useEffect(() => {
-    dispatch(getAllChocolates())
+    dispatch(getProductsAdvanceController())
   }, [dispatch])
 
-  let allProducts = useSelector((state) => state.chocolates)
+  let allProducts = useSelector((state) => state.chocolates.products)
   return (
-
-    <div>
+    <><div>
       <div className={styles.headerHome}>
-        <div className={styles.headerTitle}>
-          <h1>SOMOS LOS <br /> REYES DEL <br /> CHOCOLATE</h1>
-        </div>
-        <div className={styles.headerButton}>
-          <button>!Que rico¡</button>
-        </div>
+        <h1>SOMOS LOS <br /> REYES DEL <br /> CHOCOLATE</h1>
       </div>
+
       <div>
         <SortingAndFiltering />
       </div>
-
       <h4 className={styles.ourProducts}>Our products:</h4>
-    <div className={styles.cardsGrid}>
-      {/* Map each product into a single card using map */}
-      {
-        allProducts?.map((product) => {
+      <div>
+        <Paginated />
+      </div>
+      <div className={styles.cardsGrid}>
+        {/* Map each product into a single card using map */}
+        {allProducts?.map((product) => {
           return (
-            <ProductCard
+            <><ProductCard
               // as we are receiving info from the api with the "?" we make sure that we are getting the info and the app does not crash
               key={product?.id}
               id={product.id}
@@ -47,12 +43,13 @@ const Products = (props) => {
               image={product?.image}
               category={product?.categories}
               price={product?.price}
-              score={product?.score}
-            />
-          )
+              score={product?.score} />
+            </>
+          );
         })}
+      </div>
     </div>
-    </div>
+    </>
   )
 };
 
