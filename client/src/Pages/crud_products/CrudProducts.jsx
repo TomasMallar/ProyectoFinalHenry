@@ -1,13 +1,13 @@
 import { useSelector, useDispatch } from "react-redux"
 import { useEffect, useState } from "react"
-import { GetAllCategories, getProductsAdvanceController, GetAllTypes, DeleteProduct } from "../../Redux/Actions/Actions"
+import { GetAllCategories, getProductsAdvanceController, GetAllTypes, DeleteProduct, EditedProduct } from "../../Redux/Actions/Actions"
 import style from './crud_products.module.css'
-import { Link } from "react-router-dom"
-import EditProduct from "../editProduct/editProduct"
+import { Link} from "react-router-dom"
+import Edit from "../editProduct/editProduct"
 
 
 export default function CrudProducts() {
-
+   // const history = useHistory()
     const dispatch = useDispatch()
 
     const [queries, setQueries] = useState({
@@ -52,9 +52,9 @@ export default function CrudProducts() {
     }
 
     const handleOnClickEdit = (c) => {
-        console.log(c, "soy c")
-        // EditProduct(c)
+        dispatch(EditedProduct(c))
     }
+
     return (
         <div>
             <div className={style.searchBar}>
@@ -136,7 +136,7 @@ export default function CrudProducts() {
                                     }
                                 </div>
 
-                                <button className={style.cell} value={c} onClick={() => { handleOnClickEdit(c) }} >Editar</button>
+                              <Link to="/editProduct"><button className={style.cell} value={c} onClick={() => { handleOnClickEdit(c) }} >Editar</button> </Link>
                                 <button className={style.cell} value={c.id} onClick={handleOnClickDelete}>Eliminar</button>
 
                             </div>
