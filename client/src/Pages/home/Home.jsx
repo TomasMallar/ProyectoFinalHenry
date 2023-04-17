@@ -3,7 +3,7 @@ import ProductCard from "../../Components/ProductCard/ProductCard";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { getProductsAdvanceController } from "../../Redux/Actions/Actions";
-import SortingAndFiltering from "../sortingAndFiltering/sortingAndFiltering";
+import SortingAndFiltering from "../../Components/sortingAndFiltering/sortingAndFiltering";
 import Paginated from '../../Components/Paginated/paginated';
 import styles from "./home.module.css"
 
