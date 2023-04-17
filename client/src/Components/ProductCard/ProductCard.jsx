@@ -1,10 +1,6 @@
 import { Link } from "react-router-dom"
 import style from "./card.module.css"
 import carImagen from "../../img/shopping-cart.png"
-<<<<<<< Updated upstream
-
-=======
->>>>>>> Stashed changes
 const ProductCard = ({id, name, image, price, category}) => {
     return (
         <div className={style.container}>
