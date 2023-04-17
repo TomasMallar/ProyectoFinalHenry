@@ -2,8 +2,9 @@ import React from "react"
 import ProductCard from "../../Components/ProductCard/ProductCard";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import { getAllChocolates } from "../../Redux/Actions/Actions";
+import { getProductsAdvanceController } from "../../Redux/Actions/Actions";
 import SortingAndFiltering from "../sortingAndFiltering/sortingAndFiltering";
+import Paginated from '../../Components/Paginated/paginated';
 import styles from "./home.module.css"
 
 const Products = (props) => {
@@ -13,37 +14,41 @@ const Products = (props) => {
   const dispatch = useDispatch()
 
   useEffect(() => {
-    dispatch(getAllChocolates())
+    dispatch(getProductsAdvanceController())
   }, [dispatch])
 
-  let allProducts = useSelector((state) => state.chocolates)
-
+  let allProducts = useSelector((state) => state.chocolates.products)
   return (
 
-    <div>
+    <><div>
       <div>
-        <SortingAndFiltering/>
+        <SortingAndFiltering />
       </div>
-      
+
+      <div>
+        <Paginated />
+      </div>
+
       <h4 className={styles.ourProducts}>Our products:</h4>
-    <div className={styles.cardsGrid}>
-      {/* Map each product into a single card using map */}
-      {
-        allProducts?.map((product) => {
+      <div className={styles.cardsGrid}>
+        {/* Map each product into a single card using map */}
+        {allProducts?.map((product) => {
           return (
-            <ProductCard
+            <><ProductCard
               // as we are receiving info from the api with the "?" we make sure that we are getting the info and the app does not crash
               key={product?.id}
               id={product.id}
               name={product?.name}
               image={product?.image}
+              category={product?.categories}
               price={product?.price}
-              score={product?.score}
-            />
-          )
+              score={product?.score} />
+            </>
+          );
         })}
+      </div>
     </div>
-    </div>
+    </>
   )
 };
 

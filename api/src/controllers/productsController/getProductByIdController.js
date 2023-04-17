@@ -33,8 +33,8 @@ const getProductByIdController = async (id) => {
 
 		  if(product === null) throw Error('No results for the specified id');
 
-		  const dBfiltered = cleanArrayProduct(product);
-		  return dBfiltered;
+
+		  return product;
 	
 	} catch (error) {
 		throw Error(error.message);
