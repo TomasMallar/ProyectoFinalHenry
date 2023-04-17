@@ -7,6 +7,7 @@ const updateProductController = async (id, name, price, stock, image, categories
   try {
 
 	const product = await getProductByIdController(id)
+  console.log(product)
 
     const [updatedCategories, updatedTypes, updatedIngredients] = await Promise.all([
       Category.findAll({ where: { name: categories } }),
@@ -32,7 +33,10 @@ const updateProductController = async (id, name, price, stock, image, categories
     );
 
     if (hasDifferences) {
-      await product.update(productData);
+
+      
+      await Product.update(productData, { where: { id } });
+
 
       await Promise.all([
         product.setCategories(updatedCategories),
@@ -41,7 +45,9 @@ const updateProductController = async (id, name, price, stock, image, categories
       ]);
     }
 
-	return cleanArrayProduct(product);
+    const updatedProduct = await getProductByIdController(id);
+    console.log(updatedProduct)
+    return cleanArrayProduct(updatedProduct);
 
   } catch (error) {
     throw Error(error.message);
