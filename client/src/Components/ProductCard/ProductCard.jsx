@@ -1,5 +1,7 @@
 import { Link } from "react-router-dom"
 import style from "./card.module.css"
+import carImagen from "../../img/shopping-cart.png"
+
 const ProductCard = ({id, name, image, price, category}) => {
     return (
         <div className={style.container}>
