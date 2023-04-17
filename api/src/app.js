@@ -23,8 +23,6 @@ server.use((req, res, next) => {
   next();
 });
 
-//Passport Google
-require("./middlewares/authGoogle/authGoogle.js")
 //Inicializamos passport
 server.use(passport.initialize());
 

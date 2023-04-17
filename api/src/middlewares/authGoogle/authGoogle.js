@@ -1,6 +1,6 @@
 const passport = require("passport");
 const GoogleStrategy = require("passport-google-oauth").OAuth2Strategy;
-const { User } =require("../../db");
+const { User, Rol } =require("../../db");
 const { encrypt } = require("../../helpers/password/bcryptHelper")
 
 passport.use(
@@ -38,7 +38,7 @@ passport.use(
                 // date_of_birth: profile._json.birthday ?? "2000-01-01",
                 phone: "11222333",
                 date_of_birth: "2000-01-01",
-                rolId: roles,
+                rolId: roles.id,
             });
 
             // Retorna el nuevo usuario creado
