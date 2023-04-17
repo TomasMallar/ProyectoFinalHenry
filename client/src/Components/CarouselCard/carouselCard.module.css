@@ -1,0 +1,34 @@
+
+.container{
+    max-width: 50vw;
+    border: 3px solid black;
+    margin: 5px;
+
+
+}
+
+.carousel{
+    display: flex;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+}
+
+.item{
+background-color: white;
+margin: 10px;
+padding: 10px;
+width: 280px;
+}
+
+.image{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.info{
+    height: 140px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
