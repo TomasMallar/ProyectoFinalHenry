@@ -3,7 +3,7 @@ import ProductCard from "../../Components/ProductCard/ProductCard";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { getProductsAdvanceController } from "../../Redux/Actions/Actions";
-import SortingAndFiltering from "../sortingAndFiltering/sortingAndFiltering";
+import SortingAndFiltering from "../../Components/sortingAndFiltering/sortingAndFiltering";
 import Paginated from '../../Components/Paginated/paginated';
 import styles from "./home.module.css"
 
@@ -20,17 +20,17 @@ const Products = (props) => {
   let allProducts = useSelector((state) => state.chocolates.products)
   return (
     <><div>
-      <div>
-        <SortingAndFiltering />
-      </div>
       <div className={styles.headerHome}>
         <h1>SOMOS LOS <br /> REYES DEL <br /> CHOCOLATE</h1>
       </div>
+
+      <div>
+        <SortingAndFiltering />
+      </div>
+      <h4 className={styles.ourProducts}>Our products:</h4>
       <div>
         <Paginated />
       </div>
-
-      <h4 className={styles.ourProducts}>Our products:</h4>
       <div className={styles.cardsGrid}>
         {/* Map each product into a single card using map */}
         {allProducts?.map((product) => {
