@@ -20,16 +20,13 @@ const Products = (props) => {
   let allProducts = useSelector((state) => state.chocolates.products)
   return (
     <><div>
-      <div>
-        <SortingAndFiltering />
-      </div>
       <div className={styles.headerHome}>
         <h1>SOMOS LOS <br /> REYES DEL <br /> CHOCOLATE</h1>
       </div>
-      <div>
-        <Paginated />
-      </div>
 
+      <div>
+        <SortingAndFiltering />
+      </div>
       <h4 className={styles.ourProducts}>Our products:</h4>
       <div className={styles.cardsGrid}>
         {/* Map each product into a single card using map */}
@@ -47,6 +44,9 @@ const Products = (props) => {
             </>
           );
         })}
+      </div>
+      <div>
+        <Paginated />
       </div>
     </div>
     </>
