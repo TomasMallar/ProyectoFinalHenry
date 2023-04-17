@@ -1,6 +1,6 @@
 import { useSelector } from "react-redux";
 import React, { useState } from "react";
-import DataManagement from "../../Pages/DataManagement";
+import DataManagement from "../DataManagement";
 import CarouselCard from "../CarouselCard/carouselCard";
 import styles from "./carousel.module.css"
 

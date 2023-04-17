@@ -48,6 +48,9 @@ const Products = (props) => {
           );
         })}
       </div>
+      <div>
+        <Paginated />
+      </div>
     </div>
     </>
   )

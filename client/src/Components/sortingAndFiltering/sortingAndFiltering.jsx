@@ -107,7 +107,7 @@ console.log("Types:", fitlerTypes);
                 className={fitlerCategories?.includes(c) ? styles.selected : ''}
                     >{c}
                 </button>})}
-        <button id="category" onClick={(event) => handleClick("Clear", event)}>Borrar todos los filtros</button>
+        <button id="category" onClick={(event) => handleClick("Clear", event)} className={styles.filterDelete}>Borrar todos los filtros</button>
       </div>
 
       <div className={styles.filteringButtons}>
@@ -119,7 +119,7 @@ console.log("Types:", fitlerTypes);
                 className={fitlerCategories?.includes(c) ? styles.selected : ''}
                     >{c}
                 </button>})}
-        <button id="types" onClick={(event) => handleClick("Clear", event)}>Borrar todos los filtros</button>
+        <button id="types" onClick={(event) => handleClick("Clear", event)} className={styles.filterDelete}>Borrar todos los filtros</button>
       </div>
       
       <DataManagement

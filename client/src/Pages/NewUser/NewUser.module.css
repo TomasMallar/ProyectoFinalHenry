@@ -1,41 +1,90 @@
-
-.container{
-   
-    background-image: url(https://cdn.pixabay.com/photo/2017/08/01/02/10/dark-2562840_1280.jpg);
-    background-size: cover;
-  background-position: center;
+.container {
+  background-image: url(https://cdn.pixabay.com/photo/2017/08/01/02/10/dark-2562840_1280.jpg);
+  background-size: cover;
   opacity: 0.8;
   width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  font-family: "ArimaMadurai";
+}
+
+.formContainer {
+  background-color: #fff;
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.5);
+  padding: 5rem;
+  width: 20rem;
   height: 100vh;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
 }
 
-.formContainer{
-    background-color: #fff;
-    border-radius: 0.5rem;
-    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.5);
-    padding: 5rem;
-    width: 20rem;
-    height: fit-content;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    align-items: center;
-}
-
 .inputContainer {
-display: flex;
-flex-direction: column;
-justify-content: space-between;
-height: fit-content;
-padding-top: 2%;
-
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
-.volverButton{
+.inputContainer .input {
+  background-color: #f4eee2;
+  border: none;
+  padding: .5rem;
+  font-size: 1rem;
+  width: 200px;
+  border-radius: 1rem;
+  color: #000;
+  box-shadow: 0 0.4rem #d7cbb9;
+  cursor: pointer;
+  margin: 0 0 10px 0;
+  font-family: 'ArimaMadurai', sans-serif;
+}
+
+.inputContainer .input:focus {
+  outline-color: #725e4f;
+}
+
+.volverButton {
   position: absolute;
-  margin-top: -36%;
+  margin-top: -60%;
   margin-left: 29%;
 }
+
+
+.inputContainer .error {
+  color: #ff0000;
+}
+
+.button {
+  border: none;
+  border-radius: 10px;
+  color: #ffffff;
+  background-color: #725e4f;
+  font-family: 'ArimaMadurai', sans-serif;
+  font-size: 20px;
+}
+
+.button:hover {
+  box-shadow: 2px 2px 1px rgba(0, 0, 0, 0.5);
+  background-color: #d7cbb9;
+  color: #000;
+}
+
+.message{
+  margin: 0 0 200px 250px;
+  width: 600px;
+}
+
+.message h1{
+    text-align: start;
+    font-family: "ArimaMadurai";
+    font-size: 40px;
+    color: #F4EEE2;
+    -webkit-text-stroke: 1px #5C3223;
+    text-stroke: 1px #5C3223;
+}
+

@@ -1,0 +1,29 @@
+.container {
+    margin: 0;
+    padding: 0;
+    background-image: url(https://images.unsplash.com/photo-1599599810769-bcde5a160d32?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1632&q=80);
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'ArimaMadurai';
+}
+
+.containWelcome {
+    background-color: #725e4f;
+    padding: 20px;
+    border-radius: 20px;
+}
+
+.containWelcome a {
+    text-decoration: none;
+}
+
+.containWelcome h1 {
+    color: #000;
+}
+
+.containWelcome h1:hover {
+    color: #fff;
+}

@@ -11,27 +11,32 @@ import Detail from './Pages/detail/detail';
 import CrudProducts from './Pages/crud_products/CrudProducts';
 import EditProduct from './Pages/editProduct/editProduct';
 import Carousel from './Components/Carousel/carousel';
+import Landing from './Landing/Landing';
 function App() {
 
   return (
     <div className="App">
-    
+
 
       {/* Routing  */}
       <Switch>
-      <Route exact path="/">
-        <Redirect to= "/Home"/>
-      </Route>
+        <Route exact path="/">
+          <Redirect to="/home" />
+        </Route>
 
-        <Route exact path="/carousel" > <NavBar/> <Carousel/> <Footer/></Route>
-        <Route exact path="/products" > <NavBar/> <Products/> <Footer/></Route>
-        <Route path="/login"><Login/></Route>
-        <Route path="/createProduct"><NavBar/><CreateProduct/></Route>
-        <Route path="/newUser"> <User/> </Route>
-        <Route path='/products/:id'> <Detail/> </Route>
-       <Route path="/crudProducts"> <NavBar/><CrudProducts/></Route>
-       <Route path="/editProduct"> <NavBar/><EditProduct/></Route>
-        <Route path="/*"><Error/><NavBar/></Route>
+        <Route exact path="/home">
+          <Landing />
+        </Route>
+
+        <Route exact path="/carousel" > <NavBar /> <Carousel /> <Footer /></Route>
+        <Route exact path="/products" > <NavBar /> <Products /> <Footer /></Route>
+        <Route path="/login"><Login /></Route>
+        <Route path="/createProduct"><NavBar /><CreateProduct /></Route>
+        <Route path="/newUser"> <User /> </Route>
+        <Route path='/products/:id'> <Detail /> </Route>
+        <Route path="/crudProducts"> <NavBar /><CrudProducts /></Route>
+        <Route path="/editProduct"> <NavBar /><EditProduct /></Route>
+        <Route path="/*"><Error /><NavBar /></Route>
 
       </Switch>
     </div>
