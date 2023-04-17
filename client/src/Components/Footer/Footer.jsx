@@ -1,13 +1,12 @@
 import React from "react"
 import style from "./Footer.module.css"
+import logo from "../../img/logoBlack.png"
 
 const Footer = (props) => {
   return (
     <div className={style.PieDePag}>
       <div className={style.copyright}>
-        <img src="https://res.cloudinary.com/dxh0l04wi/image/upload/v1681402134/Logo_Chocolate_Hub_hjvvek.png" alt="Logo" className={style.logoChoco} />
-        <h1 className={style.logoText}>The chocolate hub</h1>
-        <h2 className={style.sublogoText}>Exquisite Chocolate</h2>
+        <img src={logo} alt="Logo" className={style.logoChoco} />
         <h3 className={style.copyrightText}>Copyright © 2022 - Todos los derechos reservados </h3>
       </div>
       <div className={style.contacts}>

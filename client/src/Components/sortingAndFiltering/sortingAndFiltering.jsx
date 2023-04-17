@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react"
 import { useSelector } from "react-redux"
 import DataManagement from "../DataManagement"
-import styles from "./sortingAndFiltering"
+import styles from "./sortingAndFiltering.module.css"
 
 export default function SortingAndFiltering (props){
     const [queries, setQueries] = useState({
@@ -73,32 +73,32 @@ setfitlerTypes([...fitlerTypes, category])
 console.log("categories:", fitlerCategories);
 console.log("Types:", fitlerTypes);
     return (
-        <><div>
-        <div>
-          <input type="search" name="searchProduct " value={queries.name} onChange={(event) => handleOnChangeSearchBar(event)} placeholder="Busca tu producto" />
+        <div className={styles.containerFilters}><div>
+        <div className={styles.continSearchbar}>
+          <input type="text" name="searchProduct " value={queries.name} onChange={(event) => handleOnChangeSearchBar(event)} placeholder="Busca tu producto" className={styles.input}/>
         </div>
         <select id="Sort" onChange={SortName} className={styles.dropdown}>
                     <option hidden defaultValue="">Select a sorting Option</option>
-                    <optgroup label="id">
+                    <optgroup label="ID">
                     <option value="id, ASC" >Ascending</option>
                     <option value="id, DESC">Descending</option>
                     </optgroup>
-                    <optgroup label="name">
+                    <optgroup label="NAME">
                     <option value="name, ASC" >Ascending</option>
                     <option value="name, DESC">Descending</option>
                     </optgroup>
-                    <optgroup label="price">
+                    <optgroup label="PRICE">
                     <option value="price, ASC">Lowest to Highest (1-5)</option>
                     <option value="price, DESC">Highest to Lowest (1-5)</option>
                     </optgroup>
-                    <optgroup label="score">
+                    <optgroup label="SCORE">
                     <option value="score, ASC">Lowest to Highest (1-5)</option>
                     <option value="score, DESC">Highest to Lowest (1-5)</option>
                     </optgroup>
                     <option value="">Remove sort</option>
                 </select>
       </div>
-      <div className={styles.filteringCategories}>
+      <div className={styles.filteringButtons}>
       {categories?.map((c)=>{
             return <button
                 id="category"
@@ -108,9 +108,9 @@ console.log("Types:", fitlerTypes);
                     >{c}
                 </button>})}
         <button id="category" onClick={(event) => handleClick("Clear", event)}>Borrar todos los filtros</button>
-
       </div>
-      <div className={styles.filteringTypes}>
+
+      <div className={styles.filteringButtons}>
       {statetypes?.map((c)=>{
             return <button
                 id="types" 
@@ -120,8 +120,8 @@ console.log("Types:", fitlerTypes);
                     >{c}
                 </button>})}
         <button id="types" onClick={(event) => handleClick("Clear", event)}>Borrar todos los filtros</button>
-
       </div>
+      
       <DataManagement
         name= {queries.name}
         category= {queries.category}
@@ -130,7 +130,7 @@ console.log("Types:", fitlerTypes);
         sortDirection= {queries.sortDirection}
         page= {queries.page}
       />
-      </>
+      </div>
       
     )
 

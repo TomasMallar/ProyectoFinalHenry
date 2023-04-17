@@ -1,5 +1,4 @@
-@font-face
-{
+@font-face {
     font-family: "ArimaMadurai";
     src: url("../../Formatting/ArimaMadurai-ExtraBold.ttf");
 }
@@ -16,64 +15,53 @@
 
 
 .PieDePag {
-
     display: flex;
     background-color: #D7CBB9;
     justify-content: space-between;
     position: absolute;
     width: 100%;
-    height: 250px;
+    height: 200px;
+}
 
+.logoChoco {
+    width: 70%;
 }
 
 .copyright {
     display: block;
 
 }
-.copyrightText{
+
+.copyrightText {
     font-family: "ArimaMadurai-Medium";
     font-weight: lighter;
-    position: absolute;
     margin-left: 20px;
     bottom: 0;
 }
 
-.logoText {
-    font-family: "ArimaMadurai";
-    margin-block-start: 0%;
-    margin-block-end: 0%;
-}
-
-.sublogoText {
-    font-family: "Source Sans Pro";
-    font-size: 16.3px;
-    font-weight: lighter;
-    letter-spacing: 2mm;
-    margin-block-start: 0%;
-    margin-block-end: 0%;
-}
-
-
 .contacts {
     font-family: "ArimaMadurai-Medium";
     font-weight: lighter;
-
+    font-size: 25px;
+    width: 500px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 25px;
 }
 
 .lineContact{
-    width: auto;
     display: flex;
-    margin-block-start: 30px;
+    justify-content: start;
+    align-items: center;
+    gap: 25px;
+}
+
+.lineContact a{
+    text-decoration: none;
+    color: inherit;
 }
 
 .logosImg {
-    float: left;
-    margin-right: 5px;
-    width: 4.5%;
+    width: 40px;
 }
-
-.logoChoco {
-    width: 15%;
-}
-
-
