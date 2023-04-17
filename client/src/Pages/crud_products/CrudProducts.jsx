@@ -4,6 +4,7 @@ import { GetAllCategories, getProductsAdvanceController, GetAllTypes, DeleteProd
 import style from './crud_products.module.css'
 import { Link } from "react-router-dom"
 import EditProduct from "../editProduct/editProduct"
+import Paginated from "../../Components/Paginated/paginated"
 
 
 export default function CrudProducts() {
@@ -56,12 +57,17 @@ export default function CrudProducts() {
         // EditProduct(c)
     }
     return (
+        
         <div>
             <div className={style.searchBar}>
                 <img className={style.img} alt="lupa" src="https://res.cloudinary.com/dgxs2jcyu/image/upload/v1681582108/lupa_yidfrt.png" />
                 <input type="search" name="name" value={queries.name} placeholder="Buscar Producto" onChange={handleInputChangeSearchBar} />
                 <Link to="/createProduct"> <button className={style.buttonNewProd}>AGREGAR NUEVO PRODUCTO</button></Link>
             </div>
+            
+        <div>
+            <Paginated />
+        </div>
 
             <div className={style.container}>
                 <h3 className={style.cell}>ID</h3>

@@ -7,7 +7,7 @@ const ProductCard = ({id, name, image, price, category}) => {
                 <h1> {name} </h1>
                 <img src={image} alt={name} className={style.pictures}/>
                 <div> {category?.map((c)=>{
-                    return <p>{c}</p>
+                    return <p key={c}>{c}</p>
                 
                 })} </div>
                 <h3>$ {price}</h3>

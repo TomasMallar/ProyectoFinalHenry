@@ -24,25 +24,6 @@ export const getAllChocolates = () => {
     }
 }
 
-export const getChocolatesByName = (name, category, type, sort, sortDirection, page) => {
-    return async function (dispatch) {
-        try {
-            const response = await axios(`http://localhost:3001/products/advanced-search?name=${name || ""}&category=${category || ""}&type=${type || ""}&orderBy=${sort || ""}&orderDirection=${sortDirection || ""}&page=${page || 1}`)
-            console.log("Busqueda:", `http://localhost:3001/products/advanced-search?name=${name || ""}&category=${category || ""}&type=${type || ""}&orderBy=${sort || ""}&orderDirection=${sortDirection || ""}&page=${page || 1}`);
-            return dispatch({
-                type: GET_CHOCOLATE_BYNAME,
-                payload: response.data.products
-            })
-        } catch (error) {
-            return dispatch({
-                type: HANDLE_ERROR,
-                payload: error.response.data.error
-            })
-        }
-
-    }
-}
-
 export const getChocolatesById = (id) => {
     return async function (dispatch) {
         try {
