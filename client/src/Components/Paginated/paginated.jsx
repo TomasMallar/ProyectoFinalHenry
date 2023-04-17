@@ -1,12 +1,10 @@
 // import { useSelector } from "react-redux";
 // import React, { useState } from "react";
-// import DataManagement from "../../Components/DataManagement";
-
 // export default function FilterBar(){
 
 //     //Brings the information from the global state with useSelector
 // let allProducts=useSelector((state)=> state.chocolates)
-// console.log(allProducts, "object in pagination");
+// console.log(allProducts, "pagination");
 // //------------------------FILTERING ------------------------------------------------
 
 // //set a local state for filtering by genre (ALL QUERIES)
@@ -18,7 +16,6 @@
 // const handleonClickPages = (event) =>{
 //     if (event.target.value>0 && event.target.value<=allProducts.totalPages) {
 //         setQueries({...localPage, page:event.target.value})
-//         console.log( "current page:", event.target.value, "totalpages:", totalPages);   
 //     }
 
 // }
@@ -30,7 +27,7 @@
 
 
 
-//-----------------------------------------------------------------------------RETURN---------
+// // -----------------------------------------------------------------------------RETURN---------
 // return(
 // <>
 
@@ -46,10 +43,8 @@
 //         <button value={Number(localPage.page)+1} onClick={handleonClickPages}>Página Siguiente</button>
 //         <button value={Number(allProducts.totalPages)} onClick={handleonClickPages}>Final</button>
         
-//     </div>            
-//     <DataManagement 
-//             page = {localPage.page}
-//                 />
+//     </div>       
+
 
 
 

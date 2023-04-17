@@ -11,17 +11,18 @@ import Detail from './Pages/detail/detail';
 import CrudProducts from './Pages/crud_products/CrudProducts';
 import EditProduct from './Pages/editProduct/editProduct';
 import Carousel from './Components/Carousel/carousel';
+
 function App() {
 
   return (
     <div className="App">
-    
+
 
       {/* Routing  */}
       <Switch>
-      <Route exact path="/">
-        <Redirect to= "/Home"/>
-      </Route>
+        <Route exact path="/">
+          <Redirect to="/home" />
+        </Route>
 
         <Route exact path="/Home" > <NavBar/> <Carousel/> <Footer/></Route>
         <Route exact path="/products" > <NavBar/> <Products/> <Footer/></Route>
