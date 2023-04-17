@@ -9,6 +9,11 @@ module.exports = (sequelize) => {
                 primaryKey: true,
                 autoIncrement: true,               
             },
+            googleId: {
+                type: DataTypes.STRING,
+                allowNull: false,
+                defaultValue: "No google",
+            },
             name: {
                 type: DataTypes.STRING,
                 allowNull: false,
