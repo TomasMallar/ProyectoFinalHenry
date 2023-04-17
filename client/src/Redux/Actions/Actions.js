@@ -11,7 +11,8 @@ import {
     GET_CATEGORIES,
     GET_TYPES,
     GET_INGREDIENTS,
-    DELETE_PRODUCT
+    DELETE_PRODUCT,
+    TOEDIT_PRODUCT
 } from "../Action-types/Action-types"
 
 export const getAllChocolates = () => {
@@ -81,9 +82,8 @@ export const addUser = (newUser) => {
 export const getProductsAdvanceController = (name, category, type, orderBy, orderDirection, page) => {
     return async function (dispatch) {
         try {
-            console.log("soy category", category)
             const response = await axios(`http://localhost:3001/products/advanced-search?name=${name || ""}&category=${category || ""}&type=${type || ""}&orderBy=${orderBy || ""}&orderDirection=${orderDirection || ""}&page=${page || 1}`)
-            console.log(`http://localhost:3001/products/advanced-search?name=${name || ""}&category=${category || ""}&type=${type || ""}&orderBy=${orderBy || ""}&orderDirection=${orderDirection || ""}&page=${page || 1}`)
+            // console.log(`http://localhost:3001/products/advanced-search?name=${name || ""}&category=${category || ""}&type=${type || ""}&orderBy=${orderBy || ""}&orderDirection=${orderDirection || ""}&page=${page || 1}`)
             return dispatch({
                 type: GET_CHOCOLATE_BYNAME,
                 payload: response.data
@@ -158,19 +158,6 @@ export const GetAllIngredient = () => {
 
 }
 
-// export const DeleteProduct = (id) => {
-//     return async function (dispatch) {
-  
-           
-//             const response = await axios.get(`http://localhost:3001/products`);
-//             dispatch({
-//               type: GET_ALL_CHOCOLATES,
-//               payload: response.data
-//             });
-//             return dispatch(alert(`El producto con id ${id} fue borrado :D `));
-        
-//         };
-//       };
 
       export const DeleteProduct = (id) => {
         return async function (dispatch) {
@@ -192,4 +179,37 @@ export const GetAllIngredient = () => {
         }
     
     }
+    export const EditedProduct = (c) => {
+        return  function (dispatch) {
+            try {
+                return dispatch({
+                    type: TOEDIT_PRODUCT,
+                    payload: c
+                })
+            } catch (error) {
+                return dispatch({
+                    type: HANDLE_ERROR,
+                    payload: error.response.data.error
+                })
+            }
+    
+        }
+    
+    }
 
+    export const PutProduct = (finalEditedProduct) => {
+        return async function (dispatch) {
+            try {
+                const resp = await axios.put(`http://localhost:3001/products/update/${finalEditedProduct.id}`, finalEditedProduct)
+               
+                const response = await axios(`http://localhost:3001/products/`)
+        return dispatch({
+            type: GET_ALL_CHOCOLATES,
+            payload: response.data
+        })
+            }
+            catch (error) {
+                alert(error)
+            }
+        }
+    }

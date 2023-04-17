@@ -1,0 +1,14 @@
+.carousel{
+    width: 100%;
+    min-height: 65vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.nuevaColeccion {
+    font-family: 'ArimaMadurai';
+    font-size: 40px;
+    letter-spacing: 5px;
+    margin: 30px 0 -40px 0;
+}

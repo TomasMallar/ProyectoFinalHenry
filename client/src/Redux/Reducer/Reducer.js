@@ -9,7 +9,8 @@ import {
     GET_CATEGORIES,
     GET_TYPES,
     GET_INGREDIENTS,
-    DELETE_PRODUCT
+    DELETE_PRODUCT,
+    TOEDIT_PRODUCT
 } from "../Action-types/Action-types"
 
 const initialState = {
@@ -19,7 +20,8 @@ const initialState = {
     users: [],
     categories: [],
     types: [],
-    ingredients: []
+    ingredients: [],
+    editedProduct:{},
 }
 const reducer = (state = initialState, action) => {
     switch (action.type) {
@@ -87,6 +89,11 @@ const reducer = (state = initialState, action) => {
                 chocolates: updatedProducts
                 
             };
+        case TOEDIT_PRODUCT:
+                return {
+                    ...state,
+                    editedProduct: action.payload,
+                }
 
         default:
             return { ...state };

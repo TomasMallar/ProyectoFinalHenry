@@ -8,7 +8,7 @@ import Validations from "./validations"
 import { useHistory } from 'react-router-dom'
 
 export default function User() {
-   // const dispatch = useDispatch()
+    // const dispatch = useDispatch()
     const history = useHistory()
     //guarda el imput seleccionado en Tipos de Chocolates preferidos
     const inputSelectFlavorsRef = useRef(null)
@@ -48,7 +48,7 @@ export default function User() {
     const handleOnClickAdd = (event) => {
         event.preventDefault()
         const selectedFlavor = inputSelectFlavorsRef.current.value
-// eslint-disable-next-line
+        // eslint-disable-next-line
         if (!flavors.includes(selectedFlavor)) { return alert("Elige un sabor válido!" + " " + '\ud83e\udd28') }
         if (selectedFlavor && !selectedFlavors.includes(selectedFlavor)) {
             setSelectedFlavors([...selectedFlavors, selectedFlavor])
@@ -69,17 +69,17 @@ export default function User() {
     }
 
     const handleSubmit = (event) => {
-         event.preventDefault()
+        event.preventDefault()
         setErrors(Validations({ ...newUser, [event.target.name]: event.target.value }))
         const arrayErrors = Object.keys(errors)
         // chequea si existe name para que si no pones nada en ningun campo no se cree el usuario 
         if (arrayErrors.length || !newUser.name) {
-// eslint-disable-next-line
-            alert("Usuario no creado verificar errores en el formulario"+ " " + '\ud83e\uddd0')
+            // eslint-disable-next-line
+            alert("Usuario no creado verificar errores en el formulario" + " " + '\ud83e\uddd0')
         } else {
-           // dispatch(addUser(newUser))
-// eslint-disable-next-line
-            alert("Felicitaciones has creado tu usuario !!" + " "+ '\ud83c\udf0d')
+            // dispatch(addUser(newUser))
+            // eslint-disable-next-line
+            alert("Felicitaciones has creado tu usuario !!" + " " + '\ud83c\udf0d')
             setNewUser({
                 name: "",
                 surname: "",
@@ -92,76 +92,76 @@ export default function User() {
             history.push("/login")
         }
     }
-    
+
 
     console.log(" selected Flavors", selectedFlavors);
     console.log("NewUser", newUser);
     return (
 
         <div className={style.container}>
-            <form onSubmit = {handleSubmit}>
+            <form onSubmit={handleSubmit}>
                 <div className={style.formContainer}>
                     <div className={style.volverButton}>
-                        <Link to="/login"><Button text="X" /></Link>
+                        <Link to="/login"><button className={style.button}> X </button></Link>
                     </div>
                     <h2>Crea tu Cuenta! </h2>
 
                     <div className={style.inputContainer}>
                         <label htmlFor="name">Nombre: </label>
-                        <input type="text" value={newUser.name} onChange={handleInputChange} name="name" placeholder='nombre' required />
-                        <span>{errors.name}</span>
+                        <input type="text" value={newUser.name} onChange={handleInputChange} name="name" placeholder='nombre' required className={style.input} />
+                        <span className={style.error}>{errors.name}</span>
                     </div>
 
                     <div className={style.inputContainer}>
                         <label htmlFor="Surname">Apellido: </label>
-                        <input type="text" value={newUser.surname} onChange={handleInputChange} name="surname" placeholder='apellido' required />
-                        <span>{errors.surname}</span>
+                        <input type="text" value={newUser.surname} onChange={handleInputChange} name="surname" placeholder='apellido' required className={style.input} />
+                        <span className={style.error}>{errors.surname}</span>
                     </div>
 
                     <div className={style.inputContainer}>
                         <label htmlFor="date_of_birth">Fecha de Nacimiento: </label>
-                        <input type="date" value={newUser.date_of_birth} onChange={handleInputChange} name="date_of_birth" placeholder='fecha de nacimiento' required />
-                        <span>{errors.date_of_birth}</span>
+                        <input type="date" value={newUser.date_of_birth} onChange={handleInputChange} name="date_of_birth" placeholder='fecha de nacimiento' required className={style.input} />
+                        <span className={style.error}>{errors.date_of_birth}</span>
                     </div>
 
                     <div className={style.inputContainer}>
                         <label htmlFor="mail">Mail: </label>
-                        <input type="email" value={newUser.mail} onChange={handleInputChange} name="mail" placeholder="mail" required />
-                        <span>{errors.mail}</span>
+                        <input type="email" value={newUser.mail} onChange={handleInputChange} name="mail" placeholder="mail" required className={style.input} />
+                        <span className={style.error}>{errors.mail}</span>
                     </div>
 
 
                     <div className={style.inputContainer}>
                         <label htmlFor="password">Contraseña: </label>
-                        <input type="password" value={newUser.password} onChange={handleInputChange} name="password" placeholder='contraseña' required />
-                        <span>{errors.password}</span>
+                        <input type="password" value={newUser.password} onChange={handleInputChange} name="password" placeholder='contraseña' required className={style.input} />
+                        <span className={style.error}>{errors.password}</span>
                     </div>
 
                     <div className={style.inputContainer}>
                         <label htmlFor="phone">Celular: </label>
-                        <input type="tel" value={newUser.phone} onChange={handleInputChange} name="phone" placeholder='celular' required />
-                        <span>{errors.phone}</span>
+                        <input type="tel" value={newUser.phone} onChange={handleInputChange} name="phone" placeholder='celular' required className={style.input} />
+                        <span className={style.error}>{errors.phone}</span>
                     </div>
 
                     <div className={style.inputContainer}>
                         <label htmlFor="chocolates">Elige tus chocolates favoritos:</label>
-                        <input name="chocolates" id="chocolates" list="dataList" ref={inputSelectFlavorsRef} />
+                        <input name="chocolates" id="chocolates" list="dataList" ref={inputSelectFlavorsRef} className={style.input} />
                         <datalist id="dataList">
                             {flavors.map(flav => {
                                 return <option value={flav} key={flav}></option>
                             })}
                         </datalist>
-                        <button onClick={handleOnClickAdd}>Añadir</button>
-                        <span>{errors.favorites_tastes}</span>
+                        <button onClick={handleOnClickAdd} className={style.button}>Añadir</button>
+                        <span className={style.error}>{errors.favorites_tastes}</span>
                     </div>
                     <div className={style.inputContainer}>
-                    
+
                         {
                             selectedFlavors.map(flav => {
                                 return (
                                     <div>
                                         <span>{flav} </span>
-                                        <button value={flav} onClick={handleOnclickX}>X</button>
+                                        <button value={flav} onClick={handleOnclickX} className={style.button}> X </button>
                                     </div>
 
                                 )
@@ -170,11 +170,16 @@ export default function User() {
                         }
                     </div>
                     <br />
-                    <input type="submit" value = "Crear Cuenta"/>
+                    <input type="submit" value="Crear Cuenta" className={style.button} />
 
 
                 </div>
             </form>
+
+            <div className={style.message}>
+                <h1>¡Únete a nuestra comunidad chocolatera! Regístrate para acceder a ofertas exclusivas, recibir noticias y descubrir más sobre el apasionante mundo del chocolate. ¡Haz parte de nuestra familia chocolatera hoy!</h1>
+            </div>
+
         </div>
     )
 }

@@ -1,13 +1,40 @@
-.cardsGrid{
-    display: flex;
-    justify-content: space-between;
+@font-face {
+    font-family: 'ArimaMadurai';
+    src: url('../../Formatting/ArimaMadurai-ExtraBold.ttf') format('ttf');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.headerHome {
+    width: 100%;
+    height: 370px;
+    background: url("https://homepagereferences.my.canva.site/images/fcbc0bc46f24b9cd4495a011fe1272ba.jpg") no-repeat center 30% / cover;
+    opacity: 0.9;
+    display: block;
+    padding-top: 60px;
+}
+
+
+.headerHome h1 {
+    margin: 0 0 0 100px;
+    text-align: start;
+    font-family: "ArimaMadurai";
+    font-size: 55px;
+    color: #F4EEE2;
+    -webkit-text-stroke: 2px #5C3223;
+    text-stroke: 2px #5C3223;
+}
+
+.cardsGrid {
+    justify-content: center;
+    display: grid;
+    grid-template-columns: repeat(4, 300px);
+    gap: 30px;
 }
 
 .ourProducts {
-    font-family: "Source Sans Pro";
+    font-family: 'ArimaMadurai';
     font-size: 30px;
-    font-weight: lighter;
-    letter-spacing: 2mm;
-    margin-block-start: 0%;
-    margin-block-end: 0%;
+    letter-spacing: 5px;
+    margin: 30px 0 30px 0;
 }

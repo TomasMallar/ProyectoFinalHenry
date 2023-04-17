@@ -1,6 +1,6 @@
 const {Product,Category,Type,Ingredient} = require ('../../db');
 const { cleanArrayProduct } = require('../../helpers/cleanArrayProduct');
-
+const { sortProducts } = require("../../helpers/orders/orderBy");
 const getProductsAll = async () => {
 
     try {
@@ -32,7 +32,8 @@ const getProductsAll = async () => {
 		});
 	
 		let limpios= dBProduct.map(elem=> cleanArrayProduct(elem));
-		return limpios;
+		let OrderProducts = sortProducts(limpios,"id","ASC")
+		return OrderProducts;
   
     	} catch (error) {
     		throw Error(error.message);

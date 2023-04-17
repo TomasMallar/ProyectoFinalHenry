@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react"
 import { useSelector } from "react-redux"
-import DataManagement from "../DataManagement"
-import styles from "./sortingAndFiltering"
+import DataManagement from "../../Components/DataManagement"
+import styles from "./sortingAndFiltering.module.css"
 
 export default function SortingAndFiltering (props){
     const [queries, setQueries] = useState({
@@ -10,11 +10,12 @@ export default function SortingAndFiltering (props){
         type: "",
         sort: "",
         sortDirection:"",
-        page: 1
+        page: 1,
     })
 
     const statecategories = useSelector((state) => state.categories)
     const categories = statecategories.map(c => c.name)
+    const allProducts=useSelector((state)=> state.chocolates)
 
     const statetypes = useSelector((state) => state.types)
 
@@ -68,70 +69,98 @@ setfitlerTypes([...fitlerTypes, category])
 }
     }
     useEffect(() => {
-      setQueries({...queries,category:fitlerCategories,type:fitlerTypes})
+      setQueries({...queries,category:fitlerCategories,type:fitlerTypes,page:1})
     }, [fitlerCategories, fitlerTypes]);
-console.log("categories:", fitlerCategories);
-console.log("Types:", fitlerTypes);
+
+
+//-----------------------------------------Pages-----------------------------------
+const handleonClickPages = (event) =>{
+  if (event.target.value>0 && event.target.value<=allProducts.totalPages) {
+      setQueries({...queries, page:event.target.value})
+  }
+
+}
+const totalPages = allProducts.totalPages
+  const TotalPagesArray = []
+  for (let i=1; i<= totalPages; i++){
+      TotalPagesArray.push(i)
+  }
+
+
     return (
-        <><div>
-        <div>
-          <input type="search" name="searchProduct " value={queries.name} onChange={(event) => handleOnChangeSearchBar(event)} placeholder="Busca tu producto" />
+      <><div className={styles.containerFilters}><div>
+        <div className={styles.continSearchbar}>
+          <input type="text" name="searchProduct " value={queries.name} onChange={(event) => handleOnChangeSearchBar(event)} placeholder="Busca tu producto" className={styles.input} />
         </div>
         <select id="Sort" onChange={SortName} className={styles.dropdown}>
-                    <option hidden defaultValue="">Select a sorting Option</option>
-                    <optgroup label="id">
-                    <option value="id, ASC" >Ascending</option>
-                    <option value="id, DESC">Descending</option>
-                    </optgroup>
-                    <optgroup label="name">
-                    <option value="name, ASC" >Ascending</option>
-                    <option value="name, DESC">Descending</option>
-                    </optgroup>
-                    <optgroup label="price">
-                    <option value="price, ASC">Lowest to Highest (1-5)</option>
-                    <option value="price, DESC">Highest to Lowest (1-5)</option>
-                    </optgroup>
-                    <optgroup label="score">
-                    <option value="score, ASC">Lowest to Highest (1-5)</option>
-                    <option value="score, DESC">Highest to Lowest (1-5)</option>
-                    </optgroup>
-                    <option value="">Remove sort</option>
-                </select>
+          <option hidden defaultValue="">Select a sorting Option</option>
+          <optgroup label="ID">
+            <option value="id, ASC">Ascending</option>
+            <option value="id, DESC">Descending</option>
+          </optgroup>
+          <optgroup label="NAME">
+            <option value="name, ASC">Ascending</option>
+            <option value="name, DESC">Descending</option>
+          </optgroup>
+          <optgroup label="PRICE">
+            <option value="price, ASC">Lowest to Highest (1-5)</option>
+            <option value="price, DESC">Highest to Lowest (1-5)</option>
+          </optgroup>
+          <optgroup label="SCORE">
+            <option value="score, ASC">Lowest to Highest (1-5)</option>
+            <option value="score, DESC">Highest to Lowest (1-5)</option>
+          </optgroup>
+          <option value="">Remove sort</option>
+        </select>
       </div>
-      <div className={styles.filteringCategories}>
-      {categories?.map((c)=>{
+        <div className={styles.filteringButtons}>
+          {categories?.map((c) => {
             return <button
-                id="category"
-                key={c}
-                onClick={(event) => handleClick(c, event)}
-                className={fitlerCategories?.includes(c) ? styles.selected : ''}
-                    >{c}
-                </button>})}
-        <button id="category" onClick={(event) => handleClick("Clear", event)}>Borrar todos los filtros</button>
+              id="category"
+              key={c}
+              onClick={(event) => handleClick(c, event)}
+              className={fitlerCategories?.includes(c) ? styles.selected : ''}
+            >{c}
+            </button>
+          })}
+          <button id="category" onClick={(event) => handleClick("Clear", event)}>Borrar todos los filtros</button>
+        </div>
 
-      </div>
-      <div className={styles.filteringTypes}>
-      {statetypes?.map((c)=>{
+        <div className={styles.filteringButtons}>
+          {statetypes?.map((c) => {
             return <button
-                id="types" 
-                key={c}
-                onClick={(event) => handleClick(c, event)}
-                className={fitlerCategories?.includes(c) ? styles.selected : ''}
-                    >{c}
-                </button>})}
-        <button id="types" onClick={(event) => handleClick("Clear", event)}>Borrar todos los filtros</button>
+              id="types"
+              key={c}
+              onClick={(event) => handleClick(c, event)}
+              className={fitlerCategories?.includes(c) ? styles.selected : ''}
+            >{c}
+            </button>
+          })}
+          <button id="types" onClick={(event) => handleClick("Clear", event)}>Borrar todos los filtros</button>
+        </div>
+        <div>
+        </div>
+        <DataManagement
+          name={queries.name}
+          category={queries.category}
+          type={queries.type}
+          sort={queries.sort}
+          sortDirection={queries.sortDirection}
+          page={queries.page} />
+      </div><div className={styles.pagesButtons}>
+          {/* Buttons of the Pages */}
+          <button value={1} onClick={handleonClickPages}>Inicio</button>
+          <button value={queries.page - 1} onClick={handleonClickPages}>Página anterior</button>
+          {TotalPagesArray.map(p => {
+            return <button key={p} value={p} onClick={handleonClickPages} className={Number(queries.page)===(p) ? styles.selected : ''}> {p} </button>
+          })}
+          <button value={Number(queries.page) + 1} onClick={handleonClickPages}>Página Siguiente</button>
+          <button value={Number(allProducts.totalPages)} onClick={handleonClickPages}>Final</button>
+        </div></>
 
-      </div>
-      <DataManagement
-        name= {queries.name}
-        category= {queries.category}
-        type= {queries.type}
-        sort= {queries.sort}
-        sortDirection= {queries.sortDirection}
-        page= {queries.page}
-      />
-      </>
-      
+    
+
+    
     )
 
 }
