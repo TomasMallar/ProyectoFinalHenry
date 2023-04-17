@@ -176,7 +176,7 @@ export const GetAllIngredient = () => {
         return async function (dispatch) {
             try {
     
-                const res = await axios.put(`http://localhost:3001/products/${id}/delete`);
+                const res = await axios.put(`http://localhost:3001/products/delete/${id}`);
                     
                 return dispatch({
                     type: DELETE_PRODUCT,
