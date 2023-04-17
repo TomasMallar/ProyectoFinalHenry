@@ -2,12 +2,12 @@ const { User, Rol } = require("../../db")
 const { encrypt, compare } = require("../../helpers/password/bcryptHelper");
 const { Op } = require("sequelize");
 
-const getAllUser = async (name) => {
+const getAllUser = async () => {
     try {
         const allUser = await User.findAll({
-            attributes: { exclude: ['password'] }
+            attributes: { exclude: ['password', 'createdAt', 'updatedAt', 'deletedAt'] }
         });
-    
+
         if(!allUser.length) throw new Error("Users not found");
     
         return allUser;
@@ -19,7 +19,7 @@ const getAllUser = async (name) => {
 const getOneUser = async (id) => {
     try {
         const user = await User.findByPk(id, {
-            attributes: { exclude: ['password'] }
+            attributes: { exclude: ['password', 'createdAt', 'updatedAt', 'deletedAt'] }
         });
     
         if(!user) throw new Error("User not found");
@@ -48,7 +48,7 @@ const getSearchUser = async (name) => {
                     }
                 ]
             },
-            attributes: { exclude: ['password'] } // Excluir el campo 'password' en los resultados
+            attributes: { exclude: ['password', 'createdAt', 'updatedAt', 'deletedAt'] } // Excluir el campo 'password' en los resultados
         });
 
         if(!usersSearch.length) { // Verificar si no se encontraron resultados
