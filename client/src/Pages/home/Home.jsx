@@ -1,12 +1,14 @@
 import React from "react"
-import ProductCard from "../Components/ProductCard/ProductCard";
+import ProductCard from "../../Components/ProductCard/ProductCard";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import { getAllChocolates } from "../Redux/Actions/Actions";
-import SortingAndFiltering from "./sortingAndFiltering/sortingAndFiltering";
+import { getAllChocolates } from "../../Redux/Actions/Actions";
+import SortingAndFiltering from "../sortingAndFiltering/sortingAndFiltering";
+import styles from "./home.module.css"
+import { all } from "axios";
 
-const HomePage = (props) => {
- 
+const Products = (props) => {
+
   // let allProducts = props.allProducts
 
   const dispatch = useDispatch()
@@ -16,16 +18,23 @@ const HomePage = (props) => {
   }, [dispatch])
 
   let allProducts = useSelector((state) => state.chocolates)
-
   return (
 
     <div>
-      <div>
-        <SortingAndFiltering/>
+      <div className={styles.headerHome}>
+        <div className={styles.headerTitle}>
+          <h1>SOMOS LOS <br /> REYES DEL <br /> CHOCOLATE</h1>
+        </div>
+        <div className={styles.headerButton}>
+          <button>!Que rico¡</button>
+        </div>
       </div>
-      
-      <h4>Our products:</h4>
+      <div>
+        <SortingAndFiltering />
+      </div>
 
+      <h4 className={styles.ourProducts}>Our products:</h4>
+    <div className={styles.cardsGrid}>
       {/* Map each product into a single card using map */}
       {
         allProducts?.map((product) => {
@@ -36,13 +45,15 @@ const HomePage = (props) => {
               id={product.id}
               name={product?.name}
               image={product?.image}
+              category={product?.categories}
               price={product?.price}
               score={product?.score}
             />
           )
         })}
     </div>
+    </div>
   )
 };
 
-export default HomePage;
+export default Products;

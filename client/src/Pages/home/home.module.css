@@ -1,0 +1,56 @@
+.headerHome {
+    width: 100%;
+    height: 450px;
+    background: url("https://homepagereferences.my.canva.site/images/fcbc0bc46f24b9cd4495a011fe1272ba.jpg") no-repeat center 30% / cover;
+    opacity: 0.9;
+    display: block;
+}
+
+
+.headerTitle h1 {
+    margin: 0 0 0 100px;
+    text-align: start;
+    font-family: "ArimaMadurai";
+    font-size: 55px;
+    color: #F4EEE2;
+    -webkit-text-stroke: 2px #5C3223;
+    text-stroke: 2px #5C3223;
+}
+
+.headerButton {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+}
+
+.headerButton button {
+    font-family: "ArimaMadurai";
+    font-size: 20px;
+    color: #F4EEE2;
+    background-color: #5C3223;
+    padding: 20px 40px;
+    margin: 15px 0 0 150px;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+}
+
+.headerButton button:hover {
+    box-shadow: 1px 2px 10px #000;
+}
+
+
+.cardsGrid {
+    display: grid;
+    grid-template-columns: repeat(4, 300px);
+    gap: 30px;
+}
+
+.ourProducts {
+    font-family: "Source Sans Pro";
+    font-size: 30px;
+    font-weight: lighter;
+    letter-spacing: 2mm;
+    margin-block-start: 0%;
+    margin-block-end: 0%;
+}

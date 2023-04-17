@@ -36,20 +36,13 @@ module.exports = (sequelize) => {
                 }
             },
             score: {
-                type: DataTypes.INTEGER,
-                allowNull: false,
-                validate: {
-                    max: 5,
-                    min: 0
-                }
+                type: DataTypes.JSON,
+                
             },
-            is_deleted: {
-                type: DataTypes.BOOLEAN,
-                defaultValue: false
-            }
         },
         {
-            timestamps: false,
+            paranoid: true,
+            timestamps: true,
         }
     )
 }

@@ -17,7 +17,7 @@ const Detail = () => {
     return (
         <>
         <div>
-        <Link to={`/home`}>
+        <Link to={`/products`}>
             <input
                 type="image"
                 src="https://cdn-icons-png.flaticon.com/512/10009/10009304.png"
@@ -32,10 +32,13 @@ const Detail = () => {
 
                 <h1 className={styles.titleDetail}>{ChocolateDetail.name}</h1>
                 
-                <h3> Score: {ChocolateDetail.score} </h3>
 
+                <div> {ChocolateDetail.categories?.map((c)=>{
+                    return <p key={c}>{c}</p>
+                
+                })} </div>
 
-                <h3> {ChocolateDetail.price} </h3>
+                <h3>$ {ChocolateDetail.price} </h3>
                 
             </div></>
     )
