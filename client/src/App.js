@@ -2,7 +2,7 @@ import './App.css';
 import NavBar from './Components/NavBar/NavBar';
 import { Switch, Route, Redirect } from 'react-router-dom'
 import Products from './Pages/home/Home'
-import Error from './Pages/Error'
+import Error from './Pages/Error404/Error'
 import Login from './Pages/Login/Login'
 import Footer from './Components/Footer/Footer';
 import CreateProduct from './Pages/createProduct/CreateProduct';
