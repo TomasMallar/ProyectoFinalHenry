@@ -1,8 +1,8 @@
 
 
-export default function Validations({ name, price, stock, image, types, categories, ingredients }) {
-    const regexName = /^[a-zA-Z0-9]+(?: [a-zA-Z0-9]+)*$/
-    const regexUrl = /^(ftp|http|https):\/\/[^ "]+$/
+export default function Validations ({name, price, stock, image, types, categories, ingredients }){
+   const regexName = /^[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ]+(?: [a-zA-Z0-9áéíóúÁÉÍÓÚñÑ]+)*$/
+   const regexUrl = /^(ftp|http|https):\/\/[^ "]+$/
 
     let objErrors = {}
 

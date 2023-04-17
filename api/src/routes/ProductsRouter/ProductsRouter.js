@@ -21,9 +21,9 @@ routerProducts.get("/deleted", getDeletedProductsHandler);
 routerProducts.get("/advanced-search", getProductsAdvanceHandler);
 routerProducts.get("/:id", getProductByIdHandler);
 routerProducts.post('/', validatePostProduct, postProductHandler);
-routerProducts.put('/:id/delete',deleteProductHandler)
-routerProducts.put('/:id/update', updateProductHandler)
-routerProducts.put('/:id/undodelete', undodeleteProductHandler)
+routerProducts.put('/delete/:id',deleteProductHandler)
+routerProducts.put('/update/:id', updateProductHandler)
+routerProducts.put('/undodelete/:id', undodeleteProductHandler)
 routerProducts.post('/load', loadProductHandler)
 
 
