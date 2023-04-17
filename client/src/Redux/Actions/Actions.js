@@ -81,9 +81,8 @@ export const addUser = (newUser) => {
 export const getProductsAdvanceController = (name, category, type, orderBy, orderDirection, page) => {
     return async function (dispatch) {
         try {
-            console.log("soy category", category)
             const response = await axios(`http://localhost:3001/products/advanced-search?name=${name || ""}&category=${category || ""}&type=${type || ""}&orderBy=${orderBy || ""}&orderDirection=${orderDirection || ""}&page=${page || 1}`)
-            console.log(`http://localhost:3001/products/advanced-search?name=${name || ""}&category=${category || ""}&type=${type || ""}&orderBy=${orderBy || ""}&orderDirection=${orderDirection || ""}&page=${page || 1}`)
+            // console.log(`http://localhost:3001/products/advanced-search?name=${name || ""}&category=${category || ""}&type=${type || ""}&orderBy=${orderBy || ""}&orderDirection=${orderDirection || ""}&page=${page || 1}`)
             return dispatch({
                 type: GET_CHOCOLATE_BYNAME,
                 payload: response.data

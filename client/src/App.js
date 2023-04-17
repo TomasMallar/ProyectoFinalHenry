@@ -23,7 +23,7 @@ function App() {
         <Redirect to= "/Home"/>
       </Route>
 
-        <Route exact path="/carousel" > <NavBar/> <Carousel/> <Footer/></Route>
+        <Route exact path="/Home" > <NavBar/> <Carousel/> <Footer/></Route>
         <Route exact path="/products" > <NavBar/> <Products/> <Footer/></Route>
         <Route path="/login"><Login/></Route>
         <Route path="/createProduct"><NavBar/><CreateProduct/></Route>
