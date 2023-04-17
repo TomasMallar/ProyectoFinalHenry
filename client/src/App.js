@@ -10,6 +10,7 @@ import User from './Pages/NewUser/NewUser';
 import Detail from './Pages/detail/detail';
 import CrudProducts from './Pages/crud_products/CrudProducts';
 import EditProduct from './Pages/editProduct/editProduct';
+import Carousel from './Components/Carousel/carousel';
 function App() {
 
   return (
@@ -22,6 +23,7 @@ function App() {
         <Redirect to= "/Home"/>
       </Route>
 
+        <Route exact path="/carousel" > <NavBar/> <Carousel/> <Footer/></Route>
         <Route exact path="/products" > <NavBar/> <Products/> <Footer/></Route>
         <Route path="/login"><Login/></Route>
         <Route path="/createProduct"><NavBar/><CreateProduct/></Route>
