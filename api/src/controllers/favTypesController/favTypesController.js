@@ -1,48 +1,57 @@
 const { Product, Category, Type, Ingredient, User } = require("../../db");
+const { getProductsAll } = require("../productsController/getProductsAll");
 
 const getAllFavTypes = async (id) => {
-  const usuario = await User.findOne({
-    where: { id: id },
-    include: [
-      {
-        model: Type,
-        attributes: ['name'],
-      }
-    ]
-  });
+  if (id) {
+    const usuario = await User.findOne({
+      where: { id: id },
+      include: [
+        {
+          model: Type,
+          attributes: ['name'],
+        }
+      ]
+    });
 
-  const favoritesTypes = await usuario.getTypes();
-  console.log(favoritesTypes);
-  const typesId = favoritesTypes.map((tipo) => tipo.id);
-  console.log(typesId);
-  const products = await Product.findAll({
-    include: [
-      {
-        model: Category,
-        attributes: ['name'],
-        through: {
-          attributes: [],
+    const favoritesTypes = await usuario.getTypes();
+    console.log(favoritesTypes);
+    const typesId = favoritesTypes.map((tipo) => tipo.id);
+    console.log(typesId);
+    const products = await Product.findAll({
+      include: [
+        {
+          model: Category,
+          attributes: ['name'],
+          through: {
+            attributes: [],
+          },
         },
-      },
-      {
-        model: Type,
-        attributes: ['name'],
-        where: { id: typesId },
-        through: {
-          attributes: [],
+        {
+          model: Type,
+          attributes: ['name'],
+          where: { id: typesId },
+          through: {
+            attributes: [],
+          },
         },
-      },
-      {
-        model: Ingredient,
-        attributes: ['name'],
-        through: {
-          attributes: [],
+        {
+          model: Ingredient,
+          attributes: ['name'],
+          through: {
+            attributes: [],
+          },
         },
-      },
-    ],
-  });
+      ],
+    });
 
-  return products;
+    return products;
+  }
+  else
+  {
+    const getAllFavTypes = await getProductsAll()
+    const firstFavTypes = getAllFavTypes.slice(0, 10)
+    return firstFavTypes
+  }
 }
 
 const postNewFavType = async (name, id) => {
@@ -89,8 +98,8 @@ const deleteFavType = async (id, name) => {
   await user.removeType(type)
 
   const deleteVerification = user.types.map(t => t.name === name)
-  
-  if(deleteVerification.includes(true)) return {message: 'Successfully removed'}
+
+  if (deleteVerification.includes(true)) return { message: 'Successfully removed' }
   else throw Error('Failed to delete type')
 }
 
