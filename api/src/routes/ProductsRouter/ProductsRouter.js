@@ -24,7 +24,7 @@ routerProducts.post('/', validatePostProduct, postProductHandler);
 routerProducts.put('/:id/delete',deleteProductHandler)
 routerProducts.put('/:id/update', updateProductHandler)
 routerProducts.put('/:id/undodelete', undodeleteProductHandler)
-routerProducts.put('/load', loadProductHandler)
+routerProducts.get('/load', loadProductHandler)
 
 
 module.exports = routerProducts;
