@@ -1,6 +1,7 @@
 const { User, Rol } = require("../../db")
 const { encrypt, compare } = require("../../helpers/password/bcryptHelper");
 const { Op } = require("sequelize");
+const generateTokenJwt = require("../../helpers/tokenjwt/generateTokenJwt")
 
 const getAllUser = async () => {
     try {
@@ -82,12 +83,15 @@ const postNewUser = async ({ name, surname, password, phone, mail, date_of_birth
 
         if(!created) throw new Error("The email is already registered");
 
+        const token = await generateTokenJwt(user);
+
         return { 
             message: "User created successfully",
             user: {
                 name: user.name,
                 surname: user.surname  
-            }
+            },
+            token,
         } 
 
     } catch (error) {
@@ -106,12 +110,15 @@ const postLoginUser = async ({ mail, password }) => {
 
         if(!checkPassword) throw new Error("Invalid credentials");
 
+        const token = await generateTokenJwt(user);
+
         return { 
             message: "User successfully logged in",
             user: {
                 name: user.name,
                 surname: user.surname  
-            }
+            },
+            token,
         }       
     } catch (error) {
         throw new Error(error.message);
