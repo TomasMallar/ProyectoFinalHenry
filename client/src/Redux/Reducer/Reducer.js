@@ -8,7 +8,8 @@ import {
     HANDLE_ERROR,
     GET_CATEGORIES,
     GET_TYPES,
-    GET_INGREDIENTS
+    GET_INGREDIENTS,
+    DELETE_PRODUCT
 } from "../Action-types/Action-types"
 
 const initialState = {
@@ -18,7 +19,7 @@ const initialState = {
     users: [],
     categories: [],
     types: [],
-    ingredients:[]
+    ingredients: []
 }
 const reducer = (state = initialState, action) => {
     switch (action.type) {
@@ -73,11 +74,19 @@ const reducer = (state = initialState, action) => {
                 ...state,
                 types: action.payload,
             }
-            case GET_INGREDIENTS:
-                return {
-                    ...state,
-                    ingredients: action.payload,
-                }
+        case GET_INGREDIENTS:
+            return {
+                ...state,
+                ingredients: action.payload,
+            }
+        case DELETE_PRODUCT:
+            const updatedProducts = state.chocolates.products.filter(choco => choco.id !== action.payload);
+            console.log(updatedProducts, "soy prod")
+            return {
+                ...state,
+                chocolates: updatedProducts
+                
+            };
 
         default:
             return { ...state };
