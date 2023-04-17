@@ -1,6 +1,6 @@
 import { useSelector, useDispatch } from "react-redux"
 import { useEffect, useState } from "react"
-import { GetAllCategories, getProductsAdvanceController, GetAllTypes } from "../../Redux/Actions/Actions"
+import { GetAllCategories, getProductsAdvanceController, GetAllTypes, DeleteProduct } from "../../Redux/Actions/Actions"
 import style from './crud_products.module.css'
 import { Link } from "react-router-dom"
 import EditProduct from "../editProduct/editProduct"
@@ -35,9 +35,11 @@ export default function CrudProducts() {
         setQueries({ ...queries, [event.target.name]: event.target.value })
     }
 
-    const handleOnClickDelete = (id) => {
-       // dispatch()
-       console.log(id)
+    const handleOnClickDelete = (event) => {
+        event.preventDefault()
+        dispatch(DeleteProduct(event.target.value))
+       // dispatch(getProductsAdvanceController())
+
     }
 
     const handleOnChangeFilter = (event) => {
@@ -49,9 +51,9 @@ export default function CrudProducts() {
         }
     }
 
-    const handleOnClickEdit = (c)=>{
+    const handleOnClickEdit = (c) => {
         console.log(c, "soy c")
-       // EditProduct(c)
+        // EditProduct(c)
     }
     return (
         <div>
@@ -134,8 +136,8 @@ export default function CrudProducts() {
                                     }
                                 </div>
 
-                                <button className={style.cell} value={c} onClick={()=>{handleOnClickEdit(c)}} >Editar</button>
-                                <button className={style.cell} value={c.id} onClick={()=>{handleOnClickDelete(c.id)}}>Eliminar</button>
+                                <button className={style.cell} value={c} onClick={() => { handleOnClickEdit(c) }} >Editar</button>
+                                <button className={style.cell} value={c.id} onClick={handleOnClickDelete}>Eliminar</button>
 
                             </div>
                         )
