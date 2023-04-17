@@ -5,20 +5,21 @@
   font-style: normal;
 }
 
-.container{
-    background-color: #F4EEE2;
-    display: flex;
-    justify-content: space-between;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+.container {
+  background-color: #F4EEE2;
+  display: flex;
+  justify-content: space-between;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
 }
 
-.containerUlLinks{
+.containerUlLinks {
   display: flex;
   padding: 20px;
   align-items: center;
   justify-content: space-between;
 }
-.listItem{
+
+.listItem {
   list-style: none;
   padding-left: 15px;
   text-decoration: none;
@@ -27,13 +28,13 @@
   font-size: 25px;
 }
 
-.listItem .buttonNav{
+.listItem .buttonNav {
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
 
-.buttonNav{
+.buttonNav {
   padding: 15px;
   border: none;
   border-radius: 10px;
@@ -43,21 +44,21 @@
   font-size: 20px;
 }
 
-.buttonNav:hover{
+.buttonNav:hover {
   box-shadow: 2px 2px 1px rgba(0, 0, 0, 0.5);
 }
 
-.img{
-  margin-left: 20px;
+.img {
+  margin: 10px 0 0 20px;
   width: 250px;
 }
 
 
-.car{
+.car {
   width: 30px;
 }
 
-.imgButton{
+.imgButton {
   width: 20px;
   margin-left: 10px;
 }
