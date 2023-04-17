@@ -2,13 +2,13 @@ import { useSelector, useDispatch } from "react-redux"
 import { useEffect, useState } from "react"
 import { GetAllCategories, getProductsAdvanceController, GetAllTypes, DeleteProduct, EditedProduct } from "../../Redux/Actions/Actions"
 import style from './crud_products.module.css'
-import { Link} from "react-router-dom"
+import { Link } from "react-router-dom"
 import Edit from "../editProduct/editProduct"
 import Paginated from "../../Components/Paginated/paginated"
 
 
 export default function CrudProducts() {
-   // const history = useHistory()
+    // const history = useHistory()
     const dispatch = useDispatch()
 
     const [queries, setQueries] = useState({
@@ -39,7 +39,7 @@ export default function CrudProducts() {
     const handleOnClickDelete = (event) => {
         event.preventDefault()
         dispatch(DeleteProduct(event.target.value))
-       // dispatch(getProductsAdvanceController())
+        // dispatch(getProductsAdvanceController())
 
     }
 
@@ -57,17 +57,17 @@ export default function CrudProducts() {
     }
 
     return (
-        
+
         <div>
             <div className={style.searchBar}>
                 <img className={style.img} alt="lupa" src="https://res.cloudinary.com/dgxs2jcyu/image/upload/v1681582108/lupa_yidfrt.png" />
                 <input type="search" name="name" value={queries.name} placeholder="Buscar Producto" onChange={handleInputChangeSearchBar} />
                 <Link to="/createProduct"> <button className={style.buttonNewProd}>AGREGAR NUEVO PRODUCTO</button></Link>
             </div>
-            
-        <div>
-            <Paginated />
-        </div>
+
+            <div>
+                <Paginated />
+            </div>
 
             <div className={style.container}>
                 <h3 className={style.cell}>ID</h3>
@@ -142,7 +142,7 @@ export default function CrudProducts() {
                                     }
                                 </div>
 
-                              <Link to="/editProduct"><button className={style.cell} value={c} onClick={() => { handleOnClickEdit(c) }} >Editar</button> </Link>
+                                <Link to="/editProduct"><button className={style.cell} value={c} onClick={() => { handleOnClickEdit(c) }} >Editar</button> </Link>
                                 <button className={style.cell} value={c.id} onClick={handleOnClickDelete}>Eliminar</button>
 
                             </div>
