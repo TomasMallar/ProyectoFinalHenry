@@ -5,8 +5,8 @@
   padding: 10px;
   width: 300px;
   max-height: 1000px;
-  margin: 4px;
-  box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.467);
+  margin: 0px 0 20px 50px;
+  box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.5);
   font-family: 'ArimaMadurai', sans-serif;
   font-weight: lighter;
 }
@@ -19,21 +19,38 @@
   color: rgb(255, 255, 255);
   margin: auto;
   text-decoration: none;
-  display: inline-block;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.ingredients{
+  height: 4rem;
 }
 
 .cardLink h1 {
   margin: 0;
-
+  line-height: 30px;
+  height: 100px;
 }
 
 .cardLink h3 {
   font-weight: 15px;
+  line-height: 30px;
+}
+
+.cardLink p{
+  line-height: 10px;
+  text-align: start;
 }
 
 .pictures {
   width: 200px;
+<<<<<<< Updated upstream
   height: auto;
+=======
+  height: 200px;
+>>>>>>> Stashed changes
 }
 
 .carImagen {
@@ -48,3 +65,4 @@
   margin: 5px 0px 0px 250px;
   cursor: pointer;
 }
+
