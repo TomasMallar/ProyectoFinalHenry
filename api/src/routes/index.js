@@ -8,6 +8,7 @@ const routerFavoriteTypes = require("./FavTypesRouter/FavTypesRouter")
 const routerIngredient = require("./IngredientRouter/IngredientRouter")
 const routerScore = require('./PutScoreRouter/PutScoreRouter')
 const routerPay = require('./CompraRouter/mercadopago')
+const routerAuth = require("./AuthRouter/AuthRouter");
 const router = Router();
 
 // Ruta para los chocolates
@@ -25,5 +26,8 @@ router.use("/roles", routerRoles);
 router.use("/score", routerScore)
 
 router.use('/pay', routerPay)
+
+//Autenticación con google
+router.use("/auth", routerAuth);
 
 module.exports = router;
