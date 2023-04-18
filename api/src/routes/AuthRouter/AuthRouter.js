@@ -1,4 +1,6 @@
 const { Router } = require("express");
+const { User } = require("../../db");
+const jwt = require("jsonwebtoken")
 // const authGoogleHandler = require("../../handlers/authHandler/authHandler")
 // require("../../middlewares/authGoogle/authGoogle");
 // const passport = require("passport");
@@ -23,18 +25,28 @@ routerAuth.get("/google", async (req, res) => {
       if (!user) {
         // Si el usuario no existe, crea un nuevo registro en la base de datos con la información del usuario de Firebase
         await User.create({
-          uid,
-          email,
-          displayName,
+          googleId: uid,
+          mail: email,
+          name: displayName,
+          surname: displayName,
+          phone: "qwerqwe",
+          date_of_birth: "2000-02-03",
+          password: "qeweqwew", 
         });
       }
   
       // Genera un token de acceso utilizando un paquete de autenticación, como jsonwebtoken
       const accessToken = jwt.sign(
-        { uid, email, displayName },
-        'secreto', // Reemplaza 'secreto' con tu propia clave secreta
-        { expiresIn: '1d' } // Puedes ajustar la expiración del token como mejor se adapte a tu aplicación
-      );
+        {
+            id: user.id,
+            rol: user.rolId
+        },
+        process.env.JWT_SECRET, //Se agrega una clave secreta para la generación del token
+        {
+            expiresIn: "2h",
+        }
+    );
+
   
       // Devuelve el token de acceso al cliente
       res.json({ accessToken });
