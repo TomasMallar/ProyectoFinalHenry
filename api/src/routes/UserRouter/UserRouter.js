@@ -18,7 +18,7 @@ const validateRoleAdm = require("../../middlewares/validateRoleAdm/validateRolAd
 
 const routerUser = Router();
 
-routerUser.get("/", getAllUserHandler);
+routerUser.get("/", validateJwt, validateRoleAdm, getAllUserHandler);
 routerUser.get("/profile/:id", validateJwt, getOneUserHandler);
 routerUser.get("/searchuser", validateJwt, validateRoleAdm, getSearchUserHandler);
 routerUser.put("/update/:id", validateJwt, validatePutUser, updateUserHandler);
