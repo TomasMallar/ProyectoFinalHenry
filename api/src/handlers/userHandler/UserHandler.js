@@ -1,12 +1,12 @@
 const { 
     getAllUser, 
+    getOneUser,
+    getSearchUser,
     postNewUser, 
     postLoginUser, 
     updateUser, 
     deleteUser 
 } = require("../../controllers/userController/UserController");
-
-const validatePutUser = require("../../helpers/validateUser/validatePutUser")
 
 const getAllUserHandler = async (req, res) => {
     try {
@@ -15,6 +15,30 @@ const getAllUserHandler = async (req, res) => {
         res.status(200).json(allUser);
     } catch (error) {
         res.status(400).json({ message: error.message });
+    }
+}
+
+const getOneUserHandler = async (req, res) => {
+    try {
+        const { id } = req.params;
+
+        const oneUser = await getOneUser(id);
+
+        res.status(200).json(oneUser);
+    } catch (error) {
+        res.status(400).json({ message: error.message})
+    }
+}
+
+const getSearchUserHandler = async (req, res) => {
+    try {
+        const { name } = req.query;
+
+        const usersSearch = await getSearchUser(name);
+    
+        res.status(200).json(usersSearch);
+    } catch (error) {
+        res.status(400).json({ message: error.message })
     }
 }
 
@@ -55,10 +79,8 @@ const postLoginUserHandler = async (req, res) => {
 const updateUserHandler = async (req, res) => {
     try {
         const { id } = req.params;
-        
-        const updateData = validatePutUser(req.body);
-        
-        const update = await updateUser(id, updateData);
+
+        const update = await updateUser(id, req.body);
 
         res.status(200).json(update);
     } catch (error) {
@@ -80,6 +102,8 @@ const deleteUserHandler = async (req, res) => {
 
 module.exports = {
     getAllUserHandler,
+    getOneUserHandler,
+    getSearchUserHandler,
     postNewtUserHandler,
     postLoginUserHandler,
     updateUserHandler,
