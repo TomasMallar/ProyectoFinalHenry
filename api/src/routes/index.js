@@ -9,6 +9,7 @@ const routerIngredient = require("./IngredientRouter/IngredientRouter")
 const routerScore = require('./PutScoreRouter/PutScoreRouter')
 const routerPay = require('./CompraRouter/mercadopago')
 const routerAuth = require("./AuthRouter/AuthRouter");
+const routerEmail = require('./EmailRouter/EmailRouter')
 const router = Router();
 
 const passport = require("passport");
@@ -24,6 +25,8 @@ router.use("/favtypes", routerFavoriteTypes)
 router.use("/ingredient", routerIngredient)
 
 //Rutas para usuarios y roles
+router.use("/email", routerEmail)
+
 router.use("/users", routerUser);
 router.use("/roles", routerRoles);
 
