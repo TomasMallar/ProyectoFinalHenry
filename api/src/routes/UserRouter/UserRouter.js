@@ -30,5 +30,4 @@ routerUser.put("/new-password", updatePasswordHanlder);
 routerUser.post("/register", validatePostRegister, postNewtUserHandler);
 routerUser.post("/login", validatePostLogin, postLoginUserHandler);
 
-
 module.exports = routerUser;
