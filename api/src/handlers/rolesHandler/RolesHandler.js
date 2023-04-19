@@ -35,7 +35,7 @@ const putRolesHandler = async (req, res) => {
     }
 }
 
-const deleteRolesHandler = async (req, es) => {
+const deleteRolesHandler = async (req, res) => {
     try {
         const { id } = req.params;
 
