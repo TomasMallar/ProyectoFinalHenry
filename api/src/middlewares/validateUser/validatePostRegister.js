@@ -2,8 +2,8 @@ const Joi = require('joi');
 
 const validatePostRegister = (req, res, next) => {
     const schema = Joi.object().keys({
-        name: Joi.string().required(),
-        surname: Joi.string().required(),
+        name: Joi.string().allow("").optional(),
+        surname: Joi.string().allow("").optional(),
         mail: Joi.string().required(),
         date_of_birth: Joi.string().required(),
         password: Joi.string().required(),
