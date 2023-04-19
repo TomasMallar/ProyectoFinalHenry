@@ -75,7 +75,7 @@
 }
 
 .message{
-  margin: 0 0 0 150px;
+  margin: 0 0 200px 250px;
   width: 600px;
 }
 
@@ -87,3 +87,4 @@
     -webkit-text-stroke: 1px #5C3223;
     text-stroke: 1px #5C3223;
 }
+

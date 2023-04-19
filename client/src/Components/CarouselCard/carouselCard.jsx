@@ -4,8 +4,8 @@ const CarouselCard = ({id, name, image, price, category}) => {
         <div className={style.container} key={id}>
             <div className={style.carousel} >
             <div className={style.item}>
-            <div className={style.image}>
-                <img src={image} alt={name}/>
+            <div className={style.pictures}>
+                <img src={image} alt={name} className={style.pictures}/>
             </div>
             <div className={style.info}>
                 <span className="name"> {name} </span>

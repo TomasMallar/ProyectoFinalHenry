@@ -24,9 +24,9 @@ routerProducts.get("/:id", getProductByIdHandler);
 routerProducts.post('/load', loadProductHandler)
 routerProducts.post('/', validatePostProduct, postProductHandler);
 
-routerProducts.put('/delete/:id',deleteProductHandler)
+routerProducts.put('/:id/delete',deleteProductHandler)
 routerProducts.put('/:id/undodelete', undodeleteProductHandler)
 
-routerProducts.patch('/update/:id', updateProductHandler)
+routerProducts.put('/update/:id', updateProductHandler)
 
 module.exports = routerProducts;
