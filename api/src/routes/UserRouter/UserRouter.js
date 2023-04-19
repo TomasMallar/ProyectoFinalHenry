@@ -15,11 +15,12 @@ const validatePostLogin = require("../../middlewares/validateUser/validatePostLo
 const validatePutUser = require("../../middlewares/validateUser/validatePutUser");
 const validateJwt = require("../../middlewares/validateJwt/validateJwt");
 const validateRoleAdm = require("../../middlewares/validateRoleAdm/validateRolAdm");
+const validateUserId = require("../../middlewares/validateUser/validateUserId");
 
 const routerUser = Router();
 
 routerUser.get("/", validateJwt, validateRoleAdm, getAllUserHandler);
-routerUser.get("/profile/:id", validateJwt, getOneUserHandler);
+routerUser.get("/profile/:id", validateJwt, validateUserId, getOneUserHandler);
 routerUser.get("/searchuser", validateJwt, validateRoleAdm, getSearchUserHandler);
 routerUser.put("/update/:id", validateJwt, validatePutUser, updateUserHandler);
 routerUser.delete("/delete/:id", validateJwt, validateRoleAdm, deleteUserHandler);
