@@ -18,13 +18,17 @@ const postRole = async (name) => {
     }
 }
 
-const putRoles = async (id, name) => {
+const putRoles = async (id, rol_name) => {
     try {
-        const rol = await Rol.findByPk(id);
+        const user = await User.findByPk(id); 
 
-        if(!rol) throw new Error("Rol not found");
+        if(!user) throw new Error("User not found");
 
-        await Rol.update({ rol_name: name }, { where: { id } });
+        const role = await Rol.findOne({ where: { rol_name }})
+
+        if(!role) throw new Error("Role not found");
+
+        await User.update({ rolId : role.id }, { where: { id }});
 
         return { message: "Role changed successfully"};
     } catch (error) {
@@ -36,7 +40,7 @@ const deleteRoles = async (id) => {
     try {
         const rol = await Rol.findByPk(id);
 
-        if(!rol) throw new Error("Rol not found");
+        if(!rol) throw new Error("Role not found");
     
         await Rol.destroy({ where: { id }});
     
