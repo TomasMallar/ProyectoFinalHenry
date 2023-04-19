@@ -1,5 +1,5 @@
 const { Router } = require("express");
-const { getRolesHandler, postRoleHandler, putRolesHandler } = require("../../handlers/rolesHandler/RolesHandler");
+const { getRolesHandler, postRoleHandler, putRolesHandler, postNewUserAdmHandler } = require("../../handlers/rolesHandler/RolesHandler");
 const validatePostRoles = require("../../middlewares/validatePostRoles/validatePostRoles");
 const validateJwt = require("../../middlewares/validateJwt/validateJwt");
 const validateRoleAdm = require("../../middlewares/validateRoleAdm/validateRolAdm")
@@ -7,7 +7,8 @@ const validateRoleAdm = require("../../middlewares/validateRoleAdm/validateRolAd
 const routerRoles = Router();
 
 routerRoles.get("/", validateJwt, validateRoleAdm, getRolesHandler);
-routerRoles.put("/updateroleuser/:id", validateJwt, validateRoleAdm, putRolesHandler);
+routerRoles.put("/update-role-user/:id", validateJwt, validateRoleAdm, putRolesHandler);
+routerRoles.post("/new-user-adm", validateJwt, validateRoleAdm, postNewUserAdmHandler);
 
 // routerRoles.post("/create", validateJwt, validateRoleAdm, validatePostRoles, postRoleHandler);
 // routerRoles.post("/create", validatePostRoles, postRoleHandler);
