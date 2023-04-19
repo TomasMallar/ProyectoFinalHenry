@@ -1,7 +1,7 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import { GetAllCategories, GetAllTypes, getProductsAdvanceController } from "../Redux/Actions/Actions";
+import { GetAllCategories, GetAllTypes, getCarousel, getProductsAdvanceController } from "../Redux/Actions/Actions";
 
 
 export default function DataManagement(props){
@@ -18,6 +18,7 @@ const sortDirection= props.sortDirection?.trim()
 
     //Brings the information from the global state with useSelector
     useEffect(()=> {
+        dispatch(getCarousel())
         dispatch(GetAllCategories())
         dispatch(GetAllTypes())
         dispatch(getProductsAdvanceController(name,category, type, sort, sortDirection, page))

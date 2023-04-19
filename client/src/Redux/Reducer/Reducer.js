@@ -10,7 +10,8 @@ import {
     GET_TYPES,
     GET_INGREDIENTS,
     DELETE_PRODUCT,
-    TOEDIT_PRODUCT
+    TOEDIT_PRODUCT,
+    GET_ALL_CAROUSEL
 } from "../Action-types/Action-types"
 
 const initialState = {
@@ -22,6 +23,7 @@ const initialState = {
     types: [],
     ingredients: [],
     editedProduct:{},
+    carousel:[]
 }
 const reducer = (state = initialState, action) => {
     switch (action.type) {
@@ -29,6 +31,11 @@ const reducer = (state = initialState, action) => {
             return {
                 ...state,
                 chocolates: action.payload,
+            }
+        case GET_ALL_CAROUSEL:
+            return {
+                ...state,
+                carousel: action.payload,
             }
 
         case GET_CHOCOLATE_BYNAME:

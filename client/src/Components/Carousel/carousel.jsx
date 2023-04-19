@@ -1,20 +1,30 @@
 import { useSelector } from "react-redux";
-import React, { useState } from "react";
+import React, { useRef } from "react";
 import DataManagement from "../../Components/DataManagement";
 import CarouselCard from "../CarouselCard/carouselCard";
 import styles from "./carousel.module.css"
 
 export default function FilterBar(){
-
+    
     //Brings the information from the global state with useSelector
-let carouselItems=useSelector((state)=> state.chocolates.products)
+let carouselItems=useSelector((state)=> state.carousel.products)
 console.log(carouselItems, "items");
+const carousel = useRef(null)
 
+const onCLickLeft = (e) =>{
+    e.preventDefault();
+    carousel.current.scrollLeft -= carousel.current.offsetWidth
+}
+
+const onCLickRight = (e) =>{
+    e.preventDefault();
+    carousel.current.scrollLeft += carousel.current.offsetWidth
+}
 //-----------------------------------------------------------------------------RETURN---------
 return(
 <>
 <h1 className={styles.nuevaColeccion}>NUEVA COLECCIÓN</h1>
-    <div className={styles.carousel}>
+    <div className={styles.carousel} ref={carousel}>
 
             {
             carouselItems?.map(p =>{
@@ -29,9 +39,11 @@ return(
                 score={score}>
                      </CarouselCard>
                 })
-            }
-        
-    </div>            
+            }        
+    </div>   
+    <button onClick={onCLickLeft}>{'<<'}</button>
+    <button onClick={onCLickRight}>{'>>'}</button>
+
     <DataManagement/>
 
 
