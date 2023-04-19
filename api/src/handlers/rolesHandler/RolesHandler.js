@@ -1,4 +1,4 @@
-const { getRoles, postRole, putRoles, deleteRoles } = require("../../controllers/rolesController/rolesController")
+const { getRoles, postRole, putRoles } = require("../../controllers/rolesController/rolesController")
 
 const getRolesHandler = async (req, res) => {
     try {
@@ -35,21 +35,21 @@ const putRolesHandler = async (req, res) => {
     }
 }
 
-const deleteRolesHandler = async (req, res) => {
-    try {
-        const { id } = req.params;
+// const deleteRolesHandler = async (req, res) => {
+//     try {
+//         const { id } = req.params;
 
-        const deleteRol = await deleteRoles(id);
+//         const deleteRol = await deleteRoles(id);
         
-        res.status(200).json(deleteRol);
-    } catch (error) {
-        res.status(400).json({ message: error.message })
-    }
-}
+//         res.status(200).json(deleteRol);
+//     } catch (error) {
+//         res.status(400).json({ message: error.message })
+//     }
+// }
 
 module.exports = {
     getRolesHandler,
     postRoleHandler,
     putRolesHandler,
-    deleteRolesHandler
+    // deleteRolesHandler
 }
