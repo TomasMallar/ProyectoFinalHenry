@@ -53,6 +53,11 @@ module.exports = (sequelize) => {
                     isNumeric: true
                 }
             },
+            emailVerified: {
+                type: DataTypes.BOOLEAN,
+                allowNull: false,
+                defaultValue: false,
+              },
         },
         {
             paranoid: true,
