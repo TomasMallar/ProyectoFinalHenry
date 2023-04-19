@@ -8,6 +8,7 @@ const routerFavoriteTypes = require("./FavTypesRouter/FavTypesRouter")
 const routerIngredient = require("./IngredientRouter/IngredientRouter")
 const routerScore = require('./PutScoreRouter/PutScoreRouter')
 const routerPay = require('./CompraRouter/mercadopago')
+const routerEmail = require('./EmailRouter/EmailRouter')
 const router = Router();
 
 // Ruta para los chocolates
@@ -19,6 +20,8 @@ router.use("/favtypes", routerFavoriteTypes)
 router.use("/ingredient", routerIngredient)
 
 //Rutas para usuarios y roles
+router.use("/email", routerEmail)
+
 router.use("/users", routerUser);
 router.use("/roles", routerRoles);
 
