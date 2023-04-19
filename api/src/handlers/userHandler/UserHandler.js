@@ -7,6 +7,7 @@ const {
     updateUser, 
     deleteUser 
 } = require("../../controllers/userController/UserController");
+const { sendWelcomeEmail } = require('../../controllers/emailControllers/emailNewUserController');
 
 const getAllUserHandler = async (req, res) => {
     try {
@@ -54,6 +55,8 @@ const postNewtUserHandler = async (req, res) => {
             date_of_birth,
             password
         });
+
+        await sendWelcomeEmail(mail, name);
 
         res.status(200).json(newUser);
     } catch (error) {
