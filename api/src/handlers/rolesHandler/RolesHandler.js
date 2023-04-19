@@ -25,9 +25,9 @@ const postRoleHandler = async (req, res) => {
 const putRolesHandler = async (req, res) => {
     try {
         const { id } = req.params;
-        const { name } = req.body;
+        const { rol_name } = req.body;
 
-        const updateRoles = await putRoles(id, name);
+        const updateRoles = await putRoles(id, rol_name);
 
         res.status(200).json(updateRoles);
     } catch (error) {
