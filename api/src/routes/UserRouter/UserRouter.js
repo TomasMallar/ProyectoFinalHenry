@@ -22,7 +22,7 @@ const routerUser = Router();
 routerUser.get("/", validateJwt, validateRoleAdm, getAllUserHandler);
 routerUser.get("/profile/:id", validateJwt, validateUserId, getOneUserHandler);
 routerUser.get("/searchuser", validateJwt, validateRoleAdm, getSearchUserHandler);
-routerUser.put("/update/:id", validateJwt, validatePutUser, updateUserHandler);
+routerUser.put("/update/:id", validateJwt, validateUserId, validatePutUser, updateUserHandler);
 routerUser.delete("/delete/:id", validateJwt, validateRoleAdm, deleteUserHandler);
 
 routerUser.post("/register", validatePostRegister, postNewtUserHandler);
