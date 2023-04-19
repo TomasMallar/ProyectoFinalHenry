@@ -17,6 +17,8 @@ export default function CrudProducts(props) {
         type: [""],
         orderBy: "",
         orderDirection: "",
+        deleted:"",
+        edited:"",
         page: 1
     })
 
@@ -39,6 +41,7 @@ export default function CrudProducts(props) {
     const handleOnClickDelete = (event) => {
         event.preventDefault()
         dispatch(DeleteProduct(event.target.value))
+       setQueries({...queries, deleted:event.target.value})
         // dispatch(getProductsAdvanceController())
 
     }
@@ -54,6 +57,7 @@ export default function CrudProducts(props) {
 
     const handleOnClickEdit = (c) => {
         dispatch(EditedProduct(c))
+        setQueries({...queries, edited:c})
     }
 
     //-----------------------------------------Pages-----------------------------------
