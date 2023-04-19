@@ -5,7 +5,8 @@ const {
     postNewUser, 
     postLoginUser, 
     updateUser, 
-    deleteUser 
+    deleteUser,
+    updatePassword 
 } = require("../../controllers/userController/UserController");
 const { sendWelcomeEmail } = require('../../controllers/emailControllers/emailNewUserController');
 
@@ -91,6 +92,18 @@ const updateUserHandler = async (req, res) => {
     }
 }
 
+const updatePasswordHanlder = async (req, res) => {
+    try {
+        const { password, mail } = req.body;
+
+        const newPassword = await updatePassword({ password, mail });
+
+        res.status(200).json(newPassword);
+    } catch (error) {
+        res.status(400).json({ message: error.message });
+    }
+}
+
 const deleteUserHandler = async (req, res) => {
     try {
         const { id } = req.params;
@@ -111,5 +124,6 @@ module.exports = {
     postLoginUserHandler,
     updateUserHandler,
     deleteUserHandler,
+    updatePasswordHanlder
 }
 
