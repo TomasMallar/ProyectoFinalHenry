@@ -19,8 +19,10 @@ const newOrder = async (bodyOrder) => {
         back_urls: {
             failure: '/failure',
             pending: '/pending',
-            success: '/success'
-        }
+            success: 'http://localhost:3000/home'
+        },
+        auto_return: "approved",
+        binary_mode: true
     }
 
     const payment = await axios.post(url, body, {
@@ -30,9 +32,11 @@ const newOrder = async (bodyOrder) => {
         }
     })
 
-    return payment.data;
+    const id = payment.data.id
+    console.log(id);
+    return payment.data
 }
 
 module.exports = {
-    newOrder
+    newOrder,
 }
