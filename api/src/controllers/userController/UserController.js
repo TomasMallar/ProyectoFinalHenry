@@ -161,28 +161,6 @@ const updateUser = async (id, userData) => {
     }
 }
 
-const updatePassword = async ({ password, mail } ) => {
-    try {
-        const user = await User.findOne({ where: { mail }});
-
-        if(!user) throw new Error("User not found");
-
-        const checkPassword = await compare(password, user.password);
-        
-        if(checkPassword) {
-            throw new Error("The password is the same as the current one, you must type a new one");
-        }
-    
-        const passwordHash = await encrypt(password);
-    
-        await User.update({ password: passwordHash }, { where: { mail }});
-    
-        return { message: "Password updated successfully"}; 
-    } catch (error) {
-        throw new Error(error.message);
-    }
-}
-
 // const deleteUser = async (id) => {
 //     try {
 //         const user = await User.findByPk(id);
@@ -204,6 +182,6 @@ module.exports = {
     postNewUser,
     postLoginUser,
     updateUser,
-    updatePassword
+    // updatePassword
     // deleteUser
 }
