@@ -9,6 +9,7 @@ const {
     updatePassword 
 } = require("../../controllers/userController/UserController");
 const { sendWelcomeEmail } = require('../../controllers/emailControllers/emailNewUserController');
+const sendMailWelcome = require("../../helpers/emailer/emailerWelcome")
 
 const getAllUserHandler = async (req, res) => {
     try {
@@ -57,7 +58,8 @@ const postNewtUserHandler = async (req, res) => {
             password
         });
 
-        await sendWelcomeEmail(mail, name);
+        // await sendWelcomeEmail(mail, name);
+        await sendMailWelcome(name, mail);
 
         res.status(200).json(newUser);
     } catch (error) {
