@@ -12,6 +12,7 @@ import CrudProducts from './Pages/crud_products/CrudProducts';
 import EditProduct from './Pages/editProduct/editProduct';
 import Carousel from './Components/Carousel/carousel';
 import Carrito from './Pages/carrito/carrito';
+import Crypto from './Components/Cryptos/Cryptos'
 
 function App() {
 

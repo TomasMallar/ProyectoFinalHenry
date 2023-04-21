@@ -18,7 +18,6 @@ const authGoogle = async (user) => {
 
 }
 
-
 module.exports = {
     authGoogle
 }
