@@ -11,6 +11,7 @@ import Detail from './Pages/detail/detail';
 import CrudProducts from './Pages/crud_products/CrudProducts';
 import EditProduct from './Pages/editProduct/editProduct';
 import Carousel from './Components/Carousel/carousel';
+import Crypto from './Components/Cryptos/Cryptos'
 
 function App() {
 
@@ -33,7 +34,6 @@ function App() {
        <Route path="/crudProducts"> <NavBar/><CrudProducts/></Route>
        <Route path="/editProduct"> <NavBar/><EditProduct/></Route>
         <Route path="/*"><Error/><NavBar/></Route>
-
       </Switch>
     </div>
   );

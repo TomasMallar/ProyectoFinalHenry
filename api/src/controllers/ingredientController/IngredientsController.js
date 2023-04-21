@@ -6,6 +6,17 @@ const getAllIngredients = async() => {
     return allIngredients
 }
 
+const getIngredientsWithId = async() => {
+    const ingredients = await Ingredient.findAll()
+    const allIngredients = ingredients.map(ingredient => {
+        return {
+            id: ingredient.id,
+            name: ingredient.name
+        }
+    })
+    return allIngredients
+}
+
 const postNewIngredient = async(name) => {
     const [newIngredient] = await Ingredient.findOrCreate({
         where: {name: name}
@@ -33,5 +44,6 @@ module.exports = {
     getAllIngredients,
     postNewIngredient,
     putIngredient,
-    deleteIngredient
+    deleteIngredient,
+    getIngredientsWithId
 }
