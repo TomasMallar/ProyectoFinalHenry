@@ -1,6 +1,8 @@
 const { transporter } = require('../../utils/mailer');
 const jwt = require('jsonwebtoken');
 const fs = require("fs");
+const path = require('path');
+const util = require('util');
 const handlerbars = require("handlebars");
 
 const sendWelcomeEmail = async (mail, name) => {
@@ -11,7 +13,8 @@ const sendWelcomeEmail = async (mail, name) => {
   // const verificationLink = `https://yourwebsite.com/verify-email?token=${token}`;
   const verificationLink = `http://localhost:3001/email/verify-email?token=${token}`;
 
-  const templateFile = fs.readFileSync(__dirname + "/../../views/emailWelcome.handlebars").toString();
+  const readFile = util.promisify(fs.readFile);
+  const templateFile = await readFile(path.resolve(__dirname, '../../views/emailWelcome.handlebars'), 'utf8');
   const template = handlerbars.compile(templateFile);
   const html = template({ name , verificationLink })
 
