@@ -1,9 +1,9 @@
 const { User } = require("../../db");
 const jwt = require("jsonwebtoken");
-const nodemailer = require("nodemailer");
 const { encrypt, compare } = require("../../helpers/password/bcryptHelper");
 const handlerbars = require("handlebars");
 const fs = require("fs");
+const { transporter } = require('../../utils/mailer');
 
 const postForgotPassword = async (mail) => {
     try {
@@ -15,15 +15,6 @@ const postForgotPassword = async (mail) => {
 
         const verificationLink = `http://localhost:3001/password/verify-token/${token}`;
  
-        const transporter = nodemailer.createTransport({
-            host: "sandbox.smtp.mailtrap.io",
-            port: 2525,
-            auth: {
-              user: "ead4e90f98e053",
-              pass: "8318d5d293d8da"
-            }
-        });
-
         const { name } = user;
 
         const templateFile = fs.readFileSync(__dirname + "/../../views/emailForgotPassword.handlebars").toString();
@@ -31,7 +22,7 @@ const postForgotPassword = async (mail) => {
         const html = template({ name , verificationLink })
 
         const mailOptions = {
-            from: 'mail@example.com',
+            from: 'thechocolatehub@outlook.com.ar',
             to: mail,
             subject: 'Forgot password',
             html,
