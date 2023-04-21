@@ -20,7 +20,7 @@ const getVerifyTokenPasswordHandler = async (req, res) => {
     
         res.status(200).json(verifyToken);
     } catch (error) {
-        res.status(400).json( { message: error });
+        res.status(400).json( { message: error.message });
     }
 }
 
