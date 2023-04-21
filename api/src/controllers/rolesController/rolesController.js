@@ -1,4 +1,6 @@
-const { User, Rol } = require("../../db")
+const { User, Rol } = require("../../db");
+const { encrypt } = require("../../helpers/password/bcryptHelper");
+const generateTokenJwt = require("../../helpers/tokenjwt/generateTokenJwt");
 
 const getRoles = async () => {
     const allRoles = await Rol.findAll({
@@ -52,9 +54,47 @@ const deleteRoles = async (id) => {
     }
 }
 
+const postNewUserAdm = async ({ name, surname, password, phone, mail, date_of_birth }) => {
+    try {
+        const passwordHash = await encrypt(password);
+
+        const roles = await Rol.findOne({ where: { rol_name: process.env.ROLE_B } });
+
+        const [ user, created ] = await User.findOrCreate({
+            where: { mail },
+            defaults: {
+                name, 
+                surname, 
+                password: passwordHash,
+                phone,
+                mail,
+                date_of_birth,
+                rolId: roles.id
+            }
+        });
+
+        if(!created) throw new Error("The email is already registered, modify the role");
+
+        // const token = await generateTokenJwt(user);
+
+        return { 
+            message: "Admin user created successfully",
+            user: {
+                name: user.name,
+                surname: user.surname  
+            },
+            // token,
+        } 
+
+    } catch (error) {
+        throw new Error(error.message);
+    }
+}
+
 module.exports = {
     getRoles,
     postRole,
     putRoles,
-    deleteRoles
+    deleteRoles,
+    postNewUserAdm
 }

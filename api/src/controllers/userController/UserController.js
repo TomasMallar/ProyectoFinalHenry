@@ -182,5 +182,6 @@ module.exports = {
     postNewUser,
     postLoginUser,
     updateUser,
+    // updatePassword
     // deleteUser
 }

@@ -5,7 +5,8 @@ const {
     postNewUser, 
     postLoginUser, 
     updateUser, 
-    deleteUser 
+    deleteUser,
+    updatePassword 
 } = require("../../controllers/userController/UserController");
 const { sendWelcomeEmail } = require('../../controllers/emailControllers/emailNewUserController');
 
@@ -111,5 +112,6 @@ module.exports = {
     postLoginUserHandler,
     updateUserHandler,
     deleteUserHandler,
+    // updatePasswordHanlder
 }
 
