@@ -7,6 +7,17 @@ const getTypesAll = async () => {
     return typesMaped
 }
 
+const getTypesWithID = async() => {
+    const types = await Type.findAll()
+    const typesMaped = types.map(type => {
+        return {
+            id: type.id,
+            name: type.name
+        }
+    })
+    return typesMaped
+}
+
 const postType = async(name) => {
     const [newType] = await Type.findOrCreate({
         where: {name}
@@ -16,5 +27,6 @@ const postType = async(name) => {
 
 module.exports = {
     postType,
-    getTypesAll
+    getTypesAll, 
+    getTypesWithID
 }
