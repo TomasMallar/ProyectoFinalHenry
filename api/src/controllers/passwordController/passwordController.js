@@ -4,6 +4,8 @@ const { encrypt, compare } = require("../../helpers/password/bcryptHelper");
 const handlerbars = require("handlebars");
 const fs = require("fs");
 const { transporter } = require('../../utils/mailer');
+const path = require('path');
+const util = require('util');
 
 const postForgotPassword = async (mail) => {
     try {
@@ -17,7 +19,8 @@ const postForgotPassword = async (mail) => {
  
         const { name } = user;
 
-        const templateFile = fs.readFileSync(__dirname + "/../../views/emailForgotPassword.handlebars").toString();
+        const readFile = util.promisify(fs.readFile);
+        const templateFile = await readFile(path.resolve(__dirname, '../../views/emailForgotPassword.handlebars'), 'utf8');
         const template = handlerbars.compile(templateFile);
         const html = template({ name , verificationLink })
 
@@ -29,9 +32,8 @@ const postForgotPassword = async (mail) => {
           };
 
         await transporter.sendMail(mailOptions);
-
+          
         console.log('Correo electrónico enviado exitosamente');
-        // console.log("Correo enviado:", info.messageId);
     } catch (error) {
         throw new Error(error.message);
     }
