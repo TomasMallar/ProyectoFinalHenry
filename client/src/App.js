@@ -11,6 +11,7 @@ import Detail from './Pages/detail/detail';
 import CrudProducts from './Pages/crud_products/CrudProducts';
 import EditProduct from './Pages/editProduct/editProduct';
 import Carousel from './Components/Carousel/carousel';
+import EditCategoryTypeIngredient from './Pages/editCategoryTypeIngredient/editCategoryTypeIngredient';
 
 function App() {
 
@@ -32,6 +33,8 @@ function App() {
         <Route path='/products/:id'> <Detail/> </Route>
        <Route path="/crudProducts"> <NavBar/><CrudProducts/></Route>
        <Route path="/editProduct"> <NavBar/><EditProduct/></Route>
+       <Route path="/editcategoryTypeIngredient"> <NavBar/><EditCategoryTypeIngredient/></Route>
+
         <Route path="/*"><Error/><NavBar/></Route>
 
       </Switch>

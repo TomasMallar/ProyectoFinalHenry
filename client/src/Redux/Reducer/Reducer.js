@@ -10,7 +10,9 @@ import {
     GET_TYPES,
     GET_INGREDIENTS,
     DELETE_PRODUCT,
-    TOEDIT_PRODUCT
+    TOEDIT_PRODUCT,
+    ADD_INGREDIENT_TYPE_CATEGORIE,
+    DELETE_CATEGORIE
 } from "../Action-types/Action-types"
 
 const initialState = {
@@ -21,7 +23,7 @@ const initialState = {
     categories: [],
     types: [],
     ingredients: [],
-    editedProduct:{},
+    editedProduct: {},
 }
 const reducer = (state = initialState, action) => {
     switch (action.type) {
@@ -83,17 +85,29 @@ const reducer = (state = initialState, action) => {
             }
         case DELETE_PRODUCT:
             const updatedProducts = state.chocolates.products.filter(choco => choco.id !== action.payload);
-            console.log(updatedProducts, "soy prod")
             return {
                 ...state,
                 chocolates: updatedProducts
-                
+
             };
         case TOEDIT_PRODUCT:
-                return {
-                    ...state,
-                    editedProduct: action.payload,
-                }
+            return {
+                ...state,
+                editedProduct: action.payload,
+            }
+        case ADD_INGREDIENT_TYPE_CATEGORIE:
+            const property = action.payload.value
+            return {
+                ...state,
+                [property]: [action.payload.response]
+            }
+        case DELETE_CATEGORIE:
+            const updatedCategories = state.categories.filter(categ => categ.id !== action.payload);
+            return {
+                ...state,
+                categories: updatedCategories
+
+            };
 
         default:
             return { ...state };

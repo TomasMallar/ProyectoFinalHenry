@@ -1,0 +1,199 @@
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modalContent {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  max-width: 500px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal input {
+  display: block;
+  margin-bottom: 10px;
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+.modal button {
+  padding: 10px 20px;
+  background-color: #3498db;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  margin-right: 10px;
+}
+
+.modal button:last-child {
+  margin-right: 0;
+}
+
+.container {
+  display: table;
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+  font-family: Arial, sans-serif;
+  table-layout: fixed;
+}
+
+.cell {
+  display: table-cell;
+  padding: 10px;
+  border-bottom: 1px solid #ccc;
+  text-align: center;
+  word-break: break-all;
+}
+
+.cell:first-child {
+  width: 50%;
+  font-weight: bold;
+}
+
+.cell:last-child {
+  width: 25%;
+}
+
+ .editButton {
+  width: 200px;
+  margin-top: 10px;
+  padding: 5px;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  color: #fff;
+  background-color: #54bf56;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+.deleteButton {
+  width: 200px;
+  margin-top: 10px;
+  padding: 5px;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  color: #fff;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+
+.editButton:hover {
+  background-color: #19de1d;
+}
+
+ .editButton{
+  margin-right: 10px;
+}
+.deleteButton{
+  margin-right: 10px;
+}
+
+ .deleteButton {
+  background-color: #f44336;
+}
+
+ .deleteButton:hover {
+  background-color: #c62828;
+}
+
+.buttonEditElement{
+  background-color: #00c853; /* Color de fondo */
+  border: none; /* Sin borde */
+  color: #fff; /* Color de texto */
+  padding: 10px 20px; /* Relleno */
+  text-align: center; /* Alineación de texto */
+  text-decoration: none; /* Sin subrayado de texto */
+  display: inline-block; /* Mostrar como bloque en línea */
+  font-size: 16px; /* Tamaño de fuente */
+  margin: 10px 5px; /* Margen */
+  cursor: pointer; /* Cursor apuntando */
+  border-radius: 5px; /* Radio de borde */
+  box-shadow: 0px 5px 10px rgba(0,0,0,0.2); /* Sombra */
+  transition: all 0.3s ease; 
+}
+
+.buttonEditElement:hover{
+  background-color: #fff; /* Color de fondo en hover */
+  color: #00c853; /* Color de texto en hover */
+  box-shadow: 0px 5px 10px rgba(0,0,0,0.4); 
+}
+
+.addContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.label {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  margin-right: 15px;
+  margin-bottom: 10px;
+
+}
+
+.input {
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 5px;
+  border: none;
+  margin-bottom: 10px;
+  box-shadow: 0px 5px 10px rgba(0,0,0,0.2);
+  transition: all 0.3s ease;
+  margin-right: 15px;
+  margin-bottom: 20px;
+
+
+}
+
+.input:focus {
+  outline: none;
+  box-shadow: 0px 5px 10px rgba(0,0,0,0.4);
+  margin-right: 15px;
+
+}
+
+.button {
+  background-color: #00c853;
+  border: none;
+  color: #fff;
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  box-shadow: 0px 5px 10px rgba(0,0,0,0.2);
+  transition: all 0.3s ease;
+  margin-right: 5px;
+  margin-bottom: 20px;
+
+}
+
+.button:hover {
+  background-color: #fff;
+  color: #00c853;
+  box-shadow: 0px 5px 10px rgba(0,0,0,0.4);
+}
