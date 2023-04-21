@@ -11,6 +11,7 @@ import Detail from './Pages/detail/detail';
 import CrudProducts from './Pages/crud_products/CrudProducts';
 import EditProduct from './Pages/editProduct/editProduct';
 import Carousel from './Components/Carousel/carousel';
+import Crypto from './Components/Cryptos/Cryptos'
 import EditCategoryTypeIngredient from './Pages/editCategoryTypeIngredient/editCategoryTypeIngredient';
 
 function App() {
@@ -36,7 +37,6 @@ function App() {
        <Route path="/editcategoryTypeIngredient"> <NavBar/><EditCategoryTypeIngredient/></Route>
 
         <Route path="/*"><Error/><NavBar/></Route>
-
       </Switch>
     </div>
   );

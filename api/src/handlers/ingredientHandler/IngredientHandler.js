@@ -1,11 +1,22 @@
-const { getAllIngredients, postNewIngredient, deleteIngredient, putIngredient } = require('../../controllers/ingredientController/IngredientsController')
+const { getAllIngredients, postNewIngredient, deleteIngredient, putIngredient, getIngredientsWithId } = require('../../controllers/ingredientController/IngredientsController')
 
+//ingredientes sin id
 const getIngredients = async (req, res) => {
     try {
         const allIngredients = await getAllIngredients()
         res.status(200).json(allIngredients)
     } catch (error) {
         res.status(400).json({ error: error.message })
+    }
+}
+
+// ingredients con id
+const getIngredientsAll = async(req, res) => {
+    try {
+        const ingredients = await getIngredientsWithId()
+        res.status(200).json(ingredients)
+    } catch (error) {
+        res.status(400).json({error: error.message})
     }
 }
 
@@ -44,5 +55,6 @@ module.exports = {
     getIngredients,
     postIngredients,
     putIngredients,
-    deleteIngredients
+    deleteIngredients,
+    getIngredientsAll
 }
