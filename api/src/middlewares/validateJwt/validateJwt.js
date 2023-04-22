@@ -1,3 +1,4 @@
+const { User } = require("../../db")
 const verifyToken = require("../../helpers/tokenjwt/verifyTokenJwt")
 
 const validateJwt = async (req, res, next) => {
@@ -12,9 +13,17 @@ const validateJwt = async (req, res, next) => {
         //payload decodificado
         if (!tokenData.id) {
             return res.status(400).json({ message: "No token"});
-       }
+        }
 
-       next();
+        const user = await User.findOne({ where: { id: tokenData.id}});
+
+        if(!user) {
+            return res.status(400).json("Validation Error");
+        }
+
+        req.userId = tokenData.id;
+
+        next();
     } catch (error) {
         return res.status(400).json("Invalid token");
     }
