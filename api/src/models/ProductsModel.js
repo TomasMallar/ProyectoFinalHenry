@@ -39,6 +39,11 @@ module.exports = (sequelize) => {
                 type: DataTypes.JSON,
                 
             },
+            totalSold: {
+                type: DataTypes.INTEGER,
+                defaultValue: 0,
+                allowNull: false,
+              },
         },
         {
             paranoid: true,
