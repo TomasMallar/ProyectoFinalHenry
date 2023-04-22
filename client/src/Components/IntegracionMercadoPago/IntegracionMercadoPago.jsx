@@ -13,7 +13,7 @@ const products = {
 
     const handleOnClick = () => {
         console.log(products,"soy products", props.unit_price, "soy price")
-        axios.post('http://localhost:3001/pay/',products)
+        axios.post('http://localhost:3001/payment/create-order',products)
         .then((response) => {
             console.log(response)
             window.location.href = response.data.init_point

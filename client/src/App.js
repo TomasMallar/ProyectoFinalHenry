@@ -38,6 +38,7 @@ function App() {
         <Route path="/editProduct"> <NavBar /><EditProduct /></Route>
        <Route path="/editcategoryTypeIngredient"> <NavBar/><EditCategoryTypeIngredient/></Route>
         <Route path="/carrito"> <NavBar /><Carrito/></Route>
+        <Route path="/criptos"><Crypto/></Route>
         <Route path="/*"><Error/><NavBar/></Route>
       </Switch>
     </div>

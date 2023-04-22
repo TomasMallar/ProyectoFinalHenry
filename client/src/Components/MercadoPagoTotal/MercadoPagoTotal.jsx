@@ -2,12 +2,20 @@ import axios from "axios"
 
 export default function ButtonMPTotal({ products }) {
 
+    const items = {
+        cartItems: products.bodyOrder.map(p => {
+            return {
+                id: p.id,
+                quantity: p.quantity
+            }
+        })
+    }
+
     const handleOnClick = () => {
-        console.log(products, "soy products");
-        axios.post('http://localhost:3001/pay/', products)
+        console.log(items);
+        axios.post('http://localhost:3001/payment/create-order', items)
             .then((response) => {
-                console.log(response);
-                window.location.href = response.data.init_point;
+                console.log(products.bodyOrder);
             });
     }
 

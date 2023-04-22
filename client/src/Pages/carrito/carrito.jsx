@@ -66,14 +66,15 @@ const Carrito = () => {
 
     const buildProductsObject = (cartItems) => {
         const products = {
-            bodyOrder: cartItems.map(item => ({
-                title: item.name,
-                unit_price: item.price,
-                quantity: item.quantity
-            }))
-        }
+          bodyOrder: cartItems.map((item) => ({
+            id: item.id,
+            title: item.name,
+            unit_price: item.price,
+            quantity: item.quantity,
+          })),
+        };
         return products;
-    }
+      };
 
     const calcularTotalCarrito = () => {
         let total = 0;
