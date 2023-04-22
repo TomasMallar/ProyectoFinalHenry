@@ -12,7 +12,7 @@ import {
     DELETE_PRODUCT,
     TOEDIT_PRODUCT,
     ADD_INGREDIENT_TYPE_CATEGORIE,
-    DELETE_CATEGORIE
+    DELETE_ELEMENT
 } from "../Action-types/Action-types"
 
 const initialState = {
@@ -69,6 +69,7 @@ const reducer = (state = initialState, action) => {
                 errorMessage: action.payload
             }
         case GET_CATEGORIES:
+            
             return {
                 ...state,
                 categories: action.payload,
@@ -97,17 +98,22 @@ const reducer = (state = initialState, action) => {
             }
         case ADD_INGREDIENT_TYPE_CATEGORIE:
             const property = action.payload.value
-            return {
-                ...state,
-                [property]: [action.payload.response]
-            }
-        case DELETE_CATEGORIE:
-            const updatedCategories = state.categories.filter(categ => categ.id !== action.payload);
-            return {
-                ...state,
-                categories: updatedCategories
+            const response = action.payload.response
 
+            return {
+                ...state,
+                [property]: [...state[property], response]
+            }
+        case DELETE_ELEMENT:
+            const prop = action.payload.property
+            const id = Number(action.payload.id)
+
+            const updatedElement = state[prop].filter(element => element.id !== id);
+            return {
+                ...state,
+                [prop]: updatedElement
             };
+
 
         default:
             return { ...state };

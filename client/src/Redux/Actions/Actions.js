@@ -13,8 +13,8 @@ import {
     GET_INGREDIENTS,
     DELETE_PRODUCT,
     TOEDIT_PRODUCT,
-    ADD_INGREDIENT_TYPE_CATEGORIE, 
-    DELETE_CATEGORIE
+    ADD_INGREDIENT_TYPE_CATEGORIE,
+    DELETE_ELEMENT
 } from "../Action-types/Action-types"
 
 export const getAllChocolates = () => {
@@ -217,18 +217,33 @@ export const PutProduct = (finalEditedProduct) => {
     }
 }
 
+
+
 export const addIngredientCategoryType = (objToAdd, value) => {
     return async function (dispatch) {
         try {
             const res = await axios.post(`http://localhost:3001/${value}/`, objToAdd)
-            const response = await axios(`http://localhost:3001/${value}/`)
-            alert (`el elemento ${objToAdd.name} se añadió correctamente a ${value}`)
+            
+            if(value==="ingredient") {
+                value="ingredients"
+            }
+            alert(`el elemento ${objToAdd.name} se añadió correctamente a ${value}`)
+            if(value==="ingredients" || value==="types"){
             return dispatch({
                 type: ADD_INGREDIENT_TYPE_CATEGORIE,
-                payload: {response: response.data,
-                        value: value
+                payload: {
+                    response: res.data,
+                    value: value
                 }
-            })
+            })}else{
+                return dispatch({
+                    type: ADD_INGREDIENT_TYPE_CATEGORIE,
+                    payload: {
+                        response: res.data.newCategory,
+                        value: value
+                    }
+                })
+            }
         }
         catch (error) {
             alert(error)
@@ -236,15 +251,74 @@ export const addIngredientCategoryType = (objToAdd, value) => {
     }
 }
 
-export const DeleteCategorie = (id,) => {
+export const DeleteElement = (id, value) => {
     return async function (dispatch) {
         try {
 
-            const res = await axios.delete(`http://localhost:3001/categories/${id}`);
+            const res = await axios.delete(`http://localhost:3001/${value}/${id}`);
             alert(`la categoría con id: ${id} se borró de manera exitosa`)
+            if(value==="ingredient") {
+                value="ingredients"
+            }
+          
+                return (dispatch({
+                    type: DELETE_ELEMENT,
+                    payload: {id:id,
+                    property:value
+                    }
+                }))
+        } catch (error) {
             return dispatch({
-                type: DELETE_CATEGORIE,
-                payload: id
+                type: HANDLE_ERROR,
+                payload: error.response.data.error
+            })
+        }
+
+    }
+
+}
+
+export const PutElement = (objChanged, id, value) => {
+    return async function (dispatch) {
+        try {
+            const resp = await axios.put(`http://localhost:3001/${value}/${id}`, objChanged)
+        
+            alert(`Elemento con id: ${id} modificado correctamente!`)
+
+            if (value === "categories") {
+                const responseCat = await axios(`http://localhost:3001/${value}`)
+                return (dispatch({
+                    type: GET_CATEGORIES,
+                    payload: responseCat.data
+                }))
+            }else if(value ==="ingredient"){
+                const responseTypeAndIngr = await axios(`http://localhost:3001/${value}/all`)
+                return (dispatch({
+                    type: GET_INGREDIENTS,
+                    payload: responseTypeAndIngr.data
+                }))
+            }else if(value ==="types"){
+                const responseTypeAndIngr = await axios(`http://localhost:3001/${value}/all`)
+                return (dispatch({
+                    type: GET_TYPES,
+                    payload: responseTypeAndIngr.data
+                }))
+            }
+
+        }
+        catch (error) {
+            alert(error)
+        }
+    }
+}
+
+export const GetAllTypesWithId = () => {
+    return async function (dispatch) {
+        try {
+            const response = await axios(`http://localhost:3001/types/all`)
+            return dispatch({
+                type: GET_TYPES,
+                payload: response.data
             })
         } catch (error) {
             return dispatch({
@@ -257,20 +331,24 @@ export const DeleteCategorie = (id,) => {
 
 }
 
-export const PutCategorie = (objCategorie, id, value) => {
+export const GetAllIngredientWithId = () => {
     return async function (dispatch) {
         try {
-            const resp = await axios.put(`http://localhost:3001/${value}/${id}`, objCategorie)
 
-            const response = await axios(`http://localhost:3001/${value}/`)
-            alert(`Elemento con id: ${id} modificado correctamente!`)
+            const response = await axios(`http://localhost:3001/ingredient/all`)
+
             return dispatch({
-                type: GET_CATEGORIES,
+                type: GET_INGREDIENTS,
                 payload: response.data
             })
+        } catch (error) {
+
+            return dispatch({
+                type: HANDLE_ERROR,
+                payload: error.response.data.error
+            })
         }
-        catch (error) {
-            alert(error)
-        }
+
     }
+
 }

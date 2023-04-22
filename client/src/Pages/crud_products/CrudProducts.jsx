@@ -1,6 +1,6 @@
 import { useSelector, useDispatch } from "react-redux"
 import { useEffect, useState } from "react"
-import { GetAllCategories, getProductsAdvanceController, GetAllTypes, DeleteProduct, EditedProduct } from "../../Redux/Actions/Actions"
+import { GetAllCategories, getProductsAdvanceController, GetAllTypes, DeleteProduct, EditedProduct, GetAllIngredient } from "../../Redux/Actions/Actions"
 import style from './crud_products.module.css'
 import { Link } from "react-router-dom"
 import Edit from "../editProduct/editProduct"
@@ -31,6 +31,7 @@ export default function CrudProducts(props) {
         dispatch(getProductsAdvanceController(queries.name, queries.category, queries.type, queries.orderBy, queries.orderDirection, queries.page))
         dispatch(GetAllCategories())
         dispatch(GetAllTypes())
+        dispatch(GetAllIngredient())
     }, [dispatch, queries])
 
 
