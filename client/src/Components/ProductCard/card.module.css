@@ -65,7 +65,19 @@
 }
 
 .carButtonBuy {
-  background-color: #725e4f;
+  background-color: #724f4f;
   color: white;
   width: fit-content;
+}
+
+.redponit{
+  padding: 0;
+  margin: 0;
+  width: 10px;
+  height: 10px;
+  background-color: #3b271a;
+  border-radius: 50px;
+  position: relative;
+  left: 8px;
+  top: -35px;
 }
