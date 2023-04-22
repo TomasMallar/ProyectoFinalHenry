@@ -8,17 +8,30 @@ const ProductCard = ({ id, name, image, price, category }) => {
     const [cartItems, setCartItems] = useState([]);
 
     const addToCart = (product) => {
-        // Agregar el producto al estado local del carrito
-        setCartItems([...cartItems, product]);
+         // Verificar si el producto ya existe en el carrito
+    const existingProduct = cartItems.find(item => item.id === product.id);
+    if (existingProduct) {
+        // Si el producto ya existe, actualizar su cantidad sumando 1
+        const updatedCartItems = cartItems.map(item => {
+            if (item.id === product.id) {
+                return { ...item, quantity: item.quantity + 1 };
+            }
+            return item;
+        });
+        setCartItems(updatedCartItems);
+    } else {
+        // Si el producto no existe, agregarlo con una cantidad de 1
+        setCartItems([...cartItems, { ...product, quantity: 1 }]);
+    }
     };
 
     useEffect(() => {
         const existingCartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
-        localStorage.setItem(
-            "cartItems",
-            JSON.stringify([...existingCartItems, ...cartItems])
-        );
-    }, [cartItems]);
+    localStorage.setItem(
+        "cartItems",
+        JSON.stringify([...existingCartItems, ...cartItems])
+    );
+}, [cartItems]);
 
     return (
         <div className={style.container}>
