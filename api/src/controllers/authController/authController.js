@@ -11,20 +11,20 @@ const authGoogle = async (user) => {
 
         const { name, mail, surname } = user;
 
-        //Se agrega el envío del correo cuando se registra por google
-        // const readFile = util.promisify(fs.readFile);
-        // const templateFile = await readFile(path.resolve(__dirname, '../../views/emailWelcomeGoogle.handlebars'), 'utf8');
-        // const template = handlerbars.compile(templateFile);
-        // const html = template({ name })
+        // Se agrega el envío del correo cuando se registra por google
+        const readFile = util.promisify(fs.readFile);
+        const templateFile = await readFile(path.resolve(__dirname, '../../views/emailWelcomeGoogle.handlebars'), 'utf8');
+        const template = handlerbars.compile(templateFile);
+        const html = template({ name })
 
-        // const mailOptions = {
-        //     from: 'thechocolatehub@outlook.com.ar',
-        //     to: mail,
-        //     subject: 'Forgot password',
-        //     html,
-        //   };
+        const mailOptions = {
+            from: 'the.chocolate.hub@outlook.com',
+            to: mail,
+            subject: 'Forgot password',
+            html,
+          };
 
-        // await transporter.sendMail(mailOptions);
+        await transporter.sendMail(mailOptions);
 
         return { 
             message: "User created successfully",
