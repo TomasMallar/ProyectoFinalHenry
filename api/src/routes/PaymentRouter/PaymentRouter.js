@@ -11,6 +11,7 @@ routerPayment.post('/create-order', validateJwt, createOrderHandler);
 routerPayment.post('/create-payment-preference', createPaymentPreferenceHandler);
 routerPayment.post('/handle-payment-notification', paymentNotificationHandler);
 routerPayment.post('/crypto-payment-notification', paymentCryptoNotificationHandler);
+//
 // routerPayment.post('/handle-payment-notification', (req, res) => {
 //     console.log('Notificación recibida:', req.body);
 //     res.status(200).send();
