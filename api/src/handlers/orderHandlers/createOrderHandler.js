@@ -2,7 +2,9 @@ const { createOrder } = require('../../controllers/orderControllers/createOrderC
 
 const createOrderHandler = async (req, res) => {
   try {
-    const { userId, shipping_address,  cartItems } = req.body;
+    const { shipping_address,  cartItems } = req.body;
+    const userId = req.userId;
+    
     console.log(userId,cartItems)
     if (!userId ||  !cartItems) {
       return res.status(400).json({ message: 'Faltan datos en la solicitud' });
