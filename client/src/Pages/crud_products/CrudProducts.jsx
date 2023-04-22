@@ -17,8 +17,8 @@ export default function CrudProducts(props) {
         type: [""],
         orderBy: "",
         orderDirection: "",
-        deleted:"",
-        edited:"",
+        deleted: "",
+        edited: "",
         page: 1
     })
 
@@ -35,13 +35,13 @@ export default function CrudProducts(props) {
 
 
     const handleInputChangeSearchBar = (event) => {
-        setQueries({ ...queries, [event.target.name]: event.target.value,page:1 })
+        setQueries({ ...queries, [event.target.name]: event.target.value, page: 1 })
     }
 
     const handleOnClickDelete = (event) => {
         event.preventDefault()
         dispatch(DeleteProduct(event.target.value))
-       setQueries({...queries, deleted:event.target.value})
+        setQueries({ ...queries, deleted: event.target.value })
         // dispatch(getProductsAdvanceController())
 
     }
@@ -49,33 +49,33 @@ export default function CrudProducts(props) {
     const handleOnChangeFilter = (event) => {
         if (event.target.value !== "CATEGORIAS" && event.target.value !== "TIPOS") {
             const selectedFilter = [event.target.value]
-            setQueries({ ...queries, [event.target.name]: selectedFilter,page:1 })
+            setQueries({ ...queries, [event.target.name]: selectedFilter, page: 1 })
         } else {
-            setQueries({ ...queries, [event.target.name]: [""],page:1})
+            setQueries({ ...queries, [event.target.name]: [""], page: 1 })
         }
     }
 
     const handleOnClickEdit = (c) => {
         dispatch(EditedProduct(c))
-        setQueries({...queries, edited:c})
+        setQueries({ ...queries, edited: c })
     }
 
     //-----------------------------------------Pages-----------------------------------
-const handleonClickPages = (event) =>{
-    if (event.target.value>0 && event.target.value<=allProducts.totalPages) {
-        setQueries({...queries, page:event.target.value})
+    const handleonClickPages = (event) => {
+        if (event.target.value > 0 && event.target.value <= allProducts.totalPages) {
+            setQueries({ ...queries, page: event.target.value })
+        }
+
     }
-  
-  }
-  const totalPages = allProducts.totalPages
+    const totalPages = allProducts.totalPages
     const TotalPagesArray = []
-    for (let i=1; i<= totalPages; i++){
+    for (let i = 1; i <= totalPages; i++) {
         TotalPagesArray.push(i)
     }
 
     return (
 
-        <><div>
+        <><div className={style.totalContainer}>
             <div className={style.searchBar}>
                 <img className={style.img} alt="lupa" src="https://res.cloudinary.com/dgxs2jcyu/image/upload/v1681582108/lupa_yidfrt.png" />
                 <input type="search" name="name" value={queries.name} placeholder="Buscar Producto" onChange={handleInputChangeSearchBar} />
@@ -156,7 +156,7 @@ const handleonClickPages = (event) =>{
                                 }) : <p className={style.cell}>N/A</p>}
                             </div>
 
-                            <Link to="/editProduct"><button className={style.cell} value={c} onClick={() => { handleOnClickEdit(c) } }>Editar</button> </Link>
+                            <Link to="/editProduct"><button className={style.cell} value={c} onClick={() => { handleOnClickEdit(c) }}>Editar</button> </Link>
                             <button className={style.cell} value={c.id} onClick={handleOnClickDelete}>Eliminar</button>
 
                         </div>

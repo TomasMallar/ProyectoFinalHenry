@@ -1,4 +1,7 @@
 import React, { useState, useEffect } from "react";
+import styles from "./carrito.module.css"
+import ButtonMP from "../../Components/IntegracionMercadoPago/IntegracionMercadoPago"
+import ButtonMPTotal from "../../Components/MercadoPagoTotal/MercadoPagoTotal";
 
 const Carrito = () => {
     const [cartItems, setCartItems] = useState([]);
@@ -32,9 +35,9 @@ const Carrito = () => {
 
     const handleAddToCart = (item) => {
         const updatedCartItems = [...cartItems];
-        const existingItem = updatedCartItems.find(cartItem => cartItem.id === item.id);
-        if (existingItem) {
-            existingItem.quantity += 1;
+        const existingItemIndex = updatedCartItems.findIndex(cartItem => cartItem.id === item.id);
+        if (existingItemIndex !== -1) {
+            updatedCartItems[existingItemIndex].quantity += 1;
         } else {
             updatedCartItems.push({ ...item, quantity: 1 });
         }
@@ -44,32 +47,62 @@ const Carrito = () => {
 
     const handleRemoveFromCart = (item) => {
         const updatedCartItems = [...cartItems];
-        const itemIndex = updatedCartItems.findIndex(cartItem => cartItem.id === item.id);
-        if (itemIndex !== -1) {
-            updatedCartItems[itemIndex].quantity -= 1;
-            if (updatedCartItems[itemIndex].quantity === 0) {
-                updatedCartItems.splice(itemIndex, 1);
+        const existingItemIndex = updatedCartItems.findIndex(cartItem => cartItem.id === item.id);
+        if (existingItemIndex !== -1) {
+            updatedCartItems[existingItemIndex].quantity -= 1;
+            if (updatedCartItems[existingItemIndex].quantity === 0) {
+                updatedCartItems.splice(existingItemIndex, 1);
             }
         }
         setCartItems(updatedCartItems);
         localStorage.setItem("cartItems", JSON.stringify(updatedCartItems));
     }
 
+    const handleDeleteFromCart = (item) => {
+        const updatedCartItems = cartItems.filter(cartItem => cartItem.id !== item.id);
+        setCartItems(updatedCartItems);
+        localStorage.setItem("cartItems", JSON.stringify(updatedCartItems));
+    };
+
+    const buildProductsObject = (cartItems) => {
+        const products = {
+            bodyOrder: cartItems.map(item => ({
+                title: item.name,
+                unit_price: item.price,
+                quantity: item.quantity
+            }))
+        }
+        return products;
+    }
+
+    const calcularTotalCarrito = () => {
+        let total = 0;
+        for (const item of cartItems) {
+            total += item.price * item.quantity;
+        }
+        return total;
+    }
+
+
     return (
-        <div>
+        <div className={styles.container}>
             <h2>Carrito de Productos</h2>
             <button onClick={handleDeleteCart}>
                 Borrar carrito
             </button>
+            <p>Total del carrito: ${calcularTotalCarrito()}</p>
+            <ButtonMPTotal products={buildProductsObject(cartItems)}/>
             {uniqueCartItems.length > 0 ? (
                 uniqueCartItems.map((item) => (
                     <div key={item.id}>
                         <img src={item.image} alt={item.name} />
                         <p>Nombre: {item.name}</p>
-                        <p>Precio: {item.price}</p>
                         <p>Cantidad: {item.quantity}</p>
+                        <p>Precio Total: ${item.price * item.quantity}</p>
                         <button onClick={() => handleAddToCart(item)}>+</button>
                         <button onClick={() => handleRemoveFromCart(item)}>-</button>
+                        <button onClick={() => handleDeleteFromCart(item)}>Eliminar</button>
+                        <ButtonMP  title={item.name} unit_price={item.price} />
                     </div>
                 ))
             ) : (

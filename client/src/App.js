@@ -31,7 +31,7 @@ function App() {
         <Route path="/login"><Login /></Route>
         <Route path="/createProduct"><NavBar /><CreateProduct /></Route>
         <Route path="/newUser"> <User /> </Route>
-        <Route path='/products/:id'> <Detail /> </Route>
+        <Route path='/products/:id'> <NavBar /><Detail /> </Route>
         <Route path="/crudProducts"> <NavBar /><CrudProducts /></Route>
         <Route path="/editProduct"> <NavBar /><EditProduct /></Route>
         <Route path="/carrito"> <NavBar /><Carrito/></Route>

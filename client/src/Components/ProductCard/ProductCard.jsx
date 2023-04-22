@@ -6,6 +6,7 @@ import React, { useState, useEffect } from "react";
 
 const ProductCard = ({ id, name, image, price, category }) => {
     const [cartItems, setCartItems] = useState([]);
+    const [showBubble, setShowBubble] = useState(false);
 
     const addToCart = (product) => {
          // Verificar si el producto ya existe en el carrito
@@ -23,6 +24,7 @@ const ProductCard = ({ id, name, image, price, category }) => {
         // Si el producto no existe, agregarlo con una cantidad de 1
         setCartItems([...cartItems, { ...product, quantity: 1 }]);
     }
+    setShowBubble(true);
     };
 
     useEffect(() => {
@@ -37,6 +39,7 @@ const ProductCard = ({ id, name, image, price, category }) => {
         <div className={style.container}>
             <button className={style.carButtonTrolley} onClick={() => addToCart({ id, name, image, price, category })}>
                 <img src={carImagen} alt="" className={style.carImagen} />
+            {showBubble && (<div className={style.redponit}></div>)}
             </button>
             <Link className={style.cardLink} to={`/products/${id}`}>
                 <h1> {name} </h1>
