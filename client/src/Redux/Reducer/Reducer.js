@@ -10,7 +10,9 @@ import {
     GET_TYPES,
     GET_INGREDIENTS,
     DELETE_PRODUCT,
-    TOEDIT_PRODUCT
+    TOEDIT_PRODUCT,
+    ADD_INGREDIENT_TYPE_CATEGORIE,
+    DELETE_ELEMENT
 } from "../Action-types/Action-types"
 
 const initialState = {
@@ -21,7 +23,7 @@ const initialState = {
     categories: [],
     types: [],
     ingredients: [],
-    editedProduct:{},
+    editedProduct: {},
 }
 const reducer = (state = initialState, action) => {
     switch (action.type) {
@@ -67,6 +69,7 @@ const reducer = (state = initialState, action) => {
                 errorMessage: action.payload
             }
         case GET_CATEGORIES:
+            
             return {
                 ...state,
                 categories: action.payload,
@@ -83,17 +86,34 @@ const reducer = (state = initialState, action) => {
             }
         case DELETE_PRODUCT:
             const updatedProducts = state.chocolates.products.filter(choco => choco.id !== action.payload);
-            console.log(updatedProducts, "soy prod")
             return {
                 ...state,
                 chocolates: updatedProducts
-                
+
             };
         case TOEDIT_PRODUCT:
-                return {
-                    ...state,
-                    editedProduct: action.payload,
-                }
+            return {
+                ...state,
+                editedProduct: action.payload,
+            }
+        case ADD_INGREDIENT_TYPE_CATEGORIE:
+            const property = action.payload.value
+            const response = action.payload.response
+
+            return {
+                ...state,
+                [property]: [...state[property], response]
+            }
+        case DELETE_ELEMENT:
+            const prop = action.payload.property
+            const id = Number(action.payload.id)
+
+            const updatedElement = state[prop].filter(element => element.id !== id);
+            return {
+                ...state,
+                [prop]: updatedElement
+            };
+
 
         default:
             return { ...state };
