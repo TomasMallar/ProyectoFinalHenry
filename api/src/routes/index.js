@@ -12,7 +12,6 @@ const routerAuth = require("./AuthRouter/AuthRouter");
 const routerEmail = require('./EmailRouter/EmailRouter')
 const routerPayment = require('./PaymentRouter/PaymentRouter')
 const routerMetric = require('./MetricRouter/MetricRouter')
-const routerEmail = require('./EmailRouter/EmailRouter');
 const routerPassword = require("./PasswordRouter/PasswordRouter");
 const router = Router();
 
