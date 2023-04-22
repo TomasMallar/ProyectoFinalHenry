@@ -6,8 +6,7 @@ import style from './editCTI.module.css'
 
 
 export default function EditCategoryTypeIngredient() {
-
-
+console.log("??????")
     const dispatch = useDispatch()
     const allIngredients = useSelector(state => state.ingredients)
     const allCategories = useSelector(state => state.categories)
@@ -141,3 +140,4 @@ export default function EditCategoryTypeIngredient() {
         </div>
     )
 }
+
