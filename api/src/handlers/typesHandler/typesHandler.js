@@ -1,4 +1,4 @@
-const { postType, getTypesAll, getTypesWithID } = require('../../controllers/typesController/typesController')
+const { postType, getTypesAll, getTypesWithID, putTypes, deleteTypes } = require('../../controllers/typesController/typesController')
 
 const getAllTypes = async(req,res) => {
     try {
@@ -28,8 +28,32 @@ const postNewType = async (req, res) => {
     }
 }
 
+const putType = async(req, res) =>{
+    try {
+        const { id } = req.params
+        const { name } = req.body
+        const typeUpdated = await putTypes(id, name)
+        res.status(200).json(typeUpdated)
+    } catch (error) {
+        res.status(400).json({ error: error.message })
+    }
+}
+
+const deleteType = async(req, res ) => {
+    try {
+        const { id } = req.params
+        const typeDeleted = await deleteTypes(id)
+        res.status(200).json(typeDeleted)
+    } catch (error) {
+        res.status(400).json({ error: error.message })
+    }
+}
+
+
 module.exports = {
     postNewType,
     getAllTypes,
-    getTypes
+    getTypes, 
+    putType,
+    deleteType
 }

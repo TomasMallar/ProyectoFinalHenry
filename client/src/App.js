@@ -13,6 +13,8 @@ import EditProduct from './Pages/editProduct/editProduct';
 import Carousel from './Components/Carousel/carousel';
 import Carrito from './Pages/carrito/carrito';
 import Crypto from './Components/Cryptos/Cryptos'
+//import Crypto from './Components/Cryptos/Cryptos'
+import EditCategoryTypeIngredient from './Pages/editCategoryTypeIngredient/editCategoryTypeIngredient';
 
 function App() {
 
@@ -36,7 +38,9 @@ function App() {
         <Route path="/editProduct"> <NavBar /><EditProduct /></Route>
         <Route path="/carrito"> <NavBar /><Carrito/></Route>
         <Route path="/*"><Error /><NavBar /></Route>
+       <Route path="/editcategoryTypeIngredient"> <NavBar/><EditCategoryTypeIngredient/></Route>
 
+        <Route path="/*"><Error/><NavBar/></Route>
       </Switch>
     </div>
   );

@@ -9,10 +9,10 @@ const routerIngredient = require("./IngredientRouter/IngredientRouter")
 const routerScore = require('./PutScoreRouter/PutScoreRouter')
 const routerPay = require('./CompraRouter/mercadopago')
 const routerAuth = require("./AuthRouter/AuthRouter");
-const routerEmail = require('./EmailRouter/EmailRouter')
+const routerEmail = require('./EmailRouter/EmailRouter');
+const routerPassword = require("./PasswordRouter/PasswordRouter")
 const routerPayment = require('./PaymentRouter/PaymentRouter')
 const routerMetric = require('./MetricRouter/MetricRouter')
-const routerPassword = require("./PasswordRouter/PasswordRouter");
 const router = Router();
 
 const passport = require("passport");
