@@ -6,13 +6,10 @@
 }
 
 .container {
-  background-color: #DFD1C0;
+  background-color: #F4EEE2;
   display: flex;
   justify-content: space-between;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
-  width: 100%;
-  position: fixed;
-  z-index: 100;
 }
 
 .containerUlLinks {
@@ -26,7 +23,7 @@
   list-style: none;
   padding-left: 15px;
   text-decoration: none;
-  color: #3F2822;
+  color: #725e4f;
   font-family: 'ArimaMadurai', sans-serif;
   font-size: 25px;
 }
@@ -42,7 +39,7 @@
   border: none;
   border-radius: 10px;
   color: #ffffff;
-  background-color: #3F2822;
+  background-color: #725e4f;
   font-family: 'ArimaMadurai', sans-serif;
   font-size: 20px;
 }

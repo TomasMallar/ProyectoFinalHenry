@@ -18,7 +18,7 @@ const Products = (props) => {
 
   let allProducts = useSelector((state) => state.chocolates.products)
   return (
-    <><div className={styles.container}>
+    <><div>
 
       <div className={styles.headerHome}>
         <h1>SOMOS LOS <br /> REYES DEL <br /> CHOCOLATE</h1>

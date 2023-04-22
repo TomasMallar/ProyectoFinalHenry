@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom"
 import style from './NavBar.module.css'
 import carImagen from "../../img/shopping-cart.png"
-import logo from "../../img/logoBlack.png"
+import logo from "../../img/logo.png"
 export default function NavBar() {
 
 

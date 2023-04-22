@@ -16,7 +16,7 @@ const Detail = () => {
     }, [dispatch, id])
     return (
         <div className={styles.container}>
-            <div className={styles.containerLink}>
+            <div>
                 <Link to={`/products`} className={styles.links}>
                     <button className={styles.returnButtom}>
                         <img src="https://res.cloudinary.com/dsaocvav7/image/upload/v1681707019/arrow_zxesaq.png" alt="" />

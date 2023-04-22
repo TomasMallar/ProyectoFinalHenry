@@ -1,6 +1,3 @@
-.container{
-    padding-top: 120px;
-}
 
 .returnButtom {
     font-family: 'ArimaMadurai';
@@ -21,11 +18,6 @@
 
 .links {
     text-decoration: none;
-    width: fit-content;
-}
-
-.containerLink{
-    width: fit-content;
 }
 
 .returnButtom img {
