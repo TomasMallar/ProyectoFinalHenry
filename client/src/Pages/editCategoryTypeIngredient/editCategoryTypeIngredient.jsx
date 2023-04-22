@@ -101,7 +101,7 @@ export default function EditCategoryTypeIngredient() {
         <div>
             <button onClick={handleOnClickEdit} className={style.buttonEditElement} value={"ingredient"}>EDITAR INGREDIENTE </button>
             <button onClick={handleOnClickEdit} className={style.buttonEditElement} value={"categories"}>EDITAR CATEGORÍA </button>
-            <button onClick={handleOnClickEdit} className={style.buttonEditElement} value={"types"}>EDITAR TIPO </button>
+            <button  onClick={handleOnClickEdit} className={style.buttonEditElement} value={"types"}>EDITAR TIPO </button>
             <div className={style.addContainer}>
                 {toAdd !== "" && <div>
                     <br />
