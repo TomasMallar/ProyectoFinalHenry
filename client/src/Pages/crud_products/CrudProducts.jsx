@@ -1,6 +1,6 @@
 import { useSelector, useDispatch } from "react-redux"
 import { useEffect, useState } from "react"
-import { GetAllCategories, getProductsAdvanceController, GetAllTypes, DeleteProduct, EditedProduct } from "../../Redux/Actions/Actions"
+import { GetAllCategories, getProductsAdvanceController, GetAllTypes, DeleteProduct, EditedProduct, GetAllIngredient } from "../../Redux/Actions/Actions"
 import style from './crud_products.module.css'
 import { Link } from "react-router-dom"
 import Edit from "../editProduct/editProduct"
@@ -31,6 +31,7 @@ export default function CrudProducts(props) {
         dispatch(getProductsAdvanceController(queries.name, queries.category, queries.type, queries.orderBy, queries.orderDirection, queries.page))
         dispatch(GetAllCategories())
         dispatch(GetAllTypes())
+        dispatch(GetAllIngredient())
     }, [dispatch, queries])
 
 
@@ -80,6 +81,8 @@ const handleonClickPages = (event) =>{
                 <img className={style.img} alt="lupa" src="https://res.cloudinary.com/dgxs2jcyu/image/upload/v1681582108/lupa_yidfrt.png" />
                 <input type="search" name="name" value={queries.name} placeholder="Buscar Producto" onChange={handleInputChangeSearchBar} />
                 <Link to="/createProduct"> <button className={style.buttonNewProd}>AGREGAR NUEVO PRODUCTO</button></Link>
+                <Link to="/editCategoryTypeIngredient"> <button className={style.buttonNewProd}>EDITAR INGREDIENTES / TIPOS / CATEGORIAS</button></Link>
+
             </div>
 
             <div className={style.pagesButtons}>
