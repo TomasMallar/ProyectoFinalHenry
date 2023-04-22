@@ -3,6 +3,7 @@ import { useEffect, useState } from "react"
 import { GetAllCategories, getProductsAdvanceController, GetAllTypes, DeleteProduct, EditedProduct, GetAllIngredient } from "../../Redux/Actions/Actions"
 import style from './crud_products.module.css'
 import { Link } from "react-router-dom"
+import ModalMailing from "../../Components/ModalMailing/ModalMailing"
 import Edit from "../editProduct/editProduct"
 import Paginated from "../../Components/Paginated/paginated"
 
@@ -21,9 +22,10 @@ export default function CrudProducts(props) {
         edited: "",
         page: 1
     })
+    const [modalOpen, setModalOpen] = useState(false);
+
 
     const allProducts = useSelector((state) => state.chocolates)
-    console.log("crud allProd", allProducts)
     const allCategories = useSelector((state) => state.categories)
     const allTypes = useSelector((state) => state.types)
 
@@ -40,10 +42,9 @@ export default function CrudProducts(props) {
     }
 
     const handleOnClickDelete = (event) => {
-        event.preventDefault()
         dispatch(DeleteProduct(event.target.value))
         setQueries({ ...queries, deleted: event.target.value })
-        // dispatch(getProductsAdvanceController())
+        dispatch(getProductsAdvanceController())
 
     }
 
@@ -74,6 +75,13 @@ export default function CrudProducts(props) {
         TotalPagesArray.push(i)
     }
 
+    const handleOpenModal = () => {
+        setModalOpen(true);
+    };
+    const handleCloseModal = () => {
+        setModalOpen(false);
+    };
+
     return (
 
         <><div className={style.totalContainer}>
@@ -82,7 +90,12 @@ export default function CrudProducts(props) {
                 <input type="search" name="name" value={queries.name} placeholder="Buscar Producto" onChange={handleInputChangeSearchBar} />
                 <Link to="/createProduct"> <button className={style.buttonNewProd}>AGREGAR NUEVO PRODUCTO</button></Link>
                 <Link to="/editCategoryTypeIngredient"> <button className={style.buttonNewProd}>EDITAR INGREDIENTES / TIPOS / CATEGORIAS</button></Link>
-
+                <div>
+                    <button className={style.buttonNewProd} onClick={handleOpenModal}>
+                        MAILING
+                    </button>
+                    {modalOpen && <ModalMailing onClose={handleCloseModal} />}
+                </div>
             </div>
 
             <div className={style.pagesButtons}>
@@ -166,6 +179,7 @@ export default function CrudProducts(props) {
                     )
                 })}
             </div>
-        </div></>
+        </div>
+        </>
     )
 }

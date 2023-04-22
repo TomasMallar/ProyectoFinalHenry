@@ -36,10 +36,6 @@ function App() {
         <Route path='/products/:id'> <NavBar /><Detail /> </Route>
         <Route path="/crudProducts"> <NavBar /><CrudProducts /></Route>
         <Route path="/editProduct"> <NavBar /><EditProduct /></Route>
-<<<<<<< Updated upstream
-        <Route path="/carrito"> <NavBar /><Carrito/></Route>
-=======
->>>>>>> Stashed changes
        <Route path="/editcategoryTypeIngredient"> <NavBar/><EditCategoryTypeIngredient/></Route>
         <Route path="/carrito"> <NavBar /><Carrito/></Route>
         <Route path="/*"><Error/><NavBar/></Route>
