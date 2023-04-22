@@ -12,6 +12,8 @@ const routerAuth = require("./AuthRouter/AuthRouter");
 const routerEmail = require('./EmailRouter/EmailRouter')
 const routerPayment = require('./PaymentRouter/PaymentRouter')
 const routerMetric = require('./MetricRouter/MetricRouter')
+const routerEmail = require('./EmailRouter/EmailRouter');
+const routerPassword = require("./PasswordRouter/PasswordRouter");
 const router = Router();
 
 const passport = require("passport");
@@ -42,5 +44,8 @@ router.use('/metric',routerMetric)
 
 //Autenticación con google
 router.use("/auth", routerAuth);
+
+//Forgot password
+router.use("/password", routerPassword);
 
 module.exports = router;

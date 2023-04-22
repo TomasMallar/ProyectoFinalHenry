@@ -26,7 +26,6 @@ routerUser.get("/search-user", validateJwt, validateRoleAdm, getSearchUserHandle
 routerUser.put("/update/:id", validateJwt, validateUserId, validatePutUser, updateUserHandler);
 routerUser.delete("/delete/:id", validateJwt, validateRoleAdm, deleteUserHandler);
 
-routerUser.put("/new-password", updatePasswordHanlder);
 routerUser.post("/register", validatePostRegister, postNewtUserHandler);
 routerUser.post("/login", validatePostLogin, postLoginUserHandler);
 
