@@ -25,7 +25,7 @@ const postForgotPassword = async (mail) => {
         const html = template({ name , verificationLink })
 
         const mailOptions = {
-            from: 'thechocolatehub@outlook.com.ar',
+            from: 'the.chocolate.hub@outlook.com',
             to: mail,
             subject: 'Forgot password',
             html,
