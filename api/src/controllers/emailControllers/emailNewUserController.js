@@ -19,7 +19,7 @@ const sendWelcomeEmail = async (mail, name) => {
   const html = template({ name , verificationLink })
 
   const mailOptions = {
-    from: 'thechocolatehub@outlook.com.ar',
+    from: 'the.chocolate.hub@outlook.com',
     to: mail,
     subject: 'Bienvenido a nuestra aplicación',
     html,
