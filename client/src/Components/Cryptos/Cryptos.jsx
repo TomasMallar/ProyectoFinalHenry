@@ -28,7 +28,7 @@ const Crypto = (order) => {
                 orderId: order.order
             }
             console.log(body);
-            //await axios.post('http://localhost:3001/crypto-payment-notification', body)
+            await axios.post('http://localhost:3001/payment/crypto-payment-notification', body)
 
 
             setResponseMessage('Pago exitoso')
