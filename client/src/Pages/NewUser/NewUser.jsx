@@ -5,29 +5,42 @@ import { useDispatch } from 'react-redux'
 import Validations from "./validations"
 import { addUser } from '../../Redux/Actions/Actions'
 import { useHistory } from 'react-router-dom'
+import { GetAllCategories } from '../../Redux/Actions/Actions';
+import { useEffect} from 'react';
+import {useSelector } from 'react-redux';
+
 
 export default function User() {
-    const dispatch = useDispatch()
-    const history = useHistory()
-    //guarda el imput seleccionado en Tipos de Chocolates preferidos
-    const inputSelectFlavorsRef = useRef(null)
 
-    const flavors = ["Chocolate Amargo", "Chocolate con Leche", "Chocolate Blanco", "Rellenos", "Tabletas", "Con Licor", "Con Frutos Secos"]
-    // E. local newUser --> guarda info que inserte el user para luego enviar al post
+    const dispatch = useDispatch();
+    const categories = useSelector((state) => state.categories);
+    const [selectedFlavors, setSelectedFlavors] = useState([]);
+    const inputSelectFlavorsRef = useRef(null);
+    const [errors, setErrors] = useState({});
     let [newUser, setNewUser] = useState({
-        name: "",
-        surname: "",
-        date_of_birth: "",
-        mail: "",
-        phone: "",
-        password: "",
-    })
-    // E.Local guarda las preferencias de chocolate del usuario del usuario
-    const [selectedFlavors, setSelectedFlavors] = useState([])
+      name: '',
+      surname: '',
+      date_of_birth: '',
+      mail: '',
+      phone: '',
+      password: '',
+    });
+  
+    useEffect(() => {
+      // Usa la acción GetAllCategories para obtener las categorías
+      dispatch(GetAllCategories());
+    }, [dispatch]);
+  
+    // Resto del código...
+  
 
 
-    //E. Local para validar errores 
-    const [errors, setErrors] = useState({})
+    const history = useHistory()
+
+
+
+
+
 
     // useEffect(() => {
 
@@ -144,16 +157,20 @@ export default function User() {
                     </div>
 
                     <div className={style.inputContainer}>
-                        <label htmlFor="chocolates">Elige tus chocolates favoritos:</label>
-                        <input name="chocolates" id="chocolates" list="dataList" ref={inputSelectFlavorsRef} className={style.input} />
+                        <label htmlFor="categories">Elige tus categorías favoritas:</label>
+                        <input name="categories" id="categories" list="dataList" ref={inputSelectFlavorsRef} className={style.input} />
                         <datalist id="dataList">
-                            {flavors.map(flav => {
-                                return <option value={flav} key={flav}></option>
-                            })}
+                            {/* Usa un map para crear una opción para cada categoría */}
+                            {categories && categories.map((category) => {
+                        return <option value={category.name} key={category._id}></option>;
+                        })}
                         </datalist>
-                        <button onClick={handleOnClickAdd} className={style.button}>Añadir</button>
+                        <button onClick={handleOnClickAdd} className={style.button}>
+                            Añadir
+                        </button>
                         <span className={style.error}>{errors.favorites_tastes}</span>
-                    </div>
+                        </div>
+
                     <div className={style.inputContainer}>
 
                         {
