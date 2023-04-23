@@ -59,7 +59,7 @@ export default function Edit() {
     const handleOnClickAddIngredient = (event) => {
         event.preventDefault()
         const selectedIngredient = inputSelectedIngredientRef.current.value
-        if (!ingredients.includes(selectedIngredient)) { return alert("Elige un ingrediente válido!" + " " + '\ud83e\udd28') }
+        if (!ingredients.includes(selectedIngredient)) { return alert("Elige un ingrediente válido! ", '\ud83e\udd28') }
         if (selectedIngredient && !selectedIngredients.includes(selectedIngredient)) {
             setSelectedIngredients([...selectedIngredients, selectedIngredient])
            setErrors(Validations({...finalEditedProduct, ingredients:selectedIngredient}))
@@ -78,7 +78,7 @@ export default function Edit() {
     const handleOnClickAddType = (event) => {
         event.preventDefault()
         const selectedType = inputSelectedTypeRef.current.value
-        if (!types.includes(selectedType)) { return alert("Elige un tipo válido!" + " " + '\ud83e\udd28') }
+        if (!types.includes(selectedType)) { return alert("Elige un tipo válido! ", '\ud83e\udd28') }
         if (selectedType && !selectedTypes.includes(selectedType)) {
             setSelectedTypes([...selectedTypes, selectedType])
            setErrors(Validations({...finalEditedProduct, types:selectedType}))
@@ -97,7 +97,7 @@ export default function Edit() {
     const handleOnClickAddCategory = (event) => {
         event.preventDefault()
         const selectedCategory = inputSelectedCategoryRef.current.value
-        if (!categories.includes(selectedCategory)) { return alert("Elige una categoría válida!" + " " + '\ud83e\udd28') }
+        if (!categories.includes(selectedCategory)) { return alert("Elige una categoría válida! ", '\ud83e\udd28') }
         if (selectedCategory && !selectedCategories.includes(selectedCategory)) {
             setSelectedCategories([...selectedCategories, selectedCategory])
             setErrors(Validations({...finalEditedProduct, categories:selectedCategory}))
@@ -119,11 +119,11 @@ export default function Edit() {
         setErrors(Validations(finalEditedProduct))
         const arrayErrors=Object.keys(errors)
         if (arrayErrors.length || !finalEditedProduct.name) {
-            alert("Producto no creado verificar errores en el formulario"+ " " + '\ud83e\uddd0')
+            alert("Producto no creado verificar errores en el formulario ", '\ud83e\uddd0')
         } else {
            dispatch(PutProduct(finalEditedProduct))
            console.log(finalEditedProduct, "sooy lo que se despacha a la action")
-            alert(`Has editado el producto con id ${finalEditedProduct.id} !!" + " "+ '\ud83c\udf89`)
+            alert(`Has editado el producto con id ${finalEditedProduct.id} !! " + " "+ '\ud83c\udf89`)
             setFinalEditedProduct({
                 name: "",
                 surname: "",

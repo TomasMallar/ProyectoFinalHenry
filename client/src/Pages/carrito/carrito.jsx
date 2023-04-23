@@ -82,13 +82,26 @@ const Carrito = () => {
     return products;
   };
 
-  const calcularTotalCarrito = () => {
-    let total = 0;
-    for (const item of cartItems) {
-      total += item.price * item.quantity;
+    const buildProductsObject = (cartItems) => {
+        const products = {
+            bodyOrder: cartItems.map(item => ({
+                title: item.name,
+                unit_price: item.price,
+                quantity: item.quantity,
+                id:item.id
+            }))
+        }
+        return products;
     }
-    return total;
-  };
+
+    const calcularTotalCarrito = () => {
+        let total = 0;
+        for (const item of cartItems) {
+            total += item.price * item.quantity;
+        }
+        return total;
+    }
+
 
   return (
     <div className={styles.container}>

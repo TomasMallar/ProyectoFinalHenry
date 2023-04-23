@@ -54,7 +54,7 @@ export default function CreateProduct() {
     const handleOnClickAddType = (event) => {
         event.preventDefault()
         const selectedType = inputSelectedTypeRef.current.value
-        if (!types.includes(selectedType)) { return alert("Elige un tipo válido!" + " " + '\ud83e\udd28') }
+        if (!types.includes(selectedType)) { return alert("Elige un tipo válido! ", '\ud83e\udd28') }
         if (selectedType && !selectedTypes.includes(selectedType)) {
             setSelectedTypes([...selectedTypes, selectedType])
             setErrors(Validations({...newChocolate, types:selectedType}))
@@ -65,7 +65,7 @@ export default function CreateProduct() {
     const handleOnClickAddCategory = (event) => {
         event.preventDefault()
         const selectedCategory = inputSelectedCategoryRef.current.value
-        if (!categories.includes(selectedCategory)) { return alert("Elige una categoría válida!" + " " + '\ud83e\udd28') }
+        if (!categories.includes(selectedCategory)) { return alert("Elige una categoría válida! ", '\ud83e\udd28') }
         if (selectedCategory && !selectedCategories.includes(selectedCategory)) {
             setSelectedCategories([...selectedCategories, selectedCategory])
             setErrors(Validations({...newChocolate, categories:selectedCategory}))
@@ -76,7 +76,7 @@ export default function CreateProduct() {
     const handleOnClickAddIngredient = (event) => {
         event.preventDefault()
         const selectedIngredient = inputSelectedIngredientRef.current.value
-        if (!ingredients.includes(selectedIngredient)) { return alert("Elige un ingrediente válido!" + " " + '\ud83e\udd28') }
+        if (!ingredients.includes(selectedIngredient)) { return alert("Elige un ingrediente válido! ", '\ud83e\udd28') }
         if (selectedIngredient && !selectedIngredients.includes(selectedIngredient)) {
             setSelectedIngredients([...selectedIngredients, selectedIngredient])
             setErrors(Validations({...newChocolate, ingredients:selectedIngredient}))
@@ -118,10 +118,10 @@ export default function CreateProduct() {
         setErrors(Validations(newChocolate))
         const arrayErrors=Object.keys(errors)
         if (arrayErrors.length || !newChocolate.name) {
-            alert("Producto no creado verificar errores en el formulario"+ " " + '\ud83e\uddd0')
+            alert("Producto no creado verificar errores en el formulario ", '\ud83e\uddd0')
         } else {
            dispatch(addChocolate(newChocolatePost))
-            alert("Felicitaciones has creado el producto !!" + " "+ '\ud83c\udf89')
+            alert("Felicitaciones has creado el producto !! ", '\ud83c\udf89')
             setNewChocolate({
                 name: "",
                 surname: "",

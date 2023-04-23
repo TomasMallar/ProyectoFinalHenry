@@ -3,8 +3,8 @@ import { useEffect, useState } from "react"
 import { GetAllCategories, getProductsAdvanceController, GetAllTypes, DeleteProduct, EditedProduct, GetAllIngredient } from "../../Redux/Actions/Actions"
 import style from './crud_products.module.css'
 import { Link } from "react-router-dom"
-import Edit from "../editProduct/editProduct"
-import Paginated from "../../Components/Paginated/paginated"
+import ModalMailing from "../../Components/ModalMailing/ModalMailing"
+
 
 
 export default function CrudProducts(props) {
@@ -21,9 +21,10 @@ export default function CrudProducts(props) {
         edited: "",
         page: 1
     })
+    const [modalOpen, setModalOpen] = useState(false);
+
 
     const allProducts = useSelector((state) => state.chocolates)
-    console.log("crud allProd", allProducts)
     const allCategories = useSelector((state) => state.categories)
     const allTypes = useSelector((state) => state.types)
 
@@ -40,10 +41,9 @@ export default function CrudProducts(props) {
     }
 
     const handleOnClickDelete = (event) => {
-        event.preventDefault()
         dispatch(DeleteProduct(event.target.value))
         setQueries({ ...queries, deleted: event.target.value })
-        // dispatch(getProductsAdvanceController())
+        dispatch(getProductsAdvanceController())
 
     }
 
@@ -74,6 +74,13 @@ export default function CrudProducts(props) {
         TotalPagesArray.push(i)
     }
 
+    const handleOpenModal = () => {
+        setModalOpen(true);
+    };
+    const handleCloseModal = () => {
+        setModalOpen(false);
+    };
+
     return (
 
         <><div className={style.totalContainer}>
@@ -82,7 +89,12 @@ export default function CrudProducts(props) {
                 <input type="search" name="name" value={queries.name} placeholder="Buscar Producto" onChange={handleInputChangeSearchBar} />
                 <Link to="/createProduct"> <button className={style.buttonNewProd}>AGREGAR NUEVO PRODUCTO</button></Link>
                 <Link to="/editCategoryTypeIngredient"> <button className={style.buttonNewProd}>EDITAR INGREDIENTES / TIPOS / CATEGORIAS</button></Link>
-
+                <div>
+                    <button className={style.buttonNewProd} onClick={handleOpenModal}>
+                        MAILING
+                    </button>
+                    {modalOpen && <ModalMailing onClose={handleCloseModal} />}
+                </div>
             </div>
 
             <div className={style.pagesButtons}>
@@ -90,7 +102,7 @@ export default function CrudProducts(props) {
                 <button value={1} onClick={handleonClickPages}>Inicio</button>
                 <button value={queries.page - 1} onClick={handleonClickPages}>Página anterior</button>
                 {TotalPagesArray.map(p => {
-                    return <button key={p} value={p} onClick={handleonClickPages} className={Number(queries.page) === (p) ? style.selected : ''}> {p} </button>
+                    return <button value={p} onClick={handleonClickPages} className={Number(queries.page) === (p) ? style.selected : ''}> {p} </button>
                 })}
                 <button value={Number(queries.page) + 1} onClick={handleonClickPages}>Página Siguiente</button>
                 <button value={Number(allProducts.totalPages)} onClick={handleonClickPages}>Final</button>
@@ -108,7 +120,6 @@ export default function CrudProducts(props) {
                     <option className={style.cell} value="TIPOS" defaultValue="TIPOS">TIPOS</option>
                     {allTypes.map(t => {
                         return (
-
                             <option className={style.cell} value={t}>{t}</option>
                         )
                     })}
@@ -130,7 +141,7 @@ export default function CrudProducts(props) {
             <div>
                 {allProducts.products?.map(c => {
                     return (
-                        <div className={style.container}>
+                        <div key={c.id} className={style.container}>
                             <p className={style.cell}>{c.id}</p>
                             <p className={style.cell}>{c.name}</p>
                             <p className={style.cell}>{c.price}</p>
@@ -139,6 +150,7 @@ export default function CrudProducts(props) {
                             <div>
                                 {c.ingredients.length ? c.ingredients.map(i => {
                                     return (
+                                        
                                         <p className={style.cell}>{i}</p>
                                     )
                                 }) : <p className={style.cell}>N/A</p>}
@@ -166,6 +178,7 @@ export default function CrudProducts(props) {
                     )
                 })}
             </div>
-        </div></>
+        </div>
+        </>
     )
 }

@@ -4,7 +4,7 @@ export default function Validations({ name, surname, date_of_birth, mail, phone,
     let objErrors = {}
     const regexName = /^([A-Za-zÁÉÍÓÚÑáéíóúñ]+[\s]?)+$/ //mayusculas minusculas acentos y nombres compuestos se aceptan 
     const regexMail = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/ //verifica arroba, largo y permite caracteres especiales 
-    const regexPhone = /^\+?54\d{2}[ ]?\d{4}[ ]?\d{4}$/ // verifica numeros argentinos 
+    const regexPhone = /^\d{10}$/ // verifica numeros argentinos 
     const regexPassword = {
         regexMayus: /(?=.*[A-Z])/,
         regexCSpecial: /(?=.*[^a-zA-Z0-9])./,
@@ -44,7 +44,7 @@ export default function Validations({ name, surname, date_of_birth, mail, phone,
     }else if (!regexPassword.regexLenght.test(password)) {
         objErrors.password = "Debe tener una longitud mínima de 8 caracteres"
     }
-    if(!favorites_tastes.length){
+    if(!favorites_tastes?.length){
         objErrors.favorites_tastes = "Elija al menos uno de sus chocolates favoritos"
     }
 return objErrors

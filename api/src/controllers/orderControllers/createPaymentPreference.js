@@ -6,6 +6,7 @@ mercadopago.configure({
 });
 
 const createPaymentPreference = async (orderId) => {
+  console.log("orderId", orderId)
   const order = await Order.findByPk(orderId, {
     include: [{
       model: OrderItem,
@@ -31,11 +32,11 @@ const createPaymentPreference = async (orderId) => {
     items,
     external_reference: `${order.id}`,
     back_urls: {
-      success: 'https://www.youtube.com/watch?v=CoqjbQJpp-E',
-      failure: 'https://yourwebsite.com/payment/failure',
-      pending: 'https://yourwebsite.com/payment/pending',
+      success: 'http://localhost:3000/purchase/success',
+      failure: 'http://localhost:3000/purchase/rejected',
+      pending: 'http://localhost:3000/purchase/pending',
     },
-    notification_url: 'https://4ae9-181-31-209-160.sa.ngrok.io/payment/handle-payment-notification',
+    notification_url: 'https://d1e0-181-31-209-160.sa.ngrok.io/payment/handle-payment-notification',
   };
   
 
