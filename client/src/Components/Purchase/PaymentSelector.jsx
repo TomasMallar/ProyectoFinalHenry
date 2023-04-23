@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Crypto from '../Cryptos/Cryptos';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useHistory } from 'react-router-dom';
 
 function PaymentSelector() {
   const location = useLocation();
@@ -15,19 +15,28 @@ function PaymentSelector() {
     }
   };
 
+  const history = useHistory();
+
+  const handleCryptoClick = () => {
+    history.push({
+      pathname: '/purchase/crypto',
+      state: { order }
+    });
+  };
+
   return (
     <div>
       <h2>Seleccione un método de pago:</h2>
       <div>
         <button
-          // onClick={() => handlePaymentSelection('crypto')}
-          // className={selectedPayment === 'crypto' ? 'selected' : ''}
+          onClick={handleCryptoClick}
+        // className={selectedPayment === 'crypto' ? 'selected' : ''}
         >
-          Crypto{order}
+          Crypto
         </button>
         <button
           onClick={handleMercadoPagoClick}
-          // className={selectedPayment === 'mercadopago' ? 'selected' : ''}
+        // className={selectedPayment === 'mercadopago' ? 'selected' : ''}
         >
           MercadoPago
         </button>

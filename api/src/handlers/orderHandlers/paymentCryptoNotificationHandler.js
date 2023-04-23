@@ -3,7 +3,7 @@ const { Order, Sale } = require('../../db');
 const paymentCryptoNotificationHandler = async (req, res) => {
   try {
     const { orderId, hash, amount } = req.body;
-
+    
     // Buscar la orden en la base de datos y actualizar su estado a "approved"
     const order = await Order.findOne({ where: { id: orderId } });
     order.status = "approved";

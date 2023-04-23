@@ -2,7 +2,7 @@ import axios from 'axios'
 import React, { useState } from 'react';
 import { ethers } from "ethers";
 
-const Crypto = () => {
+const Crypto = (order) => {
 
     const [responseMessage, setResponseMessage] = useState('')
     const startPayment = async ({ ether, addr }) => {
@@ -24,11 +24,12 @@ const Crypto = () => {
 
             const body = {
                 hash: tx.hash,
-                totalPrice: ether,
-                //orden de compra
+                amount: ether,
+                orderId: order.order
             }
             console.log(body);
-            //const response = axios.post('http://localhost:3001/crypto-payment-notification', body)
+            //await axios.post('http://localhost:3001/crypto-payment-notification', body)
+
 
             setResponseMessage('Pago exitoso')
             return tx;
@@ -47,7 +48,8 @@ const Crypto = () => {
 
         const cambio = 0.0000025
         let ether = totalPrice * cambio
-        return ether.toString()
+        console.log(ether.toString().slice(0, 7));
+        return ether.toString().slice(0, 7)
     }
 
     const handlePayment = async () => {
