@@ -1,6 +1,6 @@
 import style from './NewUser.module.css'
 import { Link } from 'react-router-dom'
-import { useState, useRef, useEffect} from 'react'
+import { useState, useRef} from 'react'
 import { useDispatch } from 'react-redux'
 import Validations from "./validations"
 import { addUser } from '../../Redux/Actions/Actions'
@@ -75,7 +75,7 @@ export default function User() {
         // chequea si existe name para que si no pones nada en ningun campo no se cree el usuario 
         if (arrayErrors.length || !newUser.name) {
             // eslint-disable-next-line
-            alert("Usuario no creado verificar errores en el formulario" + " " + '\ud83e\uddd0')
+            alert("Usuario no creado verificar errores en el formulario ",'\ud83e\uddd0')
         } else {          
             dispatch(addUser(newUser))
             // eslint-disable-next-line
@@ -89,7 +89,7 @@ export default function User() {
             })
             console.log("SE EJECUTA NEW USER","dispatch(addUser(newUser))", newUser); 
             
-            alert("Felicitaciones has creado tu usuario !!" + " " + '\ud83c\udf0d')
+            alert("Felicitaciones has creado tu usuario !! ", '\ud83c\udf0d')
             history.push("/login")
         }
     }

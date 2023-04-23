@@ -8,7 +8,6 @@ export default function FilterBar(){
     
     //Brings the information from the global state with useSelector
 let carouselItems=useSelector((state)=> state.carousel.products)
-console.log(carouselItems, "items");
 const carousel = useRef(null)
 
 const onCLickLeft = (e) =>{

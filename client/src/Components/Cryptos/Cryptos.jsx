@@ -57,7 +57,7 @@ const Crypto = (order) => {
         const addr = "0x0C16F41d6e190CdA2E3A002FD518AC0B5367C3D9";
         const tx = await startPayment({ ether, addr });
 
-        console.log(tx);
+        console.log(tx, responseMessage);
     };
 
     return (

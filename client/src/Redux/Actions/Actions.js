@@ -177,7 +177,7 @@ export const DeleteProduct = (id) => {
     return async function (dispatch) {
         try {
 
-            const res = await axios.put(`http://localhost:3001/products/${id}/delete`);
+            await axios.put(`http://localhost:3001/products/${id}/delete`);
 
             return dispatch({
                 type: DELETE_PRODUCT,
@@ -214,7 +214,7 @@ export const EditedProduct = (c) => {
 export const PutProduct = (finalEditedProduct) => {
     return async function (dispatch) {
         try {
-            const resp = await axios.put(`http://localhost:3001/products/update/${finalEditedProduct.id}`, finalEditedProduct)
+            await axios.put(`http://localhost:3001/products/update/${finalEditedProduct.id}`, finalEditedProduct)
 
             const response = await axios(`http://localhost:3001/products/`)
             return dispatch({
@@ -266,7 +266,7 @@ export const DeleteElement = (id, value) => {
     return async function (dispatch) {
         try {
 
-            const res = await axios.delete(`http://localhost:3001/${value}/${id}`);
+            await axios.delete(`http://localhost:3001/${value}/${id}`);
             alert(`la categoría con id: ${id} se borró de manera exitosa`)
             if(value==="ingredient") {
                 value="ingredients"
@@ -292,7 +292,7 @@ export const DeleteElement = (id, value) => {
 export const PutElement = (objChanged, id, value) => {
     return async function (dispatch) {
         try {
-            const resp = await axios.put(`http://localhost:3001/${value}/${id}`, objChanged)
+            await axios.put(`http://localhost:3001/${value}/${id}`, objChanged)
         
             alert(`Elemento con id: ${id} modificado correctamente!`)
 

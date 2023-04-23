@@ -10,11 +10,11 @@ import style from './Login.module.css'
 export default function Login() {
 
     const userRef = useRef()
-    const errorRef = useRef()
+    // const errorRef = useRef()
 
     const [user, setUser] = useState("")
     const [password, setPassword] = useState("")
-    const [errorMsg, setErrorMsg] = useState("")
+    // const [errorMsg, setErrorMsg] = useState("")
     const [success, setSuccess] = useState(false)
     
 
@@ -32,16 +32,18 @@ export default function Login() {
     const handleSubmit = async(e) =>{
         e.preventDefault();
         const data = {mail:user, password};
-        console.log(data, "login inputs");
         try {
           const response = await axios.post("http://localhost:3001/users/login", data);
           console.log(response.data);
           if(response.data.user) {
+            sessionStorage.setItem("token", response.data.token);
+            alert(`Welcome, ${response.data.user.name}`)
             setUser("")
             setPassword("")
             setSuccess(true)
           }
         } catch (error) {
+            alert(error.response.data.message)
           console.error('There was a problem with the axios request:', error);
         }
 
