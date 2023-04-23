@@ -2,8 +2,8 @@ const { createOrder } = require('../../controllers/orderControllers/createOrderC
 
 const createOrderHandler = async (req, res) => {
   try {
-    const { shipping_address,  cartItems } = req.body;
-    const userId = req.userId;
+    const { userId,  cartItems } = req.body;
+    // const userId = req.userId;
     
     console.log(userId,cartItems)
     if (!userId ||  !cartItems) {

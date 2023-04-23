@@ -6,6 +6,7 @@ mercadopago.configure({
 });
 
 const createPaymentPreference = async (orderId) => {
+  console.log("orderId", orderId)
   const order = await Order.findByPk(orderId, {
     include: [{
       model: OrderItem,
@@ -35,7 +36,7 @@ const createPaymentPreference = async (orderId) => {
       failure: 'http://localhost:3000/purchase/rejected',
       pending: 'http://localhost:3000/purchase/pending',
     },
-    notification_url: 'https://2cf9-181-31-209-160.sa.ngrok.io/payment/handle-payment-notification',
+    notification_url: 'https://354c-181-31-209-160.sa.ngrok.io/payment/handle-payment-notification',
   };
   
 

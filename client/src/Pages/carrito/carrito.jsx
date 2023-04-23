@@ -69,7 +69,8 @@ const Carrito = () => {
             bodyOrder: cartItems.map(item => ({
                 title: item.name,
                 unit_price: item.price,
-                quantity: item.quantity
+                quantity: item.quantity,
+                id:item.id
             }))
         }
         return products;
