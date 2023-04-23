@@ -80,7 +80,7 @@ export const addChocolate = (newChocolate) => {
 export const addUser = (newUser) => {
     return async function (dispatch) {
         try {
-            const response = await axios.post(`PostLink`, newUser)
+            const response = await axios.post(`http://localhost:3001/users/register`, newUser)
             return dispatch({
                 type: CREATE_USER,
                 payload: response.data
