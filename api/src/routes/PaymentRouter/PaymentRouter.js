@@ -7,7 +7,8 @@ const validateJwt = require("../../middlewares/validateJwt/validateJwt")
 
 const routerPayment = Router();
 
-routerPayment.post('/create-order', validateJwt, createOrderHandler);
+// routerPayment.post('/create-order', validateJwt, createOrderHandler);
+routerPayment.post('/create-order', createOrderHandler);
 routerPayment.post('/create-payment-preference', createPaymentPreferenceHandler);
 routerPayment.post('/handle-payment-notification', paymentNotificationHandler);
 routerPayment.post('/crypto-payment-notification', paymentCryptoNotificationHandler);
