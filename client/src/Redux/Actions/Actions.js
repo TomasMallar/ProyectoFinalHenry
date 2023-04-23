@@ -13,6 +13,7 @@ import {
     GET_INGREDIENTS,
     DELETE_PRODUCT,
     TOEDIT_PRODUCT,
+    GET_ALL_CAROUSEL
     ADD_INGREDIENT_TYPE_CATEGORIE,
     DELETE_ELEMENT
 } from "../Action-types/Action-types"
@@ -22,6 +23,16 @@ export const getAllChocolates = () => {
         const response = await axios(`http://localhost:3001/products`)
         return dispatch({
             type: GET_ALL_CHOCOLATES,
+            payload: response.data
+        })
+    }
+}
+
+export const getCarousel = () => {
+    return async function (dispatch) {
+        const response = await axios(`http://localhost:3001/products/advanced-search?name&category&type&orderBy&orderDirection&page=1&pageSize=20`)
+        return dispatch({
+            type: GET_ALL_CAROUSEL,
             payload: response.data
         })
     }
