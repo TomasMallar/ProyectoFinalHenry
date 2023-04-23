@@ -11,7 +11,7 @@ import {
     GET_INGREDIENTS,
     DELETE_PRODUCT,
     TOEDIT_PRODUCT,
-    GET_ALL_CAROUSEL
+    GET_ALL_CAROUSEL,
     ADD_INGREDIENT_TYPE_CATEGORIE,
     DELETE_ELEMENT
 } from "../Action-types/Action-types"
@@ -25,7 +25,7 @@ const initialState = {
     types: [],
     ingredients: [],
     editedProduct:{},
-    carousel:[]
+    carousel:[],
     editedProduct: {},
 }
 const reducer = (state = initialState, action) => {
