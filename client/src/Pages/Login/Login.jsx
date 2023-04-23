@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState} from 'react';
 import { Link, Redirect } from "react-router-dom";
 import {gapi} from "gapi-script"
-
+import axios from 'axios';
 import LoginButton from '../../Components/Login/login.jsx';
 import LogoutButton from '../../Components/Logout/Logout.jsx';
 
@@ -31,10 +31,21 @@ export default function Login() {
 
     const handleSubmit = async(e) =>{
         e.preventDefault();
-        console.log(user, password, "login inputs");
-        setUser("")
-        setPassword("")
-        setSuccess(true)
+        const data = {mail:user, password};
+        console.log(data, "login inputs");
+        try {
+          const response = await axios.post("http://localhost:3001/users/login", data);
+          console.log(response.data);
+          if(response.data.user) {
+            setUser("")
+            setPassword("")
+            setSuccess(true)
+          }
+        } catch (error) {
+          console.error('There was a problem with the axios request:', error);
+        }
+
+      
     }
 
     const handleUsername = (e) =>{
