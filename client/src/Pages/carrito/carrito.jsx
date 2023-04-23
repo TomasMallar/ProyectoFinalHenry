@@ -74,7 +74,7 @@ const Carrito = () => {
             }))
         }
         return products;
-    }
+      };
 
     const calcularTotalCarrito = () => {
         let total = 0;

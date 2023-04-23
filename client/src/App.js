@@ -19,6 +19,7 @@ import SuccessPurchase from './Components/Purchase/SuccessPurchase';
 import PendingPurchase from './Components/Purchase/PendingPurchase';
 import RejectedPurchase from './Components/Purchase/RejectedPurchase';
 import PaymentSelector from './Components/Purchase/PaymentSelector';
+import PaymentCrypto from './Components/Purchase/PaymentCrypto';
 
 
 
@@ -44,11 +45,12 @@ function App() {
         <Route path="/editProduct"> <NavBar /><EditProduct /></Route>
         <Route path="/editcategoryTypeIngredient"> <NavBar/><EditCategoryTypeIngredient/></Route>
         <Route path="/carrito"> <NavBar /><Carrito/></Route>
+        <Route path="/criptos"><Crypto/></Route>
         <Route path="/purchase/success"><NavBar/><SuccessPurchase/></Route>
         <Route path="/purchase/pending"><NavBar/><PendingPurchase/></Route>
         <Route path="/purchase/rejected"><NavBar/><RejectedPurchase/></Route>
         <Route path="/purchase/payment-selector"><NavBar/><PaymentSelector/></Route>
-
+        <Route path="/purchase/crypto"><NavBar/><PaymentCrypto/></Route>
         <Route path="/*"><Error/><NavBar/></Route>
       </Switch>
     </div>
