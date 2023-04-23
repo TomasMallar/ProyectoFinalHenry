@@ -6,12 +6,12 @@ export default function NavBar() {
 
 
     return (
-        <div className={style.container}>
-            <div className={style.containerImg}>
-                <img src={logo} alt="" className={style.img} />
+        <div className="sticky top-0 z-10 flex justify-between w-full shadow-xl bg-chocolate-mantecol">
+            <div>
+                <img src={logo} alt="" className="w-60 mt-2.5 mb-5" />
             </div>
-                <ul className={style.containerUlLinks}>
-                    <Link to="/home"  className={style.listItem}><li>Home</li> </Link>
+                <ul className="flex p-2.5 items-center justify-center">
+                    <Link to="/home"  className="{style.listItem}"><li>Home</li> </Link>
                     <Link to="/products" className={style.listItem}><li>Products</li> </Link>
                     <Link to="/about" className={style.listItem}><li>About Us</li> </Link>
                     <Link to="/crudProducts"  className={style.listItem}><li>ADMIN</li> </Link>

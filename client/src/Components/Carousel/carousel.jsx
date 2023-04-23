@@ -12,8 +12,8 @@ console.log(carouselItems, "items");
 
 //-----------------------------------------------------------------------------RETURN---------
 return(
-<div className={styles.container}>
-<h1 className={styles.nuevaColeccion}>NUEVA COLECCIÓN</h1>
+<div className="pt-40 bg-chocolate-blanco">
+<h1 className="text-4xl font-ArimaMa">NUEVA COLECCIÓN</h1>
     <div className={styles.carousel}>
 
             {
