@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import Crypto from '../Cryptos/Cryptos';
 
 function PaymentSelector(props) {
   
@@ -7,12 +8,7 @@ function PaymentSelector(props) {
     <div>
       <h2>Seleccione un método de pago:</h2>
       <div>
-        <button
-        //   onClick={() => handlePaymentSelection('crypto')}
-        //   className={selectedPayment === 'crypto' ? 'selected' : ''}
-        >
-          Crypto
-        </button>
+        <Crypto/>
         <button
         //   onClick={() => handlePaymentSelection('mercadopago')}
         //   className={selectedPayment === 'mercadopago' ? 'selected' : ''}

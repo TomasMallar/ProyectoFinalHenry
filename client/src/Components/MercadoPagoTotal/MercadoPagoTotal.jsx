@@ -1,4 +1,5 @@
 import axios from "axios"
+import { Link } from "react-router-dom"
 
 export default function ButtonMPTotal({ products }) {
 
@@ -20,7 +21,7 @@ export default function ButtonMPTotal({ products }) {
     }
 
     return (
-        <button onClick={handleOnClick}>COMPRAR TODO</button>
+        <Link to='/purchase/payment-selector'><button onClick={handleOnClick}>COMPRAR TODO</button></Link>
     )
 
 }
