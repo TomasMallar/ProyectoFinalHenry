@@ -22,7 +22,7 @@ const onCLickRight = (e) =>{
 }
 //-----------------------------------------------------------------------------RETURN---------
 return(
-<>
+<div className={styles.container}>
 <h1 className={styles.nuevaColeccion}>NUEVA COLECCIÓN</h1>
     <div className={styles.carousel} ref={carousel}>
 
@@ -48,6 +48,6 @@ return(
 
 
 
-</>)
+</div>)
 
 }
