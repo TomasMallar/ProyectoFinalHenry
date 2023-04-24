@@ -1,34 +1,22 @@
 import { useSelector } from "react-redux";
 import React, { useRef } from "react";
 import DataManagement from "../../Components/DataManagement";
-import CarouselCard from "../CarouselCard/carouselCard";
 import ProductCard from "../ProductCard/ProductCard";
-import styles from "./carousel.module.css"
 
 export default function FilterBar() {
 
-    //Brings the information from the global state with useSelector
     let carouselItems = useSelector((state) => state.carousel.products)
-    // const carousel = useRef(null)
 
-    // const onCLickLeft = (e) => {
-    //     e.preventDefault();
-    //     carousel.current.scrollLeft -= carousel.current.offsetWidth
-    // }
-
-    // const onCLickRight = (e) => {
-    //     e.preventDefault();
-    //     carousel.current.scrollLeft += carousel.current.offsetWidth
-    // }
-    //-----------------------------------------------------------------------------RETURN---------
     return (
-        <div className="">
+        <div className="relative p-5 overflow-hidden bg-chocolate-blanco">
             <h1 className="m-6 font-serif text-5xl">NUEVA COLECCIÓN</h1>
-            <button>{'<<'}</button>
-            <button>{'>>'}</button>
-            <div className="flex items-center justify-center w-full overflow-x-scroll scroll-smooth"
-            // ref={carousel}
-            >
+            <button className="absolute top-0 z-10 flex items-center justify-center w-[10vw] h-full border-none left-0 bg-gradient-to-r from-chocolate-blanco">
+                {'<<'}
+            </button>
+            <button className="absolute top-0 z-10 flex items-center justify-center w-[10vw] h-full border-none right-0 bg-gradient-to-l from-chocolate-blanco">
+                {'>>'}
+            </button>
+            <div className="px-[10vw] flex overflow-x-auto scroll-smooth">
                 {
                     carouselItems?.map(p => {
                         const { id, name, image, categories, price, score } = p
@@ -44,9 +32,6 @@ export default function FilterBar() {
                 }
             </div>
             <DataManagement />
-
-
-
         </div>)
 
 }
