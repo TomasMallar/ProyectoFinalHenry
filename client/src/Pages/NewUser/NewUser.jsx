@@ -1,28 +1,26 @@
 import style from './NewUser.module.css'
-import Button from "../../Components/Button/Button"
 import { Link } from 'react-router-dom'
-import { useState, useRef, useEffect } from 'react'
+import { useState, useRef} from 'react'
+import { useDispatch } from 'react-redux'
 import Validations from "./validations"
-//import { addUser } from '../../Redux/Actions/Actions'
-//import { useDispatch } from 'react-redux'
+import { addUser } from '../../Redux/Actions/Actions'
 import { useHistory } from 'react-router-dom'
 
 export default function User() {
-    // const dispatch = useDispatch()
+    const dispatch = useDispatch()
     const history = useHistory()
     //guarda el imput seleccionado en Tipos de Chocolates preferidos
     const inputSelectFlavorsRef = useRef(null)
 
     const flavors = ["Chocolate Amargo", "Chocolate con Leche", "Chocolate Blanco", "Rellenos", "Tabletas", "Con Licor", "Con Frutos Secos"]
     // E. local newUser --> guarda info que inserte el user para luego enviar al post
-    const [newUser, setNewUser] = useState({
+    let [newUser, setNewUser] = useState({
         name: "",
         surname: "",
         date_of_birth: "",
         mail: "",
         phone: "",
         password: "",
-        favorites_tastes: [],
     })
     // E.Local guarda las preferencias de chocolate del usuario del usuario
     const [selectedFlavors, setSelectedFlavors] = useState([])
@@ -31,19 +29,21 @@ export default function User() {
     //E. Local para validar errores 
     const [errors, setErrors] = useState({})
 
-    useEffect(() => {
+    // useEffect(() => {
 
-        setNewUser({ ...newUser, favorites_tastes: selectedFlavors })
+    //     setNewUser({ ...newUser, favorites_tastes: selectedFlavors })
 
-    }, [selectedFlavors]
-    )
+    // }, [selectedFlavors]
+    // )
 
     const handleInputChange = (event) => {
+        if (event.target.name ==="phone") {
+        setNewUser({ ...newUser, [event.target.name]: Number(event.target.value)||0 })
         setErrors(Validations({ ...newUser, [event.target.name]: event.target.value }))
-        setNewUser({ ...newUser, [event.target.name]: event.target.value })
+        } else
+       { setErrors(Validations({ ...newUser, [event.target.name]: event.target.value }))
+        setNewUser({ ...newUser, [event.target.name]: event.target.value })}
     }
-
-    console.log(errors, "errores")
 
     const handleOnClickAdd = (event) => {
         event.preventDefault()
@@ -75,11 +75,10 @@ export default function User() {
         // chequea si existe name para que si no pones nada en ningun campo no se cree el usuario 
         if (arrayErrors.length || !newUser.name) {
             // eslint-disable-next-line
-            alert("Usuario no creado verificar errores en el formulario" + " " + '\ud83e\uddd0')
-        } else {
-            // dispatch(addUser(newUser))
+            alert("Usuario no creado verificar errores en el formulario ",'\ud83e\uddd0')
+        } else {          
+            dispatch(addUser(newUser))
             // eslint-disable-next-line
-            alert("Felicitaciones has creado tu usuario !!" + " " + '\ud83c\udf0d')
             setNewUser({
                 name: "",
                 surname: "",
@@ -87,15 +86,16 @@ export default function User() {
                 mail: "",
                 phone: "",
                 password: "",
-                favorites_tastes: [],
             })
+            console.log("SE EJECUTA NEW USER","dispatch(addUser(newUser))", newUser); 
+            
+            alert("Felicitaciones has creado tu usuario !! ", '\ud83c\udf0d')
             history.push("/login")
         }
     }
 
 
-    console.log(" selected Flavors", selectedFlavors);
-    console.log("NewUser", newUser);
+
     return (
 
         <div className={style.container}>

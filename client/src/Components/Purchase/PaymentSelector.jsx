@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import Crypto from '../Cryptos/Cryptos';
+import React from 'react';
+// import { useState, useEffect } from 'react';
+// import Crypto from '../Cryptos/Cryptos';
 import { useLocation, useHistory } from 'react-router-dom';
 import Maps from '../Maps/Maps'
 function PaymentSelector() {

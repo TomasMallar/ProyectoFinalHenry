@@ -57,7 +57,7 @@ const postNewtUserHandler = async (req, res) => {
             password
         });
 
-        await sendWelcomeEmail(mail, name);
+        // await sendWelcomeEmail(mail, name);
 
         res.status(200).json(newUser);
     } catch (error) {

@@ -4,8 +4,7 @@ import { GetAllCategories, getProductsAdvanceController, GetAllTypes, DeleteProd
 import style from './crud_products.module.css'
 import { Link } from "react-router-dom"
 import ModalMailing from "../../Components/ModalMailing/ModalMailing"
-import Edit from "../editProduct/editProduct"
-import Paginated from "../../Components/Paginated/paginated"
+
 
 
 export default function CrudProducts(props) {
@@ -103,7 +102,7 @@ export default function CrudProducts(props) {
                 <button value={1} onClick={handleonClickPages}>Inicio</button>
                 <button value={queries.page - 1} onClick={handleonClickPages}>Página anterior</button>
                 {TotalPagesArray.map(p => {
-                    return <button key={p} value={p} onClick={handleonClickPages} className={Number(queries.page) === (p) ? style.selected : ''}> {p} </button>
+                    return <button value={p} onClick={handleonClickPages} className={Number(queries.page) === (p) ? style.selected : ''}> {p} </button>
                 })}
                 <button value={Number(queries.page) + 1} onClick={handleonClickPages}>Página Siguiente</button>
                 <button value={Number(allProducts.totalPages)} onClick={handleonClickPages}>Final</button>
@@ -121,7 +120,6 @@ export default function CrudProducts(props) {
                     <option className={style.cell} value="TIPOS" defaultValue="TIPOS">TIPOS</option>
                     {allTypes.map(t => {
                         return (
-
                             <option className={style.cell} value={t}>{t}</option>
                         )
                     })}
@@ -143,7 +141,7 @@ export default function CrudProducts(props) {
             <div>
                 {allProducts.products?.map(c => {
                     return (
-                        <div className={style.container}>
+                        <div key={c.id} className={style.container}>
                             <p className={style.cell}>{c.id}</p>
                             <p className={style.cell}>{c.name}</p>
                             <p className={style.cell}>{c.price}</p>
@@ -152,6 +150,7 @@ export default function CrudProducts(props) {
                             <div>
                                 {c.ingredients.length ? c.ingredients.map(i => {
                                     return (
+                                        
                                         <p className={style.cell}>{i}</p>
                                     )
                                 }) : <p className={style.cell}>N/A</p>}
