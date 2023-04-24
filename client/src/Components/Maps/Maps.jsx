@@ -27,15 +27,15 @@ const CalcularEnvio = () => {
             const minutos = Math.floor(duration / 60);
             const segundos = duration % 60;
             if (minutos < 60) {
-                setDuration( `${minutos} minutos`) ;
+                setDuration(`${minutos} minutos`);
             } else {
-              const horas = Math.floor(minutos / 60);
-              const minutosRestantes = minutos % 60;
-              if (minutosRestantes === 0) {
-                setDuration(`${horas} horas`)  ;
-              } else {
-                setDuration(`${horas} horas y ${minutosRestantes} minutos`) ;
-              }
+                const horas = Math.floor(minutos / 60);
+                const minutosRestantes = minutos % 60;
+                if (minutosRestantes === 0) {
+                    setDuration(`${horas} horas`);
+                } else {
+                    setDuration(`${horas} horas y ${minutosRestantes} minutos`);
+                }
             }
         } catch (error) {
             console.error(error);
@@ -44,18 +44,18 @@ const CalcularEnvio = () => {
 
     //-------------------------------------------------------------
 
-    
+
 
     return (
-        <div>
-            <label>
-                Direccion: 
+        <div className=' text-chocolate-oscuro'>
+            <label className="text-xl">
+                Direccion:
                 <input placeholder='Calle, Provincia, Pais' type="text" value={toAddress} onChange={handleToAddressChange} />
             </label>
             <br />
-            <button onClick={handleCalculateDuration}>Calcular</button>
+            <button onClick={handleCalculateDuration} className="text-xl">Calcular</button>
             <br />
-            {duration && <p>Duracion: {duration}</p>}
+            {duration && <p className='text-xl'>Duracion: {duration}</p>}
         </div>
     );
 }
