@@ -21,7 +21,7 @@ function PaymentSelector() {
   const handleCryptoClick = () => {
     history.push({
       pathname: '/purchase/crypto',
-      state: { order }
+      state: { order, from: '/purchase/payment-selector' }
     });
   };
 
