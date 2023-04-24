@@ -4,7 +4,7 @@ import logo from "../../img/logoBlack.png"
 
 const Footer = (props) => {
   return (
-    <div className="absolute flex justify-between w-full h-48 bg-chocolate-claro text-chocolate-oscuro">
+    <div className="absolute flex justify-between w-full h-48 bg-chocolate-mantecol text-chocolate-oscuro">
       <div className="block">
         <img src={logo} alt="Logo" className="mt-5 ml-5 w-52" />
         <h3 className="mt-5 ml-5 font-serif ">
