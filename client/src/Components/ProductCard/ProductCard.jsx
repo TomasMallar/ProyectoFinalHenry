@@ -60,7 +60,7 @@ const ProductCard = ({ id, name, image, price, category }) => {
                 </h3>
             </Link>
 
-            <ButtonMP title={name} unit_price={price} />
+            {/* <ButtonMP title={name} unit_price={price} /> */}
         </div>
     )
 }
