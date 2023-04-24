@@ -2,7 +2,7 @@ import React from 'react';
 // import { useState, useEffect } from 'react';
 // import Crypto from '../Cryptos/Cryptos';
 import { useLocation, useHistory } from 'react-router-dom';
-
+import Maps from '../Maps/Maps'
 function PaymentSelector() {
   const location = useLocation();
   const responseData = location.state?.responseData;
@@ -41,6 +41,10 @@ function PaymentSelector() {
         >
           MercadoPago
         </button>
+      </div>
+      <div>
+        <h2>calcular tiempo de envio</h2>
+        <Maps />
       </div>
     </div>
   );
