@@ -41,6 +41,9 @@ const Carrito = () => {
     );
     if (existingItemIndex !== -1) {
       updatedCartItems[existingItemIndex].quantity += 1;
+      updatedCartItems[existingItemIndex].totalPrice =
+      updatedCartItems[existingItemIndex].quantity *
+      updatedCartItems[existingItemIndex].price;
     } else {
       updatedCartItems.push({ ...item, quantity: 1 });
     }
@@ -54,8 +57,13 @@ const Carrito = () => {
       (cartItem) => cartItem.id === item.id
     );
     if (existingItemIndex !== -1) {
-      updatedCartItems[existingItemIndex].quantity -= 1;
-      if (updatedCartItems[existingItemIndex].quantity === 0) {
+      if (updatedCartItems[existingItemIndex].quantity > 1) {
+        updatedCartItems[existingItemIndex].quantity -= 1;
+        // Actualizar el precio total del ítem
+        updatedCartItems[existingItemIndex].totalPrice =
+          updatedCartItems[existingItemIndex].quantity *
+          updatedCartItems[existingItemIndex].price;
+      } else {
         updatedCartItems.splice(existingItemIndex, 1);
       }
     }
@@ -100,8 +108,8 @@ const Carrito = () => {
       <div className="p-4 bg-chocolate-mantecol rounded-2xl">
 
         <div className="px-10 divide-y divide-black">
-          {uniqueCartItems.length > 0 ? (
-            uniqueCartItems.map((item) => (
+          {cartItems.length > 0 ? (
+            cartItems.map((item) => (
               <div key={item.id} className="flex items-center justify-between p-6">
 
                 <div className="w-[20%]">
@@ -143,7 +151,7 @@ const Carrito = () => {
             <p className="m-4 text-2xl font-bold animate-pulse">
               No hay productos en el carrito.
             </p>
-            <button onClick={handleDeleteCart} className="p-4 text-xl font-bold shadow-sm h-fit shadow-chocolate-claro bg-chocolate-claro rounded-xl text-chocolate-oscuro hover:bg-chocolate-blanco">
+            <button className="p-4 text-xl font-bold shadow-sm h-fit shadow-chocolate-claro bg-chocolate-claro rounded-xl text-chocolate-oscuro hover:bg-chocolate-blanco">
             <Link to="/products">Ver nuestos productos</Link>
           </button>
             </div>

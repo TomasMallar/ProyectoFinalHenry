@@ -5,6 +5,7 @@ const CalcularEnvio = () => {
 
     const [toAddress, setToAddress] = useState('');
     const [duration, setDuration] = useState('');
+    const [costo, setCosto] = useState('')
 
     const handleToAddressChange = (event) => {
         setToAddress(event.target.value);
@@ -21,8 +22,17 @@ const CalcularEnvio = () => {
             const response = await axios.get(url);
             console.log(response);
             const duration = response.data.features[0].properties.segments[0].duration;
-            //const distanceInKm = response.data.features[0].properties.segments[0].distance / 1000;
-            //console.log(distanceInKm);
+            const distanceInKm = response.data.features[0].properties.segments[0].distance / 1000;
+            console.log(distanceInKm);
+            if(distanceInKm > 50)
+            {
+                setCosto('$' + (distanceInKm * 1.3).toFixed(2))
+            }
+            else
+            {
+                setCosto('Envio gratis')
+            }
+
 
             const minutos = Math.floor(duration / 60);
             const segundos = duration % 60;
@@ -56,6 +66,8 @@ const CalcularEnvio = () => {
             <button onClick={handleCalculateDuration} className="text-xl">Calcular</button>
             <br />
             {duration && <p className='text-xl'>Duracion: {duration}</p>}
+            {costo && <p className='text-xl'>Costo: {costo}</p>}
+            
         </div>
     );
 }
