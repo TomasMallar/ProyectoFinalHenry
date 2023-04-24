@@ -32,7 +32,7 @@ const createPaymentPreference = async (orderId) => {
     items,
     external_reference: `${order.id}`,
     back_urls: {
-      success: 'http://localhost:3000/purchase/success',
+      success: 'http://localhost:3000/purchase/approved',
       failure: 'http://localhost:3000/purchase/rejected',
       pending: 'http://localhost:3000/purchase/pending',
     },
