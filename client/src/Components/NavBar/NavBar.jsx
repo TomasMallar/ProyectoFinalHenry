@@ -46,6 +46,14 @@ export default function NavBar() {
                     </Link>
                 )}
 
+                {userRole === '1' && (
+                    <Link to="/myshopping" className="text-2xl list-none text-chocolate-oscuro no-underline pl-3.5  font-serif">
+                        <li>
+                            MY SHOPPING
+                        </li>
+                    </Link>
+                )}
+
                 <Link to="/carrito" className="text-2xl list-none text-chocolate-oscuro no-underline pl-3.5  font-serif">
                     <li>
                         <img src={carImagen} alt="" className={style.car} />
