@@ -2,6 +2,7 @@ import { Link, useHistory } from "react-router-dom"
 import style from './NavBar.module.css'
 import carImagen from "../../img/shopping-cart.png"
 import logo from "../../img/logoBlack.png"
+import MenuProfile from "../MenuProfile/MenuProfile";
 
 export default function NavBar() {
     const history = useHistory();
@@ -44,6 +45,10 @@ export default function NavBar() {
                             ADMIN
                         </li>
                     </Link>
+                )}
+
+                {userRole === '1' && (
+                    <MenuProfile/>
                 )}
 
                 <Link to="/carrito" className="text-2xl list-none text-chocolate-oscuro no-underline pl-3.5  font-serif">

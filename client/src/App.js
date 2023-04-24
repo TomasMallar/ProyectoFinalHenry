@@ -24,8 +24,11 @@ import PublicRoute from './Components/PublicRoute/PublicRoute';
 import PaymentApprovedRoute from './Components/PaymentRoute/PaymentApprovedRoute/PaymentApprovedRoute';
 import PaymentRejectedRoute from './Components/PaymentRoute/PaymentRejectedRoute/PaymentRejectedRoute';
 import PaymentPendingRoute from './Components/PaymentRoute/PaymentPendingRoute/PaymentPendingRoute';
+import PrivateRouteUser from './Components/PrivateRouteUser/PrivateRouterUser';
 import About from './Pages/about/about';
 import Metric from './Components/Metrics/Metrics';
+import MyShopping from './Components/MyShopping/MyShopping';
+import MyProfile from './Components/MyProfile/MyProfile';
 
 function App() {
 
@@ -56,7 +59,9 @@ function App() {
         <Route path="/purchase/payment-selector"><NavBar /><PaymentSelector /><Footer /></Route>
         <Route path="/purchase/crypto"><NavBar /><PaymentCrypto /> <Footer /> </Route>
         <Route path="/about"><NavBar /><About /> <Footer /></Route>
-        <Route path="/*"><Error /><NavBar /></Route>
+        <PrivateRouteUser exact path="/myshopping" component={() => <><NavBar /><MyShopping /><Footer /></>}/>
+        <PrivateRouteUser exact path="/myprofile" component={() => <><NavBar /><MyProfile/><Footer /></>}/>
+        <Route path="/*"><Error/><NavBar/></Route>
       </Switch>
     </div>
   );
