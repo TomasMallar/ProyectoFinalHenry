@@ -24,9 +24,10 @@ import PublicRoute from './Components/PublicRoute/PublicRoute';
 import PaymentApprovedRoute from './Components/PaymentRoute/PaymentApprovedRoute/PaymentApprovedRoute';
 import PaymentRejectedRoute from './Components/PaymentRoute/PaymentRejectedRoute/PaymentRejectedRoute';
 import PaymentPendingRoute from './Components/PaymentRoute/PaymentPendingRoute/PaymentPendingRoute';
-import MyShopping from './Components/MyShopping/MyShopping';
 import PrivateRouteUser from './Components/PrivateRouteUser/PrivateRouterUser';
 import About from './Pages/about/about';
+import Metric from './Components/Metrics/Metrics';
+import MyShopping from './Components/MyShopping/MyShopping';
 import MyProfile from './Components/MyProfile/MyProfile';
 
 function App() {
