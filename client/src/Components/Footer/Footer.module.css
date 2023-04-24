@@ -13,7 +13,7 @@
     src: url("../../Formatting/ArimaMadurai-Medium.ttf");
 }
 
-
+/* 
 .PieDePag {
     display: flex;
     background-color: #D7CBB9;
@@ -37,7 +37,7 @@
     font-weight: lighter;
     margin-left: 20px;
     bottom: 0;
-}
+} */
 
 .contacts {
     font-family: "ArimaMadurai-Medium";

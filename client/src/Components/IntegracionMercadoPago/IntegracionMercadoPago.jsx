@@ -32,7 +32,7 @@ export default function ButtonMP(props) {
 
 
     return (
-        <Link to='/purchase/payment-selector'><button onClick={handleOnClick}>COMPRAR</button></Link>
+        <Link to='/purchase/payment-selector'><button onClick={handleOnClick} className="p-1 m-2 font-serif font-bold rounded-lg shadow-sm bg-chocolate-mantecol text-chocolate-oscuro shadow-chocolate-claro hover:bg-chocolate-blanco">COMPRAR</button></Link>
     )
 
 }

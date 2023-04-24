@@ -2,7 +2,7 @@
     padding-top: 150px;
 }
 .carousel{
-    width: 100%;
+    /* width: 100%; */
     min-height: 35vh;
     display: flex;
     justify-content: center;
