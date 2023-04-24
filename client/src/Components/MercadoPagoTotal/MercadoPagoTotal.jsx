@@ -23,7 +23,7 @@ export default function ButtonMPTotal({ products }) {
     axios.post('http://localhost:3001/payment/create-order', { userId, cartItems: products.bodyOrder })
       .then((response) => {
         console.log("ESTA ES LA ORDER ID?", response.data.order.id);
-       order = response.data.order.id;
+        order = response.data.order.id;
         return axios.post('http://localhost:3001/payment/create-payment-preference', { orderId: order });
       })
       .then((mpResponse) => {
@@ -39,6 +39,6 @@ export default function ButtonMPTotal({ products }) {
   }
 
   return (
-    <button onClick={handleOnClick}>COMPRAR TODO</button>
+    <button onClick={handleOnClick} className="px-6 py-4 mb-8 font-serif text-xl font-bold rounded-lg shadow-sm bg-chocolate-claro text-chocolate-oscuro shadow-chocolate-claro hover:bg-chocolate-blanco">FINALIZAR COMPRA</button>
   )
 }

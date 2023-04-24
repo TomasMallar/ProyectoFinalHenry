@@ -64,7 +64,9 @@ const Crypto = (order) => {
 
     return (
         <div>
-            <button onClick={handlePayment}>Pagar</button>
+            <button onClick={handlePayment} className="p-4 text-xl font-bold shadow-sm h-fit shadow-chocolate-claro bg-chocolate-claro rounded-xl text-chocolate-oscuro hover:bg-chocolate-blanco">
+                Pagar
+            </button>
         </div>
     )
 }
