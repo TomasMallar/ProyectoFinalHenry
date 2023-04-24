@@ -1,4 +1,5 @@
 import './App.css';
+import axios from 'axios'
 import NavBar from './Components/NavBar/NavBar';
 import { Switch, Route, Redirect } from 'react-router-dom'
 import Products from './Pages/home/Home'
@@ -24,6 +25,8 @@ import PublicRoute from './Components/PublicRoute/PublicRoute';
 import PaymentApprovedRoute from './Components/PaymentRoute/PaymentApprovedRoute/PaymentApprovedRoute';
 import PaymentRejectedRoute from './Components/PaymentRoute/PaymentRejectedRoute/PaymentRejectedRoute';
 import PaymentPendingRoute from './Components/PaymentRoute/PaymentPendingRoute/PaymentPendingRoute';
+
+axios.defaults.baseURL = 'http://localhost:3001/' // cambiar por la url de la base de datos (RAILWAY)
 
 function App() {
 
