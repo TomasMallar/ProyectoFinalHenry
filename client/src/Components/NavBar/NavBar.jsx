@@ -15,7 +15,7 @@ export default function NavBar() {
     };
 
     return (
-        <div className="sticky top-0 z-10 flex justify-between w-full shadow-md bg-chocolate-mantecol">
+        <div className="sticky top-0 z-20 flex justify-between w-full shadow-md bg-chocolate-mantecol">
             <div>
                 <img src={logo} alt="" className="w-60 mt-2.5 mb-5" />
             </div>
