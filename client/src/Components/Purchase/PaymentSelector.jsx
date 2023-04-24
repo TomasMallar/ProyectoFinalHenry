@@ -33,7 +33,7 @@ function PaymentSelector() {
           onClick={handleCryptoClick}
         // className={selectedPayment === 'crypto' ? 'selected' : ''}
         >
-          Crypto
+          Criptomonedas
         </button>
         <button
           onClick={handleMercadoPagoClick}
