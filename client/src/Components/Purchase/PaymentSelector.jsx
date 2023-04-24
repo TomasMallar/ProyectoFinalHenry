@@ -26,25 +26,33 @@ function PaymentSelector() {
   };
 
   return (
-    <div>
-      <h2>Seleccione un método de pago:</h2>
-      <div>
-        <button
-          onClick={handleCryptoClick}
-        // className={selectedPayment === 'crypto' ? 'selected' : ''}
-        >
-          Criptomonedas
-        </button>
-        <button
-          onClick={handleMercadoPagoClick}
-        // className={selectedPayment === 'mercadopago' ? 'selected' : ''}
-        >
-          MercadoPago
-        </button>
-      </div>
-      <div>
-        <h2>calcular tiempo de envio</h2>
-        <Maps />
+    <div className='flex items-center justify-center h-screen p-16 font-serif bg-chocolate-blanco text-chocolate-oscuro'>
+      <div className=' bg-chocolate-mantecol rounded-2xl'>
+        <h2 className='p-6 text-4xl'>
+          Seleccione un método de pago:
+        </h2>
+
+        <div className='flex items-center justify-evenly'>
+          <button
+            onClick={handleCryptoClick}
+            className='p-4 text-xl font-bold shadow-sm h-fit shadow-chocolate-claro bg-chocolate-claro rounded-xl text-chocolate-oscuro hover:bg-chocolate-blanco'
+          >
+            Criptomonedas
+          </button>
+          <button
+            onClick={handleMercadoPagoClick}
+            className="p-4 text-xl font-bold shadow-sm h-fit shadow-chocolate-claro bg-chocolate-claro rounded-xl text-chocolate-oscuro hover:bg-chocolate-blanco"
+          >
+            MercadoPago
+          </button>
+        </div>
+
+        <div >
+          <h2 className='p-6 text-2xl'>
+            Calcular tiempo de envio
+          </h2>
+          <Maps />
+        </div>
       </div>
     </div>
   );

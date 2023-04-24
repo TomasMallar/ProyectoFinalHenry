@@ -14,24 +14,31 @@ const Detail = () => {
         return () =>
             dispatch(resetChocolateDetail())
     }, [dispatch, id])
+
+
     return (
-        <div className={styles.container}>
-            <div className={styles.containerLink}>
-                <Link to={`/products`} className={styles.links}>
-                    <button className={styles.returnButtom}>
-                        <img src="https://res.cloudinary.com/dsaocvav7/image/upload/v1681707019/arrow_zxesaq.png" alt="" />
+        <div className="p-12 font-serif bg-chocolate-blanco">
+            <div>
+            <div className="w-fit">
+                <Link to={`/products`} className="w-fit">
+                    <button className="flex items-center justify-center p-2 border-none shadow-lg w-fit h-fit bg-chocolate-oscuro text-chocolate-blanco rounded-2xl shadow-chocolate-bombom hover:bg-chocolate-mantecol hover:text-chocolate-oscuro">
+
+                        <img src="https://res.cloudinary.com/dsaocvav7/image/upload/v1681707019/arrow_zxesaq.png" alt="" className="w-5 mr-4 " />
+
                         Volver
                     </button>
                 </Link>
             </div>
             <br />
-            <div className={styles.containerCard}>
-                <img className={styles.pictures} src={ChocolateDetail.image} alt={ChocolateDetail.name} />
-                <h1 className={styles.titleDetail}>{ChocolateDetail.name}</h1>
+            <div className="border-8 border-chocolate-mantecol w-[40%] h-[70%] my-0 mx-auto rounded-2xl bg-chocolate-oscuro shadow-lg shadow-chocolate-bombom text-chocolate-blanco ">
+                <img className="mx-auto mt-8 w-80 h-80" src={ChocolateDetail.image} alt={ChocolateDetail.name} />
+                <h1 className="p-2 m-2 text-xl">{ChocolateDetail.name}</h1>
                 <div> {ChocolateDetail.categories?.map((c) => {
-                    return <p key={c}>{c}</p>
+                    return <p  key={c} className="p-2 m-2 text-lg">{c}</p>
                 })} </div>
-                <h3>$ {ChocolateDetail.price} </h3>
+                <h3 className="p-2 m-2">$ {ChocolateDetail.price} </h3>
+            </div>
+
             </div>
         </div>
     )
