@@ -47,6 +47,8 @@ export default function Login() {
             const userRole = decodedToken.rol;
             // Guardar el rol en sessionStorage
             sessionStorage.setItem("userRole", userRole);
+            console.log("ESTE ES EL ROL:",userRole);
+            window.location.reload();
           }
         } catch (error) {
             alert(error.response.data.message)
