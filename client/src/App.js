@@ -25,6 +25,7 @@ import PaymentApprovedRoute from './Components/PaymentRoute/PaymentApprovedRoute
 import PaymentRejectedRoute from './Components/PaymentRoute/PaymentRejectedRoute/PaymentRejectedRoute';
 import PaymentPendingRoute from './Components/PaymentRoute/PaymentPendingRoute/PaymentPendingRoute';
 import About from './Pages/about/about';
+import Metric from './Components/Metrics/Metrics';
 
 function App() {
 
@@ -41,6 +42,7 @@ function App() {
         <Route exact path="/products" > <NavBar /> <Products /> <Footer /></Route>
         <PublicRoute exact path="/login" component={Login} />
         <PrivateRoute exact path="/createProduct" component={() => <> <NavBar /><CreateProduct /></>} />
+        <PrivateRoute exact path="/metric" component={() => <> <NavBar /><Metric /></>} />
         <PublicRoute exact path="/newUser" component={User} />
         <Route path='/products/:id'> <NavBar /><Detail /> <Footer /></Route>
         <PrivateRoute exact path="/crudProducts" component={() => <> <NavBar /><CrudProducts /></>} />
