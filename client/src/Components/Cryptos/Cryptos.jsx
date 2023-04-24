@@ -1,8 +1,10 @@
 import axios from 'axios'
 import React, { useState } from 'react';
 import { ethers } from "ethers";
+import { useHistory } from 'react-router-dom';
 
 const Crypto = (order) => {
+    const history = useHistory();
 
     const [responseMessage, setResponseMessage] = useState('')
     const startPayment = async ({ ether, addr }) => {
@@ -29,7 +31,7 @@ const Crypto = (order) => {
             }
             console.log(body);
             await axios.post('http://localhost:3001/payment/crypto-payment-notification', body)
-
+            history.push('/purchase/approved');
 
             setResponseMessage('Pago exitoso')
             return tx;
@@ -62,7 +64,7 @@ const Crypto = (order) => {
 
     return (
         <div>
-            <button onClick={handlePayment}>Crypto</button>
+            <button onClick={handlePayment}>Pagar</button>
         </div>
     )
 }
