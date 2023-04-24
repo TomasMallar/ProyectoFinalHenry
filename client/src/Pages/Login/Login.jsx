@@ -4,6 +4,8 @@ import {gapi} from "gapi-script"
 import axios from 'axios';
 import LoginButton from '../../Components/Login/login.jsx';
 import LogoutButton from '../../Components/Logout/Logout.jsx';
+import jwtDecode from 'jwt-decode';
+
 
 import style from './Login.module.css'
 
@@ -41,6 +43,10 @@ export default function Login() {
             setUser("")
             setPassword("")
             setSuccess(true)
+            const decodedToken = jwtDecode(response.data.token);
+            const userRole = decodedToken.rol;
+            // Guardar el rol en sessionStorage
+            sessionStorage.setItem("userRole", userRole);
           }
         } catch (error) {
             alert(error.response.data.message)
