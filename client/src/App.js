@@ -44,6 +44,7 @@ function App() {
         <Route exact path="/products" > <NavBar /> <Products /> <Footer /></Route>
         <PublicRoute exact path="/login" component={Login} />
         <PrivateRoute exact path="/createProduct" component={() => <> <NavBar /><CreateProduct /></>} />
+        <PrivateRoute exact path="/metric" component={() => <> <NavBar /><Metric /></>} />
         <PublicRoute exact path="/newUser" component={User} />
         <Route path='/products/:id'> <NavBar /><Detail /> <Footer /></Route>
         <PrivateRoute exact path="/crudProducts" component={() => <> <NavBar /><CrudProducts /></>} />
@@ -53,9 +54,10 @@ function App() {
         <Route path="/criptos"><Crypto /></Route>
         <PaymentApprovedRoute path="/purchase/approved"><NavBar /><SuccessPurchase /></PaymentApprovedRoute>
         <PaymentPendingRoute path="/purchase/pending"><NavBar /><PendingPurchase /></PaymentPendingRoute>
-        <PaymentRejectedRoute path="/purchase/rejected"> <NavBar /> <RejectedPurchase /> </PaymentRejectedRoute>
-        <Route path="/purchase/payment-selector"><NavBar/><PaymentSelector/></Route>
-        <Route path="/purchase/crypto"><NavBar/><PaymentCrypto/></Route>
+        <PaymentRejectedRoute path="/purchase/rejected"> <NavBar /> <RejectedPurchase />  <Footer /></PaymentRejectedRoute>
+        <Route path="/purchase/payment-selector"><NavBar /><PaymentSelector /><Footer /></Route>
+        <Route path="/purchase/crypto"><NavBar /><PaymentCrypto /> <Footer /> </Route>
+        <Route path="/about"><NavBar /><About /> <Footer /></Route>
         <PrivateRouteUser exact path="/myshopping" component={() => <><NavBar /><MyShopping /><Footer /></>}/>
         <PrivateRouteUser exact path="/myprofile" component={() => <><NavBar /><MyProfile/><Footer /></>}/>
         <Route path="/*"><Error/><NavBar/></Route>
