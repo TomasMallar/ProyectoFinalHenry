@@ -133,7 +133,7 @@ const Carrito = () => {
                   <button className="hover:underline decoration-chocolate-oscuro" onClick={() => handleDeleteFromCart(item)}>
                     Eliminar
                   </button>
-                  <ButtonMP title={item.name} unit_price={item.price} />
+                  {/* <ButtonMP title={item.name} unit_price={item.price} /> */}
                 </div>
 
               </div>
