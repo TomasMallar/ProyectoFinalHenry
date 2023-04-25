@@ -101,7 +101,7 @@ export default function Login() {
                         placeholder="password"
                         className={style.input}
                     />
-                <button>Ingresar</button>
+                <button className={style.btn}>Ingresar</button>
                 </form>
 
                 <p> ¿Aún no tienes una cuenta? <Link to="/newUser">Crear Cuenta</Link> </p>

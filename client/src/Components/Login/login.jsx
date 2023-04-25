@@ -1,6 +1,6 @@
 import {GoogleLogin} from 'react-google-login'
-import {singInWithGoogle} from "../Firebase"
-
+import {singInWithGoogle, singInWithFacebook} from "../Firebase"
+import style from './login.module.css'
 const clientId = "552260192142-vtjdl7oc8tdsflnrq9ibuc07dd6aun0l.apps.googleusercontent.com"
 
 function LoginButton() {
@@ -22,7 +22,12 @@ return(
     //         isSignedIn={true}
     //     />
     // </div>
-    <button onClick={singInWithGoogle}>SignInWithGoogle</button>
+    <>
+
+<button onClick={singInWithGoogle}type="button" className={style.loginBtnGoogle} >
+  Sign in with Google
+</button>    <button className={style.loginBtnFacebook} onClick={singInWithFacebook}>Sign In With Facebook</button>
+    </>
 )
 
 }
