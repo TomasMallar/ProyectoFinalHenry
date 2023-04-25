@@ -15,7 +15,7 @@ const Footer = (props) => {
 
         <div className="flex items-center justify-start gap-6 text-chocolate-oscuro">
           <img src='https://cdn-icons-png.flaticon.com/512/87/87390.png' alt="LogoInst" className="w-8 " />
-          <a href="https://www.instagram.com/the_chocolatehub/?hl=es">
+          <a href="https://www.instagram.com/the_chocolatehub/?hl=es" target="blank">
             @chocolate_hub
           </a>
         </div>
@@ -29,7 +29,7 @@ const Footer = (props) => {
 
         <div className="flex items-center justify-start gap-6 text-chocolate-oscuro">
           <img src='https://cdn-icons-png.flaticon.com/512/20/20673.png' alt="LogoFacebook" className="w-8 "/>
-          <a href="https://www.facebook.com/people/The-chocolate-hub/100054213501503/">
+          <a href="https://www.facebook.com/people/The-chocolate-hub/100054213501503/" target="blank">
             The Chocolate Hub
           </a>
         </div>

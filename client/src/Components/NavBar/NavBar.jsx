@@ -17,9 +17,11 @@ export default function NavBar() {
 
     return (
         <div className="sticky top-0 z-20 flex justify-between w-full shadow-md bg-chocolate-mantecol">
+            <Link to="/Home" >
             <div>
                 <img src={logo} alt="" className="w-60 mt-2.5 mb-5" />
             </div>
+            </Link>
             <ul className="flex p-2.5 items-center justify-center">
 
                 <Link to="/home" className="text-2xl list-none text-chocolate-oscuro no-underline pl-3.5  font-serif">
