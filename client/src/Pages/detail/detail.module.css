@@ -54,3 +54,21 @@
     width: 300px;
     height: 350px;
 }
+
+.rating label {
+    display: inline-flex;
+    align-items: center;
+    margin-right: 10px;
+    cursor: pointer;
+  }
+
+  .rating input[type="radio"] {
+    display: none;
+  }
+  
+  .rating label:hover ~ label,
+  .rating input[type="radio"]:checked ~ label {
+    color: #ffc107;
+  }
+
+  
