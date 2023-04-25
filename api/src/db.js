@@ -2,20 +2,21 @@ require("dotenv").config();
 const { Sequelize } = require("sequelize");
 const fs = require("fs");
 const path = require("path");
-const { DB_USER, DB_PASSWORD, DB_HOST, DB_NAME } = process.env;
+const { DB_USER, DB_PASSWORD, DB_HOST, DB_NAME} = process.env;
 
 const sequelize = new Sequelize(
-  `postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/${DB_NAME}`,
-  {
-    define: {
-      paranoid: true, // Agregar esta línea
-      timestamps: true // Asegúrate de que 'timestamps' esté habilitado
-    },
-    //Agregué como variable de entorno el name de la db
-    logging: false,
-    native: false,
-  }
-);
+   `postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/${DB_NAME}`,
+   {
+     define: {
+       paranoid: true, // Agregar esta línea
+       timestamps: true // Asegúrate de que 'timestamps' esté habilitado
+     },
+     //Agregué como variable de entorno el name de la db
+     logging: false,
+     native: false,
+   }
+ );
+
 const basename = path.basename(__filename);
 
 const modelDefiners = [];
@@ -38,7 +39,19 @@ let capsEntries = entries.map((entry) => [
 ]);
 sequelize.models = Object.fromEntries(capsEntries);
 
-const { Product, User, Category, Ingredient, Type, Rol } = sequelize.models;
+const { Product, User, Category, Ingredient, Type, Rol, Order, OrderItem, Sale } = sequelize.models;
+
+User.hasMany(Order, { foreignKey: 'userId', as: 'orders' });
+Order.belongsTo(User, { foreignKey: 'userId', as: 'user' });
+
+Product.hasMany(OrderItem, { foreignKey: 'productId', as: 'items' });
+OrderItem.belongsTo(Product, { foreignKey: 'productId', as: 'product' });
+
+Order.hasMany(OrderItem, { foreignKey: 'orderId', as: 'items' });
+OrderItem.belongsTo(Order, { foreignKey: 'orderId', as: 'order' });
+
+Order.hasOne(Sale, { foreignKey: 'orderId', as: 'sale' });
+Sale.belongsTo(Order, { foreignKey: 'orderId', as: 'order' });
 
 Product.belongsToMany(Category, {
   through: { model: "ProductsCategory" },
@@ -106,3 +119,5 @@ module.exports = {
   ...sequelize.models,
   conn: sequelize,
 };
+
+

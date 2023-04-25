@@ -47,12 +47,17 @@ module.exports = (sequelize) => {
                 allowNull: false
             },
             phone: {
-                type: DataTypes.INTEGER,
+                type: DataTypes.BIGINT,
                 allowNull: false,
                 validate: {
                     isNumeric: true
                 }
             },
+            emailVerified: {
+                type: DataTypes.BOOLEAN,
+                allowNull: false,
+                defaultValue: false,
+              },
         },
         {
             paranoid: true,

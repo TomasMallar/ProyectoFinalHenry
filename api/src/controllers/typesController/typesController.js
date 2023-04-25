@@ -7,6 +7,17 @@ const getTypesAll = async () => {
     return typesMaped
 }
 
+const getTypesWithID = async() => {
+    const types = await Type.findAll()
+    const typesMaped = types.map(type => {
+        return {
+            id: type.id,
+            name: type.name
+        }
+    })
+    return typesMaped
+}
+
 const postType = async(name) => {
     const [newType] = await Type.findOrCreate({
         where: {name}
@@ -14,7 +25,25 @@ const postType = async(name) => {
     return newType
 }
 
+const putTypes = async(id, name) => {
+    const updateType = await Type.update({name: name},{
+        where: {id: id}
+    })
+
+    if(updateType !== 0) return {message: "Updated successfully"}
+    else return {message: "Error while updating"}
+}
+
+const deleteTypes = async(id) => {
+    const typeDeleted = await Type.destroy({where: {id: id}})
+    if (typeDeleted !== 0) return { message: "Successfully deleted" }
+    else return { message: "Error while deleting" }
+}
+
 module.exports = {
     postType,
-    getTypesAll
+    getTypesAll, 
+    getTypesWithID,
+    deleteTypes,
+    putTypes
 }

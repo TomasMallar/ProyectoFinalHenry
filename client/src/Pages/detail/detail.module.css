@@ -1,3 +1,6 @@
+.container{
+    padding-top: 120px;
+}
 
 .returnButtom {
     font-family: 'ArimaMadurai';
@@ -7,7 +10,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: 25px;
+    /* margin: 25px; */
     background-color: #725e4f;
     border: none;
     text-decoration: none;
@@ -18,6 +21,11 @@
 
 .links {
     text-decoration: none;
+    width: fit-content;
+}
+
+.containerLink{
+    width: fit-content;
 }
 
 .returnButtom img {
@@ -46,3 +54,21 @@
     width: 300px;
     height: 350px;
 }
+
+.rating label {
+    display: inline-flex;
+    align-items: center;
+    margin-right: 10px;
+    cursor: pointer;
+  }
+
+  .rating input[type="radio"] {
+    display: none;
+  }
+  
+  .rating label:hover ~ label,
+  .rating input[type="radio"]:checked ~ label {
+    color: #ffc107;
+  }
+
+  

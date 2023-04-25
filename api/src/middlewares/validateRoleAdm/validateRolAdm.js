@@ -9,8 +9,8 @@ const validateRoleAdm = async (req, res, next) => {
         const rolId = tokenData.rol;
         const role = await Rol.findByPk(rolId);
 
-        if(role.rol_name !== "adm") {
-            res.status(400).json({ message: "You don't have access"})
+        if(role.rol_name !== process.env.ROLE_B) {
+            return res.status(400).json({ message: "You don't have access"})
         }
 
         next()

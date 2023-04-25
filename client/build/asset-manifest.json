@@ -1,0 +1,26 @@
+{
+  "files": {
+    "main.css": "/static/css/main.1d3f14ed.chunk.css",
+    "main.js": "/static/js/main.53cc3f57.chunk.js",
+    "main.js.map": "/static/js/main.53cc3f57.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.a9d86a7b.js",
+    "runtime-main.js.map": "/static/js/runtime-main.a9d86a7b.js.map",
+    "static/js/2.f0742790.chunk.js": "/static/js/2.f0742790.chunk.js",
+    "static/js/2.f0742790.chunk.js.map": "/static/js/2.f0742790.chunk.js.map",
+    "static/js/3.3944824d.chunk.js": "/static/js/3.3944824d.chunk.js",
+    "static/js/3.3944824d.chunk.js.map": "/static/js/3.3944824d.chunk.js.map",
+    "index.html": "/index.html",
+    "static/css/main.1d3f14ed.chunk.css.map": "/static/css/main.1d3f14ed.chunk.css.map",
+    "static/js/2.f0742790.chunk.js.LICENSE.txt": "/static/js/2.f0742790.chunk.js.LICENSE.txt",
+    "static/media/home.module.css": "/static/media/ArimaMadurai-ExtraBold.6b9fbb69.ttf",
+    "static/media/Footer.module.css": "/static/media/SourceSansPro-Regular.df87f53c.ttf",
+    "static/media/logoBlack.0d21eb33.png": "/static/media/logoBlack.0d21eb33.png",
+    "static/media/shopping-cart.adf62c5e.png": "/static/media/shopping-cart.adf62c5e.png"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.a9d86a7b.js",
+    "static/js/2.f0742790.chunk.js",
+    "static/css/main.1d3f14ed.chunk.css",
+    "static/js/main.53cc3f57.chunk.js"
+  ]
+}

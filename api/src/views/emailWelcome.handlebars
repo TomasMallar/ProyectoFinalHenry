@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Chocolate</title>
+        <style>
+            body {
+                font-family: 'Open Sans', sans-serif;
+                font-size: 14px;
+                width: 100%;
+                height: 100%;
+                padding: 2rem;
+            }
+            .container {
+                max-width: 600px;
+                margin: 0 auto;
+                padding: 20px;
+                background-color: #D7CBB9;
+                border-radius: 4px;
+                box-shadow: 0px 0px 15px 5px rgba(1, 1, 1, 0.1);
+                margin-top: 20px;
+                margin-bottom: 20px;
+                border-radius: 30px;
+            }
+            .divImg img {
+                width: 100%;
+                height: 250px;
+                border-radius: 30px;
+                margin-top: 10px;
+            }
+            .divInfo {
+                text-align: center;
+            }
+            .divInfo h2 {
+                color: rgb(38, 32, 25);
+                font-size: 35px;
+                font-weight: 600;
+                margin-bottom: 50px;
+                text-align: center;
+            }
+            .divInfo p {
+                margin-top: 30px;
+                font-size: 18px;
+                margin-left: 15px;
+                margin-right: 15px;
+                color: black;
+            }
+            .divInfo p span {
+                color: rgb(38, 32, 25);
+                font-weight: 600;
+            }
+            .button {
+                background-color: rgb(65, 55, 44);
+                border-radius: 30px;
+                border: none;
+                color: white;
+                padding: 20px 32px;
+                text-align: center;
+                text-decoration: none;
+                display: inline-block;
+                font-size: 16px;
+                margin: 15px 2px;
+                cursor: pointer;
+            }
+            .divFooter {
+                margin-top: 30px;
+                text-align: center;
+            }
+            .divFooter hr {
+                border: 0.5px solid rgb(106, 88, 69);
+                margin-bottom: 30px;
+            }
+            .divFooter h3 {
+                color: rgb(38, 32, 25);
+                font-size: 14px;
+                font-weight: 600;
+            }
+        </style>
+    </head>
+    <body style="background-color: #eaeaea; padding: 2rem;" >
+        <div class="container">
+            <div class="divImg">
+                <img src="https://infoalimentos.org.ar/images/temas_21/nuticion_estilos_de_vida/TEMA_CHOCOLATE_interna_horiz_840x410.jpg" alt="Chocolate">
+            </div>
+            <div class="divInfo">
+                <h2>¡Hola {{name}}!</h2>
+                <p>Gracias por registrarte en <span>The Chocolate Hub</span>. Estamos emocionados de tenerte a bordo.</p>
+                <p>Por favor, verifica tu dirección de correo electrónico ingresando al siguiente enlace:</p>
+                <a href="{{verificationLink}}" class="link"><button class="button">Verificar correo</button></a>
+            </div>
+            <div class="divFooter">
+                <hr>
+                <h3>Saludos, Don C. Hub 🍫</h3>
+            </div>
+        </div> 
+    </body>
+</html>

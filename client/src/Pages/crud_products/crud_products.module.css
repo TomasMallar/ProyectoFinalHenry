@@ -1,4 +1,6 @@
-
+.totalContainer{
+    padding-top: 150px;
+}
 .container{
     display: flex;
   flex-direction: row;

@@ -9,7 +9,10 @@ const routerIngredient = require("./IngredientRouter/IngredientRouter")
 const routerScore = require('./PutScoreRouter/PutScoreRouter')
 const routerPay = require('./CompraRouter/mercadopago')
 const routerAuth = require("./AuthRouter/AuthRouter");
-const routerEmail = require('./EmailRouter/EmailRouter')
+const routerEmail = require('./EmailRouter/EmailRouter');
+const routerPassword = require("./PasswordRouter/PasswordRouter")
+const routerPayment = require('./PaymentRouter/PaymentRouter')
+const routerMetric = require('./MetricRouter/MetricRouter')
 const router = Router();
 
 const passport = require("passport");
@@ -34,7 +37,14 @@ router.use("/score", routerScore)
 
 router.use('/pay', routerPay)
 
+router.use('/payment', routerPayment)
+
+router.use('/metric',routerMetric)
+
 //Autenticación con google
 router.use("/auth", routerAuth);
+
+//Forgot password
+router.use("/password", routerPassword);
 
 module.exports = router;

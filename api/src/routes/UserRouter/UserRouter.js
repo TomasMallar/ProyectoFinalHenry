@@ -7,7 +7,8 @@ const {
     postNewtUserHandler, 
     postLoginUserHandler,
     updateUserHandler, 
-    deleteUserHandler, 
+    deleteUserHandler,
+    updatePasswordHanlder 
 } = require("../../handlers/userHandler/UserHandler");
 
 const validatePostRegister = require("../../middlewares/validateUser/validatePostRegister");
@@ -15,13 +16,14 @@ const validatePostLogin = require("../../middlewares/validateUser/validatePostLo
 const validatePutUser = require("../../middlewares/validateUser/validatePutUser");
 const validateJwt = require("../../middlewares/validateJwt/validateJwt");
 const validateRoleAdm = require("../../middlewares/validateRoleAdm/validateRolAdm");
+const validateUserId = require("../../middlewares/validateUser/validateUserId");
 
 const routerUser = Router();
 
 routerUser.get("/", validateJwt, validateRoleAdm, getAllUserHandler);
-routerUser.get("/profile/:id", validateJwt, getOneUserHandler);
-routerUser.get("/searchuser", validateJwt, validateRoleAdm, getSearchUserHandler);
-routerUser.put("/update/:id", validateJwt, validatePutUser, updateUserHandler);
+routerUser.get("/profile/:id", validateJwt, validateUserId, getOneUserHandler);
+routerUser.get("/search-user", validateJwt, validateRoleAdm, getSearchUserHandler);
+routerUser.put("/update/:id", validateJwt, validateUserId, validatePutUser, updateUserHandler);
 routerUser.delete("/delete/:id", validateJwt, validateRoleAdm, deleteUserHandler);
 
 routerUser.post("/register", validatePostRegister, postNewtUserHandler);

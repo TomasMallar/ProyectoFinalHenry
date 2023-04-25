@@ -4,7 +4,7 @@ const getProductsAdvanceHandler = async (req, res) => {
 
 	try {
 
-		const {name,category,type,orderBy = 'id',orderDirection = 'ASC',page = 1,pageSize = 10} = req.query;
+		const {name,category,type,orderBy = 'id',orderDirection = 'ASC',page = 1,pageSize = 12} = req.query;
 		console.log(name)
 		console.log(category)
 		console.log(type)
