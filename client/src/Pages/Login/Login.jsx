@@ -39,6 +39,7 @@ export default function Login() {
           console.log(response.data);
           if(response.data.user) {
             sessionStorage.setItem("token", response.data.token);
+            sessionStorage.setItem("Name", response.data.user.name);
             alert(`Welcome, ${response.data.user.name}`)
             setUser("")
             setPassword("")

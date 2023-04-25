@@ -78,6 +78,7 @@ export default function User() {
             alert("Usuario no creado verificar errores en el formulario ",'\ud83e\uddd0')
         } else {          
             dispatch(addUser(newUser))
+            
             // eslint-disable-next-line
             setNewUser({
                 name: "",
