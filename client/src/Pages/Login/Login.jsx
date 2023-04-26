@@ -2,8 +2,7 @@ import { useEffect, useRef, useState} from 'react';
 import { Link, Redirect } from "react-router-dom";
 import {gapi} from "gapi-script"
 import axios from 'axios';
-import LoginButton from '../../Components/Login/login.jsx';
-import LogoutButton from '../../Components/Logout/Logout.jsx';
+import LoginButton from '../../Components/GoogleLogin/googleLogin.jsx';
 import jwtDecode from 'jwt-decode';
 
 
@@ -41,7 +40,6 @@ export default function Login() {
             sessionStorage.setItem("token", response.data.token);
             sessionStorage.setItem("Name", response.data.user.name);
             sessionStorage.setItem("user", JSON.stringify(response.data.user));
-            alert(`Welcome, ${response.data.user.name}`)
             setUser("")
             setPassword("")
             setSuccess(true)
@@ -110,7 +108,6 @@ export default function Login() {
                 <p> ¿Aún no tienes una cuenta? <Link to="/newUser">Crear Cuenta</Link> </p>
                 <p> Volver al <Link to="/home">Home</Link> </p>
                 <LoginButton />
-                <LogoutButton />
             </div>
 
             <div className={style.message}>
