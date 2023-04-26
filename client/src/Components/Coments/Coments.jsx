@@ -1,10 +1,12 @@
 import { useEffect, useState } from 'react'
 import style from './Coments.module.css'
 import jwt_decode from 'jwt-decode';
-import { useParams } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 import axios from 'axios'
 
 const Coments = () => {
+
+    const history = useHistory()
 
     const [comments, setComments] = useState([])
     const [currentComment, setCurrentComment] = useState('')
@@ -16,8 +18,9 @@ const Coments = () => {
     const token = sessionStorage.getItem('token');
     let userId = null;
     if (token) {
-      const decodedToken = jwt_decode(token);
-      userId = decodedToken.id;
+        const decodedToken = jwt_decode(token);
+        userId = decodedToken.id;
+        console.log(userId);
     }
     console.log(userId);
     useEffect(() => {
@@ -33,6 +36,11 @@ const Coments = () => {
     }
 
     const postComment = async () => {
+        if(userId === null){
+            alert('Debes iniciar sesión para poder comprar');
+            history.push('/login');
+            return;
+          }
         const newComment = {
             productId: id,
             userId: userId,
@@ -80,15 +88,20 @@ const Coments = () => {
                         <h3>{comment.name}</h3>
                         <h4>{comment.createdAt.slice(0, 10)}</h4>
                         {editComment.id === comment.id ? (
-                            <form onSubmit={editCommentSubmit}>
+                            <form onSubmit={editCommentSubmit} >
                                 <textarea value={editComment.content} onChange={(event) => setEditComment({ ...editComment, content: event.target.value })} />
                                 <button name={comment.id} type="submit">Guardar</button>
                             </form>
                         ) : (
                             <p>{comment.content}</p>
                         )}
-                        <button onClick={() => editCommentHandler(comment)}>Editar</button>
-                        <button name={comment.id} onClick={deleteComment}>Eliminar</button>
+                        {comment.userId === userId && (
+                            <div>
+                                <button onClick={() => editCommentHandler(comment)}>Editar</button>
+                                <button name={comment.id} onClick={deleteComment}>Eliminar</button>
+                            </div>
+                        )
+                        }
 
                     </div>
                 ))}
