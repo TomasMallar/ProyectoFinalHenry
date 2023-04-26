@@ -29,6 +29,7 @@ import About from './Pages/about/about';
 import Metric from './Components/Metrics/Metrics';
 import MyShopping from './Components/MyShopping/MyShopping';
 import MyProfile from './Components/MyProfile/MyProfile';
+import Landing from './Pages/Landing/Landing';
 
 function App() {
 
@@ -41,7 +42,7 @@ function App() {
         <Route exact path="/">
           <Redirect to="/home" />
         </Route>
-        <Route exact path="/Home" > <NavBar /> <Carousel /> <Footer /></Route>
+        <Route exact path="/Home" > <NavBar /> <Landing /> <Footer /></Route>
         <Route exact path="/products" > <NavBar /> <Products /> <Footer /></Route>
         <PublicRoute exact path="/login" component={Login} />
         <PrivateRoute exact path="/createProduct" component={() => <> <NavBar /><CreateProduct /></>} />

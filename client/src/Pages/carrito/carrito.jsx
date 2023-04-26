@@ -29,6 +29,7 @@ const Carrito = () => {
         };
       }
     });
+    console.log(uniqueProducts);
     return Object.values(uniqueProducts);
   };
 
@@ -41,9 +42,6 @@ const Carrito = () => {
     );
     if (existingItemIndex !== -1) {
       updatedCartItems[existingItemIndex].quantity += 1;
-      updatedCartItems[existingItemIndex].totalPrice =
-      updatedCartItems[existingItemIndex].quantity *
-      updatedCartItems[existingItemIndex].price;
     } else {
       updatedCartItems.push({ ...item, quantity: 1 });
     }
@@ -59,10 +57,6 @@ const Carrito = () => {
     if (existingItemIndex !== -1) {
       if (updatedCartItems[existingItemIndex].quantity > 1) {
         updatedCartItems[existingItemIndex].quantity -= 1;
-        // Actualizar el precio total del ítem
-        updatedCartItems[existingItemIndex].totalPrice =
-          updatedCartItems[existingItemIndex].quantity *
-          updatedCartItems[existingItemIndex].price;
       } else {
         updatedCartItems.splice(existingItemIndex, 1);
       }
@@ -99,7 +93,6 @@ const Carrito = () => {
     return total;
   }
 
-
   return (
     <div className="w-full h-full p-16 font-serif bg-chocolate-blanco text-chocolate-oscuro">
       <h2 className="pb-2 text-4xl">
@@ -108,8 +101,8 @@ const Carrito = () => {
       <div className="p-4 bg-chocolate-mantecol rounded-2xl">
 
         <div className="px-10 divide-y divide-black">
-          {cartItems.length > 0 ? (
-            cartItems.map((item) => (
+          {uniqueCartItems.length > 0 ? (
+            uniqueCartItems.map((item) => (
               <div key={item.id} className="flex items-center justify-between p-6">
 
                 <div className="w-[20%]">
