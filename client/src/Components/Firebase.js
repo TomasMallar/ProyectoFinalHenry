@@ -1,5 +1,6 @@
 import { initializeApp } from "firebase/app";
 import {getAuth, GoogleAuthProvider, signInWithPopup} from "firebase/auth"
+import axios from "axios";
 // import { getAnalytics } from "firebase/analytics";
 import { FacebookAuthProvider } from "firebase/auth";
 
@@ -20,18 +21,19 @@ const provider = new GoogleAuthProvider ()
 const providerFb = new FacebookAuthProvider();
 
 export const singInWithGoogle =  () =>{
-    signInWithPopup (auth, provider).then((result) =>{
+    signInWithPopup (auth, provider).then(async(result) =>{
         const name = result._tokenResponse.firstName
         const surname = result._tokenResponse.lastName
-        const token = result.user.accessToken
-        const role = 1
+        const mail = result._tokenResponse.email
 
         sessionStorage.setItem("name", name)
         sessionStorage.setItem("surname", surname)
-        sessionStorage.setItem("token", token)
-        sessionStorage.setItem("role", role)
+        sessionStorage.setItem("mail", mail)
 
-        console.log(result);
+        const data = {mail, surname, name};
+        
+        console.log(data, "data de google");
+        await axios.post("http://localhost:3001/auth/google", data);
     
     }).catch((error) =>{
         console.log(error);
