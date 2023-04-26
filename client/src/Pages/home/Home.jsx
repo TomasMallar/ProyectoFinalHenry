@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { getProductsAdvanceController } from "../../Redux/Actions/Actions";
 import SortingAndFiltering from "../sortingAndFiltering/sortingAndFiltering";
+import { Rotate, Fade } from 'react-reveal';
 import styles from "./home.module.css";
 
 const Products = (props) => {
@@ -19,19 +20,24 @@ const Products = (props) => {
   return (
     <>
       <div className=" bg-chocolate-blanco">
-        <div className="w-full h-96 bg-[url('https://homepagereferences.my.canva.site/images/fcbc0bc46f24b9cd4495a011fe1272ba.jpg')] bg-no-repeat bg-center bg-cover opacity-90 block pt-20">
-          <h1 className="mb-2.5 text-start font-serif text-5xl text-chocolate-oscuro ml-6 bg-gradient-to-r from-chocolate-mantecol w-fit rounded-lg ">
-            SOMOS LOS <br /> REYES DEL <br /> CHOCOLATE
-          </h1>
-        </div>
+        <Rotate top left cascade>
+          <div className="w-full h-96 bg-[url('https://homepagereferences.my.canva.site/images/fcbc0bc46f24b9cd4495a011fe1272ba.jpg')] bg-no-repeat bg-center bg-cover opacity-90 block pt-20">
+            <h1 className="mb-2.5 text-start font-serif text-5xl text-chocolate-oscuro ml-6 bg-gradient-to-r from-chocolate-mantecol w-fit rounded-lg ">
+              SOMOS LOS <br /> REYES DEL <br /> CHOCOLATE
+            </h1>
+          </div>
+        </Rotate>
 
-        <h4 className="font-serif text-3xl font-bold mt-7 mb-7 text-chocolate-oscuro">
-          Our products:
-        </h4>
+        <Fade bottom big cascade>
+          <h4 className="font-serif text-3xl font-bold mt-7 mb-7 text-chocolate-oscuro">
+            Our products:
+          </h4>
 
-        <div>
-          <SortingAndFiltering />
-        </div>
+          <div>
+            <SortingAndFiltering />
+          </div>
+
+        </Fade>
 
         <div className="grid grid-cols-1 mb-8 ml-8 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
           {/* Map each product into a single card using map */}
@@ -52,9 +58,9 @@ const Products = (props) => {
             );
           })}
         </div>
-        
+
       </div>
-      
+
     </>
   );
 };

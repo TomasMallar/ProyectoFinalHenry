@@ -3,6 +3,7 @@ import React from "react";
 import DataManagement from "../../Components/DataManagement";
 import CarouselCard from "../CarouselCard/carouselCard";
 import { Link } from "react-router-dom"
+import { Slide, Fade, Rotate } from 'react-reveal';
 
 export default function FilterBar() {
 
@@ -10,9 +11,11 @@ export default function FilterBar() {
 
     return (
         <div className="relative p-5 bg-chocolate-blanco">
-            <h1 className="py-6 font-serif text-4xl ml-14">
-                PRODUCTOS RECOMENDADOS
-            </h1>
+            <Rotate bottom left cascade collapse>
+                <h1 className="py-6 font-serif text-4xl ml-14">
+                    PRODUCTOS RECOMENDADOS
+                </h1>
+            </Rotate>
             <div className="flex flex-wrap justify-around gap-3 py-6 items-evenly">
                 {
                     carouselItems?.slice(0, 4)?.map(p => {
@@ -31,12 +34,11 @@ export default function FilterBar() {
                     })
                 }
             </div>
-
-            <button className="p-4 text-xl font-bold shadow-md h-fit shadow-chocolate-claro bg-chocolate-claro rounded-xl text-chocolate-oscuro hover:bg-chocolate-mantecol hover:shadow">
-                <Link to="/products">
-                Ver todos
-                </Link>
-            </button>
+                <button className="p-4 text-xl font-bold shadow-md h-fit shadow-chocolate-claro bg-chocolate-claro rounded-xl text-chocolate-oscuro hover:bg-chocolate-mantecol hover:shadow">
+                    <Link to="/products">
+                        Ver todos
+                    </Link>
+                </button>
 
             <DataManagement />
         </div>)
