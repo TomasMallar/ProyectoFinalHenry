@@ -92,7 +92,7 @@ export default function SortingAndFiltering(props) {
     <>
 
       <div className="flex items-center w-full p-5 font-serif h-52">
-        <Fade bottom big cascade>
+        <Fade big cascade>
           <div>
             <div >
               <input type="text" name="searchProduct " value={queries.name} onChange={(event) => handleOnChangeSearchBar(event)} placeholder="Busca tu producto" className="p-4 mb-2 text-base border-none shadow-sm bg-chocolate-mantecol w-45 rounded-2xl text-chocolate-oscuro shadow-chocolate-bombom cursor-text focus:outline-chocolate-bombom" />

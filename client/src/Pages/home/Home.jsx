@@ -1,17 +1,28 @@
-import React from "react";
+import React, { useState } from "react";
 import ProductCard from "../../Components/ProductCard/ProductCard";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { getProductsAdvanceController } from "../../Redux/Actions/Actions";
 import SortingAndFiltering from "../sortingAndFiltering/sortingAndFiltering";
 import { Rotate, Fade } from 'react-reveal';
-import styles from "./home.module.css";
+import ModalDetail from "../../Components/ModalDetail/ModalDetail";
 
 const Products = (props) => {
-  // let allProducts = props.allProducts
-
   const dispatch = useDispatch();
 
+  // Modal
+  const [modalOpen, setModalOpen] = useState(false);
+  const [selectedProduct, setSelectedProduct] = useState(null);
+
+
+  const handleOpenModal = () => {
+    setModalOpen(true);
+  };
+  const handleCloseModal = () => {
+    setModalOpen(false);
+  };
+
+  // de acá en adelante andaba todo bien
   useEffect(() => {
     dispatch(getProductsAdvanceController());
   }, [dispatch]);
@@ -53,12 +64,15 @@ const Products = (props) => {
                   category={product?.categories}
                   price={product?.price}
                   score={product?.score}
+                  onClick={handleOpenModal}
                 />
               </>
             );
           })}
         </div>
-
+        {modalOpen && (
+    <ModalDetail onClose={handleCloseModal} selectedProduct={selectedProduct} />
+  )}
       </div>
 
     </>

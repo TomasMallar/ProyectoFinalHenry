@@ -4,7 +4,7 @@ import carImagen from "../../img/shopping-cart-cards.png"
 import ButtonMP from "../IntegracionMercadoPago/IntegracionMercadoPago"
 import React, { useState, useEffect } from "react";
 
-const ProductCard = ({ id, name, image, price, category }) => {
+const ProductCard = ({ id, name, image, price, category, onClick }) => {
     const [cartItems, setCartItems] = useState([]);
     const [showBubble, setShowBubble] = useState(false);
 
@@ -35,6 +35,9 @@ const ProductCard = ({ id, name, image, price, category }) => {
         );
     }, [cartItems]);
 
+    const handleClick = () => {
+        onClick({ id, name, image, category, price });
+    };
     return (
         <div className="p-3 font-serif border border-solid shadow-lg border-chocolate-mantecol rounded-xl bg-chocolate-oscuro w-72 hover:shadow-chocolate-bombom hover:bg-chocolate-bombom">
 
@@ -42,7 +45,7 @@ const ProductCard = ({ id, name, image, price, category }) => {
                 <img src={carImagen} alt="" className="w-8" />
             </button>
 
-            <Link className="flex flex-col items-center m-auto text-chocolate-blanco" to={`/products/${id}`}>
+            <div className="flex flex-col items-center m-auto text-chocolate-blanco" >
                 <h1 className="h-16 m-0 text-2xl leading-7 w-72">
                     {name}
                 </h1>
@@ -58,8 +61,8 @@ const ProductCard = ({ id, name, image, price, category }) => {
                 <h3 className="text-lg leading-4">
                     $ {price}
                 </h3>
-            </Link>
-
+            </div>
+            <button onClick={handleClick}>Ver detalle</button>
             {/* <ButtonMP title={name} unit_price={price} /> */}
         </div>
     )
