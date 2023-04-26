@@ -88,8 +88,12 @@ const postNewUser = async ({ name, surname, password, phone, mail, date_of_birth
         return { 
             message: "User created successfully",
             user: {
+                id: user.id,
                 name: user.name,
-                surname: user.surname  
+                surname: user.surname,
+                phone: user.phone,
+                mail: user.mail,
+                date_of_birth: user.date_of_birth
             },
             token,
         } 
@@ -116,7 +120,10 @@ const postLoginUser = async ({ mail, password }) => {
             message: "User successfully logged in",
             user: {
                 name: user.name,
-                surname: user.surname  
+                surname: user.surname,
+                phone: user.phone,
+                mail: user.mail,
+                date_of_birth: user.date_of_birth  
             },
             token,
         }       
@@ -155,7 +162,19 @@ const updateUser = async (id, userData) => {
 
         await User.update(userData, { where: { id } });
 
-        return { message: "User updated successfully" };
+        const {name, surname, mail, date_of_birth, phone} = await User.findByPk(id);
+
+        return { 
+            message: "User updated successfully",
+            user: {
+                id,
+                name, 
+                surname,
+                mail, 
+                date_of_birth, 
+                phone
+            },
+        };
     } catch (error) {
         throw new Error(error.message);
     }

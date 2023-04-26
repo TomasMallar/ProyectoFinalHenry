@@ -12,11 +12,13 @@ const MenuProfile = () => {
     setIsNavActive(!isNavActive);
   };
 
+  const {name} = JSON.parse(sessionStorage.getItem("user"));
+
   return (
   <div className={styles.container}>
     {isNavActive ? 
-      <button onClick={toggleNav} className={`text-2xl list-none text-red-oscuro no-underline pl-3.5  font-serif`}>{sessionStorage.getItem('Name')}</button> 
-      :<button onClick={toggleNav} className={`text-2xl list-none text-chocolate-oscuro no-underline pl-3.5  font-serif`} >{sessionStorage.getItem('Name')}</button>
+      <button onClick={toggleNav} className={`text-2xl list-none text-red-oscuro no-underline pl-3.5  font-serif`}>{name}</button> 
+      :<button onClick={toggleNav} className={`text-2xl list-none text-chocolate-oscuro no-underline pl-3.5  font-serif`} >{name}</button>
       }
     <div className={`${styles.containerNav} ${isNavActive ? styles.active : ""}`}>
       <div className={`${styles.buttonsNav} ${isNavActive ? styles.active : ""}`}>

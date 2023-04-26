@@ -1,8 +1,10 @@
-const { authGoogle } = require("../../controllers/authController/authController")
+const { authGoogle } = require("../../controllers/authController/authController");
 
 const authGoogleHandler = async (req, res) => {
     try {
-        const userGoogle = await authGoogle(req.user);
+        const { name, surname, mail } = req.body;
+        
+        const userGoogle = await authGoogle({ name, surname, mail });
 
         res.status(200).json(userGoogle);
     } catch (error) {

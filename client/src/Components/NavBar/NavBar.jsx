@@ -13,6 +13,7 @@ export default function NavBar() {
     const handleLogout = () => {
         sessionStorage.removeItem("token");
         sessionStorage.removeItem("userRole");
+        sessionStorage.removeItem("user");
         history.push("/home");
         window.location.reload();
     };
