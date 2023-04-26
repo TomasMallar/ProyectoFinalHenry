@@ -41,9 +41,13 @@ const Carrito = () => {
       (cartItem) => cartItem.id === item.id
     );
     if (existingItemIndex !== -1) {
-      updatedCartItems[existingItemIndex].quantity += 1;
+      if (updatedCartItems[existingItemIndex].quantity < 1) {
+        updatedCartItems[existingItemIndex].quantity += 1;
+      } else {
+        updatedCartItems.splice(existingItemIndex, 0, item); // Agrega 'item' en el índice 'existingItemIndex' sin eliminar ningún elemento
+      }
     } else {
-      updatedCartItems.push({ ...item, quantity: 1 });
+      updatedCartItems.push(item); // Agrega 'item' al final del arreglo
     }
     setCartItems(updatedCartItems);
     localStorage.setItem("cartItems", JSON.stringify(updatedCartItems));
@@ -55,8 +59,8 @@ const Carrito = () => {
       (cartItem) => cartItem.id === item.id
     );
     if (existingItemIndex !== -1) {
-      if (updatedCartItems[existingItemIndex].quantity > 1) {
-        updatedCartItems[existingItemIndex].quantity -= 1;
+      if (updatedCartItems[existingItemIndex].quantity < 1) {
+        updatedCartItems[existingItemIndex].quantity += 1;
       } else {
         updatedCartItems.splice(existingItemIndex, 1);
       }
@@ -88,7 +92,7 @@ const Carrito = () => {
   const calcularTotalCarrito = () => {
     let total = 0;
     for (const item of cartItems) {
-      total += item.price * item.quantity;
+      total += item.price ;
     }
     return total;
   }

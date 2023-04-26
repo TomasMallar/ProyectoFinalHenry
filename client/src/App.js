@@ -36,6 +36,8 @@ import LineChartSalesByMonth from './Components/Charts/LineChartSalesByMonth';
 import PieChartSalesByPaymentAmount from './Components/Charts/PieChartSalesByPaymentAmount';
 import BarCharProductSold from './Components/Charts/BarCharProductSold';
 
+import Landing from './Pages/Landing/Landing';
+
 function App() {
 
   return (
