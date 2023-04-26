@@ -31,6 +31,10 @@ import MyShopping from './Components/MyShopping/MyShopping';
 import MyProfile from './Components/MyProfile/MyProfile';
 import PieChartSalesByPayment from './Components/Charts/PieChartSalesByPayment';
 import PieChartOrderByPaid from './Components/Charts/PieChartOrderByPaid';
+import BarCharSales from './Components/Charts/BarCharSales';
+import LineChartSalesByMonth from './Components/Charts/LineChartSalesByMonth';
+import PieChartSalesByPaymentAmount from './Components/Charts/PieChartSalesByPaymentAmount';
+import BarCharProductSold from './Components/Charts/BarCharProductSold';
 
 function App() {
 
@@ -63,7 +67,7 @@ function App() {
         <Route path="/about"><NavBar /><About /> <Footer /></Route>
         <PrivateRouteUser exact path="/myshopping" component={() => <><NavBar /><MyShopping /><Footer /></>}/>
         <PrivateRouteUser exact path="/myprofile" component={() => <><NavBar /><MyProfile/><Footer /></>}/>
-        <Route path="/metrica"><PieChartSalesByPayment/><PieChartOrderByPaid/> </Route>
+        <Route path="/metrica"><PieChartSalesByPayment/><PieChartOrderByPaid/><BarCharSales/><LineChartSalesByMonth/><PieChartSalesByPaymentAmount/> <BarCharProductSold/> </Route>
         <Route path="/*"><Error/><NavBar/></Route>
       </Switch>
     </div>

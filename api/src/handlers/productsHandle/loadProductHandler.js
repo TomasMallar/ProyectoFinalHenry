@@ -2,9 +2,10 @@ const { postProductController } = require('../../controllers/productsController/
 const { postTypeController } = require('../../controllers/typesController/postTypeController');
 const { postIngredientController } = require('../../controllers/ingredientController/postIngredientController');
 const { postCategoryController } = require('../../controllers/categoriesController/postCategoryController');
+const { Sale } = require('../../db');
 
 async function loadProductHandler(req, res) {
-    const { products, types, ingredients, categories } = req.body;
+    const { products, types, ingredients, categories,sales } = req.body;
     console.log(products.length)
     try {
         // Crear nuevos types
@@ -25,6 +26,10 @@ async function loadProductHandler(req, res) {
         // Crear nuevos products
         if (products && products.length) {
           await Promise.all(products.map(product => postProductController(product.name, product.price, product.stock, product.image, product.categories, product.types, product.ingredients)));
+        }
+
+        if(sales && sales.length){
+          const createdSales = await Sale.bulkCreate(sales);
         }
   
       res.status(201).json({

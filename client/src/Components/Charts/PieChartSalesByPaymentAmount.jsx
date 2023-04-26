@@ -8,22 +8,22 @@ import s from './PieChartSalesByPayment.module.css'
 // no chart will be rendered.
 // website examples showcase many properties,
 // you'll often use just a few of them.
-const PieChartSalesByPayment = ( ) => {
+const PieChartSalesByPaymentAmount = ( ) => {
     const [data, setData] = useState([]);
     function transformData(data) {
         return [
           {
             id: "Criptomoneda",
             label: "Criptomoneda",
-            value: data["total sales by Crypto Payment"],
+            value: data["total sales amount by Crypto Payment"],
           },
           {
             id: "Tarjeta",
-            value: data["total sales by Cards Payment"]
+            value: data["total sales amount by Cards Payment"]
           },
             {
             id: "Transferencia",
-            value: data["total sales by Transfer Payment"]
+            value: data["total sales amount by Transfer Payment"]
             },
         ];
       }
@@ -44,10 +44,8 @@ const PieChartSalesByPayment = ( ) => {
             <div>
 
                     <h1>Tipo de pago en compras finalizadas</h1>
-        <p>{`Ventas Finalizadas: ${data["total sales with any payment"]}`}</p>
-        <p>{`Pago con Tarjeta: ${data["total sales by Cards Payment"]} (%${data["percentage of purchased carts by Cards Payment"]})`}</p>
-        <p>{`Pago con Criptomoneda: ${data["total sales by Crypto Payment"]} (%${data["percentage of purchased carts by Crypto Payment"]})`}</p>
-        <p>{`Pago con Transferencia: ${data["total sales by Transfer Payment"]} (%${data["percentage of purchased carts by Transfer Payment"]})`}</p>
+        <p>{`Ventas Finalizadas: $${data["total sales amount"]}`}</p>
+    
             </div>
 
     <ResponsivePie
@@ -59,6 +57,7 @@ const PieChartSalesByPayment = ( ) => {
         colors={{ scheme: 'red_grey' }}
         activeOuterRadiusOffset={8}
         borderWidth={1}
+        enableArcLabels={false}
         arcLinkLabelsSkipAngle={10}
         arcLinkLabelsTextColor="#333333"
         arcLinkLabelsThickness={2}
@@ -70,4 +69,4 @@ const PieChartSalesByPayment = ( ) => {
         </div>
 )}
 
-export default PieChartSalesByPayment
+export default PieChartSalesByPaymentAmount

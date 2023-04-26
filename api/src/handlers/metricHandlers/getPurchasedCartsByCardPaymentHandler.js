@@ -92,9 +92,9 @@ const getPurchasedCartsByCardPaymentHandler = async (req, res, next) => {
       "total sales amount by Crypto Payment": totalSalesAmountByCrypto,
       "total sales by Transfer Payment": totalSalesByTransferPayment,
       "total sales amount by Transfer Payment": totalSalesAmountByTransfer,
-      "percentage of purchased carts by Cards Payment": percentageOfPurchasedCartsByCardsPayment,
-      "percentage of purchased carts by Crypto Payment": percentageOfPurchasedCartsByCryptoPayment,
-      "percentage of purchased carts by Transfer Payment": percentageOfPurchasedCartsByTransferPayment
+      "percentage of purchased carts by Cards Payment": percentageOfPurchasedCartsByCardsPayment.toFixed(2),
+      "percentage of purchased carts by Crypto Payment": percentageOfPurchasedCartsByCryptoPayment.toFixed(2),
+      "percentage of purchased carts by Transfer Payment": percentageOfPurchasedCartsByTransferPayment.toFixed(2)
     });
   } catch (error) {
     next(error);

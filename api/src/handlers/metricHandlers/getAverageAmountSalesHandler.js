@@ -17,12 +17,13 @@ const getAverageAmountSalesHandler = async (req, res, next) => {
 
     const { averageAmount, maxAmount, minAmount, totalSales } = result.dataValues;
 
-    res.json({
-      allSales: totalSales,
-      averageAmountSale: averageAmount,
-      maxAmountSale: maxAmount,
-      minAmountSale: minAmount
-    });
+
+    res.json([
+      {        "sales": "Minima Historica",        "value": minAmount      },
+      {        "sales": "Venta Promedio",        "value": Number(averageAmount).toFixed(2)      },
+      {        "sales": "Mayor Historica",        "value": maxAmount      }
+    ]);
+    
   } catch (error) {
     next(error);
   }

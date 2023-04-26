@@ -8,10 +8,10 @@ import s from './BarCharSales.module.css'
 // no chart will be rendered.
 // website examples showcase many properties,
 // you'll often use just a few of them.
-const BarCharSales = () => {
+const BarCharProductSold = () => {
     const [data, setData] = useState([]);
     useEffect(() => {
-      axios.get('http://localhost:3001/metric/average-amount-sales')
+      axios.get('http://localhost:3001/metric/top-sold-product')
         .then(response => {
           console.log(response.data)
             setData(response.data);
@@ -26,10 +26,9 @@ const BarCharSales = () => {
         <ResponsiveBar
         data={data}
         keys={
-            ['value']
+            ['sales']
         }
-        indexBy="sales"
-        valueFormat=" >-$"
+        indexBy="id"
         margin={{ top: 50, right: 130, bottom: 50, left: 60 }}
         padding={0.3}
         valueScale={{ type: 'linear' }}
@@ -41,7 +40,7 @@ const BarCharSales = () => {
             tickSize: 5,
             tickPadding: 5,
             tickRotation: 0,
-            legend: 'Ventas',
+            legend: 'Productos Mas Vendidos Historicos',
             legendPosition: 'middle',
             legendOffset: 32
         }}
@@ -49,7 +48,7 @@ const BarCharSales = () => {
             tickSize: 5,
             tickPadding: 5,
             tickRotation: 0,
-            legend: 'Montos',
+            legend: 'Ventas',
             legendPosition: 'middle',
             legendOffset: -40
         }}
@@ -64,13 +63,18 @@ const BarCharSales = () => {
                 ]
             ]
         }}
-        legends={[]}
-        isInteractive={false}
+        tooltip={({ value, indexValue, color, data }) => (
+            <div style={{ padding: 10, background: '#fff', border: '1px solid #ccc' }}>
+              <p style={{ margin: 0 }}>{data.name}</p>
+              <p style={{ margin: 0 }}>{`id : ${indexValue} ventas :${value}`}</p>
+            </div>
+          )}
         role="application"
         isFocusable={true}
         ariaLabel="Nivo bar chart demo"
+        barAriaLabel={function(e){return e.id+": "+e.formattedValue+" in country: "+e.indexValue}}
         />
         </div>
 )}
 
-export default BarCharSales
+export default BarCharProductSold
