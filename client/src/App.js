@@ -36,6 +36,8 @@ import LineChartSalesByMonth from './Components/Charts/LineChartSalesByMonth';
 import PieChartSalesByPaymentAmount from './Components/Charts/PieChartSalesByPaymentAmount';
 import BarCharProductSold from './Components/Charts/BarCharProductSold';
 
+import Landing from './Pages/Landing/Landing';
+
 function App() {
 
   return (
@@ -47,7 +49,7 @@ function App() {
         <Route exact path="/">
           <Redirect to="/home" />
         </Route>
-        <Route exact path="/Home" > <NavBar /> <Carousel /> <Footer /></Route>
+        <Route exact path="/Home" > <NavBar /> <Landing /> <Footer /></Route>
         <Route exact path="/products" > <NavBar /> <Products /> <Footer /></Route>
         <PublicRoute exact path="/login" component={Login} />
         <PrivateRoute exact path="/createProduct" component={() => <> <NavBar /><CreateProduct /></>} />
