@@ -4,6 +4,10 @@
   "private": true,
   "dependencies": {
     "@mercadopago/sdk-react": "^0.0.8",
+    "@nivo/bar": "^0.80.0",
+    "@nivo/core": "^0.80.0",
+    "@nivo/line": "^0.80.0",
+    "@nivo/pie": "^0.80.0",
     "@testing-library/jest-dom": "^5.11.10",
     "@testing-library/react": "^11.2.6",
     "@testing-library/user-event": "^13.1.1",
