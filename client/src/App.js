@@ -29,6 +29,14 @@ import About from './Pages/about/about';
 import Metric from './Components/Metrics/Metrics';
 import MyShopping from './Components/MyShopping/MyShopping';
 import MyProfile from './Components/MyProfile/MyProfile';
+import PieChartSalesByPayment from './Components/Charts/PieChartSalesByPayment';
+import PieChartOrderByPaid from './Components/Charts/PieChartOrderByPaid';
+import BarCharSales from './Components/Charts/BarCharSales';
+import LineChartSalesByMonth from './Components/Charts/LineChartSalesByMonth';
+import PieChartSalesByPaymentAmount from './Components/Charts/PieChartSalesByPaymentAmount';
+import BarCharProductSold from './Components/Charts/BarCharProductSold';
+
+import Landing from './Pages/Landing/Landing';
 import Dashboard from './Pages/Dashboard/Dashborad';
 
 function App() {
@@ -42,7 +50,7 @@ function App() {
         <Route exact path="/">
           <Redirect to="/home" />
         </Route>
-        <Route exact path="/Home" > <NavBar /> <Carousel /> <Footer /></Route>
+        <Route exact path="/Home" > <NavBar /> <Landing /> <Footer /></Route>
         <Route exact path="/products" > <NavBar /> <Products /> <Footer /></Route>
         <PublicRoute exact path="/login" component={Login} />
         <PrivateRoute exact path="/createProduct" component={() => <> <NavBar /><CreateProduct /></>} />
@@ -62,7 +70,6 @@ function App() {
         <Route path="/about"><NavBar /><About /> <Footer /></Route>
         <PrivateRouteUser exact path="/myshopping" component={() => <><NavBar /><MyShopping /><Footer /></>}/>
         <PrivateRouteUser exact path="/myprofile" component={() => <><NavBar /><MyProfile/><Footer /></>}/>
-       <Route path = "/dashboard"><NavBar/><Dashboard/></Route>
         <Route path="/*"><Error/><NavBar/></Route>
       </Switch>
     </div>

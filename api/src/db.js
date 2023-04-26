@@ -39,7 +39,7 @@ let capsEntries = entries.map((entry) => [
 ]);
 sequelize.models = Object.fromEntries(capsEntries);
 
-const { Product, User, Category, Ingredient, Type, Rol, Order, OrderItem, Sale } = sequelize.models;
+const { Product, User, Category, Ingredient, Type, Rol, Order, OrderItem, Sale, Coment } = sequelize.models;
 
 User.hasMany(Order, { foreignKey: 'userId', as: 'orders' });
 Order.belongsTo(User, { foreignKey: 'userId', as: 'user' });
@@ -114,6 +114,13 @@ Type.belongsToMany(User, {
   through: { model: "UserFavoriteTypes" },
   timestamps: false,
 });
+
+User.hasMany(Coment, { foreignKey: 'userId', as: 'coments' });
+Coment.belongsTo(User, { foreignKey: 'userId', as: 'user' });
+
+Product.hasMany(Coment, { foreignKey: 'productId', as: 'coments' });
+Coment.belongsTo(Product, { foreignKey: 'productId', as: 'product' });
+
 
 module.exports = {
   ...sequelize.models,
