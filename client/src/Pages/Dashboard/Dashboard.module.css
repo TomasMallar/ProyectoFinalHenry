@@ -1,0 +1,17 @@
+.dashboardContainer{
+    display:flex;
+
+}
+.homeContainer{
+    flex:6;
+    display: flex;
+    padding: 20px;
+    margin-right: 20px;
+    gap: 20px;
+
+}
+
+.sideBar{
+    flex: 1;
+   
+}

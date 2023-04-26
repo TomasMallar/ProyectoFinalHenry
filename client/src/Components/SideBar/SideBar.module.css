@@ -1,0 +1,62 @@
+.sideBar{
+    border: 0.5px solid rgb(142, 142, 142);
+    min-height: 100vh;
+    background-color: white;
+}
+.top{
+    height: 50px;
+    display: flex;
+    align-items:center;
+    justify-content: center;
+}
+
+.logo{
+    font-size: 20px;
+    font-weight: bold;
+    color: #3F2822;
+}
+.hr{
+    height: 0;
+    border: 0.5px solid rgb(142, 142, 142);
+}
+
+.center{
+    padding-left: 10px;
+    margin: 0px;
+}
+.center ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.title{
+    font-size: 10px;
+    font-weight: bold;
+    color: #999;
+    margin-top: 15px;
+    margin-bottom: 5px;
+}
+
+.li{
+display: flex;
+align-items: center;
+padding: 5px;
+cursor: pointer;
+}
+.li:hover{
+    background-color: rgb(234, 216, 183);
+}
+
+.icon{
+    font-size: 18px;
+    color: #3F2822;
+}
+
+.span{
+    font-size: 13px;
+    font-weight: 600;
+    color: #888;
+    margin-left: 10px;
+}
+

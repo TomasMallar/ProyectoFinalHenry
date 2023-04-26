@@ -29,6 +29,7 @@ import About from './Pages/about/about';
 import Metric from './Components/Metrics/Metrics';
 import MyShopping from './Components/MyShopping/MyShopping';
 import MyProfile from './Components/MyProfile/MyProfile';
+import Dashboard from './Pages/Dashboard/Dashborad';
 
 function App() {
 
@@ -61,6 +62,7 @@ function App() {
         <Route path="/about"><NavBar /><About /> <Footer /></Route>
         <PrivateRouteUser exact path="/myshopping" component={() => <><NavBar /><MyShopping /><Footer /></>}/>
         <PrivateRouteUser exact path="/myprofile" component={() => <><NavBar /><MyProfile/><Footer /></>}/>
+       <Route path = "/dashboard"><NavBar/><Dashboard/></Route>
         <Route path="/*"><Error/><NavBar/></Route>
       </Switch>
     </div>
