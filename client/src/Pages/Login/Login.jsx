@@ -40,12 +40,15 @@ export default function Login() {
           if(response.data.user) {
             sessionStorage.setItem("token", response.data.token);
             sessionStorage.setItem("Name", response.data.user.name);
+            sessionStorage.setItem("user", JSON.stringify(response.data.user));
             alert(`Welcome, ${response.data.user.name}`)
             setUser("")
             setPassword("")
             setSuccess(true)
             const decodedToken = jwtDecode(response.data.token);
             const userRole = decodedToken.rol;
+            const id = decodedToken.id
+            sessionStorage.setItem('id', id)
             // Guardar el rol en sessionStorage
             sessionStorage.setItem("userRole", userRole);
             console.log("ESTE ES EL ROL:",userRole);
