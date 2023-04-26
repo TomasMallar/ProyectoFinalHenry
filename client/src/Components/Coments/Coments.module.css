@@ -1,0 +1,20 @@
+.container{
+    border: 1px solid black;
+    height: 500px;
+    display: flex;
+    justify-content: center;
+    
+}
+
+.containerComents {
+    margin-top: 20px;
+    border: 1px solid red;
+    width: 40%;
+    height: fit-content;
+
+}
+
+.comentarios {
+    border:  1px solid blue;
+    margin: 4px;
+}

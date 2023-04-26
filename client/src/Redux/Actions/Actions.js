@@ -16,6 +16,7 @@ import {
     GET_ALL_CAROUSEL,
     ADD_INGREDIENT_TYPE_CATEGORIE,
     DELETE_ELEMENT,
+    EDIT_PROFILE
 } from "../Action-types/Action-types"
 
 export const getAllChocolates = () => {
@@ -364,4 +365,31 @@ export const GetAllIngredientWithId = () => {
 
     }
 
+}
+
+export const PutEditProfile = (id, dataEdit) => {
+    return async function (dispatch) {
+        try {
+            
+            const response = await axios.put(`http://localhost:3001/users/update/${id}`, 
+            dataEdit, 
+            {
+            headers: {
+                    Authorization: JSON.parse(localStorage.getItem("token")),
+                    }
+            }
+            )
+
+            return dispatch({
+                type: EDIT_PROFILE,
+                payload: response.data
+            })
+        } catch (error) {
+            console.log(error);
+            // return dispatch({
+            //     type: HANDLE_ERROR,
+            //     payload: error.response.data.error
+            // })
+        }
+    }
 }

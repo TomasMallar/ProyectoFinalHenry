@@ -13,6 +13,7 @@ const routerEmail = require('./EmailRouter/EmailRouter');
 const routerPassword = require("./PasswordRouter/PasswordRouter")
 const routerPayment = require('./PaymentRouter/PaymentRouter')
 const routerMetric = require('./MetricRouter/MetricRouter')
+const routerComents = require('./ComentsRouter/ComentsRouter')
 const router = Router();
 
 const passport = require("passport");
@@ -46,5 +47,7 @@ router.use("/auth", routerAuth);
 
 //Forgot password
 router.use("/password", routerPassword);
+
+router.use('/coments', routerComents)
 
 module.exports = router;

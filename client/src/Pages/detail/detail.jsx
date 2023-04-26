@@ -2,6 +2,7 @@ import { Link, useParams } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { getChocolatesById, resetChocolateDetail } from "../../Redux/Actions/Actions"
+import Coments from "../../Components/Coments/Coments";
 import styles from "./detail.module.css";
 import { FaStar } from 'react-icons/fa';
 import { useState } from "react";
@@ -72,7 +73,7 @@ const Detail = () => {
                     </div>
                 </div>
                 <br />
-
+                <Coments></Coments>
             </div>
         </div>
     )
