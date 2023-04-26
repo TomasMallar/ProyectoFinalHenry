@@ -1,37 +1,34 @@
 import React, { useEffect, useState, useRef } from 'react';
 import axios from 'axios';
 import { ResponsivePie } from '@nivo/pie'
-import s from './PieChartSalesByPayment.module.css'
+import s from './PieChartOrderByPaid.module.css'
 
 // make sure parent container have a defined height when using
 // responsive component, otherwise height will be 0 and
 // no chart will be rendered.
 // website examples showcase many properties,
 // you'll often use just a few of them.
-const PieChartSalesByPayment = ( ) => {
+const PieChartOrderByPaid = ( ) => {
     const [data, setData] = useState([]);
     function transformData(data) {
         return [
           {
-            id: "Criptomoneda",
-            label: "Criptomoneda",
-            value: data["total sales by Crypto Payment"],
+            id: "Ordenes de Compra no Finalizadas",
+            value: data["notPurchasedOrders"],
+            label: "No Finalizadas",
           },
           {
-            id: "Tarjeta",
-            value: data["total sales by Cards Payment"]
-          },
-            {
-            id: "Transferencia",
-            value: data["total sales by Transfer Payment"]
-            },
+            id: "Ordenes de Compra Finalizadas",
+            value: data["purchasedOrders"],
+            label: "Finalizadas",
+          }
         ];
       }
       
       const transformedData = transformData(data);
       console.log(transformedData);
-    useEffect(() => {
-        axios.get('http://localhost:3001/metric/purchasedCartsByCardPayment')
+      useEffect(() => {
+        axios.get('http://localhost:3001/metric/purchasedCarts')
           .then(response => {
             setData(response.data);
           })
@@ -43,11 +40,10 @@ const PieChartSalesByPayment = ( ) => {
         <div className={s.container} >
             <div>
 
-                    <h1>Tipo de pago en compras finalizadas</h1>
-        <p>{`Ventas Finalizadas: ${data["total sales with any payment"]}`}</p>
-        <p>{`Pago con Tarjeta: ${data["total sales by Cards Payment"]} (%${data["percentage of purchased carts by Cards Payment"]})`}</p>
-        <p>{`Pago con Criptomoneda: ${data["total sales by Crypto Payment"]} (%${data["percentage of purchased carts by Crypto Payment"]})`}</p>
-        <p>{`Pago con Transferencia: ${data["total sales by Transfer Payment"]} (%${data["percentage of purchased carts by Transfer Payment"]})`}</p>
+            <h1>Ordenes de compras finalizadas</h1>
+        <p>{`Total de Ordenes de Compra: ${data["totalOrders"]}`}</p>
+        <p>{`Ordenes sin concluir: ${data["notPurchasedOrders"]} (%${data["percentageNotPurchased"]})`}</p>
+        <p>{`Compras realizadas: ${data["purchasedOrders"]} (%${data["percentage"]})`}</p>
             </div>
 
     <ResponsivePie
@@ -73,15 +69,7 @@ const PieChartSalesByPayment = ( ) => {
         arcLinkLabelsThickness={2}
         arcLinkLabelsColor={{ from: 'color' }}
         arcLabelsSkipAngle={10}
-        arcLabelsTextColor={{
-            from: 'color',
-            modifiers: [
-                [
-                    'darker',
-                    2
-                ]
-            ]
-        }}
+        arcLabelsTextColor="#ffffff"
         defs={[
             {
                 id: 'dots',
@@ -181,4 +169,4 @@ const PieChartSalesByPayment = ( ) => {
         </div>
 )}
 
-export default PieChartSalesByPayment
+export default PieChartOrderByPaid

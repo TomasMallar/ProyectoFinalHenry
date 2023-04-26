@@ -30,6 +30,7 @@ import Metric from './Components/Metrics/Metrics';
 import MyShopping from './Components/MyShopping/MyShopping';
 import MyProfile from './Components/MyProfile/MyProfile';
 import PieChartSalesByPayment from './Components/Charts/PieChartSalesByPayment';
+import PieChartOrderByPaid from './Components/Charts/PieChartOrderByPaid';
 
 function App() {
 
@@ -62,7 +63,7 @@ function App() {
         <Route path="/about"><NavBar /><About /> <Footer /></Route>
         <PrivateRouteUser exact path="/myshopping" component={() => <><NavBar /><MyShopping /><Footer /></>}/>
         <PrivateRouteUser exact path="/myprofile" component={() => <><NavBar /><MyProfile/><Footer /></>}/>
-        <Route path="/metrica"><PieChartSalesByPayment/> </Route>
+        <Route path="/metrica"><PieChartSalesByPayment/><PieChartOrderByPaid/> </Route>
         <Route path="/*"><Error/><NavBar/></Route>
       </Switch>
     </div>
