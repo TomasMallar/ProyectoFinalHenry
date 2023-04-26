@@ -103,7 +103,7 @@ const Carrito = () => {
   return (
     <div className="w-full h-full p-16 font-serif bg-chocolate-blanco text-chocolate-oscuro">
       <h2 className="pb-2 text-4xl">
-        PRODCUTOS DEL CARRITO
+        PRODUCTOS DEL CARRITO
       </h2>
       <div className="p-4 bg-chocolate-mantecol rounded-2xl">
 

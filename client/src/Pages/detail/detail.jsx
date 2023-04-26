@@ -2,6 +2,7 @@ import { Link, useParams } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { getChocolatesById, resetChocolateDetail } from "../../Redux/Actions/Actions"
+import Coments from "../../Components/Coments/Coments";
 import styles from "./detail.module.css"
 
 const Detail = () => {
@@ -38,7 +39,9 @@ const Detail = () => {
                 })} </div>
                 <h3 className="p-2 m-2">$ {ChocolateDetail.price} </h3>
             </div>
-
+                <div>
+                    <Coments></Coments>
+                </div>
             </div>
         </div>
     )
