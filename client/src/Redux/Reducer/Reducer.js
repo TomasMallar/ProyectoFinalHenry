@@ -13,7 +13,8 @@ import {
     TOEDIT_PRODUCT,
     GET_ALL_CAROUSEL,
     ADD_INGREDIENT_TYPE_CATEGORIE,
-    DELETE_ELEMENT
+    DELETE_ELEMENT,
+    EDIT_PROFILE
 } from "../Action-types/Action-types"
 
 const initialState = {
@@ -121,6 +122,12 @@ const reducer = (state = initialState, action) => {
                 [prop]: updatedElement
             };
 
+        case EDIT_PROFILE: 
+            const data = action.payload.user;
+            sessionStorage.setItem("user", JSON.stringify(data))
+            return {
+                ...state
+            }
 
         default:
             return { ...state };

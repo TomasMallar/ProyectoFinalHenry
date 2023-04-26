@@ -8,6 +8,7 @@ import {
     RESET_STATE,
     HANDLE_ERROR,
     CREATE_USER,
+    CREATE_GOOGLE_USER,
     GET_CATEGORIES,
     GET_TYPES,
     GET_INGREDIENTS,
@@ -16,6 +17,7 @@ import {
     GET_ALL_CAROUSEL,
     ADD_INGREDIENT_TYPE_CATEGORIE,
     DELETE_ELEMENT,
+    EDIT_PROFILE
 } from "../Action-types/Action-types"
 
 export const getAllChocolates = () => {
@@ -85,6 +87,22 @@ export const addUser = (newUser) => {
             console.log(response.data);
             return dispatch({
                 type: CREATE_USER,
+                payload: response.data
+            })
+        }
+        catch (error) {
+            alert(error)
+        }
+    }
+}
+export const newGoogleUser = (data) => {
+    return async function (dispatch) {
+        try {
+            console.log(data);
+            const response = await axios.post(`http://localhost:3001/auth/google`, data)
+            console.log(response.data);
+            return dispatch({
+                type: CREATE_GOOGLE_USER,
                 payload: response.data
             })
         }
@@ -364,4 +382,31 @@ export const GetAllIngredientWithId = () => {
 
     }
 
+}
+
+export const PutEditProfile = (id, dataEdit) => {
+    return async function (dispatch) {
+        try {
+            
+            const response = await axios.put(`http://localhost:3001/users/update/${id}`, 
+            dataEdit, 
+            {
+            headers: {
+                    Authorization: JSON.parse(localStorage.getItem("token")),
+                    }
+            }
+            )
+
+            return dispatch({
+                type: EDIT_PROFILE,
+                payload: response.data
+            })
+        } catch (error) {
+            console.log(error);
+            // return dispatch({
+            //     type: HANDLE_ERROR,
+            //     payload: error.response.data.error
+            // })
+        }
+    }
 }

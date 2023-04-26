@@ -2,8 +2,7 @@ import { useEffect, useRef, useState} from 'react';
 import { Link, Redirect } from "react-router-dom";
 import {gapi} from "gapi-script"
 import axios from 'axios';
-import LoginButton from '../../Components/Login/login.jsx';
-import LogoutButton from '../../Components/Logout/Logout.jsx';
+import LoginButton from '../../Components/GoogleLogin/googleLogin.jsx';
 import jwtDecode from 'jwt-decode';
 
 
@@ -40,12 +39,14 @@ export default function Login() {
           if(response.data.user) {
             sessionStorage.setItem("token", response.data.token);
             sessionStorage.setItem("Name", response.data.user.name);
-            alert(`Welcome, ${response.data.user.name}`)
+            sessionStorage.setItem("user", JSON.stringify(response.data.user));
             setUser("")
             setPassword("")
             setSuccess(true)
             const decodedToken = jwtDecode(response.data.token);
             const userRole = decodedToken.rol;
+            const id = decodedToken.id
+            sessionStorage.setItem('id', id)
             // Guardar el rol en sessionStorage
             sessionStorage.setItem("userRole", userRole);
             console.log("ESTE ES EL ROL:",userRole);
@@ -107,7 +108,6 @@ export default function Login() {
                 <p> ¿Aún no tienes una cuenta? <Link to="/newUser">Crear Cuenta</Link> </p>
                 <p> Volver al <Link to="/home">Home</Link> </p>
                 <LoginButton />
-                <LogoutButton />
             </div>
 
             <div className={style.message}>

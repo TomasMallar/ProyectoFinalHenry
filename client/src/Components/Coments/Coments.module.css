@@ -18,3 +18,11 @@
     border:  1px solid blue;
     margin: 4px;
 }
+
+.visible {
+    display: block;
+}
+
+.invisible {
+    display: none;
+}
