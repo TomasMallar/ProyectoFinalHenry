@@ -5,6 +5,29 @@ const moment = require('moment');
 const getTopSoldProductHandler = async (req, res, next) => {
   try {
     const { month } = req.query;
+
+    if (!month) {
+      const topSoldProducts = await Product.findAll({
+        order: [['totalSold', 'DESC']],
+        limit: 5
+      });
+      const transformedData = topSoldProducts.map(product => {
+        return {
+          id: product.id,
+          name: product.name,
+          sales: product.totalSold,
+          data :{          id: product.id,
+            name: product.name,
+            sales: product.totalSold}
+        };
+      });
+      
+      res.json(transformedData)
+    }
+
+
+
+
     const monthStart = moment(month, 'YYYY-MM').startOf('month').toISOString();
     const monthEnd = moment(month, 'YYYY-MM').endOf('month').toISOString();
 
@@ -25,10 +48,10 @@ const getTopSoldProductHandler = async (req, res, next) => {
       },
       group: ['productId', 'order.id'], // Agregar 'order.id' en la cláusula GROUP BY
       order: [[sequelize.literal('count'), 'DESC']],
-      limit: 1
+      limit: 5
     });
 
-    const topSoldProduct = await Product.findOne({
+    const topSoldProduct = await Product.findAll({
       where: {
         id: topSoldProducts[0].productId
       }
