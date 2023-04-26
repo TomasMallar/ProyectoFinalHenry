@@ -8,6 +8,7 @@ import {
     RESET_STATE,
     HANDLE_ERROR,
     CREATE_USER,
+    CREATE_GOOGLE_USER,
     GET_CATEGORIES,
     GET_TYPES,
     GET_INGREDIENTS,
@@ -86,6 +87,22 @@ export const addUser = (newUser) => {
             console.log(response.data);
             return dispatch({
                 type: CREATE_USER,
+                payload: response.data
+            })
+        }
+        catch (error) {
+            alert(error)
+        }
+    }
+}
+export const newGoogleUser = (data) => {
+    return async function (dispatch) {
+        try {
+            console.log(data);
+            const response = await axios.post(`http://localhost:3001/auth/google`, data)
+            console.log(response.data);
+            return dispatch({
+                type: CREATE_GOOGLE_USER,
                 payload: response.data
             })
         }

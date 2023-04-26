@@ -9,11 +9,13 @@ import Fade from 'react-reveal/Flip';
 export default function NavBar() {
     const history = useHistory();
     const userRole = sessionStorage.getItem('userRole');
-    console.log(userRole)
     const handleLogout = () => {
         sessionStorage.removeItem("token");
         sessionStorage.removeItem("userRole");
         sessionStorage.removeItem("user");
+        sessionStorage.removeItem("Name");
+        sessionStorage.removeItem("id");
+        sessionStorage.removeItem("mail");
         history.push("/home");
         window.location.reload();
     };
