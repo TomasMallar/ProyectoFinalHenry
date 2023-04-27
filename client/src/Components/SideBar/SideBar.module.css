@@ -1,7 +1,9 @@
 .sideBar{
     border: 0.5px solid rgb(142, 142, 142);
-    min-height: 100vh;
+    min-height: fit-content;
     background-color: white;
+    min-width: fit-content;
+    width: 36vw;
 }
 .top{
     height: 50px;
@@ -13,7 +15,9 @@
 .logo{
     font-size: 20px;
     font-weight: bold;
-    color: #3F2822;
+    color:#3F2822;
+    line-height: 1.2;
+    
 }
 .hr{
     height: 0;

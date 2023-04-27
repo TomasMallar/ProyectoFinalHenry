@@ -4,14 +4,33 @@ import PeopleAltOutlinedIcon from '@mui/icons-material/PeopleAltOutlined';
 import AttachMoneyOutlinedIcon from '@mui/icons-material/AttachMoneyOutlined';import PaymentOutlinedIcon from '@mui/icons-material/PaymentOutlined';
 import AccountBalanceWalletOutlinedIcon from '@mui/icons-material/AccountBalanceWalletOutlined';
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
+import { useEffect, useState } from 'react';
+import axios from 'axios';
+import {useDispatch, useSelector} from 'react-redux'
+import { GetInfo } from '../../Redux/Actions/ActionsDashboard';
+import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
+import { Link } from 'react-router-dom/cjs/react-router-dom';
+
 export default function Widget({type}) {
 let data ;
 //temporary : 
-const amount = 100 
-const percentage = 20
+const dispatch = useDispatch()
+const info = useSelector((state) => state.metrics)
+const currentMonthSales =  info.currentMonthSales 
+const salesVariaton = info.salesVariaton
+const currentYearTotalSales = info.currentYearTotalSales
+const variationYear = info.VariationYear
+const variationSemester =info.VariationSemester
+const currentSemesterTotalSales = info.currentSemesterTotalSales
+
+useEffect(()=>{
+dispatch (GetInfo())
+},[dispatch])
+
 switch (type){
 case "user" : 
     data = {
+        // info:info.currentMonthSales,
         title:"USERS",
         isMoney:false,
        link: "see all users",
@@ -25,34 +44,45 @@ case "user" :
     break;
     case "order" : 
     data = {
-        title:"ORDERS",
+        title:"VTA SEMESTRAL",
         isMoney:false,
-       link: "see all orders",
+       link: "Ver más detalles",
        icon: (
         <ShoppingCartOutlinedIcon className={style.icon} style = {{color:'goldenrod', backgroundColor:"rgba(218,165,32,0.2)"}}/>
-       )
+       ),
+       value:currentSemesterTotalSales,
+       percentage:variationSemester,
+       path:"/statistics"
 
     }
     break;
     case "earning" : 
     data = {
-        title:"EARNINGS",
+        // info:info.currentMonthSales,
+        title:"VTA MENSUAL",
         isMoney:true,
-       link: "view net earnings",
+       link: "Ver órdenes mensuales",
+       path:"/orders",
        icon: (
         < AttachMoneyOutlinedIcon className={style.icon} style = {{color:'green', backgroundColor:"rgba(0,128,0,0.2)"}}/>
-       )
+       ),
+       value:currentMonthSales,
+        percentage:salesVariaton
 
     }
     break;
     case "balance" : 
     data = {
-        title:"BALANCES",
+        // info:info.currentMonthSales,
+        title:"VTA ANUAL",
         isMoney:true,
-       link: "see details",
+       link: "Ver más detalles",
        icon: (
         <AccountBalanceWalletOutlinedIcon className={style.icon} style = {{color:'purple', backgroundColor:"rgba(128,0,128,0.2)"}}/>
-       )
+       ),
+       value:currentYearTotalSales,
+        percentage:variationYear,
+        path:"/statistics"
 
     }
     default:
@@ -63,13 +93,21 @@ case "user" :
             <div className={style.left}>
                 <span className={style.title}>{data.title}</span>
                 {/* ACA VA LA CANTIDAD DE USUARIOS */}
-                <span className={style.counter}>{data.isMoney && "$"}{amount}</span>
-                <span className={style.link}> {data.link}</span>
+                <span className={style.counter}>{data.isMoney && "$"}{data.value}</span>
+               <Link to={data.path}> <span className={style.link}> {data.link}</span></Link>
             </div>
             <div className={style.right}>
                 <div className={style.percentage} >
+                    { data.percentage > 0 ? 
+                        <div className={style.percentagePos}> 
                     <ArrowUpwardOutlinedIcon />
-                    {percentage}%</div>
+                    {data.percentage}%
+                    </div> : <div className={style.percentageNeg}>
+                    <ArrowDownwardIcon />
+                    {data.percentage}%
+                    </div>
+                }
+                </div>
             </div>
             {data.icon}
         </div>

@@ -31,6 +31,7 @@ const LineChartSalesByMonth = () => {
       }, []);
     return (
         <div className={s.container}>
+          <p className={s.title}>VENTAS MENSUALES</p>
       <ResponsiveLine
     data={[{ id: 'Sales', data: data }]}
     margin={{ top: 50, right: 50, bottom: 50, left: 60 }}
@@ -63,6 +64,8 @@ const LineChartSalesByMonth = () => {
     motionStiffness={90}
     motionDamping={15}
   />
+          <p className={s.link}>Ver más métricas</p>
+
   </div>
 )}
 
