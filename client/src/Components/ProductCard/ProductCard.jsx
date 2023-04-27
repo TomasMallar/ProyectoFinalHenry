@@ -39,7 +39,7 @@ const ProductCard = ({ id, name, image, price, category, onClick }) => {
         onClick({ id, name, image, category, price });
     };
     return (
-        <div className="p-3 font-serif border border-solid shadow-lg border-chocolate-mantecol rounded-xl bg-chocolate-oscuro w-72 hover:shadow-chocolate-bombom hover:bg-chocolate-bombom">
+        <div className="p-3 font-serif border border-solid shadow-lg cursor-pointer border-chocolate-mantecol rounded-xl bg-chocolate-oscuro w-72 hover:shadow-chocolate-bombom hover:bg-chocolate-bombom" onClick={handleClick}>
 
             <button className="border-none ml-60 w-fit" onClick={() => addToCart({ id, name, image, price, category })}>
                 <img src={carImagen} alt="" className="w-8" />

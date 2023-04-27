@@ -1,9 +1,10 @@
 import { useSelector, useDispatch } from "react-redux"
 import { useEffect, useState } from "react"
-import { GetAllCategories, getProductsAdvanceController, GetAllTypes, DeleteProduct, EditedProduct, GetAllIngredient } from "../../Redux/Actions/Actions"
+import { GetAllCategories, getProductsAdvanceController, DeleteProduct, EditedProduct, GetAllTypesWithId, GetAllIngredientWithId } from "../../Redux/Actions/Actions"
 import style from './crud_products.module.css'
 import { Link } from "react-router-dom"
 import ModalMailing from "../../Components/ModalMailing/ModalMailing"
+import SideBar from "../../Components/SideBar/SideBar"
 
 
 
@@ -31,8 +32,8 @@ export default function CrudProducts(props) {
     useEffect(() => {
         dispatch(getProductsAdvanceController(queries.name, queries.category, queries.type, queries.orderBy, queries.orderDirection, queries.page))
         dispatch(GetAllCategories())
-        dispatch(GetAllTypes())
-        dispatch(GetAllIngredient())
+        dispatch(GetAllTypesWithId())
+        dispatch(GetAllIngredientWithId())
     }, [dispatch, queries])
 
 
@@ -83,7 +84,11 @@ export default function CrudProducts(props) {
 
     return (
 
-        <><div className={style.totalContainer}>
+        <>
+        <div className={style.cont}>
+            <SideBar/>
+        <div className={style.totalContainer}>
+            <p className={style.top}>PRODUCTS</p>
             <div className={style.searchBar}>
                 <img className={style.img} alt="lupa" src="https://res.cloudinary.com/dgxs2jcyu/image/upload/v1681582108/lupa_yidfrt.png" />
                 <input type="search" name="name" value={queries.name} placeholder="Buscar Producto" onChange={handleInputChangeSearchBar} />
@@ -118,9 +123,9 @@ export default function CrudProducts(props) {
                 <h3 className={style.cell}>INGREDIENTES</h3>
                 <select className={style.cell} name="type" onChange={handleOnChangeFilter}>
                     <option className={style.cell} value="TIPOS" defaultValue="TIPOS">TIPOS</option>
-                    {allTypes.map(t => {
+                    {allTypes?.map(t => {
                         return (
-                            <option className={style.cell} value={t}>{t}</option>
+                            <option className={style.cell} value={t.name}>{t.name}</option>
                         )
                     })}
                 </select>
@@ -171,13 +176,14 @@ export default function CrudProducts(props) {
                                 }) : <p className={style.cell}>N/A</p>}
                             </div>
 
-                            <Link to="/editProduct"><button className={style.cell} value={c} onClick={() => { handleOnClickEdit(c) }}>Editar</button> </Link>
-                            <button className={style.cell} value={c.id} onClick={handleOnClickDelete}>Eliminar</button>
+                            <Link to="/editProduct"><button className={style.editButton} value={c} onClick={() => { handleOnClickEdit(c) }}>Editar</button> </Link>
+                            <button className={style.deleteButton} value={c.id} onClick={handleOnClickDelete}>Eliminar</button>
 
                         </div>
                     )
                 })}
             </div>
+        </div>
         </div>
         </>
     )

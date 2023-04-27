@@ -14,7 +14,8 @@ import {
     GET_ALL_CAROUSEL,
     ADD_INGREDIENT_TYPE_CATEGORIE,
     DELETE_ELEMENT,
-    EDIT_PROFILE
+    EDIT_PROFILE,
+    GET_INFO
 } from "../Action-types/Action-types"
 
 const initialState = {
@@ -27,6 +28,7 @@ const initialState = {
     ingredients: [],
     editedProduct:{},
     carousel:[],
+    metrics:{}
 }
 const reducer = (state = initialState, action) => {
     switch (action.type) {
@@ -128,6 +130,11 @@ const reducer = (state = initialState, action) => {
             return {
                 ...state
             }
+            case GET_INFO:
+                return {
+                    ...state,
+                    metrics: action.payload,
+                }
 
         default:
             return { ...state };

@@ -15,7 +15,8 @@ const Products = (props) => {
   const [selectedProduct, setSelectedProduct] = useState(null);
 
 
-  const handleOpenModal = () => {
+  const handleOpenModal = (product) => {
+    setSelectedProduct(product);
     setModalOpen(true);
   };
   const handleCloseModal = () => {
@@ -70,9 +71,8 @@ const Products = (props) => {
             );
           })}
         </div>
-        {modalOpen && (
-    <ModalDetail onClose={handleCloseModal} selectedProduct={selectedProduct} />
-  )}
+        {modalOpen && (<ModalDetail onClose={handleCloseModal} selectedProduct={selectedProduct} />
+        )}
       </div>
 
     </>

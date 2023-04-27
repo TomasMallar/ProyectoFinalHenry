@@ -1,0 +1,55 @@
+.dashboardContainer{
+    display:flex;
+
+
+}
+.homeContainer{
+    flex:5;
+    display: flex;
+    margin-right: 20px;
+    gap: 20px;
+    align-items: center;
+    justify-content: center;
+
+}
+
+
+.widgets{
+    display: flex;
+   justify-content: space-between;
+   padding: 20px;
+   gap : 20px;
+   flex: 1;
+}
+
+
+
+.charts{
+    display: flex;
+   gap:20px;
+   flex: 1;
+}
+
+
+
+.chart{
+    width: 20px;
+}
+
+.PrincipalTitle {
+    font-size: 3rem;
+    font-weight: bold;
+    color:#3F2822;
+    background-color: #f5e7d2;
+    padding: 1rem 2rem;
+    border-radius: 0.5rem;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    display: inline-block;
+    text-transform: uppercase;
+    letter-spacing: 0.2rem;
+    line-height: 1.2;
+    position: relative;
+    width: 100%;
+
+  }
+  

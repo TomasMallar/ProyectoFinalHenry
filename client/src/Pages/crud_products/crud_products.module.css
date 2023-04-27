@@ -1,13 +1,14 @@
-.totalContainer{
-    padding-top: 150px;
-}
+
 .container{
     display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-around;
-  border: 1px solid black;
+  border: 1px solid #3F2822;
   padding: 10px;
+  width: 80vw;
+  margin-right: 10px;
+  margin-left: 10px;
 }
 
 .cell{
@@ -43,10 +44,77 @@ height: fit-content;
 .buttonNewProd{
     padding: 5px;
     margin-left: 40px;
-    background-color: black;
+    background-color: #3F2822;
     color: white;
+    border-radius: 10px;
 }
 .buttonNewProd:hover{
 background-color: gainsboro;
-color: black;
+color: #3F2822;
 }
+
+.cont{
+    display: flex;
+}
+
+.editButton {
+    width: 150px;
+    margin-top: 10px;
+    padding: 5px;
+    border: none;
+    border-radius: 6px;
+    font-size: 14px;
+    color: #fff;
+    background-color: #54bf56;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  .deleteButton {
+    width: fit-content;
+    margin-top: 10px;
+    padding: 5px;
+    border: none;
+    border-radius: 6px;
+    font-size: 14px;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  
+  .editButton:hover {
+    background-color: #19de1d;
+  }
+  
+   .editButton{
+    margin-right: 10px;
+  }
+  .deleteButton{
+    margin-right: 10px;
+  }
+  
+   .deleteButton {
+    background-color: #f44336;
+  }
+  
+   .deleteButton:hover {
+    background-color: #c62828;
+  }
+  
+  .top{
+    font-size: 3rem;
+    font-weight: bold;
+    color:#3F2822;
+    background-color: #f5e7d2;
+    padding: 1rem 2rem;
+    border-radius: 0.5rem;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    display: inline-block;
+    text-transform: uppercase;
+    letter-spacing: 0.2rem;
+    line-height: 1.2;
+    height: fit-content;
+    position: relative;
+    width: 100%;
+
+  }

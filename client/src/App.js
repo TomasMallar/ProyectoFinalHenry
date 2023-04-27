@@ -37,6 +37,8 @@ import PieChartSalesByPaymentAmount from './Components/Charts/PieChartSalesByPay
 import BarCharProductSold from './Components/Charts/BarCharProductSold';
 
 import Landing from './Pages/Landing/Landing';
+import Dashboard from './Pages/Dashboard/Dashborad';
+import Statistics from './Pages/Statistics/Statistics';
 
 function App() {
 
@@ -54,9 +56,10 @@ function App() {
         <PublicRoute exact path="/login" component={Login} />
         <PrivateRoute exact path="/createProduct" component={() => <> <NavBar /><CreateProduct /></>} />
         <PrivateRoute exact path="/metric" component={() => <> <NavBar /><Metric /></>} />
+        
         <PublicRoute exact path="/newUser" component={User} />
         <Route path='/products/:id'> <NavBar /><Detail /> <Footer /></Route>
-        <PrivateRoute exact path="/crudProducts" component={() => <> <NavBar /><CrudProducts /></>} />
+        <PrivateRoute exact path="/crudProducts" component={() => <> <CrudProducts /></>} />
         <PrivateRoute exact path="/editProduct" component={() => <> <NavBar /><EditProduct /></>} />
         <PrivateRoute exact path="/editcategoryTypeIngredient" component={() => <> <NavBar /><EditCategoryTypeIngredient /></>} />
         <Route path="/carrito"> <NavBar /><Carrito /><Footer /></Route>
@@ -69,7 +72,11 @@ function App() {
         <Route path="/about"><NavBar /><About /> <Footer /></Route>
         <PrivateRouteUser exact path="/myshopping" component={() => <><NavBar /><MyShopping /><Footer /></>}/>
         <PrivateRouteUser exact path="/myprofile" component={() => <><NavBar /><MyProfile/><Footer /></>}/>
-        <Route path="/metrica"><PieChartSalesByPayment/><PieChartOrderByPaid/><BarCharSales/><LineChartSalesByMonth/><PieChartSalesByPaymentAmount/> <BarCharProductSold/> </Route>
+        <PrivateRoute exact path="/dashboard" component={() => <> <Dashboard /></>} />
+        <PrivateRoute exact path="/statistics" component={() => <> <Statistics/></>} />
+      
+      
+
         <Route path="/*"><Error/><NavBar/></Route>
       </Switch>
     </div>

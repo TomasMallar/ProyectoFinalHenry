@@ -43,8 +43,7 @@ const PieChartSalesByPaymentAmount = ( ) => {
         <div className={s.container} >
             <div>
 
-                    <h1>Tipo de pago en compras finalizadas</h1>
-        <p>{`Ventas Finalizadas: $${data["total sales amount"]}`}</p>
+                    <p className={s.title}>Tipo de pago en compras finalizadas</p>
     
             </div>
 
@@ -66,6 +65,8 @@ const PieChartSalesByPaymentAmount = ( ) => {
         arcLabelsTextColor="#ffffff"
         legends={[]}
         />
+        <p className={s.text}> {`Ventas Finalizadas: $${data["total sales amount"]}`}</p>
+
         </div>
 )}
 
