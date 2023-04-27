@@ -1,6 +1,6 @@
 import { useSelector, useDispatch } from "react-redux"
 import { useEffect, useState } from "react"
-import { GetAllCategories, getProductsAdvanceController, GetAllTypes, DeleteProduct, EditedProduct, GetAllIngredient } from "../../Redux/Actions/Actions"
+import { GetAllCategories, getProductsAdvanceController, DeleteProduct, EditedProduct, GetAllTypesWithId, GetAllIngredientWithId } from "../../Redux/Actions/Actions"
 import style from './crud_products.module.css'
 import { Link } from "react-router-dom"
 import ModalMailing from "../../Components/ModalMailing/ModalMailing"
@@ -31,8 +31,8 @@ export default function CrudProducts(props) {
     useEffect(() => {
         dispatch(getProductsAdvanceController(queries.name, queries.category, queries.type, queries.orderBy, queries.orderDirection, queries.page))
         dispatch(GetAllCategories())
-        dispatch(GetAllTypes())
-        dispatch(GetAllIngredient())
+        dispatch(GetAllTypesWithId())
+        dispatch(GetAllIngredientWithId())
     }, [dispatch, queries])
 
 
@@ -118,9 +118,9 @@ export default function CrudProducts(props) {
                 <h3 className={style.cell}>INGREDIENTES</h3>
                 <select className={style.cell} name="type" onChange={handleOnChangeFilter}>
                     <option className={style.cell} value="TIPOS" defaultValue="TIPOS">TIPOS</option>
-                    {allTypes.map(t => {
+                    {allTypes?.map(t => {
                         return (
-                            <option className={style.cell} value={t}>{t}</option>
+                            <option className={style.cell} value={t.name}>{t.name}</option>
                         )
                     })}
                 </select>
