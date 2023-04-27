@@ -4,6 +4,7 @@ import { GetAllCategories, getProductsAdvanceController, DeleteProduct, EditedPr
 import style from './crud_products.module.css'
 import { Link } from "react-router-dom"
 import ModalMailing from "../../Components/ModalMailing/ModalMailing"
+import SideBar from "../../Components/SideBar/SideBar"
 
 
 
@@ -83,7 +84,11 @@ export default function CrudProducts(props) {
 
     return (
 
-        <><div className={style.totalContainer}>
+        <>
+        <div className={style.cont}>
+            <SideBar/>
+        <div className={style.totalContainer}>
+            <p className={style.top}>PRODUCTS</p>
             <div className={style.searchBar}>
                 <img className={style.img} alt="lupa" src="https://res.cloudinary.com/dgxs2jcyu/image/upload/v1681582108/lupa_yidfrt.png" />
                 <input type="search" name="name" value={queries.name} placeholder="Buscar Producto" onChange={handleInputChangeSearchBar} />
@@ -171,13 +176,14 @@ export default function CrudProducts(props) {
                                 }) : <p className={style.cell}>N/A</p>}
                             </div>
 
-                            <Link to="/editProduct"><button className={style.cell} value={c} onClick={() => { handleOnClickEdit(c) }}>Editar</button> </Link>
-                            <button className={style.cell} value={c.id} onClick={handleOnClickDelete}>Eliminar</button>
+                            <Link to="/editProduct"><button className={style.editButton} value={c} onClick={() => { handleOnClickEdit(c) }}>Editar</button> </Link>
+                            <button className={style.deleteButton} value={c.id} onClick={handleOnClickDelete}>Eliminar</button>
 
                         </div>
                     )
                 })}
             </div>
+        </div>
         </div>
         </>
     )

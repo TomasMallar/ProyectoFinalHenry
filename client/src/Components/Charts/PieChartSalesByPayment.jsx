@@ -8,49 +8,44 @@ import s from './PieChartSalesByPayment.module.css'
 // no chart will be rendered.
 // website examples showcase many properties,
 // you'll often use just a few of them.
-const PieChartSalesByPayment = ( ) => {
-    const [data, setData] = useState([]);
-    function transformData(data) {
-        return [
-          {
-            id: "Criptomoneda",
-            label: "Criptomoneda",
-            value: data["total sales by Crypto Payment"],
-          },
-          {
-            id: "Tarjeta",
-            value: data["total sales by Cards Payment"]
-          },
-            {
-            id: "Transferencia",
-            value: data["total sales by Transfer Payment"]
-            },
-        ];
-      }
-      
-      const transformedData = transformData(data);
-      console.log(transformedData);
-    useEffect(() => {
-        axios.get('http://localhost:3001/metric/purchasedCartsByCardPayment')
-          .then(response => {
-            setData(response.data);
-          })
-          .catch(error => {
-            console.error(error);
-          });
-      }, []);
-    return (
-        <div className={s.container} >
-            <div>
+const PieChartSalesByPayment = () => {
+  const [data, setData] = useState([]);
+  function transformData(data) {
+    return [
+      {
+        id: "Criptomoneda",
+        label: "Criptomoneda",
+        value: data["total sales by Crypto Payment"],
+      },
+      {
+        id: "Tarjeta ",
+        value: data["total sales by Cards Payment"],
+      },
+      {
+        id: "Transferencia",
+        value: data["total sales by Transfer Payment"]
+      },
+    ];
+  }
 
-                    <h1>Tipo de pago en compras finalizadas</h1>
-        <p>{`Ventas Finalizadas: ${data["total sales with any payment"]}`}</p>
-        <p>{`Pago con Tarjeta: ${data["total sales by Cards Payment"]} (%${data["percentage of purchased carts by Cards Payment"]})`}</p>
-        <p>{`Pago con Criptomoneda: ${data["total sales by Crypto Payment"]} (%${data["percentage of purchased carts by Crypto Payment"]})`}</p>
-        <p>{`Pago con Transferencia: ${data["total sales by Transfer Payment"]} (%${data["percentage of purchased carts by Transfer Payment"]})`}</p>
-            </div>
-
-    <ResponsivePie
+  const transformedData = transformData(data);
+  console.log(transformedData);
+  useEffect(() => {
+    axios.get('http://localhost:3001/metric/purchasedCartsByCardPayment')
+      .then(response => {
+        setData(response.data);
+      })
+      .catch(error => {
+        console.error(error);
+      });
+  }, []);
+  return (
+    <div className={s.container} >
+      <div>
+      <p className={s.title}>Método de pago </p>
+      </div>
+   
+      <ResponsivePie
         data={transformedData}
         margin={{ top: 40, right: 80, bottom: 80, left: 80 }}
         innerRadius={0.5}
@@ -66,8 +61,16 @@ const PieChartSalesByPayment = ( ) => {
         arcLabelsSkipAngle={10}
         arcLabelsTextColor="#ffffff"
         legends={[]}
-        />
+      />
+      <div>
+
+      </div>
+       <div className={s.infoContainer}>
+        <p className={s.text}>{`Total de ventas finalizadas: ${data["total sales with any payment"]}`}</p>
         </div>
-)}
+    </div>
+
+  )
+}
 
 export default PieChartSalesByPayment

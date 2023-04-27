@@ -45,7 +45,7 @@ export default function NavBar() {
                 </Link>
 
                 {userRole === '2' && (
-                    <Link to="/crudProducts" className="text-2xl list-none text-chocolate-oscuro no-underline pl-3.5  font-serif">
+                    <Link to="/dashboard" className="text-2xl list-none text-chocolate-oscuro no-underline pl-3.5  font-serif">
                         <li>
                             ADMIN
                         </li>
