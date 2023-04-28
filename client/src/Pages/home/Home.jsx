@@ -37,7 +37,7 @@ const Products = (props) => {
           {/* Map each product into a single card using map */}
           {allProducts?.map((product) => {
             return (
-              <>
+              
                 <ProductCard
                   // as we are receiving info from the api with the "?" we make sure that we are getting the info and the app does not crash
                   key={product?.id}
@@ -48,7 +48,7 @@ const Products = (props) => {
                   price={product?.price}
                   score={product?.score}
                 />
-              </>
+              
             );
           })}
         </div>
