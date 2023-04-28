@@ -35,7 +35,7 @@ const ProductCard = ({ id, name, image, price, category }) => {
                 return updatedCartItems;
             }
         });
-        setShowBubble(true);
+        // setShowBubble(true);
     };
     
 
@@ -50,8 +50,9 @@ const ProductCard = ({ id, name, image, price, category }) => {
             <button className="border-none ml-60 w-fit" onClick={() => addToCart(product)}>
                 <img src={carImagen} alt="" className="w-8" />
             </button>
+            <Link to={`/products/${id}`}>
 
-            <Link className="flex flex-col items-center m-auto text-chocolate-blanco" to={`/products/${id}`}>
+            <div className="flex flex-col items-center m-auto text-chocolate-blanco" >
                 <h1 className="h-16 m-0 text-2xl leading-7 w-72">
                     {name}
                 </h1>
@@ -67,9 +68,9 @@ const ProductCard = ({ id, name, image, price, category }) => {
                 <h3 className="text-lg leading-4">
                     $ {price}
                 </h3>
-            </Link>
-
+            </div>
             {/* <ButtonMP title={name} unit_price={price} /> */}
+                    </Link>
         </div>
     )
 }
