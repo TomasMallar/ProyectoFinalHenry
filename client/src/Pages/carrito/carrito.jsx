@@ -17,51 +17,24 @@ const Carrito = () => {
     setCartItems([]);
   };
 
-
-  const getUniqueProducts = (cartItems) => {
-    const uniqueProducts = {};
-    cartItems.forEach((item) => {
-      if (uniqueProducts[item.id]) {
-        uniqueProducts[item.id].quantity += 1;
-      } else {
-        uniqueProducts[item.id] = {
-          ...item,
-          quantity: 1,
-        };
-      }
-    });
-    console.log(uniqueProducts);
-    return Object.values(uniqueProducts);
-  };
-
-  const uniqueCartItems = getUniqueProducts(cartItems);
-
   const handleAddToCart = (item) => {
+    const existingItemIndex = cartItems.findIndex((cartItem) => cartItem.id === item.id);
     const updatedCartItems = [...cartItems];
-    const existingItemIndex = updatedCartItems.findIndex(
-      (cartItem) => cartItem.id === item.id
-    );
     if (existingItemIndex !== -1) {
-      if (updatedCartItems[existingItemIndex].quantity < 1) {
-        updatedCartItems[existingItemIndex].quantity += 1;
-      } else {
-        updatedCartItems.splice(existingItemIndex, 0, item); // Agrega 'item' en el índice 'existingItemIndex' sin eliminar ningún elemento
-      }
+      updatedCartItems[existingItemIndex].quantity++;
     } else {
-      updatedCartItems.push(item); // Agrega 'item' al final del arreglo
+      updatedCartItems.push({ ...item, quantity: 1 });
     }
     setCartItems(updatedCartItems);
     localStorage.setItem("cartItems", JSON.stringify(updatedCartItems));
-  };
+  };  
 
   const handleRemoveFromCart = (item) => {
+    const existingItemIndex = cartItems.findIndex((cartItem) => cartItem.id === item.id);
     const updatedCartItems = [...cartItems];
-    const existingItemIndex = updatedCartItems.findIndex(
-      (cartItem) => cartItem.id === item.id
-    );
     if (existingItemIndex !== -1) {
-      if (updatedCartItems[existingItemIndex].quantity < 1) {
-        updatedCartItems[existingItemIndex].quantity += 1;
+      if (updatedCartItems[existingItemIndex].quantity > 1) {
+        updatedCartItems[existingItemIndex].quantity--;
       } else {
         updatedCartItems.splice(existingItemIndex, 1);
       }
@@ -106,8 +79,8 @@ const Carrito = () => {
       <div className="p-4 bg-chocolate-mantecol rounded-2xl">
 
         <div className="px-10 divide-y divide-black">
-          {uniqueCartItems.length > 0 ? (
-            uniqueCartItems.map((item) => (
+          {cartItems.length > 0 ? (
+            cartItems.map((item) => (
               <div key={item.id} className="flex items-center justify-between p-6">
 
                 <div className="w-[20%]">
