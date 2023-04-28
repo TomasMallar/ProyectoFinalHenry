@@ -7,6 +7,7 @@ const { getPurchasedCartsByCardPaymentHandler } = require("../../handlers/metric
 const { getAverageAmountSalesHandler } = require("../../handlers/metricHandlers/getAverageAmountSalesHandler");
 const { getTotalSalesByMonthHandler } = require("../../handlers/metricHandlers/getTotalSalesByMonthHandler");
 const { getMonthPerformanceHandler } = require("../../handlers/metricHandlers/getMonthPerformanceHandler");
+const {getAllSalesPaginatedHandler} = require("../../handlers/metricHandlers/getAllSalesPaginatedHandler");
 
 
 const routerMetric = Router();
@@ -19,6 +20,7 @@ routerMetric.get('/purchasedCarts', getPurchasedCartsHandler);
 routerMetric.get('/purchasedCartsByCardPayment', getPurchasedCartsByCardPaymentHandler);
 routerMetric.get('/average-amount-sales', getAverageAmountSalesHandler) ;
 routerMetric.get('/month-performance', getMonthPerformanceHandler);
+routerMetric.get('/all-sales', getAllSalesPaginatedHandler );
 
 
 
