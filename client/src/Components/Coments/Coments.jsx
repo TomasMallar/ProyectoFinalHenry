@@ -9,6 +9,7 @@ const Coments = () => {
     const history = useHistory()
 
     const [comments, setComments] = useState([])
+    console.log(comments);
     const [currentComment, setCurrentComment] = useState('')
     const [commentsDeleted, setCommentsDeleted] = useState(false)
     const [commentsUpdated, setCommentsUpdated] = useState(false)
@@ -27,6 +28,7 @@ const Coments = () => {
         const getAllComents = async () => {
             const response = await axios.get(`http://localhost:3001/coments/${id}`)
             setComments(response.data)
+            setLatestComments(response.data.length)
         }
         getAllComents()
     }, [commentsDeleted, commentsUpdated])
@@ -36,18 +38,19 @@ const Coments = () => {
     }
 
     const postComment = async () => {
-        if(userId === null){
+        if (userId === null) {
             alert('Debes iniciar sesión para poder comprar');
             history.push('/login');
             return;
-          }
+        }
+        if(currentComment.length === 0) return
         const newComment = {
             productId: id,
             userId: userId,
             content: currentComment
         }
         const response = await axios.post('http://localhost:3001/coments', newComment)
-        setComments([...comments, response.data])
+        setComments([response.data, ...comments])
     }
 
     const deleteComment = async (event) => {
@@ -77,6 +80,14 @@ const Coments = () => {
     const editCommentHandler = (comment) => {
         setEditComment({ id: comment.id, content: comment.content })
     }
+    const [cont, setCont] = useState(2)
+    const [latestComments, setLatestComments] = useState(null)
+    const pagesHandler = async () => {
+        const response = await axios.get(`http://localhost:3001/coments/${id}?page=${cont}`)
+        setCont(cont + 1)
+        setComments([...comments, ...response.data])
+        setLatestComments(response.data.length)
+    }
 
     return (
         <div className={style.container}>
@@ -105,6 +116,9 @@ const Coments = () => {
 
                     </div>
                 ))}
+                {
+                    latestComments === 3 && <button onClick={pagesHandler}>Ver mas comentarios...</button>
+                }
             </div>
 
         </div>
