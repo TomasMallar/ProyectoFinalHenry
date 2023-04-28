@@ -3,8 +3,9 @@ const { getComents, postComent, putComent, deleteComent } = require('../../contr
 
 const getAllComents = async (req, res) => {
     try {
+        const { page = 1 } = req.query
         const { id } = req.params
-        const allComents = await getComents(id)
+        const allComents = await getComents(id, page)
         res.status(200).json(allComents)
     } catch (error) {
         res.status(400).json({error: error.message})

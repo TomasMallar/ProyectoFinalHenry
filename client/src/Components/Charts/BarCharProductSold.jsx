@@ -21,8 +21,8 @@ const BarCharProductSold = () => {
         });
     }, []);
     return (
-        <div className={s.container}>
-
+        <div className={s.containerMS}>
+          <p className={s.title}> PRODUCTOS MÁS VENDIDOS HISTORICAMENTE</p>
         <ResponsiveBar
         data={data}
         keys={
@@ -40,7 +40,7 @@ const BarCharProductSold = () => {
             tickSize: 5,
             tickPadding: 5,
             tickRotation: 0,
-            legend: 'Productos Mas Vendidos Historicos',
+            legend: 'PRODUCTOS',
             legendPosition: 'middle',
             legendOffset: 32
         }}
@@ -48,7 +48,7 @@ const BarCharProductSold = () => {
             tickSize: 5,
             tickPadding: 5,
             tickRotation: 0,
-            legend: 'Ventas',
+            legend: 'VENTAS',
             legendPosition: 'middle',
             legendOffset: -40
         }}

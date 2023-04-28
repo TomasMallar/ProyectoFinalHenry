@@ -1,6 +1,6 @@
 .container{
     border: 1px solid black;
-    height: 500px;
+    height: fit-content;
     display: flex;
     justify-content: center;
     
@@ -17,4 +17,12 @@
 .comentarios {
     border:  1px solid blue;
     margin: 4px;
+}
+
+.visible {
+    display: block;
+}
+
+.invisible {
+    display: none;
 }

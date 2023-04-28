@@ -3,7 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@emotion/react": "^11.10.6",
+    "@emotion/styled": "^11.10.6",
     "@mercadopago/sdk-react": "^0.0.8",
+    "@mui/icons-material": "^5.11.16",
+    "@mui/material": "^5.12.2",
     "@nivo/bar": "^0.80.0",
     "@nivo/core": "^0.80.0",
     "@nivo/line": "^0.80.0",

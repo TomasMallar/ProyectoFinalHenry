@@ -24,7 +24,7 @@ export default function Validations ({name, price, stock, image, types, categori
     if (!image) {
         objErrors.image = "Debe ingresar una url de la imágen"
     } else if (!regexUrl.test(image)) {
-        objErrors.image = "Ingrese una url válida"
+       objErrors.image = "Ingrese una url válida"
     }
     if (!types.length) {
         objErrors.types = "Debe elegir al menos un tipo"

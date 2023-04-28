@@ -29,9 +29,6 @@ import About from './Pages/about/about';
 import Metric from './Components/Metrics/Metrics';
 import MyShopping from './Components/MyShopping/MyShopping';
 import MyProfile from './Components/MyProfile/MyProfile';
-<<<<<<< HEAD
-import EditProfile from './Components/EditProfile/EditProfile';
-=======
 import PieChartSalesByPayment from './Components/Charts/PieChartSalesByPayment';
 import PieChartOrderByPaid from './Components/Charts/PieChartOrderByPaid';
 import BarCharSales from './Components/Charts/BarCharSales';
@@ -40,7 +37,8 @@ import PieChartSalesByPaymentAmount from './Components/Charts/PieChartSalesByPay
 import BarCharProductSold from './Components/Charts/BarCharProductSold';
 
 import Landing from './Pages/Landing/Landing';
->>>>>>> acdc84548fad62170a043a5e0f11187fb6df59f9
+import Dashboard from './Pages/Dashboard/Dashborad';
+import Statistics from './Pages/Statistics/Statistics';
 
 function App() {
 
@@ -58,9 +56,10 @@ function App() {
         <PublicRoute exact path="/login" component={Login} />
         <PrivateRoute exact path="/createProduct" component={() => <> <NavBar /><CreateProduct /></>} />
         <PrivateRoute exact path="/metric" component={() => <> <NavBar /><Metric /></>} />
+        
         <PublicRoute exact path="/newUser" component={User} />
         <Route path='/products/:id'> <NavBar /><Detail /> <Footer /></Route>
-        <PrivateRoute exact path="/crudProducts" component={() => <> <NavBar /><CrudProducts /></>} />
+        <PrivateRoute exact path="/crudProducts" component={() => <> <CrudProducts /></>} />
         <PrivateRoute exact path="/editProduct" component={() => <> <NavBar /><EditProduct /></>} />
         <PrivateRoute exact path="/editcategoryTypeIngredient" component={() => <> <NavBar /><EditCategoryTypeIngredient /></>} />
         <Route path="/carrito"> <NavBar /><Carrito /><Footer /></Route>
@@ -73,11 +72,11 @@ function App() {
         <Route path="/about"><NavBar /><About /> <Footer /></Route>
         <PrivateRouteUser exact path="/myshopping" component={() => <><NavBar /><MyShopping /><Footer /></>}/>
         <PrivateRouteUser exact path="/myprofile" component={() => <><NavBar /><MyProfile/><Footer /></>}/>
-<<<<<<< HEAD
-        <PrivateRouteUser exact path="/editprofile" component={() => <><NavBar /><EditProfile /><Footer /></>}/>
-=======
-        <Route path="/metrica"><PieChartSalesByPayment/><PieChartOrderByPaid/><BarCharSales/><LineChartSalesByMonth/><PieChartSalesByPaymentAmount/> <BarCharProductSold/> </Route>
->>>>>>> acdc84548fad62170a043a5e0f11187fb6df59f9
+        <PrivateRoute exact path="/dashboard" component={() => <> <Dashboard /></>} />
+        <PrivateRoute exact path="/statistics" component={() => <> <Statistics/></>} />
+      
+      
+
         <Route path="/*"><Error/><NavBar/></Route>
       </Switch>
     </div>

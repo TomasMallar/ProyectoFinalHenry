@@ -37,13 +37,9 @@ const PieChartOrderByPaid = ( ) => {
           });
       }, []);
     return (
-        <div className={s.container} >
+        <div className={s.containerCF} >
             <div>
-
-            <h1>Ordenes de compras finalizadas</h1>
-        <p>{`Total de Ordenes de Compra: ${data["totalOrders"]}`}</p>
-        <p>{`Ordenes sin concluir: ${data["notPurchasedOrders"]} (%${data["percentageNotPurchased"]})`}</p>
-        <p>{`Compras realizadas: ${data["purchasedOrders"]} (%${data["percentage"]})`}</p>
+            <p className={s.title}>Ordenes de compras finalizadas</p>
             </div>
 
     <ResponsivePie
@@ -63,6 +59,10 @@ const PieChartOrderByPaid = ( ) => {
         arcLabelsTextColor="#ffffff"
         legends={[]}
         />
+         <p className={s.text}> {`Total de Ordenes de Compra: ${data["totalOrders"]}`}</p>
+        <p className={s.text}>{`Ordenes sin concluir: ${data["notPurchasedOrders"]} (%${data["percentageNotPurchased"]})`}</p>
+        <p className={s.text}>{`Compras realizadas: ${data["purchasedOrders"]} (%${data["percentage"]})`}</p>
+       
         </div>
 )}
 
