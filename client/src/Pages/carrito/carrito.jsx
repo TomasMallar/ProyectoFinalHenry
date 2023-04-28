@@ -17,6 +17,7 @@ const Carrito = () => {
     setCartItems([]);
   };
 
+
   const getUniqueProducts = (cartItems) => {
     const uniqueProducts = {};
     cartItems.forEach((item) => {
@@ -92,7 +93,7 @@ const Carrito = () => {
   const calcularTotalCarrito = () => {
     let total = 0;
     for (const item of cartItems) {
-      total += item.price ;
+      total += item.price;
     }
     return total;
   }
@@ -145,12 +146,12 @@ const Carrito = () => {
             ))
           ) : (
             <div className="p-10">
-            <p className="m-4 text-2xl font-bold animate-pulse">
-              No hay productos en el carrito.
-            </p>
-            <button className="p-4 text-xl font-bold shadow-sm h-fit shadow-chocolate-claro bg-chocolate-claro rounded-xl text-chocolate-oscuro hover:bg-chocolate-blanco">
-            <Link to="/products">Ver nuestos productos</Link>
-          </button>
+              <p className="m-4 text-2xl font-bold animate-pulse">
+                No hay productos en el carrito.
+              </p>
+              <button className="p-4 text-xl font-bold shadow-sm h-fit shadow-chocolate-claro bg-chocolate-claro rounded-xl text-chocolate-oscuro hover:bg-chocolate-blanco">
+                <Link to="/products">Ver nuestos productos</Link>
+              </button>
             </div>
           )}
         </div>

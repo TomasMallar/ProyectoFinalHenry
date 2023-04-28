@@ -5,25 +5,10 @@ import { useEffect } from "react";
 import { getProductsAdvanceController } from "../../Redux/Actions/Actions";
 import SortingAndFiltering from "../sortingAndFiltering/sortingAndFiltering";
 import { Rotate, Fade } from 'react-reveal';
-import ModalDetail from "../../Components/ModalDetail/ModalDetail";
 
 const Products = (props) => {
   const dispatch = useDispatch();
 
-  // Modal
-  const [modalOpen, setModalOpen] = useState(false);
-  const [selectedProduct, setSelectedProduct] = useState(null);
-
-
-  const handleOpenModal = (product) => {
-    setSelectedProduct(product);
-    setModalOpen(true);
-  };
-  const handleCloseModal = () => {
-    setModalOpen(false);
-  };
-
-  // de acá en adelante andaba todo bien
   useEffect(() => {
     dispatch(getProductsAdvanceController());
   }, [dispatch]);
@@ -65,14 +50,11 @@ const Products = (props) => {
                   category={product?.categories}
                   price={product?.price}
                   score={product?.score}
-                  onClick={handleOpenModal}
                 />
               </>
             );
           })}
         </div>
-        {modalOpen && (<ModalDetail onClose={handleCloseModal} selectedProduct={selectedProduct} />
-        )}
       </div>
 
     </>

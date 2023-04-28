@@ -36,11 +36,11 @@ const Coments = () => {
     }
 
     const postComment = async () => {
-        if(userId === null){
+        if (userId === null) {
             alert('Debes iniciar sesión para poder comprar');
             history.push('/login');
             return;
-          }
+        }
         const newComment = {
             productId: id,
             userId: userId,
@@ -82,23 +82,37 @@ const Coments = () => {
         <div className={style.container}>
             <div className={style.containerComents}>
                 <input type="text" placeholder='Escribe un comentario...' onChange={onChangeHandler} />
-                <button onClick={postComment}>Publicar</button>
+                <button onClick={postComment}>
+                    Publicar
+                </button>
                 {comments.map((comment, index) => (
                     <div key={comment.id} className={style.comentarios}>
-                        <h3>{comment.name}</h3>
-                        <h4>{comment.createdAt.slice(0, 10)}</h4>
+                        <h3>
+                            {comment.name}
+                        </h3>
+                        <h4>
+                            {comment.createdAt.slice(0, 10)}
+                        </h4>
                         {editComment.id === comment.id ? (
                             <form onSubmit={editCommentSubmit} >
                                 <textarea value={editComment.content} onChange={(event) => setEditComment({ ...editComment, content: event.target.value })} />
-                                <button name={comment.id} type="submit">Guardar</button>
+                                <button name={comment.id} type="submit">
+                                    Guardar
+                                </button>
                             </form>
                         ) : (
-                            <p>{comment.content}</p>
+                            <p>
+                                {comment.content}
+                            </p>
                         )}
                         {comment.userId === userId && (
                             <div>
-                                <button onClick={() => editCommentHandler(comment)}>Editar</button>
-                                <button name={comment.id} onClick={deleteComment}>Eliminar</button>
+                                <button onClick={() => editCommentHandler(comment)}>
+                                    Editar
+                                </button>
+                                <button name={comment.id} onClick={deleteComment}>
+                                    Eliminar
+                                </button>
                             </div>
                         )
                         }
