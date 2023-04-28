@@ -35,7 +35,7 @@ const ProductCard = ({ id, name, image, price, category }) => {
                 return updatedCartItems;
             }
         });
-        setShowBubble(true);
+        // setShowBubble(true);
     };
     
 

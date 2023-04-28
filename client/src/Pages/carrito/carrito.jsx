@@ -27,7 +27,7 @@ const Carrito = () => {
     }
     setCartItems(updatedCartItems);
     localStorage.setItem("cartItems", JSON.stringify(updatedCartItems));
-  };  
+  };
 
   const handleRemoveFromCart = (item) => {
     const existingItemIndex = cartItems.findIndex((cartItem) => cartItem.id === item.id);
@@ -66,7 +66,7 @@ const Carrito = () => {
   const calcularTotalCarrito = () => {
     let total = 0;
     for (const item of cartItems) {
-      total += item.price;
+      total += item.price * item.quantity;
     }
     return total;
   }

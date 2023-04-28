@@ -34,31 +34,38 @@ const Detail = () => {
     // carrito 
     const [cartItems, setCartItems] = useState([]);
 
-    const addToCart = (item) => {
-        // Verificar si el producto ya existe en el carrito
-        const existingProduct = cartItems.find(item => item.id === item.id);
-        if (existingProduct) {
-            // Si el producto ya existe, actualizar su cantidad sumando 1
-            const updatedCartItems = cartItems.map(item => {
-                if (item.id === ChocolateDetail.id) {
-                    return { ...item, quantity: item.quantity + 1 };
-                }
-                return item;
-            });
-            setCartItems(updatedCartItems);
-        } else {
-            // Si el producto no existe, agregarlo con una cantidad de 1
-            setCartItems([...cartItems, { ...item, quantity: 1 }]);
-        }
+    const addToCart = (product) => {
+        console.log('ESTE ES EL PRODUCTO ARMADO', product);
+        setCartItems((prevCartItems) => {
+            const existingProduct = prevCartItems.find(item => item.id === product.id);
+            console.log('ESTE ES EL PRODUCTO EXISTENTE', existingProduct);
+
+            if (existingProduct) {
+                // Si el producto ya existe, actualizar su cantidad sumando 1
+                const updatedCartItems = prevCartItems.map(item => {
+                    if (item.id === product.id) {
+                        console.log('LLEGAMOS AL MAS?');
+                        return { ...item, quantity: item.quantity + 1 };
+                    } else {
+                        return item;
+                    }
+                });
+                console.log('ESTE ES EL CARRITO ACTUALIZADO', updatedCartItems);
+                localStorage.setItem("cartItems", JSON.stringify(updatedCartItems));
+                return updatedCartItems;
+            } else {
+                // Si el producto no existe, agregarlo con una cantidad de 1
+                const updatedCartItems = [...prevCartItems, { ...product, quantity: 1 }];
+                localStorage.setItem("cartItems", JSON.stringify(updatedCartItems));
+                return updatedCartItems;
+            }
+        });
     };
 
     useEffect(() => {
-        const existingCartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
-        localStorage.setItem(
-            "cartItems",
-            JSON.stringify([...existingCartItems, ...cartItems])
-        );
-    }, [cartItems]);
+        const storedCartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
+        setCartItems(storedCartItems);
+    }, []);
 
     // carrito 
 
@@ -92,7 +99,7 @@ const Detail = () => {
                         <div className="flex flex-row px-5 my-6">
                             <div className="flex flex-col items-start justify-start px-5 basis-1/2">
                                 <p className="px-2 text-xl font-semibold ">
-                                    Categoria
+                                    Categorias
                                 </p>
                                 {ChocolateDetail.categories?.map((c) => {
                                     return (
@@ -131,9 +138,10 @@ const Detail = () => {
                 </section>
 
                 {/* seccion de valoraciones */}
-                <section className="flex flex-col items-center justify-between mt-8">
-                    <div>
-                        <div className="rating">
+                <section className="flex items-start justify-center">
+                    <div className="pt-8 w-[30%]">
+                        <h3 className="mb-8 text-3xl ">VALORACIONES</h3>
+                        <div className={styles.rating}>
                             {[...Array(5)].map((star, i) => {
                                 const ratingValue = i + 1;
 
@@ -156,8 +164,9 @@ const Detail = () => {
                             })}
                         </div>
                     </div>
-
-                    <Coments></Coments>
+                    <div className="w-[70%] pt-20 h-full">
+                        <Coments></Coments>
+                    </div>
                 </section>
 
             </div>
