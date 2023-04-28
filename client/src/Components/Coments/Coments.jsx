@@ -90,8 +90,8 @@ const Coments = () => {
     }
 
     return (
-        <div className={style.container}>
-            <div className={style.containerComents}>
+        <div className="flex flex-col items-center justify-center w-[50%] h-96 bg-chocolate-blanco rounded-xl">
+            <div className="w-full ">
                 <input type="text" placeholder='Escribe un comentario...' onChange={onChangeHandler} />
                 <button onClick={postComment}>
                     Publicar
@@ -131,7 +131,7 @@ const Coments = () => {
                     </div>
                 ))}
                 {
-                    latestComments === 3 && <button onClick={pagesHandler}>Ver mas comentarios...</button>
+                    latestComments === 3 && <button className='m-10 ' onClick={pagesHandler}>Ver mas comentarios...</button>
                 }
             </div>
 

@@ -131,9 +131,9 @@ const Detail = () => {
                 </section>
 
                 {/* seccion de valoraciones */}
-                <section className="flex items-center justify-between">
+                <section className="flex flex-col items-center justify-between mt-8">
                     <div>
-                        <div className={styles.rating}>
+                        <div className="rating">
                             {[...Array(5)].map((star, i) => {
                                 const ratingValue = i + 1;
 
@@ -156,7 +156,7 @@ const Detail = () => {
                             })}
                         </div>
                     </div>
-                    
+
                     <Coments></Coments>
                 </section>
 

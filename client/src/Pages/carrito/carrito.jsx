@@ -149,9 +149,11 @@ const Carrito = () => {
               <p className="m-4 text-2xl font-bold animate-pulse">
                 No hay productos en el carrito.
               </p>
-              <button className="p-4 text-xl font-bold shadow-sm h-fit shadow-chocolate-claro bg-chocolate-claro rounded-xl text-chocolate-oscuro hover:bg-chocolate-blanco">
-                <Link to="/products">Ver nuestos productos</Link>
-              </button>
+              <Link to="/products">
+                <button className="p-4 text-xl font-bold shadow-sm h-fit shadow-chocolate-claro bg-chocolate-claro rounded-xl text-chocolate-oscuro hover:bg-chocolate-blanco">
+                  Ver nuestos productos
+                </button>
+              </Link>
             </div>
           )}
         </div>
