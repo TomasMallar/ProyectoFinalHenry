@@ -1,7 +1,7 @@
 const { Sale, Order, User, Product, OrderItem } = require('../../db');
 const { Op } = require('sequelize');
 
-async function getSalesReport(year, month = null, page = 1, pageSize = 100) {
+async function getOrdersReport(year, month = null, page = 1, pageSize = 100) {
   const options = {
     order: [['createdAt', 'DESC']],
     limit: pageSize,
@@ -27,33 +27,33 @@ async function getSalesReport(year, month = null, page = 1, pageSize = 100) {
     };
     console.log(options);
     // Obtenemos la suma total de la columna "amount" para el mes proporcionado
-    const total = await Sale.sum('amount', {where: options.where} );
-     totalHistoric = await Sale.sum('amount')
-    monthTotal = parseFloat(total);
   }
 
 //   const sales = await Sale.findAndCountAll(options);
-const sales = await Sale.findAndCountAll({
+const sales = await Order.findAndCountAll({
     ...options,
-    include: {
-      model: Order,
-      as: 'order',
-      include: [
+    include: [
         {
-          model: User,
-          as: 'user'
+            model: User,
+            as: 'user',
         },
         {
-          model: OrderItem,
-          as: 'items',
-          include: {
-            model: Product,
-            as: 'product'
-          }
-        }
-      ]
-    }
-  });
+            model: OrderItem,
+            as: 'items',
+            include: [
+                {
+                    model: Product,
+                    as: 'product',
+                },
+            ],
+        },
+        {
+            model: Sale,
+            as: 'sale',
+        },
+    ],
+});
+
   
 
   const report = {sales: []};
@@ -64,11 +64,7 @@ const sales = await Sale.findAndCountAll({
 
   const totalPages = Math.ceil(sales.count / pageSize);
 
-  if (month) {
-    return { report: report.sales, monthTotal, page, pageSize, totalPages, totalHistoric };
-  }
-
   return { report:report.sales, page, pageSize, totalPages };
 }
 
-module.exports = {getSalesReport};
+module.exports = {getOrdersReport};
