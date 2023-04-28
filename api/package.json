@@ -24,6 +24,7 @@
     "express": "^4.17.1",
     "fs": "^0.0.1-security",
     "handlebars": "^4.7.7",
+    "html-pdf": "^3.0.1",
     "joi": "^17.9.1",
     "jsonwebtoken": "^9.0.0",
     "mercadopago": "^1.5.15",
