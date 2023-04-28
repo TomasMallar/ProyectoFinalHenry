@@ -1,6 +1,6 @@
 .container{
     border: 1px solid black;
-    height: 500px;
+    height: fit-content;
     display: flex;
     justify-content: center;
     
