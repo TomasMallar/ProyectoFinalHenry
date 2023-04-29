@@ -124,10 +124,10 @@ export default function SortingAndFiltering(props) {
             </option>
           </optgroup>
           <optgroup label="SCORE">
-            <option value="score, ASC">
+            <option value="scoresStars, ASC">
               Lowest to Highest (1-5)
             </option>
-            <option value="score, DESC">
+            <option value="scoresStars, DESC">
               Highest to Lowest (1-5)
             </option>
           </optgroup>
