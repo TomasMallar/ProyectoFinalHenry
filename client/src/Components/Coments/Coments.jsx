@@ -43,7 +43,7 @@ const Coments = () => {
             history.push('/login');
             return;
         }
-        if(currentComment.length === 0) return
+        if (currentComment.length === 0) return
         const newComment = {
             productId: id,
             userId: userId,
@@ -90,34 +90,54 @@ const Coments = () => {
     }
 
     return (
-        <div className={style.container}>
-            <div className={style.containerComents}>
-                <input type="text" placeholder='Escribe un comentario...' onChange={onChangeHandler} />
-                <button onClick={postComment}>Publicar</button>
-                {comments.map((comment, index) => (
-                    <div key={comment.id} className={style.comentarios}>
-                        <h3>{comment.name}</h3>
-                        <h4>{comment.createdAt.slice(0, 10)}</h4>
-                        {editComment.id === comment.id ? (
-                            <form onSubmit={editCommentSubmit} >
-                                <textarea value={editComment.content} onChange={(event) => setEditComment({ ...editComment, content: event.target.value })} />
-                                <button name={comment.id} type="submit">Guardar</button>
-                            </form>
-                        ) : (
-                            <p>{comment.content}</p>
-                        )}
-                        {comment.userId === userId && (
-                            <div>
-                                <button onClick={() => editCommentHandler(comment)}>Editar</button>
-                                <button name={comment.id} onClick={deleteComment}>Eliminar</button>
-                            </div>
-                        )
-                        }
+        <div className="flex flex-col items-center justify-center w-[100%] bg-chocolate-blanco rounded-xl">
+            <div className="w-full h-full">
+                <div className='flex items-center my-6 justify-evenly'>
+                    <textarea type="text" placeholder='Escribe un comentario...' onChange={onChangeHandler} maxlength="150" className="p-4 mb-2 text-base border-none shadow-sm bg-chocolate-mantecol w-[70%] h-28 rounded-2xl text-chocolate-oscuro shadow-chocolate-bombom cursor-text focus:outline-chocolate-bombom" />
 
-                    </div>
-                ))}
+                    <button onClick={postComment} className='p-1 m-2 font-serif font-bold rounded-lg shadow-sm bg-chocolate-claro text-chocolate-oscuro shadow-chocolate-claro hover:bg-chocolate-blanco'>
+                        Publicar
+                    </button>
+                </div>
+
+                <div className='grid w-full h-full p-6 divide-y divide-current'>
+                    {comments.map((comment, index) => (
+                        <div key={comment.id} className="flex">
+                            <h3>
+                                {comment.name}
+                            </h3>
+                            <h4>
+                                {comment.createdAt.slice(0, 10)}
+                            </h4>
+                            {editComment.id === comment.id ? (
+                                <form onSubmit={editCommentSubmit} >
+                                    <textarea value={editComment.content} onChange={(event) => setEditComment({ ...editComment, content: event.target.value })} />
+                                    <button name={comment.id} type="submit">
+                                        Guardar
+                                    </button>
+                                </form>
+                            ) : (
+                                <p>
+                                    {comment.content}
+                                </p>
+                            )}
+                            {comment.userId === userId && (
+                                <div>
+                                    <button onClick={() => editCommentHandler(comment)}>
+                                        Editar
+                                    </button>
+                                    <button name={comment.id} onClick={deleteComment}>
+                                        Eliminar
+                                    </button>
+                                </div>
+                            )
+                            }
+
+                        </div>
+                    ))}
+                </div>
                 {
-                    latestComments === 3 && <button onClick={pagesHandler}>Ver mas comentarios...</button>
+                    latestComments === 3 && <button className='m-10 ' onClick={pagesHandler}>Ver mas comentarios...</button>
                 }
             </div>
 

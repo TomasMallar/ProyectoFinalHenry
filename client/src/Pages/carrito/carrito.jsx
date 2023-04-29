@@ -27,7 +27,7 @@ const Carrito = () => {
     }
     setCartItems(updatedCartItems);
     localStorage.setItem("cartItems", JSON.stringify(updatedCartItems));
-  };  
+  };
 
   const handleRemoveFromCart = (item) => {
     const existingItemIndex = cartItems.findIndex((cartItem) => cartItem.id === item.id);
@@ -66,7 +66,7 @@ const Carrito = () => {
   const calcularTotalCarrito = () => {
     let total = 0;
     for (const item of cartItems) {
-      total += item.price ;
+      total += item.price * item.quantity;
     }
     return total;
   }
@@ -119,12 +119,14 @@ const Carrito = () => {
             ))
           ) : (
             <div className="p-10">
-            <p className="m-4 text-2xl font-bold animate-pulse">
-              No hay productos en el carrito.
-            </p>
-            <button className="p-4 text-xl font-bold shadow-sm h-fit shadow-chocolate-claro bg-chocolate-claro rounded-xl text-chocolate-oscuro hover:bg-chocolate-blanco">
-            <Link to="/products">Ver nuestos productos</Link>
-          </button>
+              <p className="m-4 text-2xl font-bold animate-pulse">
+                No hay productos en el carrito.
+              </p>
+              <Link to="/products">
+                <button className="p-4 text-xl font-bold shadow-sm h-fit shadow-chocolate-claro bg-chocolate-claro rounded-xl text-chocolate-oscuro hover:bg-chocolate-blanco">
+                  Ver nuestos productos
+                </button>
+              </Link>
             </div>
           )}
         </div>
