@@ -1,10 +1,15 @@
 import s from './List.module.css'
 import SideBar from '../../Components/SideBar/SideBar'
-export default function (){
+import DataTable from '../../Components/DataTable/DataTable'
+export default function Users(){
 
     return (
         <div className={s.list}>
             <SideBar/>
+            <div className={s.listContainer}>
+            <p className={s.top}>USUARIOS</p>
+            <DataTable/>
+            </div>
         </div>
     )
 }

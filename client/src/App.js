@@ -39,6 +39,7 @@ import BarCharProductSold from './Components/Charts/BarCharProductSold';
 import Landing from './Pages/Landing/Landing';
 import Dashboard from './Pages/Dashboard/Dashborad';
 import Statistics from './Pages/Statistics/Statistics';
+import Users from './Pages/List/List';
 
 function App() {
 
@@ -74,6 +75,7 @@ function App() {
         <PrivateRouteUser exact path="/myprofile" component={() => <><NavBar /><MyProfile/><Footer /></>}/>
         <PrivateRoute exact path="/dashboard" component={() => <> <Dashboard /></>} />
         <PrivateRoute exact path="/statistics" component={() => <> <Statistics/></>} />
+        <PrivateRoute exact path="/users" component={() => <> <Users/></>} />
       
       
 
