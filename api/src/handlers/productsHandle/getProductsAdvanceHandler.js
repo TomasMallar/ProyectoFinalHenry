@@ -1,22 +1,27 @@
 const { getProductsAdvanceController } = require('../../controllers/productsController/getProductsAdvanceController');
+const { Op } = require('sequelize');
 
 const getProductsAdvanceHandler = async (req, res) => {
 	try {
-	  const { name, category, type, orderBy = 'id', orderDirection = 'ASC', page = 1, pageSize = 12 } = req.query;
-		console.log(req.query)
+	  const { name, category, type, orderBy, orderDirection, page, pageSize } = req.query;
+	  console.log(req.query)
 	  const where = {};
+  
+	  // Valores predeterminados y validación
+	  const validOrderByColumns = ['id', 'name', 'price', 'stock', 'scoresStars'];
+	  const sanitizedOrderBy = orderBy && validOrderByColumns.includes(orderBy) ? orderBy : "id";
+	  const sanitizedOrderDirection = orderDirection && orderDirection.toLowerCase() === 'desc' ? 'DESC' : 'ASC';
+	  const sanitizedPage = page && !isNaN(page) ? parseInt(page) : 1;
+	  const sanitizedPageSize = pageSize && !isNaN(pageSize) ? parseInt(pageSize) : 12;
   
 	  if (name) {
 		where.name = { [Op.iLike]: `%${name}%` };
 	  }
-	  if (category) {
-		where.category = { [Op.in]: category.split(',') };
-	  }
-	  if (type) {
-		where.type = { [Op.in]: type.split(',') };
-	  }
   
-	  const result = await getProductsAdvanceController(where, orderBy, orderDirection, page, pageSize);
+	  const categories = category ? category.split(',') : null;
+	  const types = type ? type.split(',') : null;
+  
+	  const result = await getProductsAdvanceController(where, sanitizedOrderBy, sanitizedOrderDirection, sanitizedPage, sanitizedPageSize, categories, types);
 	  res.json(result);
 	} catch (error) {
 	  console.error(error);
