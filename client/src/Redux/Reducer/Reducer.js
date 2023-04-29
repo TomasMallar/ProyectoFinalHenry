@@ -15,6 +15,7 @@ import {
     ADD_INGREDIENT_TYPE_CATEGORIE,
     DELETE_ELEMENT,
     EDIT_PROFILE,
+    GET_USER_ORDER,
     GET_INFO
 } from "../Action-types/Action-types"
 
@@ -28,6 +29,7 @@ const initialState = {
     ingredients: [],
     editedProduct:{},
     carousel:[],
+    order: {},
     metrics:{}
 }
 const reducer = (state = initialState, action) => {
@@ -135,6 +137,13 @@ const reducer = (state = initialState, action) => {
                     ...state,
                     metrics: action.payload,
                 }
+
+        case GET_USER_ORDER: 
+            return {
+                ...state,
+                order: action.payload
+            }
+
 
         default:
             return { ...state };
