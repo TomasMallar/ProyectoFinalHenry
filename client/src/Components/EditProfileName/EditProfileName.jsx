@@ -29,6 +29,7 @@ const EditProfileName = () => {
     sessionStorage.getItem('user')
   );
 
+
   const id = sessionStorage.getItem('id');
 
   const handleInputChange = (e) => {
@@ -47,6 +48,12 @@ const EditProfileName = () => {
       [property]: value,
     });
   };
+
+  useEffect(() => {
+    const userData = JSON.parse(sessionStorage.getItem('user'));
+    const updatedUserData = { ...userData, ...editProfile };
+    sessionStorage.setItem('user', JSON.stringify(updatedUserData));
+  }, [editProfile]);
  
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -75,8 +82,6 @@ const EditProfileName = () => {
       <form onSubmit={handleSubmit} className={style.form}>
         <div className={style.container}>
           <div className={style.campos}>
-            <h3>Current name</h3>
-            <p>{name}</p>
                   <label htmlFor='name'>New name</label>
                   <input
                     name='name'
