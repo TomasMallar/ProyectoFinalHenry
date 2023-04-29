@@ -51,6 +51,11 @@ const EditProfileSurname = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     
+    if (Object.keys(editProfile).length === 0) {
+      alert('Por favor, complete los campos');
+      return;
+    }
+
     if(!errors.surname){
       dispatch(PutEditProfile(id, editProfile));
       alert('Perfil editado');
