@@ -3,16 +3,16 @@ export default function createData(name, surname,mail, orderId,date, state, item
       name: `${name} ${surname}`,
       mail,
       orderId,
-      totalAmount:items.map(item => item.quantity * item.product.price).reduce((a, b) => a + b, 0),
+      totalAmount:items.map(item => item.quantity * item.product?.price).reduce((a, b) => a + b, 0),
       date: date.slice(0,10),
       state,
       history: items.map(item => {
 
-       return  {name: item.product.name,
-        id: item.product.id,
+       return  {name: item.product?.name || "producto Eliminado",
+        id: item.product?.id || "producto Eliminado",
         quantity: item.quantity,
-        itemPrice: item.product.price,
-        totalPrice: (Number(item.quantity) * Number(item.product.price))
+        itemPrice: item.product?.price || "Producto Eliminado",
+        totalPrice: (Number(item.quantity) * Number(item.product?.price))
     }
 
       })

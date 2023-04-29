@@ -23,7 +23,7 @@ import createData from './CreateData';
 export default function CollapsibleTable() {
     const dispatch = useDispatch()
     const ordersInfo = useSelector(state => state.ordersInfo.report)
-
+console.log(ordersInfo, 'fghghf');
 
 useEffect (()=> {
     dispatch(GetOrdersInfo())
