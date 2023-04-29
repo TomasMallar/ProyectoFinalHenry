@@ -2,20 +2,33 @@ require("dotenv").config();
 const { Sequelize } = require("sequelize");
 const fs = require("fs");
 const path = require("path");
-const { DB_USER, DB_PASSWORD, DB_HOST, DB_NAME} = process.env;
+const { DB_USER, DB_PASSWORD, DB_HOST, DB_NAME, DB_DEPLOY} = process.env;
+
+// const sequelize = new Sequelize(
+//    `postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/${DB_NAME}`,
+//    {
+//      define: {
+//        paranoid: true, // Agregar esta línea
+//        timestamps: true // Asegúrate de que 'timestamps' esté habilitado
+//      },
+//      //Agregué como variable de entorno el name de la db
+//      logging: false,
+//      native: false,
+//    }
+//  );
 
 const sequelize = new Sequelize(
-   `postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/${DB_NAME}`,
-   {
-     define: {
-       paranoid: true, // Agregar esta línea
-       timestamps: true // Asegúrate de que 'timestamps' esté habilitado
-     },
-     //Agregué como variable de entorno el name de la db
-     logging: false,
-     native: false,
-   }
- );
+  DB_DEPLOY,
+  {
+    define: {
+      paranoid: true, // Agregar esta línea
+      timestamps: true // Asegúrate de que 'timestamps' esté habilitado
+    },
+    //Agregué como variable de entorno el name de la db
+    logging: false,
+    native: false,
+  }
+);
 
 const basename = path.basename(__filename);
 
