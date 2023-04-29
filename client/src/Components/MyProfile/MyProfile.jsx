@@ -14,6 +14,7 @@ const MyProfile = () => {
 
   useEffect(() => {
     const userData = JSON.parse(sessionStorage.getItem('user'));
+    console.log('1',sessionStorage.getItem('user'));
     setUser(userData);
   }, []);
 
@@ -22,6 +23,7 @@ const MyProfile = () => {
   useEffect(() => {
     const updatedUserData = { ...user, name, surname };
     sessionStorage.setItem('user', JSON.stringify(updatedUserData));
+    console.log('2',updatedUserData);
   }, [name, surname]);
 
   const initials = (`${name[0]}${surname[0]}`).toUpperCase();
@@ -62,4 +64,4 @@ const MyProfile = () => {
   )
 }
 
-export default MyProfile
+export default MyProfile;
