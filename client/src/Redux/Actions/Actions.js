@@ -17,7 +17,8 @@ import {
     GET_ALL_CAROUSEL,
     ADD_INGREDIENT_TYPE_CATEGORIE,
     DELETE_ELEMENT,
-    EDIT_PROFILE
+    EDIT_PROFILE,
+    GET_USER_ORDER
 } from "../Action-types/Action-types"
 
 export const getAllChocolates = () => {
@@ -407,6 +408,21 @@ export const PutEditProfile = (id, dataEdit) => {
             //     type: HANDLE_ERROR,
             //     payload: error.response.data.error
             // })
+        }
+    }
+}
+
+export const getUserOrder = (id, page) => {
+    return async function (dispatch) {
+      try {
+          const response = await axios.get(`http://localhost:3001/users/order/${id}?page=${page}`);
+          
+          return dispatch({
+            type: GET_USER_ORDER,
+            payload: response.data
+          })
+        } catch (error) {
+          console.log(error);
         }
     }
 }
