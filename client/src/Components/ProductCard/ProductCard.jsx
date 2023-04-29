@@ -3,6 +3,7 @@ import style from "./card.module.css"
 import carImagen from "../../img/shopping-cart-cards.png"
 import ButtonMP from "../IntegracionMercadoPago/IntegracionMercadoPago"
 import React, { useState, useEffect } from "react";
+import Fade from "react-reveal/Fade"
 
 const ProductCard = ({ id, name, image, price, category }) => {
     const [cartItems, setCartItems] = useState([]);
@@ -14,7 +15,7 @@ const ProductCard = ({ id, name, image, price, category }) => {
         setCartItems((prevCartItems) => {
             const existingProduct = prevCartItems.find(item => item.id === product.id);
             console.log('ESTE ES EL PRODUCTO EXISTENTE', existingProduct);
-    
+
             if (existingProduct) {
                 // Si el producto ya existe, actualizar su cantidad sumando 1
                 const updatedCartItems = prevCartItems.map(item => {
@@ -37,40 +38,40 @@ const ProductCard = ({ id, name, image, price, category }) => {
         });
         // setShowBubble(true);
     };
-    
 
     useEffect(() => {
         const storedCartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
         setCartItems(storedCartItems);
-      }, []);
+    }, []);
 
     return (
         <div className="p-3 font-serif border border-solid shadow-lg border-chocolate-mantecol rounded-xl bg-chocolate-oscuro w-72 hover:shadow-chocolate-bombom hover:bg-chocolate-bombom">
+            <Fade cascade>
+                <button className="border-none ml-60 w-fit" onClick={() => addToCart(product)}>
+                    <img src={carImagen} alt="" className="w-8" />
+                </button>
+                <Link to={`/products/${id}`}>
 
-            <button className="border-none ml-60 w-fit" onClick={() => addToCart(product)}>
-                <img src={carImagen} alt="" className="w-8" />
-            </button>
-            <Link to={`/products/${id}`}>
+                    <div className="flex flex-col items-center m-auto text-chocolate-blanco" >
+                        <h1 className="h-16 m-0 text-2xl leading-7 w-72">
+                            {name}
+                        </h1>
+                        <img src={image} alt={name} className=" w-52 h-52" />
 
-            <div className="flex flex-col items-center m-auto text-chocolate-blanco" >
-                <h1 className="h-16 m-0 text-2xl leading-7 w-72">
-                    {name}
-                </h1>
-                <img src={image} alt={name} className=" w-52 h-52" />
-
-                <div className="flex flex-col justify-center h-16 m-1 mb-1 text-justify">
-                    {category?.map((c) => {
-                        return <p className="leading-5 text-start">
-                            - {c}
-                        </p>
-                    })}
-                </div>
-                <h3 className="text-lg leading-4">
-                    $ {price}
-                </h3>
-            </div>
-            {/* <ButtonMP title={name} unit_price={price} /> */}
-                    </Link>
+                        <div className="flex flex-col justify-center h-16 m-1 mb-1 text-justify">
+                            {category?.map((c) => {
+                                return <p className="leading-5 text-start">
+                                    - {c}
+                                </p>
+                            })}
+                        </div>
+                        <h3 className="text-lg leading-4">
+                            $ {price}
+                        </h3>
+                    </div>
+                    {/* <ButtonMP title={name} unit_price={price} /> */}
+                </Link>
+            </Fade>
         </div>
     )
 }
