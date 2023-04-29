@@ -1,10 +1,11 @@
-.dashboardContainer{
-    display:flex;
+.dashboardContainer {
+    display: flex;
 
 
 }
-.homeContainer{
-    flex:5;
+
+.homeContainer {
+    flex: 5;
     display: flex;
     margin-right: 20px;
     gap: 20px;
@@ -14,32 +15,32 @@
 }
 
 
-.widgets{
+.widgets {
     display: flex;
-   justify-content: space-between;
-   padding: 20px;
-   gap : 20px;
-   flex: 1;
+    justify-content: space-between;
+    padding: 20px;
+    gap: 20px;
+    flex: 1;
 }
 
 
 
-.charts{
+.charts {
     display: flex;
-   gap:20px;
-   flex: 1;
+    gap: 20px;
+    flex: 1;
 }
 
 
 
-.chart{
+.chart {
     width: 20px;
 }
 
 .PrincipalTitle {
     font-size: 3rem;
     font-weight: bold;
-    color:#3F2822;
+    color: #3F2822;
     background-color: #f5e7d2;
     padding: 1rem 2rem;
     border-radius: 0.5rem;
@@ -51,5 +52,4 @@
     position: relative;
     width: 100%;
 
-  }
-  
+}
