@@ -45,6 +45,12 @@ const EditProfileDate = () => {
     });
   };
 
+  useEffect(() => {
+    const userData = JSON.parse(sessionStorage.getItem('user'));
+    const updatedUserData = { ...userData, ...editProfile };
+    sessionStorage.setItem('user', JSON.stringify(updatedUserData));
+  }, [editProfile]);
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -72,8 +78,6 @@ const EditProfileDate = () => {
       <form onSubmit={handleSubmit} className={style.form}>
         <div className={style.container}>
           <div className={style.campos}>
-            <h3>Current date of birthday</h3>
-            <p>{date_of_birth}</p>
                   <label htmlFor='date_of_birth'>New date of birthday</label>
                   <input
                     name='date_of_birth'
