@@ -83,9 +83,6 @@ function App() {
         <PrivateRouteUser exact path="/myshopping" component={() => <><NavBar /><MyShopping /><Footer /></>} />
         <PrivateRouteUser exact path="/myprofile" component={() => <><NavBar /><MyProfile /><Footer /></>} />
         <PrivateRoute exact path="/dashboard" component={() => <> <Dashboard /></>} />
-<<<<<<< HEAD
-        <PrivateRoute exact path="/statistics" component={() => <> <Statistics /></>} />
-=======
         <PrivateRoute exact path="/statistics" component={() => <> <Statistics/></>} />
         <PrivateRoute exact path="/users" component={() => <> <Users/></>} />
         <PrivateRoute exact path="/orders" component={() => <> <Orders/></>} />
@@ -97,7 +94,6 @@ function App() {
         <PrivateRouteUser exact path="/editphone" component={() => <><NavBar /><EditProfilePhone /><Footer /></>}/>
         <PrivateRouteUser exact path="/editdate" component={() => <><NavBar /><EditProfileDate /><Footer /></>}/>
         <PrivateRouteUser exact path="/editpassword" component={() => <><NavBar /><EditProfilePassword /><Footer /></>}/>
->>>>>>> 08685a3ac00e490c6d79a9cd47c464f49d20b359
 
         <PrivateRouteUser exact path="/editname" component={() => <><NavBar /><EditProfileName /><Footer /></>} />
         <PrivateRouteUser exact path="/editsurname" component={() => <><NavBar /><EditProfileSurname /><Footer /></>} />
