@@ -2,17 +2,14 @@ import style from './SideBar.module.css'
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import PeopleAltOutlinedIcon from '@mui/icons-material/PeopleAltOutlined';
 import StorefrontIcon from '@mui/icons-material/Storefront';
-import PaymentOutlinedIcon from '@mui/icons-material/PaymentOutlined';
-import LocalShippingOutlinedIcon from '@mui/icons-material/LocalShippingOutlined';
+import PendingActionsIcon from '@mui/icons-material/PendingActions';
 import QueryStatsOutlinedIcon from '@mui/icons-material/QueryStatsOutlined';
-import NotificationsOutlinedIcon from '@mui/icons-material/NotificationsOutlined';
-import SettingsSystemDaydreamOutlinedIcon from '@mui/icons-material/SettingsSystemDaydreamOutlined';
-import PsychologyOutlinedIcon from '@mui/icons-material/PsychologyOutlined';
-import SettingsSuggestOutlinedIcon from '@mui/icons-material/SettingsSuggestOutlined';
+import PaymentsIcon from '@mui/icons-material/Payments';
 import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
-import { Link } from 'react-router-dom/cjs/react-router-dom.min';
+import { Link } from 'react-router-dom/cjs/react-router-dom';
 import { useHistory } from 'react-router-dom/cjs/react-router-dom';
+
 export default function SideBar() {
 
     const history = useHistory()
@@ -49,10 +46,17 @@ export default function SideBar() {
                     <li className={style.li}>
                         <PeopleAltOutlinedIcon className={style.icon} />
                         <span className={style.span}>Usuarios</span></li>
-
+                    <Link to="/orders">
                     <li className={style.li}>
-                        <PaymentOutlinedIcon className={style.icon} />
-                        <span className={style.span}>Ordenes</span></li>
+                        <PendingActionsIcon className={style.icon} />
+                        <span className={style.span}>Órdenes</span></li>
+                        </Link>
+
+                        <Link to="">
+                    <li className={style.li}>
+                        <PaymentsIcon className={style.icon} />
+                        <span className={style.span}>Ventas</span></li>
+                        </Link>
 
 
                     {/* <li className={style.li}>
