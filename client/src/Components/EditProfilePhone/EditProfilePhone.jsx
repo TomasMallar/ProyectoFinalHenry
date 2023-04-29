@@ -46,6 +46,12 @@ const EditProfilePhone = () => {
     });
   };
 
+  useEffect(() => {
+    const userData = JSON.parse(sessionStorage.getItem('user'));
+    const updatedUserData = { ...userData, ...editProfile };
+    sessionStorage.setItem('user', JSON.stringify(updatedUserData));
+  }, [editProfile]);
+
   const handleSubmit = (e) => {
     e.preventDefault();
     
@@ -73,8 +79,6 @@ const EditProfilePhone = () => {
       <form onSubmit={handleSubmit} className={style.form}>
         <div className={style.container}>
           <div className={style.campos}>
-            <h3>Current phone</h3>
-            <p>{phone}</p>
                   <label htmlFor='phone'>New phone</label>
                   <input
                     name='phone'
