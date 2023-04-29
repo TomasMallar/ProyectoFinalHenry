@@ -17,5 +17,8 @@ export const DELETE_ELEMENT = "DELETE_ELEMENT"
 export const EDIT_PROFILE = 'EDIT_PROFILE'
 export const GET_INFO = 'GET_INFO'
 export const GET_USER_ORDER = 'GET_USER_ORDER';
+export const GET_ORDERS_INFO = "GET_ORDERS_INFO"
+export const GET_SALES_INFO = "GET_SALES_INFO"
+
 
 
