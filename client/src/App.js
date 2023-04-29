@@ -47,6 +47,8 @@ import BarCharProductSold from './Components/Charts/BarCharProductSold';
 
 import Landing from './Pages/Landing/Landing';
 
+import Dashboard from './Pages/Dashboard/Dashborad';
+import Statistics from './Pages/Statistics/Statistics';
 
 function App() {
 
@@ -64,9 +66,10 @@ function App() {
         <PublicRoute exact path="/login" component={Login} />
         <PrivateRoute exact path="/createProduct" component={() => <> <NavBar /><CreateProduct /></>} />
         <PrivateRoute exact path="/metric" component={() => <> <NavBar /><Metric /></>} />
+        
         <PublicRoute exact path="/newUser" component={User} />
         <Route path='/products/:id'> <NavBar /><Detail /> <Footer /></Route>
-        <PrivateRoute exact path="/crudProducts" component={() => <> <NavBar /><CrudProducts /></>} />
+        <PrivateRoute exact path="/crudProducts" component={() => <> <CrudProducts /></>} />
         <PrivateRoute exact path="/editProduct" component={() => <> <NavBar /><EditProduct /></>} />
         <PrivateRoute exact path="/editcategoryTypeIngredient" component={() => <> <NavBar /><EditCategoryTypeIngredient /></>} />
         <Route path="/carrito"> <NavBar /><Carrito /><Footer /></Route>
@@ -87,8 +90,9 @@ function App() {
         <PrivateRouteUser exact path="/editdate" component={() => <><NavBar /><EditProfileDate /><Footer /></>}/>
         <PrivateRouteUser exact path="/editpassword" component={() => <><NavBar /><EditProfilePassword /><Footer /></>}/>
 
-        <Route path="/metrica"><PieChartSalesByPayment/><PieChartOrderByPaid/><BarCharSales/><LineChartSalesByMonth/><PieChartSalesByPaymentAmount/> <BarCharProductSold/> </Route>
-
+        <PrivateRoute exact path="/dashboard" component={() => <> <Dashboard /></>} />
+        <PrivateRoute exact path="/statistics" component={() => <> <Statistics/></>} />
+      
         <Route path="/*"><Error/><NavBar/></Route>
       </Switch>
     </div>
