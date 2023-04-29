@@ -61,11 +61,11 @@ function App() {
         </Route>
         <Route exact path="/Home" > <NavBar /> <Landing /> <Footer /></Route>
         <Route exact path="/products" > <NavBar /> <Products /> <Footer /></Route>
-        <PublicRoute exact path="/login" component={Login} />
+        <PublicRoute exact path="/login" component={() => (<><Login /><Footer /></>)} />
         <PrivateRoute exact path="/createProduct" component={() => <> <NavBar /><CreateProduct /></>} />
         <PrivateRoute exact path="/metric" component={() => <> <NavBar /><Metric /></>} />
-        
-        <PublicRoute exact path="/newUser" component={User} />
+
+        <PublicRoute exact path="/newUser" component={() => (<><User /><Footer /></>)} />
         <Route path='/products/:id'> <NavBar /><Detail /> <Footer /></Route>
         <PrivateRoute exact path="/crudProducts" component={() => <> <CrudProducts /></>} />
         <PrivateRoute exact path="/editProduct" component={() => <> <NavBar /><EditProduct /></>} />
@@ -78,19 +78,19 @@ function App() {
         <Route path="/purchase/payment-selector"><NavBar /><PaymentSelector /><Footer /></Route>
         <Route path="/purchase/crypto"><NavBar /><PaymentCrypto /> <Footer /> </Route>
         <Route path="/about"><NavBar /><About /> <Footer /></Route>
-        <PrivateRouteUser exact path="/myshopping" component={() => <><NavBar /><MyShopping /><Footer /></>}/>
-        <PrivateRouteUser exact path="/myprofile" component={() => <><NavBar /><MyProfile/><Footer /></>}/>
+        <PrivateRouteUser exact path="/myshopping" component={() => <><NavBar /><MyShopping /><Footer /></>} />
+        <PrivateRouteUser exact path="/myprofile" component={() => <><NavBar /><MyProfile /><Footer /></>} />
         <PrivateRoute exact path="/dashboard" component={() => <> <Dashboard /></>} />
-        <PrivateRoute exact path="/statistics" component={() => <> <Statistics/></>} />
-      
-        <PrivateRouteUser exact path="/editname" component={() => <><NavBar /><EditProfileName /><Footer /></>}/>
-        <PrivateRouteUser exact path="/editsurname" component={() => <><NavBar /><EditProfileSurname /><Footer /></>}/>
-        <PrivateRouteUser exact path="/editmail" component={() => <><NavBar /><EditProfileMail /><Footer /></>}/>
-        <PrivateRouteUser exact path="/editphone" component={() => <><NavBar /><EditProfilePhone /><Footer /></>}/>
-        <PrivateRouteUser exact path="/editdate" component={() => <><NavBar /><EditProfileDate /><Footer /></>}/>
-        <PrivateRouteUser exact path="/editpassword" component={() => <><NavBar /><EditProfilePassword /><Footer /></>}/>
+        <PrivateRoute exact path="/statistics" component={() => <> <Statistics /></>} />
 
-        <Route path="/*"><Error/><NavBar/></Route>
+        <PrivateRouteUser exact path="/editname" component={() => <><NavBar /><EditProfileName /><Footer /></>} />
+        <PrivateRouteUser exact path="/editsurname" component={() => <><NavBar /><EditProfileSurname /><Footer /></>} />
+        <PrivateRouteUser exact path="/editmail" component={() => <><NavBar /><EditProfileMail /><Footer /></>} />
+        <PrivateRouteUser exact path="/editphone" component={() => <><NavBar /><EditProfilePhone /><Footer /></>} />
+        <PrivateRouteUser exact path="/editdate" component={() => <><NavBar /><EditProfileDate /><Footer /></>} />
+        <PrivateRouteUser exact path="/editpassword" component={() => <><NavBar /><EditProfilePassword /><Footer /></>} />
+
+        <Route path="/*"><Error /><NavBar /></Route>
       </Switch>
     </div>
   );

@@ -2,7 +2,8 @@ import { useEffect, useState } from 'react'
 import style from './Coments.module.css'
 import jwt_decode from 'jwt-decode';
 import { useHistory, useParams } from 'react-router-dom';
-import axios from 'axios'
+import axios from 'axios';
+import Fade from "react-reveal/Fade";
 
 const Coments = () => {
 
@@ -91,7 +92,7 @@ const Coments = () => {
 
     return (
         <div className="flex flex-col items-center justify-center w-[100%] bg-chocolate-blanco rounded-xl">
-            <div className="w-full h-full">
+            <div className="w-full">
                 <div className='flex items-center my-6 justify-evenly'>
                     <textarea type="text" placeholder='Escribe un comentario...' onChange={onChangeHandler} maxlength="150" className="p-4 mb-2 text-base border-none shadow-sm bg-chocolate-mantecol w-[70%] h-28 rounded-2xl text-chocolate-oscuro shadow-chocolate-bombom cursor-text focus:outline-chocolate-bombom" />
 
@@ -100,44 +101,57 @@ const Coments = () => {
                     </button>
                 </div>
 
-                <div className='grid w-full h-full p-6 divide-y divide-current'>
-                    {comments.map((comment, index) => (
-                        <div key={comment.id} className="flex">
-                            <h3>
-                                {comment.name}
-                            </h3>
-                            <h4>
-                                {comment.createdAt.slice(0, 10)}
-                            </h4>
-                            {editComment.id === comment.id ? (
-                                <form onSubmit={editCommentSubmit} >
-                                    <textarea value={editComment.content} onChange={(event) => setEditComment({ ...editComment, content: event.target.value })} />
-                                    <button name={comment.id} type="submit">
-                                        Guardar
-                                    </button>
-                                </form>
-                            ) : (
-                                <p>
-                                    {comment.content}
-                                </p>
-                            )}
-                            {comment.userId === userId && (
-                                <div>
-                                    <button onClick={() => editCommentHandler(comment)}>
-                                        Editar
-                                    </button>
-                                    <button name={comment.id} onClick={deleteComment}>
-                                        Eliminar
-                                    </button>
-                                </div>
-                            )
-                            }
+                <Fade left cascade>
+                    <div className='grid w-full grid-cols-1 p-6 divide-y divide-chocolate-oscuro'>
 
-                        </div>
-                    ))}
-                </div>
+                        {comments.map((comment, index) => (
+                            <div key={comment.id} className="">
+
+
+                                <div className='flex items-center justify-between pt-3'>
+                                    <h3>
+                                        {comment.name}
+                                    </h3>
+                                    <h4>
+                                        {comment.createdAt.slice(0, 10)}
+                                    </h4>
+                                </div>
+
+                                {editComment.id === comment.id ? (
+                                    <form onSubmit={editCommentSubmit} >
+                                        <textarea value={editComment.content} onChange={(event) => setEditComment({ ...editComment, content: event.target.value })} maxlength="150"  className="p-4 mb-2 text-base border-none shadow-sm bg-chocolate-mantecol w-[70%] h-28 rounded-2xl text-chocolate-oscuro shadow-chocolate-bombom cursor-text focus:outline-chocolate-bombom"/>
+                                        <button name={comment.id} type="submit" className='p-1 m-2 font-serif font-bold rounded-lg shadow-sm bg-chocolate-claro text-chocolate-oscuro shadow-chocolate-claro hover:bg-chocolate-blanco'>
+                                            Guardar
+                                        </button>
+                                    </form>
+                                ) : (
+                                    <p className='m-6 text-left break-words'>
+                                        {comment.content}
+                                    </p>
+                                )}
+                                {comment.userId === userId && (
+                                    <div className='flex items-center justify-end'>
+                                        <button onClick={() => editCommentHandler(comment)} className='p-1 m-2 font-serif font-bold rounded-lg shadow-sm bg-chocolate-claro text-chocolate-oscuro shadow-chocolate-claro hover:bg-chocolate-blanco'>
+                                            Editar
+                                        </button>
+                                        <button name={comment.id} onClick={deleteComment} className='p-1 m-2 font-serif font-bold rounded-lg shadow-sm bg-chocolate-claro text-chocolate-oscuro shadow-chocolate-claro hover:bg-chocolate-blanco'>
+                                            Eliminar
+                                        </button>
+                                    </div>
+                                )
+                                }
+
+                            </div>
+                        ))}
+
+
+                    </div>
+                </Fade>
                 {
-                    latestComments === 3 && <button className='m-10 ' onClick={pagesHandler}>Ver mas comentarios...</button>
+                    latestComments === 3 &&
+                    <button onClick={pagesHandler} className='p-1 m-10 font-serif font-bold rounded-lg shadow-sm bg-chocolate-claro text-chocolate-oscuro shadow-chocolate-claro hover:bg-chocolate-blanco'>
+                        Ver mas comentarios...
+                    </button>
                 }
             </div>
 

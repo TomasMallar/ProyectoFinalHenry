@@ -3,6 +3,7 @@ import styles from "./carrito.module.css";
 import ButtonMP from "../../Components/IntegracionMercadoPago/IntegracionMercadoPago";
 import ButtonMPTotal from "../../Components/MercadoPagoTotal/MercadoPagoTotal";
 import { Link } from "react-router-dom";
+import Fade from "react-reveal/Fade"
 
 const Carrito = () => {
   const [cartItems, setCartItems] = useState([]);
@@ -73,75 +74,87 @@ const Carrito = () => {
 
   return (
     <div className="w-full h-full p-16 font-serif bg-chocolate-blanco text-chocolate-oscuro">
-      <h2 className="pb-2 text-4xl">
-        PRODUCTOS DEL CARRITO
-      </h2>
-      <div className="p-4 bg-chocolate-mantecol rounded-2xl">
 
-        <div className="px-10 divide-y divide-black">
-          {cartItems.length > 0 ? (
-            cartItems.map((item) => (
-              <div key={item.id} className="flex items-center justify-between p-6">
+      <Fade>
 
-                <div className="w-[20%]">
-                  <img src={item.image} alt={item.name} className="object-cover w-56 h-40 " />
-                </div>
 
-                <div className="w-[40%] flex flex-col gap-10">
-                  <p className="text-2xl font-bold">
-                    {item.name}
+        <h2 className="pb-2 text-4xl">
+          PRODUCTOS DEL CARRITO
+        </h2>
+        <div className="p-4 bg-chocolate-mantecol rounded-2xl">
+
+          <Fade left cascade>
+            <div className="px-10 divide-y divide-black">
+              {cartItems.length > 0 ? (
+                cartItems.map((item) => (
+                  <div key={item.id} className="flex items-center justify-between p-6">
+
+                    <div className="w-[20%]">
+                      <Link to={`/products/${item.id}`}>
+                        <img src={item.image} alt={item.name} className="object-cover w-56 h-40 " />
+                      </Link>
+                    </div>
+
+                    <div className="w-[40%] flex flex-col gap-10 ">
+                      <Link to={`/products/${item.id}`}>
+                        <p className="text-2xl font-bold hover:underline hover:decoration-chocolate-oscuro">
+                          {item.name}
+                        </p>
+                      </Link>
+                      <p className="text-xl ">
+                        Precio Total: ${item.price * item.quantity}
+                      </p>
+                    </div>
+
+                    <div className="w-[10%] flex justify-between items-center p-0 bg-chocolate-claro">
+                      <button onClick={() => handleAddToCart(item)} className="p-2 hover:bg-chocolate-blanco">
+                        +
+                      </button>
+                      <p className="p-2">
+                        {item.quantity}
+                      </p>
+                      <button onClick={() => handleRemoveFromCart(item)} className="p-2 hover:bg-chocolate-blanco">
+                        -
+                      </button>
+                    </div>
+
+                    <div className="w-[30%]">
+                      <button className="hover:underline decoration-chocolate-oscuro" onClick={() => handleDeleteFromCart(item)}>
+                        Eliminar
+                      </button>
+                      {/* <ButtonMP title={item.name} unit_price={item.price} /> */}
+                    </div>
+
+                  </div>
+                ))
+              ) : (
+                <div className="p-10">
+                  <p className="m-4 text-2xl font-bold animate-pulse">
+                    No hay productos en el carrito.
                   </p>
-                  <p className="text-xl ">
-                    Precio Total: ${item.price * item.quantity}
-                  </p>
+                  <Link to="/products">
+                    <button className="p-4 text-xl font-bold shadow-sm h-fit shadow-chocolate-claro bg-chocolate-claro rounded-xl text-chocolate-oscuro hover:bg-chocolate-blanco">
+                      Ver nuestos productos
+                    </button>
+                  </Link>
                 </div>
-
-                <div className="w-[10%] flex justify-between items-center p-0 bg-chocolate-claro">
-                  <button onClick={() => handleAddToCart(item)} className="p-2 hover:bg-chocolate-blanco">
-                    +
-                  </button>
-                  <p className="p-2">
-                    {item.quantity}
-                  </p>
-                  <button onClick={() => handleRemoveFromCart(item)} className="p-2 hover:bg-chocolate-blanco">
-                    -
-                  </button>
-                </div>
-
-                <div className="w-[30%]">
-                  <button className="hover:underline decoration-chocolate-oscuro" onClick={() => handleDeleteFromCart(item)}>
-                    Eliminar
-                  </button>
-                  {/* <ButtonMP title={item.name} unit_price={item.price} /> */}
-                </div>
-
-              </div>
-            ))
-          ) : (
-            <div className="p-10">
-              <p className="m-4 text-2xl font-bold animate-pulse">
-                No hay productos en el carrito.
-              </p>
-              <Link to="/products">
-                <button className="p-4 text-xl font-bold shadow-sm h-fit shadow-chocolate-claro bg-chocolate-claro rounded-xl text-chocolate-oscuro hover:bg-chocolate-blanco">
-                  Ver nuestos productos
-                </button>
-              </Link>
+              )}
             </div>
-          )}
-        </div>
 
-        <div className="flex justify-end gap-6 justify-items-center">
-          <button onClick={handleDeleteCart} className="p-4 text-xl font-bold shadow-sm h-fit shadow-chocolate-claro bg-chocolate-claro rounded-xl text-chocolate-oscuro hover:bg-chocolate-blanco">
-            Borrar carrito
-          </button>
-          <p className="left-0 p-2 m-2 text-2xl font-bold ">
-            Total del carrito: ${calcularTotalCarrito()}
-          </p>
-          <ButtonMPTotal products={buildProductsObject(cartItems)} />
-        </div>
+          </Fade>
 
-      </div>
+          <div className="flex justify-end gap-6 justify-items-center">
+            <button onClick={handleDeleteCart} className="p-4 text-xl font-bold shadow-sm h-fit shadow-chocolate-claro bg-chocolate-claro rounded-xl text-chocolate-oscuro hover:bg-chocolate-blanco">
+              Borrar carrito
+            </button>
+            <p className="left-0 p-2 m-2 text-2xl font-bold ">
+              Total del carrito: ${calcularTotalCarrito()}
+            </p>
+            <ButtonMPTotal products={buildProductsObject(cartItems)} />
+          </div>
+        </div>
+      </Fade>
+
     </div>
   );
 };
