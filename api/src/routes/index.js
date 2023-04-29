@@ -10,10 +10,12 @@ const routerScore = require('./PutScoreRouter/PutScoreRouter');
 const routerPay = require('./CompraRouter/mercadopago');
 const routerAuth = require('./AuthRouter/AuthRouter');
 const routerEmail = require('./EmailRouter/EmailRouter');
-const routerPassword = require('./PasswordRouter/PasswordRouter');
-const routerPayment = require('./PaymentRouter/PaymentRouter');
-const routerMetric = require('./MetricRouter/MetricRouter');
-const routerComents = require('./ComentsRouter/ComentsRouter');
+const routerPassword = require("./PasswordRouter/PasswordRouter")
+const routerPayment = require('./PaymentRouter/PaymentRouter')
+const routerMetric = require('./MetricRouter/MetricRouter')
+const routerComents = require('./ComentsRouter/ComentsRouter')
+const uploadRouter = require('./uploadFiles/uploadFiles')
+const routerPDF = require('./PDFRouter/PDFRouter')
 const router = Router();
 
 const passport = require('passport');
@@ -48,5 +50,9 @@ router.use('/auth', routerAuth);
 router.use('/password', routerPassword);
 
 router.use('/coments', routerComents);
+
+router.use('/upload', uploadRouter)
+
+router.use('/pdf', routerPDF)
 
 module.exports = router;
