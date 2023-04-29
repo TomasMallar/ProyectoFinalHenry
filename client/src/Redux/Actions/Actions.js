@@ -23,7 +23,7 @@ import {
 
 export const getAllChocolates = () => {
     return async function (dispatch) {
-        const response = await axios(`http://localhost:3001/products`)
+        const response = await axios(`/products`)
         return dispatch({
             type: GET_ALL_CHOCOLATES,
             payload: response.data
@@ -33,7 +33,7 @@ export const getAllChocolates = () => {
 
 export const getCarousel = () => {
     return async function (dispatch) {
-        const response = await axios(`http://localhost:3001/products/advanced-search?name&category&type&orderBy&orderDirection&page=1&pageSize=20`)
+        const response = await axios(`/products/advanced-search?name&category&type&orderBy&orderDirection&page=1&pageSize=20`)
         return dispatch({
             type: GET_ALL_CAROUSEL,
             payload: response.data
@@ -44,7 +44,7 @@ export const getCarousel = () => {
 export const getChocolatesById = (id) => {
     return async function (dispatch) {
         try {
-            const response = await axios(`http://localhost:3001/products/${id}`)
+            const response = await axios(`/products/${id}`)
 
             return dispatch({
                 type: GET_CHOCOLATE_BYID,
@@ -68,7 +68,7 @@ export const resetChocolateDetail = () => ({
 export const addChocolate = (newChocolate) => {
     return async function (dispatch) {
         try {
-            const response = await axios.post(`http://localhost:3001/products/`, newChocolate)
+            const response = await axios.post(`/products/`, newChocolate)
             return dispatch({
                 type: ADD_CHOCOLATE,
                 payload: response.data
@@ -84,7 +84,7 @@ export const addUser = (newUser) => {
     return async function (dispatch) {
         try {
             console.log(newUser);
-            const response = await axios.post(`http://localhost:3001/users/register`, newUser)
+            const response = await axios.post(`/users/register`, newUser)
             console.log(response.data);
             return dispatch({
                 type: CREATE_USER,
@@ -100,7 +100,7 @@ export const newGoogleUser = (data) => {
     return async function (dispatch) {
         try {
             console.log(data);
-            const response = await axios.post(`http://localhost:3001/auth/google`, data)
+            const response = await axios.post(`/auth/google`, data)
             console.log(response.data);
             return dispatch({
                 type: CREATE_GOOGLE_USER,
@@ -116,8 +116,8 @@ export const newGoogleUser = (data) => {
 export const getProductsAdvanceController = (name, category, type, orderBy, orderDirection, page) => {
     return async function (dispatch) {
         try {
-            const response = await axios(`http://localhost:3001/products/advanced-search?name=${name || ""}&category=${category || ""}&type=${type || ""}&orderBy=${orderBy || ""}&orderDirection=${orderDirection || ""}&page=${page || 1}`)
-            // console.log(`http://localhost:3001/products/advanced-search?name=${name || ""}&category=${category || ""}&type=${type || ""}&orderBy=${orderBy || ""}&orderDirection=${orderDirection || ""}&page=${page || 1}`)
+            const response = await axios(`/products/advanced-search?name=${name || ""}&category=${category || ""}&type=${type || ""}&orderBy=${orderBy || ""}&orderDirection=${orderDirection || ""}&page=${page || 1}`)
+            // console.log(`/products/advanced-search?name=${name || ""}&category=${category || ""}&type=${type || ""}&orderBy=${orderBy || ""}&orderDirection=${orderDirection || ""}&page=${page || 1}`)
             return dispatch({
                 type: GET_CHOCOLATE_BYNAME,
                 payload: response.data
@@ -135,7 +135,7 @@ export const getProductsAdvanceController = (name, category, type, orderBy, orde
 export const GetAllCategories = () => {
     return async function (dispatch) {
         try {
-            const response = await axios(`http://localhost:3001/categories`)
+            const response = await axios(`/categories`)
 
             return dispatch({
                 type: GET_CATEGORIES,
@@ -154,7 +154,7 @@ export const GetAllCategories = () => {
 export const GetAllTypes = () => {
     return async function (dispatch) {
         try {
-            const response = await axios(`http://localhost:3001/types`)
+            const response = await axios(`/types`)
 
             return dispatch({
                 type: GET_TYPES,
@@ -175,7 +175,7 @@ export const GetAllIngredient = () => {
     return async function (dispatch) {
         try {
 
-            const response = await axios(`http://localhost:3001/ingredient`)
+            const response = await axios(`/ingredient`)
 
             return dispatch({
                 type: GET_INGREDIENTS,
@@ -198,7 +198,7 @@ export const DeleteProduct = (id) => {
     return async function (dispatch) {
         try {
 
-            await axios.put(`http://localhost:3001/products/${id}/delete`);
+            await axios.put(`/products/${id}/delete`);
 
             return dispatch({
                 type: DELETE_PRODUCT,
@@ -235,9 +235,9 @@ export const EditedProduct = (c) => {
 export const PutProduct = (finalEditedProduct) => {
     return async function (dispatch) {
         try {
-            await axios.put(`http://localhost:3001/products/update/${finalEditedProduct.id}`, finalEditedProduct)
+            await axios.put(`/products/update/${finalEditedProduct.id}`, finalEditedProduct)
 
-            const response = await axios(`http://localhost:3001/products/`)
+            const response = await axios(`/products/`)
             return dispatch({
                 type: GET_ALL_CHOCOLATES,
                 payload: response.data
@@ -254,7 +254,7 @@ export const PutProduct = (finalEditedProduct) => {
 export const addIngredientCategoryType = (objToAdd, value) => {
     return async function (dispatch) {
         try {
-            const res = await axios.post(`http://localhost:3001/${value}/`, objToAdd)
+            const res = await axios.post(`/${value}/`, objToAdd)
             
             if(value==="ingredient") {
                 value="ingredients"
@@ -287,7 +287,7 @@ export const DeleteElement = (id, value) => {
     return async function (dispatch) {
         try {
 
-            await axios.delete(`http://localhost:3001/${value}/${id}`);
+            await axios.delete(`/${value}/${id}`);
             alert(`la categoría con id: ${id} se borró de manera exitosa`)
             if(value==="ingredient") {
                 value="ingredients"
@@ -313,24 +313,24 @@ export const DeleteElement = (id, value) => {
 export const PutElement = (objChanged, id, value) => {
     return async function (dispatch) {
         try {
-            await axios.put(`http://localhost:3001/${value}/${id}`, objChanged)
+            await axios.put(`/${value}/${id}`, objChanged)
         
             alert(`Elemento con id: ${id} modificado correctamente!`)
 
             if (value === "categories") {
-                const responseCat = await axios(`http://localhost:3001/${value}`)
+                const responseCat = await axios(`/${value}`)
                 return (dispatch({
                     type: GET_CATEGORIES,
                     payload: responseCat.data
                 }))
             }else if(value ==="ingredient"){
-                const responseTypeAndIngr = await axios(`http://localhost:3001/${value}/all`)
+                const responseTypeAndIngr = await axios(`/${value}/all`)
                 return (dispatch({
                     type: GET_INGREDIENTS,
                     payload: responseTypeAndIngr.data
                 }))
             }else if(value ==="types"){
-                const responseTypeAndIngr = await axios(`http://localhost:3001/${value}/all`)
+                const responseTypeAndIngr = await axios(`/${value}/all`)
                 return (dispatch({
                     type: GET_TYPES,
                     payload: responseTypeAndIngr.data
@@ -347,7 +347,7 @@ export const PutElement = (objChanged, id, value) => {
 export const GetAllTypesWithId = () => {
     return async function (dispatch) {
         try {
-            const response = await axios(`http://localhost:3001/types/all`)
+            const response = await axios(`/types/all`)
             return dispatch({
                 type: GET_TYPES,
                 payload: response.data
@@ -367,7 +367,7 @@ export const GetAllIngredientWithId = () => {
     return async function (dispatch) {
         try {
 
-            const response = await axios(`http://localhost:3001/ingredient/all`)
+            const response = await axios(`/ingredient/all`)
 
             return dispatch({
                 type: GET_INGREDIENTS,
@@ -389,7 +389,7 @@ export const PutEditProfile = (id, dataEdit) => {
     return async function (dispatch) {
         try {
             
-            const response = await axios.put(`http://localhost:3001/users/update/${id}`, 
+            const response = await axios.put(`/users/update/${id}`, 
             dataEdit, 
             {
             headers: {
@@ -415,7 +415,7 @@ export const PutEditProfile = (id, dataEdit) => {
 export const getUserOrder = (id, page) => {
     return async function (dispatch) {
       try {
-          const response = await axios.get(`http://localhost:3001/users/order/${id}?page=${page}`);
+          const response = await axios.get(`/users/order/${id}?page=${page}`);
           
           return dispatch({
             type: GET_USER_ORDER,

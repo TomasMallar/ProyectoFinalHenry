@@ -31,7 +31,7 @@ const PieChartSalesByPayment = () => {
   const transformedData = transformData(data);
   console.log(transformedData);
   useEffect(() => {
-    axios.get('http://localhost:3001/metric/purchasedCartsByCardPayment')
+    axios.get('/metric/purchasedCartsByCardPayment')
       .then(response => {
         setData(response.data);
       })

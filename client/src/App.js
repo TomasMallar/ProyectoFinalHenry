@@ -1,4 +1,5 @@
 import './App.css';
+import axios from "axios"
 import NavBar from './Components/NavBar/NavBar';
 import { Switch, Route, Redirect } from 'react-router-dom'
 import Products from './Pages/home/Home'
@@ -49,7 +50,7 @@ import EditProfileMail from './Components/EditProfileMail/EditProfileMail';
 import EditProfileDate from './Components/EditProfileDate/EditProfileDate';
 import EditProfilePassword from './Components/EditProfilePassword/EditProfilePassword';
 import Orders from './Pages/Orders/OrdersList';
-
+axios.defaults.baseURL = 'https://backpf-production-18e8.up.railway.app/'
 function App() {
 
   return (

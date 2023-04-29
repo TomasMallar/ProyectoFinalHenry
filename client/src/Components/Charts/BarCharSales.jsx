@@ -11,7 +11,7 @@ import s from './BarCharSales.module.css'
 const BarCharSales = () => {
     const [data, setData] = useState([]);
     useEffect(() => {
-      axios.get('http://localhost:3001/metric/average-amount-sales')
+      axios.get('/metric/average-amount-sales')
         .then(response => {
           console.log(response.data)
             setData(response.data);

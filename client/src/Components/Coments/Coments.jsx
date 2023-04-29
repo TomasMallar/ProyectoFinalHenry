@@ -26,7 +26,7 @@ const Coments = () => {
     console.log(userId);
     useEffect(() => {
         const getAllComents = async () => {
-            const response = await axios.get(`http://localhost:3001/coments/${id}`)
+            const response = await axios.get(`/coments/${id}`)
             setComments(response.data)
             setLatestComments(response.data.length)
         }
@@ -49,14 +49,14 @@ const Coments = () => {
             userId: userId,
             content: currentComment
         }
-        const response = await axios.post('http://localhost:3001/coments', newComment)
+        const response = await axios.post('/coments', newComment)
         setComments([response.data, ...comments])
     }
 
     const deleteComment = async (event) => {
         const comentId = event.target.name
 
-        const response = await axios.delete(`http://localhost:3001/coments/${comentId}`, { data: { userId: userId } })
+        const response = await axios.delete(`/coments/${comentId}`, { data: { userId: userId } })
         setCommentsDeleted(!commentsDeleted)
         console.log(comments);
     }
@@ -69,7 +69,7 @@ const Coments = () => {
             comentId: editComment.id
         }
         console.log(updatedComment);
-        const response = await axios.put('http://localhost:3001/coments', updatedComment)
+        const response = await axios.put('/coments', updatedComment)
         console.log(response.data);
         const editedComments = comments.map(comment => (comment.id === response.data.id ? response.data : comment))
         setComments(editedComments)
@@ -83,7 +83,7 @@ const Coments = () => {
     const [cont, setCont] = useState(2)
     const [latestComments, setLatestComments] = useState(null)
     const pagesHandler = async () => {
-        const response = await axios.get(`http://localhost:3001/coments/${id}?page=${cont}`)
+        const response = await axios.get(`/coments/${id}?page=${cont}`)
         setCont(cont + 1)
         setComments([...comments, ...response.data])
         setLatestComments(response.data.length)

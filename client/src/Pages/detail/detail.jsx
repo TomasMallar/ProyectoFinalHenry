@@ -27,7 +27,7 @@ const Detail = () => {
     const [rating, setRating] = useState(null);
 
     const handleClick = async (value) => {
-        const response = await axios.put(`http://localhost:3001/score/${id}`, { score: value })
+        const response = await axios.put(`/score/${id}`, { score: value })
         setRating(value)
     }
 

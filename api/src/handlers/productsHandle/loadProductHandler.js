@@ -6,7 +6,7 @@ const { Sale } = require('../../db');
 
 async function loadProductHandler(req, res) {
     const { products, types, ingredients, categories,sales } = req.body;
-    console.log(products.length)
+    
     try {
         // Crear nuevos types
         if (types && types.length) {

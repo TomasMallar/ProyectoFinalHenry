@@ -28,7 +28,7 @@ const PieChartOrderByPaid = ( ) => {
       const transformedData = transformData(data);
       console.log(transformedData);
       useEffect(() => {
-        axios.get('http://localhost:3001/metric/purchasedCarts')
+        axios.get('/metric/purchasedCarts')
           .then(response => {
             setData(response.data);
           })
