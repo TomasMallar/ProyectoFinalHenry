@@ -48,6 +48,12 @@ const EditProfileMail = () => {
     });
   };
  
+  useEffect(() => {
+    const userData = JSON.parse(sessionStorage.getItem('user'));
+    const updatedUserData = { ...userData, ...editProfile };
+    sessionStorage.setItem('user', JSON.stringify(updatedUserData));
+  }, [editProfile]);
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -76,8 +82,6 @@ const EditProfileMail = () => {
       <form onSubmit={handleSubmit} className={style.form}>
         <div className={style.container}>
           <div className={style.campos}>
-            <h3>Current mail</h3>
-            <p>{mail}</p>
                   <label htmlFor='mail'>New mail</label>
                   <input
                     name='mail'
