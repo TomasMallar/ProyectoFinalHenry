@@ -88,8 +88,6 @@ const EditProfilePassword = () => {
       <form onSubmit={handleSubmit} className={style.form}>
         <div className={style.container}>
         <div className={style.campos}>
-          <h3>Current password</h3>
-          <p>*******</p>
           <label htmlFor='password'>New password</label>
           <input
             name='password'
@@ -100,7 +98,6 @@ const EditProfilePassword = () => {
         </div>
 
         <div className={style.campos}>
-          <h3>Confirm password</h3>
           <label htmlFor='confirmPassword'>Confirm new password</label>
           <input
             name='confirmPassword'
