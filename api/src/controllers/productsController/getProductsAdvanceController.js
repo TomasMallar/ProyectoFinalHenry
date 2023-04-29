@@ -19,7 +19,7 @@ const getProductsAdvanceController = async (where, orderBy, orderDirection, page
   if (categories) {
 	productsQuery.where['id'] = {
 	  [Op.and]: [
-		sequelize.literal(`(SELECT COUNT(*) FROM "ProductsCategory" WHERE "ProductsCategory"."productId" = "Product"."id" AND "ProductsCategory"."categoryId" IN (SELECT "id" FROM "Categories" WHERE "name" IN (${categories.map(category => `'${category}'`).join(', ')}))) = ${categories.length}`)
+		sequelize.literal(`(SELECT COUNT(*) FROM "ProductsCategory" WHERE "ProductsCategory"."productId" = "product"."id" AND "ProductsCategory"."categoryId" IN (SELECT "id" FROM "categories" WHERE "name" IN (${categories.map(category => `'${category}'`).join(', ')}))) = ${categories.length}`)
 	  ]
 	};
 	productsQuery.include.push({
