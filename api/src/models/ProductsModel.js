@@ -39,6 +39,10 @@ module.exports = (sequelize) => {
                 type: DataTypes.JSON,
                 
             },
+            scoresStars: {
+                type: DataTypes.INTEGER,
+                defaultValue: 0,
+            },
             totalSold: {
                 type: DataTypes.INTEGER,
                 defaultValue: 0,

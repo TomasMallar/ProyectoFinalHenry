@@ -100,65 +100,65 @@ export default function SortingAndFiltering(props) {
 
             <select id="Sort" onChange={SortName} className="p-2 mb-2.5 text-base border-none shadow-sm cursor-pointer w-52 bg-chocolate-mantecol rounded-2xl text-chocolate-oscuro shadow-chocolate-bombom font-serif">
 
-              <option hidden defaultValue="">
-                Select a sorting Option
-              </option>
-              <optgroup label="ID">
-                <option value="id, ASC">
-                  Ascending
-                </option>
-                <option value="id, DESC">
-                  Descending
-                </option>
-              </optgroup>
-              <optgroup label="NAME">
-                <option value="name, ASC">
-                  Ascending
-                </option>
-                <option value="name, DESC">
-                  Descending
-                </option>
-              </optgroup>
-              <optgroup label="PRICE">
-                <option value="price, ASC">
-                  Lowest to Highest (1-5)
-                </option>
-                <option value="price, DESC">
-                  Highest to Lowest (1-5)
-                </option>
-              </optgroup>
-              <optgroup label="SCORE">
-                <option value="score, ASC">
-                  Lowest to Highest (1-5)
-                </option>
-                <option value="score, DESC">
-                  Highest to Lowest (1-5)
-                </option>
-              </optgroup>
-              <option value="">
-                Remove sort
-              </option>
-            </select>
-          </div>
-          <div className="flex flex-wrap justify-start h-full gap-1 ml-5">
-            {categories?.map((c) => {
-              return <button
-                id="category"
-                key={c}
-                onClick={(event) => handleClick(c, event)}
-                className={
-                  fitlerCategories?.includes(c)
-                    ? "font-serif border border-solid shadow-sm cursor-pointer shadow-chocolate-bombom w-fit bg-chocolate-oscuro border-chocolate-oscuro rounded-2xl text-chocolate-blanco"
-
-                    : "font-serif border border-solid shadow-sm cursor-pointer shadow-chocolate-bombom w-fit bg-chocolate-mantecol border-chocolate-oscuro rounded-2xl text-chocolate-oscuro hover:bg-chocolate-oscuro hover:text-chocolate-blanco"}
-              >
-                {c}
-              </button>
-            })}
-            <button id="category" onClick={(event) => handleClick("Clear", event)} className="font-serif border border-solid shadow-sm cursor-pointer shadow-chocolate-bombom w-fit bg-chocolate-bombom border-chocolate-oscuro rounded-2xl text-chocolate-blanco">
-              Borrar todos los filtros
-            </button>
-          </div>
+          <option hidden defaultValue="">
+            Select a sorting Option
+          </option>
+          <optgroup label="ID">
+            <option value="id, ASC">
+              Ascending
+            </option>
+            <option value="id, DESC">
+              Descending
+            </option>
+          </optgroup>
+          <optgroup label="NAME">
+            <option value="name, ASC">
+              Ascending
+            </option>
+            <option value="name, DESC">
+              Descending
+            </option>
+          </optgroup>
+          <optgroup label="PRICE">
+            <option value="price, ASC">
+              Lowest to Highest (1-5)
+            </option>
+            <option value="price, DESC">
+              Highest to Lowest (1-5)
+            </option>
+          </optgroup>
+          <optgroup label="SCORE">
+            <option value="scoresStars, ASC">
+              Lowest to Highest (1-5)
+            </option>
+            <option value="scoresStars, DESC">
+              Highest to Lowest (1-5)
+            </option>
+          </optgroup>
+          <option value="">
+            Remove sort
+          </option>
+        </select>
+      </div>
+      <div className="flex flex-wrap justify-start h-full gap-1 ml-5">
+        {categories?.map((c) => {
+          return <button
+            id="category"
+            key={c}
+            onClick={(event) => handleClick(c, event)}
+            className={
+              fitlerCategories?.includes(c) 
+              ? "font-serif border border-solid shadow-sm cursor-pointer shadow-chocolate-bombom w-fit bg-chocolate-oscuro border-chocolate-oscuro rounded-2xl text-chocolate-blanco" 
+              
+              : "font-serif border border-solid shadow-sm cursor-pointer shadow-chocolate-bombom w-fit bg-chocolate-mantecol border-chocolate-oscuro rounded-2xl text-chocolate-oscuro hover:bg-chocolate-oscuro hover:text-chocolate-blanco"}
+          >
+            {c}
+          </button>
+        })}
+        <button id="category" onClick={(event) => handleClick("Clear", event)} className="font-serif border border-solid shadow-sm cursor-pointer shadow-chocolate-bombom w-fit bg-chocolate-bombom border-chocolate-oscuro rounded-2xl text-chocolate-blanco">
+          Borrar todos los filtros
+        </button>
+      </div>
 
           <div className="flex flex-wrap justify-start h-full gap-1 ml-5">
             {statetypes?.map((c) => {
