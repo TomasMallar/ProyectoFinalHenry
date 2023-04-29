@@ -40,6 +40,14 @@ import Landing from './Pages/Landing/Landing';
 import Dashboard from './Pages/Dashboard/Dashborad';
 import Statistics from './Pages/Statistics/Statistics';
 
+
+import EditProfileName from './Components/EditProfileName/EditProfileName';
+import EditProfileSurname from './Components/EditProfileSurname/EditProfileSurname';
+import EditProfilePhone from './Components/EditProfilePhone/EditProfilePhone';
+import EditProfileMail from './Components/EditProfileMail/EditProfileMail';
+import EditProfileDate from './Components/EditProfileDate/EditProfileDate';
+import EditProfilePassword from './Components/EditProfilePassword/EditProfilePassword';
+
 function App() {
 
   return (
@@ -75,7 +83,12 @@ function App() {
         <PrivateRoute exact path="/dashboard" component={() => <> <Dashboard /></>} />
         <PrivateRoute exact path="/statistics" component={() => <> <Statistics/></>} />
       
-      
+        <PrivateRouteUser exact path="/editname" component={() => <><NavBar /><EditProfileName /><Footer /></>}/>
+        <PrivateRouteUser exact path="/editsurname" component={() => <><NavBar /><EditProfileSurname /><Footer /></>}/>
+        <PrivateRouteUser exact path="/editmail" component={() => <><NavBar /><EditProfileMail /><Footer /></>}/>
+        <PrivateRouteUser exact path="/editphone" component={() => <><NavBar /><EditProfilePhone /><Footer /></>}/>
+        <PrivateRouteUser exact path="/editdate" component={() => <><NavBar /><EditProfileDate /><Footer /></>}/>
+        <PrivateRouteUser exact path="/editpassword" component={() => <><NavBar /><EditProfilePassword /><Footer /></>}/>
 
         <Route path="/*"><Error/><NavBar/></Route>
       </Switch>
