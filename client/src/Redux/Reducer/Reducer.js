@@ -15,7 +15,9 @@ import {
     ADD_INGREDIENT_TYPE_CATEGORIE,
     DELETE_ELEMENT,
     EDIT_PROFILE,
-    GET_INFO
+    GET_INFO,
+    GET_USER_ORDER,
+    GET_ORDERS_INFO,
 } from "../Action-types/Action-types"
 
 const initialState = {
@@ -26,9 +28,11 @@ const initialState = {
     categories: [],
     types: [],
     ingredients: [],
-    editedProduct:{},
-    carousel:[],
-    metrics:{}
+    editedProduct: {},
+    carousel: [],
+    metrics: {},
+    order: {},
+    ordersInfo: {},
 }
 const reducer = (state = initialState, action) => {
     switch (action.type) {
@@ -79,7 +83,7 @@ const reducer = (state = initialState, action) => {
                 errorMessage: action.payload
             }
         case GET_CATEGORIES:
-            
+
             return {
                 ...state,
                 categories: action.payload,
@@ -124,17 +128,28 @@ const reducer = (state = initialState, action) => {
                 [prop]: updatedElement
             };
 
-        case EDIT_PROFILE: 
+        case EDIT_PROFILE:
             const data = action.payload.user;
             sessionStorage.setItem("user", JSON.stringify(data))
             return {
                 ...state
             }
-            case GET_INFO:
-                return {
-                    ...state,
-                    metrics: action.payload,
-                }
+        case GET_INFO:
+            return {
+                ...state,
+                metrics: action.payload,
+            }
+
+        case GET_USER_ORDER:
+            return {
+                ...state,
+                order: action.payload
+            }
+        case GET_ORDERS_INFO:
+            return {
+                ...state,
+                ordersInfo: action.payload,
+            }
 
         default:
             return { ...state };
