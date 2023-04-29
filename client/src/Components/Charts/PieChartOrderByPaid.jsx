@@ -2,7 +2,7 @@ import React, { useEffect, useState, useRef } from 'react';
 import axios from 'axios';
 import { ResponsivePie } from '@nivo/pie'
 import s from './PieChartOrderByPaid.module.css'
-
+const {PORT} = process.env
 // make sure parent container have a defined height when using
 // responsive component, otherwise height will be 0 and
 // no chart will be rendered.
@@ -28,7 +28,7 @@ const PieChartOrderByPaid = ( ) => {
       const transformedData = transformData(data);
       console.log(transformedData);
       useEffect(() => {
-        axios.get('http://localhost:3001/metric/purchasedCarts')
+        axios.get(`http://${PORT}/metric/purchasedCarts`)
           .then(response => {
             setData(response.data);
           })

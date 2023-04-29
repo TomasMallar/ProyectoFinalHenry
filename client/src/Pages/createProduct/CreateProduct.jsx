@@ -7,7 +7,7 @@ import Button from '../../Components/Button/Button'
 import Validations from './validations'
 import { useHistory } from 'react-router-dom'
 import axios from 'axios'
-
+const {PORT} = process.env
 export default function CreateProduct() {
 
     const history = useHistory()
@@ -164,7 +164,7 @@ export default function CreateProduct() {
         console.log(base64EncodedImage);
 
         try {
-            const response = await axios.post('http://localhost:3001/upload', { data: base64EncodedImage });
+            const response = await axios.post(`http://${PORT}/upload`, { data: base64EncodedImage });
             console.log(response.data.secure_url)
             setNewChocolate({ ...newChocolate, image: response.data.secure_url })
         } catch (error) {

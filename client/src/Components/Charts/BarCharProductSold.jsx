@@ -2,7 +2,7 @@ import React, { useEffect, useState, useRef } from 'react';
 import axios from 'axios';
 import { ResponsiveBar } from '@nivo/bar'
 import s from './BarCharSales.module.css'
-
+const {PORT} = process.env
 // make sure parent container have a defined height when using
 // responsive component, otherwise height will be 0 and
 // no chart will be rendered.
@@ -11,7 +11,7 @@ import s from './BarCharSales.module.css'
 const BarCharProductSold = () => {
     const [data, setData] = useState([]);
     useEffect(() => {
-      axios.get('http://localhost:3001/metric/top-sold-product')
+      axios.get(`http://${PORT}/metric/top-sold-product`)
         .then(response => {
           console.log(response.data)
             setData(response.data);

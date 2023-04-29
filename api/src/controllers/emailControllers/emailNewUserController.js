@@ -11,7 +11,7 @@ const sendWelcomeEmail = async (mail, name) => {
   const token = jwt.sign({ mail }, secretKey, { expiresIn: '24h' });
   
   // const verificationLink = `https://yourwebsite.com/verify-email?token=${token}`;
-  const verificationLink = `http://localhost:3001/email/verify-email?token=${token}`;
+  const verificationLink = `http://${PORT}/email/verify-email?token=${token}`;
 
   const readFile = util.promisify(fs.readFile);
   const templateFile = await readFile(path.resolve(__dirname, '../../views/emailWelcome.handlebars'), 'utf8');

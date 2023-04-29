@@ -4,7 +4,7 @@ import jwt_decode from 'jwt-decode';
 import { useHistory, useParams } from 'react-router-dom';
 import axios from 'axios';
 import Fade from "react-reveal/Fade";
-
+const {PORT} = process.env
 const Coments = () => {
 
     const history = useHistory()
@@ -27,7 +27,7 @@ const Coments = () => {
     console.log(userId);
     useEffect(() => {
         const getAllComents = async () => {
-            const response = await axios.get(`http://localhost:3001/coments/${id}`)
+            const response = await axios.get(`http://${PORT}/coments/${id}`)
             setComments(response.data)
             setLatestComments(response.data.length)
         }
@@ -50,14 +50,14 @@ const Coments = () => {
             userId: userId,
             content: currentComment
         }
-        const response = await axios.post('http://localhost:3001/coments', newComment)
+        const response = await axios.post('http://${PORT}/coments', newComment)
         setComments([response.data, ...comments])
     }
 
     const deleteComment = async (event) => {
         const comentId = event.target.name
 
-        const response = await axios.delete(`http://localhost:3001/coments/${comentId}`, { data: { userId: userId } })
+        const response = await axios.delete(`http://${PORT}/coments/${comentId}`, { data: { userId: userId } })
         setCommentsDeleted(!commentsDeleted)
         console.log(comments);
     }
@@ -70,7 +70,7 @@ const Coments = () => {
             comentId: editComment.id
         }
         console.log(updatedComment);
-        const response = await axios.put('http://localhost:3001/coments', updatedComment)
+        const response = await axios.put('http://${PORT}/coments', updatedComment)
         console.log(response.data);
         const editedComments = comments.map(comment => (comment.id === response.data.id ? response.data : comment))
         setComments(editedComments)
@@ -84,7 +84,7 @@ const Coments = () => {
     const [cont, setCont] = useState(2)
     const [latestComments, setLatestComments] = useState(null)
     const pagesHandler = async () => {
-        const response = await axios.get(`http://localhost:3001/coments/${id}?page=${cont}`)
+        const response = await axios.get(`http://${PORT}/coments/${id}?page=${cont}`)
         setCont(cont + 1)
         setComments([...comments, ...response.data])
         setLatestComments(response.data.length)

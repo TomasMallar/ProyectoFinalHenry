@@ -3,11 +3,11 @@ import { ResponsiveLine } from '@nivo/line';
 import React, { useEffect, useState, useRef } from 'react';
 import axios from 'axios';
 import s from './LineChartSalesByMonth.module.css';
-
+const {PORT} = process.env
 const LineChartSalesByMonth = () => {
     const [data, setData] = useState([]);
     useEffect(() => {
-        axios.get(`http://localhost:3001/metric/total-sales-orders-by-month`)
+        axios.get(`http://${PORT}/metric/total-sales-orders-by-month`)
           .then(response => {
   
               const currentYear = new Date().getFullYear().toString();

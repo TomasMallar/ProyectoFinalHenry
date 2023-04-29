@@ -1,13 +1,13 @@
 import React, { useEffect, useState, useRef } from 'react';
 import * as d3 from 'd3';
 import axios from 'axios';
-
+const {PORT} = process.env
 function Metric() {
   const [data, setData] = useState([]);
   const chartRef = useRef(null);
 
   useEffect(() => {
-    axios.get('http://localhost:3001/metric/purchasedCartsByCardPayment')
+    axios.get(`http://${PORT}/metric/purchasedCartsByCardPayment`)
       .then(response => {
         setData(response.data);
       })

@@ -2,7 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
 import jwt_decode from 'jwt-decode';
-
+const {PORT} = process.env
 export default function ButtonMPTotal({ products }) {
   const history = useHistory();
 
@@ -20,11 +20,11 @@ export default function ButtonMPTotal({ products }) {
     const userId = decodedToken.id;
     let order
     console.log(products, 'soy products');
-    axios.post('http://localhost:3001/payment/create-order', { userId, cartItems: products.bodyOrder })
+    axios.post(`http://${PORT}/payment/create-order`, { userId, cartItems: products.bodyOrder })
       .then((response) => {
         console.log("ESTA ES LA ORDER ID?", response.data.order.id);
         order = response.data.order.id;
-        return axios.post('http://localhost:3001/payment/create-payment-preference', { orderId: order });
+        return axios.post(`http://${PORT}/payment/create-payment-preference`, { orderId: order });
       })
       .then((mpResponse) => {
         // Guardar responseData y redirigir al componente PaymentSelector

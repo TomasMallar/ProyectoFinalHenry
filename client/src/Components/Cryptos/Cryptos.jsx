@@ -2,7 +2,7 @@ import axios from 'axios'
 import React, { useState } from 'react';
 import { ethers } from "ethers";
 import { useHistory } from 'react-router-dom';
-
+const {PORT} = process.env
 const Crypto = (order) => {
     const history = useHistory();
 
@@ -30,7 +30,7 @@ const Crypto = (order) => {
                 orderId: order.order
             }
             console.log(body);
-            await axios.post('http://localhost:3001/payment/crypto-payment-notification', body)
+            await axios.post(`http://${PORT}/payment/crypto-payment-notification`, body)
             history.push('/purchase/approved');
 
             setResponseMessage('Pago exitoso')

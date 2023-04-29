@@ -1,7 +1,7 @@
 import { useState } from "react";
 import styles from './ModalMailing.module.css'
 import axios from "axios";
-
+const {PORT} = process.env
 export default function ModalMailing ({onClose}){
     const [subject, setSubject] = useState('');
   const [message, setMessage] = useState('');
@@ -10,7 +10,7 @@ export default function ModalMailing ({onClose}){
     event.preventDefault();
     const data = { subject, text: message };
     try {
-      const response = await axios.post('http://localhost:3001/email/choconews', data);
+      const response = await axios.post(`http://${PORT}/email/choconews`, data);
       console.log(response.data);
       onClose();
     } catch (error) {

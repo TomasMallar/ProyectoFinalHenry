@@ -7,7 +7,7 @@ import { useState } from "react";
 import { Redirect } from "react-router-dom";
 // import { getAnalytics } from "firebase/analytics";
 import jwtDecode from 'jwt-decode';
-
+const {PORT} = process.env
 
 function LoginButton() {
 
@@ -40,7 +40,7 @@ function LoginButton() {
       try {
 
         console.log(data, "data de google");
-        const response = await axios.post("http://localhost:3001/auth/google", data);
+        const response = await axios.post(`http://${PORT}/auth/google`, data);
         console.log(response.data, "soy data")
         if (response.data.token) {
           sessionStorage.setItem("token", response.data.token);

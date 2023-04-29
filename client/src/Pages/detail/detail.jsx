@@ -10,7 +10,7 @@ import axios from 'axios'
 import ButtonMP from "../../Components/IntegracionMercadoPago/IntegracionMercadoPago";
 import carImagen from "../../img/shopping-cart-cards.png";
 import Fade from "react-reveal/Fade";
-
+const {PORT} = process.env
 const Detail = () => {
 
     const dispatch = useDispatch();
@@ -27,7 +27,7 @@ const Detail = () => {
     const [rating, setRating] = useState(null);
 
     const handleClick = async (value) => {
-        const response = await axios.put(`http://localhost:3001/score/${id}`, { score: value })
+        const response = await axios.put(`http://${PORT}/score/${id}`, { score: value })
         setRating(value)
     }
 

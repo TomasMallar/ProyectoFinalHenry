@@ -3,16 +3,16 @@ const axios = require('axios')
 
 const PDFMetrics = async (req, res) => {
 
-    const tabla1 = await axios.get('http://localhost:3001/metric/purchasedCartsByCardPayment');
+    const tabla1 = await axios.get('http://${PORT}/metric/purchasedCartsByCardPayment');
     const dataTable1 = tabla1.data
 
-    const table3 = await axios.get('http://localhost:3001/metric/average-amount-sales')
+    const table3 = await axios.get('http://${PORT}/metric/average-amount-sales')
     const dataTable3 = table3.data
 
-    const table4 = await axios.get('http://localhost:3001/metric/top-sold-product')
+    const table4 = await axios.get('http://${PORT}/metric/top-sold-product')
     const dataTable4 = table4.data
 
-    const table5 = await axios.get('http://localhost:3001/metric/purchasedCarts')
+    const table5 = await axios.get('http://${PORT}/metric/purchasedCarts')
     const dataTable5 = table5.data
 
     const today = new Date();

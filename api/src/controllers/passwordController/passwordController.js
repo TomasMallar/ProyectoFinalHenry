@@ -15,7 +15,7 @@ const postForgotPassword = async (mail) => {
 
         const token = jwt.sign({ id: user.id, mail: user.mail }, process.env.JWT_SECRET, { expiresIn: "10m" });
 
-        const verificationLink = `http://localhost:3001/password/verify-token/${token}`;
+        const verificationLink = `http://${PORT}/password/verify-token/${token}`;
  
         const { name } = user;
 
