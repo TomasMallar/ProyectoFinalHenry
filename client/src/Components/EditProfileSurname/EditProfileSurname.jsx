@@ -48,6 +48,12 @@ const EditProfileSurname = () => {
     });
   };
 
+  useEffect(() => {
+    const userData = JSON.parse(sessionStorage.getItem('user'));
+    const updatedUserData = { ...userData, ...editProfile };
+    sessionStorage.setItem('user', JSON.stringify(updatedUserData));
+  }, [editProfile]);
+
   const handleSubmit = (e) => {
     e.preventDefault();
     
@@ -75,8 +81,6 @@ const EditProfileSurname = () => {
       <form onSubmit={handleSubmit} className={style.form}>
         <div className={style.container}>
           <div className={style.campos}>
-            <h3>Current surname</h3>
-            <p>{surname}</p>
                   <label htmlFor='surname'>New surname</label>
                   <input
                     name='surname'
