@@ -29,9 +29,15 @@ import About from './Pages/about/about';
 import Metric from './Components/Metrics/Metrics';
 import MyShopping from './Components/MyShopping/MyShopping';
 import MyProfile from './Components/MyProfile/MyProfile';
-<<<<<<< HEAD
-import EditProfile from './Components/EditProfile/EditProfile';
-=======
+
+import EditProfileName from './Components/EditProfileName/EditProfileName';
+import EditProfileSurname from './Components/EditProfileSurname/EditProfileSurname';
+import EditProfilePhone from './Components/EditProfilePhone/EditProfilePhone';
+import EditProfileMail from './Components/EditProfileMail/EditProfileMail';
+import EditProfileDate from './Components/EditProfileDate/EditProfileDate';
+import EditProfilePassword from './Components/EditProfilePassword/EditProfilePassword';
+
+
 import PieChartSalesByPayment from './Components/Charts/PieChartSalesByPayment';
 import PieChartOrderByPaid from './Components/Charts/PieChartOrderByPaid';
 import BarCharSales from './Components/Charts/BarCharSales';
@@ -40,7 +46,7 @@ import PieChartSalesByPaymentAmount from './Components/Charts/PieChartSalesByPay
 import BarCharProductSold from './Components/Charts/BarCharProductSold';
 
 import Landing from './Pages/Landing/Landing';
->>>>>>> acdc84548fad62170a043a5e0f11187fb6df59f9
+
 
 function App() {
 
@@ -73,11 +79,16 @@ function App() {
         <Route path="/about"><NavBar /><About /> <Footer /></Route>
         <PrivateRouteUser exact path="/myshopping" component={() => <><NavBar /><MyShopping /><Footer /></>}/>
         <PrivateRouteUser exact path="/myprofile" component={() => <><NavBar /><MyProfile/><Footer /></>}/>
-<<<<<<< HEAD
-        <PrivateRouteUser exact path="/editprofile" component={() => <><NavBar /><EditProfile /><Footer /></>}/>
-=======
+
+        <PrivateRouteUser exact path="/editname" component={() => <><NavBar /><EditProfileName /><Footer /></>}/>
+        <PrivateRouteUser exact path="/editsurname" component={() => <><NavBar /><EditProfileSurname /><Footer /></>}/>
+        <PrivateRouteUser exact path="/editmail" component={() => <><NavBar /><EditProfileMail /><Footer /></>}/>
+        <PrivateRouteUser exact path="/editphone" component={() => <><NavBar /><EditProfilePhone /><Footer /></>}/>
+        <PrivateRouteUser exact path="/editdate" component={() => <><NavBar /><EditProfileDate /><Footer /></>}/>
+        <PrivateRouteUser exact path="/editpassword" component={() => <><NavBar /><EditProfilePassword /><Footer /></>}/>
+
         <Route path="/metrica"><PieChartSalesByPayment/><PieChartOrderByPaid/><BarCharSales/><LineChartSalesByMonth/><PieChartSalesByPaymentAmount/> <BarCharProductSold/> </Route>
->>>>>>> acdc84548fad62170a043a5e0f11187fb6df59f9
+
         <Route path="/*"><Error/><NavBar/></Route>
       </Switch>
     </div>
