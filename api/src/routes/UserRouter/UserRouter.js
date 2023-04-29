@@ -21,25 +21,34 @@ const validateUserId = require('../../middlewares/validateUser/validateUserId');
 
 const routerUser = Router();
 
-routerUser.get('/', validateJwt, validateRoleAdm, getAllUserHandler);
-routerUser.get('/profile/:id', validateJwt, validateUserId, getOneUserHandler);
-routerUser.get(
-  '/search-user',
-  validateJwt,
-  validateRoleAdm,
-  getSearchUserHandler
-);
+/****************RUTAS SIN VALIDACIONES DEL TOKEN***************************/
+routerUser.get('/', getAllUserHandler);
+routerUser.get('/profile/:id', getOneUserHandler);
+routerUser.get('/search-user', getSearchUserHandler);
+routerUser.delete('/delete/:id', deleteUserHandler);
+
 routerUser.put('/update/:id', validatePutUser, updateUserHandler);
-routerUser.delete(
-  '/delete/:id',
-  validateJwt,
-  validateRoleAdm,
-  deleteUserHandler
-);
 
 routerUser.post('/register', validatePostRegister, postNewtUserHandler);
 routerUser.post('/login', validatePostLogin, postLoginUserHandler);
 
 routerUser.get('/order/:id', getUserOrderHandler);
+
+/****************RUTAS CON VALIDACIONES DEL TOKEN***************************/
+// routerUser.get('/', validateJwt, validateRoleAdm, getAllUserHandler);
+// routerUser.get('/profile/:id', validateJwt, validateUserId, getOneUserHandler);
+// routerUser.get(
+//   '/search-user',
+//   validateJwt,
+//   validateRoleAdm,
+//   getSearchUserHandler
+// );
+// routerUser.delete(
+//   '/delete/:id',
+//   validateJwt,
+//   validateRoleAdm,
+//   deleteUserHandler
+//   );
+
 
 module.exports = routerUser;
