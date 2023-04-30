@@ -4,12 +4,14 @@ import ButtonMP from "../../Components/IntegracionMercadoPago/IntegracionMercado
 import ButtonMPTotal from "../../Components/MercadoPagoTotal/MercadoPagoTotal";
 import { Link } from "react-router-dom";
 import Fade from "react-reveal/Fade"
+import axios from "axios";
 
 const Carrito = () => {
   const [cartItems, setCartItems] = useState([]);
-
+  console.log(cartItems);
   useEffect(() => {
     const storedCartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
+    console.log(storedCartItems);
     setCartItems(storedCartItems);
   }, []);
 
@@ -18,7 +20,14 @@ const Carrito = () => {
     setCartItems([]);
   };
 
-  const handleAddToCart = (item) => {
+  const [stock, setStock] = useState(null)
+
+  const handleAddToCart = async(item) => {
+    const response = await axios.get(`http://localhost:3001/products/${item.id}`)
+    if(response.data.stock === item.quantity){
+      setStock('Sin stock!')
+      return
+    }
     const existingItemIndex = cartItems.findIndex((cartItem) => cartItem.id === item.id);
     const updatedCartItems = [...cartItems];
     if (existingItemIndex !== -1) {
@@ -31,6 +40,7 @@ const Carrito = () => {
   };
 
   const handleRemoveFromCart = (item) => {
+    stock && setStock(null)
     const existingItemIndex = cartItems.findIndex((cartItem) => cartItem.id === item.id);
     const updatedCartItems = [...cartItems];
     if (existingItemIndex !== -1) {
@@ -110,6 +120,7 @@ const Carrito = () => {
                       <button onClick={() => handleAddToCart(item)} className="p-2 hover:bg-chocolate-blanco">
                         +
                       </button>
+                      {stock && <p>{stock}</p>}
                       <p className="p-2">
                         {item.quantity}
                       </p>
