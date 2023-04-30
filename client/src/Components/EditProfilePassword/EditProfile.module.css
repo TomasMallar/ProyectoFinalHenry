@@ -1,0 +1,96 @@
+.container { 
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.campos {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 10px;
+  border: 1px solid rgb(139, 134, 134);
+  width: 300px;
+  border-radius: 20px;
+}
+
+.campos h3 {
+  margin-top: 10px;
+  font-size: 17px;
+  font-weight: 600;
+  margin-bottom: 5px;
+}
+
+.campos p {
+  margin-bottom: 10px;
+}
+
+.divLabelInput{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.campos label {
+  font-size: 17px;
+  font-weight: 600;
+  margin-bottom: 5px;
+}
+
+.campos input {
+  border: 1px solid rgb(139, 134, 134);
+  margin-bottom: 10px;
+  border-radius: 10px;
+  padding-left: 10px;
+  padding-right: 20px;
+}
+
+.button {
+  margin-bottom: 20px;
+  padding-left: 16px;
+  padding-right: 16px;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  background-color: rgb(154, 110, 57);
+  border-radius: 20px;
+  margin-left: 20px;
+}
+
+.buttonCancelar{
+  margin-bottom: 20px;
+  padding-left: 16px;
+  padding-right: 16px;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  background-color: rgb(154, 86, 57);
+  border-radius: 20px;
+  margin-left: 20px;
+}
+
+.button:hover {
+  background-color: rgb(60, 43, 22);
+  color: white;
+}
+
+.buttonCancelar:hover {
+  background-color: rgb(110, 46, 18);
+  color: white;
+}
+
+.errors{
+  color: red;
+  font-size: 14px;
+}
+
+.buttonEdit {
+  margin-top: 10px;
+  margin-bottom: 20px;
+  padding-left: 16px;
+  padding-right: 16px;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  background-color: bisque ;
+  border-radius: 20px;
+}

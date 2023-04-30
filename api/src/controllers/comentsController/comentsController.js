@@ -1,10 +1,20 @@
 const { Coment, User, Product } = require("../../db")
 
-const getComents = async(id) => {
-    const coments = await Coment.findAll({
-        where: {productId: id}
-    })
-    return coments
+const getComents = async(id, page) => {
+    const size = 3
+    let options = {
+        limit: +size,
+        offset: (+page) * (+size)
+    }
+
+    const { count, rows } = await Coment.findAndCountAll({
+        where: {productId: id},
+        ...options
+    }
+    )
+
+
+    return rows
 }
 
 const postComent = async(userId, content, productId) => {
