@@ -12,6 +12,7 @@ const cancelSaleHandler = async (req, res) => {
         include: [
           {
             model: Order,
+            
             as: "order",
             include: [
               {
