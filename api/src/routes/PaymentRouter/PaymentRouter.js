@@ -3,7 +3,7 @@ const { createOrderHandler } = require("../../handlers/orderHandlers/createOrder
 const { createPaymentPreferenceHandler } = require("../../handlers/orderHandlers/createPaymentPreferenceHandler");
 const { paymentNotificationHandler } = require("../../handlers/orderHandlers/paymentNotificationHandler");
 const { paymentCryptoNotificationHandler } = require("../../handlers/orderHandlers/paymentCryptoNotificationHandler");
-const validateJwt = require("../../middlewares/validateJwt/validateJwt")
+const { cancelSaleHandler } = require("../../handlers/orderHandlers/cancelSaleHandler");
 
 const routerPayment = Router();
 
@@ -12,6 +12,8 @@ routerPayment.post('/create-order', createOrderHandler);
 routerPayment.post('/create-payment-preference', createPaymentPreferenceHandler);
 routerPayment.post('/handle-payment-notification', paymentNotificationHandler);
 routerPayment.post('/crypto-payment-notification', paymentCryptoNotificationHandler);
+routerPayment.post('/sales/cancel/:saleId', cancelSaleHandler);
+
 //
 // routerPayment.post('/handle-payment-notification', (req, res) => {
 //     console.log('Notificación recibida:', req.body);
