@@ -1,48 +1,139 @@
 import s from './DataTable.module.css'
 import { DataGrid } from '@mui/x-data-grid';
 
+import { useEffect, useState
+ } from 'react';
+ import {useDispatch, useSelector} from 'react-redux'
+ import { DeleteUser, GetUserInfo, GetUsersInfo } from '../../Redux/Actions/ActionsDashboard';
 export default function DataTable (){
+
+const [userSelected, setUserSelected] = useState("")
+const [openModal, setOpenModal] = useState(false);
+
+
+
+const dispatch = useDispatch()
+
+const users = useSelector(state => state.usersInfo)
+const user = useSelector (state => state.userInfo)
+
+
+  useEffect(()=>{
+    dispatch (GetUsersInfo())
+},[dispatch, userSelected])
+
+
+const handleButtonClickDelete = (event) => {
+  setUserSelected(event.target.value)
+  dispatch (DeleteUser(event.target.value))
+}
+const handleButtonClickDetail= (event) => {
+ 
+  dispatch (GetUserInfo(event.target.value))
+  setUserSelected(event.target.value);
+  setOpenModal(true);
+
+}
+
+const Modal = () => {
+  const handleClose = () => {
+    setOpenModal(false);
+
+  }
+  return (
+    <div className={s.modal}>
+      <button className={s.closeButton}  onClick={handleClose}>X</button>
+      <h2>{user.name}</h2>
+      <p>{user.surname}</p>
+    </div>
+  );
+};
     const columns = [
         { field: 'id', headerName: 'ID', width: 70 },
-        { field: 'firstName', headerName: 'First name', width: 130 },
-        { field: 'lastName', headerName: 'Last name', width: 130 },
+        { field: 'firstName', headerName: 'NOMBRE', width: 130 },
+        { field: 'lastName', headerName: 'APELLIDO', width: 130 },
         {
           field: 'age',
-          headerName: 'Age',
+          headerName: 'EDAD',
           type: 'number',
           width: 90,
         },
         {
-          field: 'fullName',
-          headerName: 'Full name',
-          description: 'This column has a value getter and is not sortable.',
-          sortable: false,
+          field: 'mail',
+          headerName: 'MAIL',
           width: 160,
-          valueGetter: (params) =>
-            `${params.row.firstName || ''} ${params.row.lastName || ''}`,
+         
         },
-      ];
+        {
+          field: 'phone',
+          headerName: 'TELEFONO',
+          sortable: true,
+          width: 160,
+         
+        },
+        {
+          field: 'birthday',
+          headerName: 'FECHA DE NACIMIENTO',
+          sortable: true,
+          width: 160,
+         
+        },
+        {
+          field: 'button',
+          headerName: 'DETALLES',
+          width: 120,
+          renderCell: (params) => {
+              
+              return (
+                  <button className={s.ButtonDetail} variant="contained" color="primary" value={params.row.id} onClick={ handleButtonClickDetail}>
+                      Ver más 
+                  </button>
+              );
+          },
+      },
+      {
+        field: 'but',
+        headerName: 'ELIMINAR USUARIO',
+        width: 120,
+        renderCell: (params) => {
+            
+            return (
+                <button className={s.buttonDelete}variant="contained" color="primary" value={params.row.id} onClick={handleButtonClickDelete}>
+                    Eliminar
+                </button>
+            );
+        },
+    },
+    
+  ];
+
+
+
+      const rows = users.map (user => {
+        
+          const hoy = new Date();
+          const fechaNac = new Date(user.date_of_birth);
+          let edad = hoy.getFullYear() - fechaNac.getFullYear();
+          const mes = hoy.getMonth() - fechaNac.getMonth();
+          if (mes < 0 || (mes === 0 && hoy.getDate() < fechaNac.getDate())) {
+            edad--;
+          }
+          
+       return  {id:user.id, lastName: user.surname, firstName:user.name, age:edad, mail:user.mail, phone:user.phone, birthday:user.date_of_birth}
+      })
       
-      const rows = [
-        { id: 1, lastName: 'Snow', firstName: 'Jon', age: 35 },
-        { id: 2, lastName: 'Lannister', firstName: 'Cersei', age: 42 },
-        { id: 3, lastName: 'Lannister', firstName: 'Jaime', age: 45 },
-        { id: 4, lastName: 'Stark', firstName: 'Arya', age: 16 },
-        { id: 5, lastName: 'Targaryen', firstName: 'Daenerys', age: null },
-        { id: 6, lastName: 'Melisandre', firstName: null, age: 150 },
-        { id: 7, lastName: 'Clifford', firstName: 'Ferrara', age: 44 },
-        { id: 8, lastName: 'Frances', firstName: 'Rossini', age: 36 },
-        { id: 9, lastName: 'Roxie', firstName: 'Harvey', age: 65 },
-      ];
 
     return (
     <div className={s.dataTable}>
-  <DataGrid
-        rows={rows}
-        columns={columns}
-        paginationModel={{ page: 0, pageSize: 10 }}
-        checkboxSelection
-      />
+      {openModal ? <Modal /> : null}
+ <DataGrid
+  rows={rows}
+  columns={columns}
+  getRowId={(row) => row.id}
+  paginationModel={{ page: 0, pageSize: 10 }}
+>
+</DataGrid>
+
     </div>
     )
 }

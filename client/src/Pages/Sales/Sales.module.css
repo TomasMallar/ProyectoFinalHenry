@@ -1,0 +1,27 @@
+.top{
+    font-size: 3rem;
+    font-weight: bold;
+    color:#3F2822;
+    background-color: #f5e7d2;
+    padding: 1rem 2rem;
+    border-radius: 0.5rem;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    display: inline-block;
+    text-transform: uppercase;
+    letter-spacing: 0.2rem;
+    line-height: 1.2;
+    height: fit-content;
+    position: relative;
+    width: 100%;
+
+  }
+
+  .list{
+    display: flex;
+    width: 100%;
+  }
+
+  .listContainer{
+    flex:6;
+
+  }
