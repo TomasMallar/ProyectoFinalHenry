@@ -1,0 +1,16 @@
+.dataTable {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 30px;
+  }
+
+  .header {
+    background-color: lightgrey;
+    color: black;
+    font-weight: bold;
+  }
+
+  .pages{
+    margin-bottom: 10px;
+  }
