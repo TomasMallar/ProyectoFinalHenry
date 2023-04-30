@@ -208,8 +208,10 @@ export default function User() {
                         <br />
                         <input type="submit" value="Crear Cuenta" className="p-1 font-serif font-bold rounded-lg shadow-sm bg-chocolate-claro text-chocolate-oscuro shadow-chocolate-claro hover:bg-chocolate-mantecol" />
 
-                    </div>
-                </form>
+                </div>
+                <p> Volver al <Link to="/home">Home</Link> </p>
+
+            </form>
 
                 <div className=" ml-80 w-[600px]">
                     <h1 className='font-serif text-4xl text-start text-chocolate-blanco'>¡Únete a nuestra comunidad chocolatera! Regístrate para acceder a ofertas exclusivas, recibir noticias y descubrir más sobre el apasionante mundo del chocolate. ¡Haz parte de nuestra familia chocolatera hoy!</h1>

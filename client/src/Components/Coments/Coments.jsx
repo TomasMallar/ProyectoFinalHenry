@@ -10,7 +10,7 @@ const Coments = () => {
     const history = useHistory()
 
     const [comments, setComments] = useState([])
-    console.log(comments);
+    console.log(comments, "Local state comments");
     const [currentComment, setCurrentComment] = useState('')
     const [commentsDeleted, setCommentsDeleted] = useState(false)
     const [commentsUpdated, setCommentsUpdated] = useState(false)
@@ -22,9 +22,9 @@ const Coments = () => {
     if (token) {
         const decodedToken = jwt_decode(token);
         userId = decodedToken.id;
-        console.log(userId);
+        console.log(userId, "user ID");
     }
-    console.log(userId);
+    console.log(id, "product ID");
     useEffect(() => {
         const getAllComents = async () => {
             const response = await axios.get(`http://localhost:3001/coments/${id}`)
@@ -40,7 +40,7 @@ const Coments = () => {
 
     const postComment = async () => {
         if (userId === null) {
-            alert('Debes iniciar sesión para poder comprar');
+            alert('Debes iniciar sesión para poder comentar');
             history.push('/login');
             return;
         }
@@ -51,6 +51,7 @@ const Coments = () => {
             content: currentComment
         }
         const response = await axios.post('http://localhost:3001/coments', newComment)
+    console.log(response, "posteo de comment");
         setComments([response.data, ...comments])
     }
 
@@ -59,7 +60,7 @@ const Coments = () => {
 
         const response = await axios.delete(`http://localhost:3001/coments/${comentId}`, { data: { userId: userId } })
         setCommentsDeleted(!commentsDeleted)
-        console.log(comments);
+        console.log(comments, "comments after being deleted");
     }
 
     const editCommentSubmit = async (event) => {
