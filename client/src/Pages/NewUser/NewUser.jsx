@@ -175,6 +175,8 @@ export default function User() {
 
 
                 </div>
+                <p> Volver al <Link to="/home">Home</Link> </p>
+
             </form>
 
             <div className={style.message}>
