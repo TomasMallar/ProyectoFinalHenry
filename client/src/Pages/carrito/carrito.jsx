@@ -95,6 +95,7 @@ const Carrito = () => {
 
           <Fade left cascade>
             <div className="px-10 divide-y divide-black">
+            {stock && <p>{stock}</p>}
               {cartItems.length > 0 ? (
                 cartItems.map((item) => (
                   <div key={item.id} className="flex items-center justify-between p-6">
@@ -120,7 +121,7 @@ const Carrito = () => {
                       <button onClick={() => handleAddToCart(item)} className="p-2 hover:bg-chocolate-blanco">
                         +
                       </button>
-                      {stock && <p>{stock}</p>}
+                      
                       <p className="p-2">
                         {item.quantity}
                       </p>
