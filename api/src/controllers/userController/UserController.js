@@ -198,19 +198,19 @@ const updateUser = async (id, userData) => {
   }
 };
 
-// const deleteUser = async (id) => {
-//     try {
-//         const user = await User.findByPk(id);
+const deleteUser = async (id) => {
+    try {
+        const user = await User.findByPk(id);
 
-//         if(!user) throw new Error("User not found")
+        if(!user) throw new Error("User not found")
 
-//         await User.destroy({ where: { id }});
+        await User.destroy({ where: { id }});
 
-//         return { message: "User deleted successfully"};
-//     } catch (error) {
-//         throw new Error(error.message);
-//     }
-// }
+        return { message: "User deleted successfully"};
+    } catch (error) {
+        throw new Error(error.message);
+    }
+}
 
 const getUserOrder = async (id, page = 1, limit = 4) => {
   const offset = (page - 1) * limit;
@@ -271,5 +271,5 @@ module.exports = {
   updateUser,
   getUserOrder,
   // updatePassword
-  // deleteUser
+  deleteUser
 };
