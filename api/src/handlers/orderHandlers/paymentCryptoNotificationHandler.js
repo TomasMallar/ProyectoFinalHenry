@@ -1,4 +1,5 @@
-const { Order, Sale } = require('../../db');
+const { Order, Sale, Product, orderItem, conn:sequelize} = require('../../db');
+
 
 const paymentCryptoNotificationHandler = async (req, res) => {
   try {
@@ -16,6 +17,23 @@ const paymentCryptoNotificationHandler = async (req, res) => {
       status: "approved",
       paymentMethod: "crypto",
       paymentId: hash
+    });
+
+    // Obtener los OrderItems de la orden y restar la cantidad vendida del stock de cada producto
+    const orderItems = await order.getItems();
+    await sequelize.transaction(async (t) => {
+      await order.save({ transaction: t });
+      await sale.save({ transaction: t });
+      for (let i = 0; i < orderItems.length; i++) {
+        const orderItem = orderItems[i];
+        const product = await Product.findByPk(orderItem.productId);
+        if (!product) {
+          // Manejar el caso en que product es undefined
+          return res.status(500).json({ message: "An error occurred while processing the payment notification." });
+        }
+        const newStock = product.stock - orderItem.quantity;
+        await product.update({ stock: newStock });
+      }
     });
 
     res.json({ message: "Payment notification received successfully." });
