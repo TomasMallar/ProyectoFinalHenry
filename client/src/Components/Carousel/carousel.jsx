@@ -20,7 +20,7 @@ export default function FilterBar() {
                 {
                     carouselItems?.slice(0, 4)?.map(p => {
                         const { id, name, image, categories, price, score } = p
-                        return (<Link to="/products">
+                        return (<Link to="/products" key={id}>
                             <CarouselCard
                                 key={id}
                                 id={id}

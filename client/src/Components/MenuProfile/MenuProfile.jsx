@@ -1,7 +1,6 @@
 import React from 'react'
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import Button from '../Button/Button';
 import styles from "./MenuProfile.module.css"
 import Flip from 'react-reveal/Flip';
 
