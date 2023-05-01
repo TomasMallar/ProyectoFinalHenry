@@ -92,7 +92,7 @@ export const addUser = (newUser) => {
             })
         }
         catch (error) {
-            alert(error)
+            console.log(error)
         }
     }
 }

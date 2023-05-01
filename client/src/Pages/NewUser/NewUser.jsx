@@ -1,21 +1,20 @@
 import style from './NewUser.module.css'
 import { Link } from 'react-router-dom'
-import { useState, useRef } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import Validations from "./validations"
 import { addUser } from '../../Redux/Actions/Actions'
-import { useHistory } from 'react-router-dom'
 import Fade from "react-reveal"
+
 
 export default function User() {
     const dispatch = useDispatch()
-    const history = useHistory()
     //guarda el imput seleccionado en Tipos de Chocolates preferidos
-    const inputSelectFlavorsRef = useRef(null)
+    // const inputSelectFlavorsRef = useRef(null)
 
-    const flavors = ["Chocolate Amargo", "Chocolate con Leche", "Chocolate Blanco", "Rellenos", "Tabletas", "Con Licor", "Con Frutos Secos"]
+    // const flavors = ["Chocolate Amargo", "Chocolate con Leche", "Chocolate Blanco", "Rellenos", "Tabletas", "Con Licor", "Con Frutos Secos"]
     // E. local newUser --> guarda info que inserte el user para luego enviar al post
-    let [newUser, setNewUser] = useState({
+    const [newUser, setNewUser] = useState({
         name: "",
         surname: "",
         date_of_birth: "",
@@ -24,18 +23,22 @@ export default function User() {
         password: "",
     })
     // E.Local guarda las preferencias de chocolate del usuario del usuario
-    const [selectedFlavors, setSelectedFlavors] = useState([])
+    // const [selectedFlavors, setSelectedFlavors] = useState([])
+
+    const [modal, setModal] = useState(false)
+    const [modalMsg, setModalMsg] = useState({ msg: "", ok: false })
 
 
-    //E. Local para validar errores 
+    //E. Local para validar errores
     const [errors, setErrors] = useState({})
 
-    // useEffect(() => {
+    useEffect(() => {
 
-    //     setNewUser({ ...newUser, favorites_tastes: selectedFlavors })
+        // setNewUser({ ...newUser, favorites_tastes: selectedFlavors })
+        setErrors({})
 
-    // }, [selectedFlavors]
-    // )
+    }, []
+    )
 
     const handleInputChange = (event) => {
         if (event.target.name === "phone") {
@@ -47,37 +50,40 @@ export default function User() {
         }
     }
 
-    const handleOnClickAdd = (event) => {
-        event.preventDefault()
-        const selectedFlavor = inputSelectFlavorsRef.current.value
-        // eslint-disable-next-line
-        if (!flavors.includes(selectedFlavor)) { return alert("Elige un sabor válido!" + " " + '\ud83e\udd28') }
-        if (selectedFlavor && !selectedFlavors.includes(selectedFlavor)) {
-            setSelectedFlavors([...selectedFlavors, selectedFlavor])
-        }
-        setErrors(Validations({ ...newUser, favorites_tastes: selectedFlavor }))
-        inputSelectFlavorsRef.current.value = ""
-    }
+    // const handleOnClickAdd = (event) => {
+    //     event.preventDefault()
+    //     const selectedFlavor = inputSelectFlavorsRef.current.value
+    //     // eslint-disable-next-line
+    //     if (!flavors.includes(selectedFlavor)) { return alert("Elige un sabor válido!" + " " + '\ud83e\udd28') }
+    //     if (selectedFlavor && !selectedFlavors.includes(selectedFlavor)) {
+    //         setSelectedFlavors([...selectedFlavors, selectedFlavor])
+    //     }
+    //     setErrors(Validations({ ...newUser, favorites_tastes: selectedFlavor }))
+    //     inputSelectFlavorsRef.current.value = ""
+    // }
 
-    const handleOnclickX = (event) => {
-        event.preventDefault()
-        if (selectedFlavors.length - 1 < 1) {
-            setSelectedFlavors([])
-            setErrors(Validations({ ...newUser, favorites_tastes: [] }))
-        }
-        const updatedSelectedFlavors = selectedFlavors.filter((f) => f !== event.target.value)
-        setSelectedFlavors(updatedSelectedFlavors)
+    // const handleOnclickX = (event) => {
+    //     event.preventDefault()
+    //     if (selectedFlavors.length - 1 < 1) {
+    //         setSelectedFlavors([])
+    //         setErrors(Validations({ ...newUser, favorites_tastes: [] }))
+    //     }
+    //     const updatedSelectedFlavors = selectedFlavors.filter((f) => f !== event.target.value)
+    //     setSelectedFlavors(updatedSelectedFlavors)
 
-    }
+    // }
 
     const handleSubmit = (event) => {
         event.preventDefault()
         setErrors(Validations({ ...newUser, [event.target.name]: event.target.value }))
         const arrayErrors = Object.keys(errors)
-        // chequea si existe name para que si no pones nada en ningun campo no se cree el usuario 
+        // chequea si existe name para que si no pones nada en ningun campo no se cree el usuario
         if (arrayErrors.length || !newUser.name) {
             // eslint-disable-next-line
-            alert("Usuario no creado verificar errores en el formulario ", '\ud83e\uddd0')
+            setModal(true)
+            setModalMsg({ msg: "ERRORES EN EL FORMULARIO USUARIO NO CREADO 😢", ok: false })
+
+
         } else {
             dispatch(addUser(newUser))
 
@@ -90,10 +96,9 @@ export default function User() {
                 phone: "",
                 password: "",
             })
-            console.log("SE EJECUTA NEW USER", "dispatch(addUser(newUser))", newUser);
+            setModal(true)
+            setModalMsg({ msg: "FELICITACIONES CREASTE TU USUARIO  🚀", ok: true })
 
-            alert("Felicitaciones has creado tu usuario !! ", '\ud83c\udf0d')
-            history.push("/login")
         }
     }
 
@@ -176,7 +181,7 @@ export default function User() {
                             </div>
                         </div>
 
-                        <div className="flex flex-col flex-wrap items-center justify-center">
+                        {/* <div className="flex flex-col flex-wrap items-center justify-center">
                             <label htmlFor="chocolates">Elige tus chocolates favoritos:</label>
                             <input name="chocolates" id="chocolates" list="dataList" ref={inputSelectFlavorsRef} className="flex flex-col justify-between p-2 mb-3 text-base border-none shadow-sm rounded-2xl bg-chocolate-mantecol w-44 text-chocolate-oscuro shadow-chocolate-bombom focus:outline focus:outline-chocolate-oscuro" />
                             <datalist id="dataList">
@@ -203,20 +208,35 @@ export default function User() {
 
                                 })
                             }
-                        </div>
+                        </div> */}
 
                         <br />
                         <input type="submit" value="Crear Cuenta" className="p-1 font-serif font-bold rounded-lg shadow-sm bg-chocolate-claro text-chocolate-oscuro shadow-chocolate-claro hover:bg-chocolate-mantecol" />
 
-                </div>
-                <p> Volver al <Link to="/home">Home</Link> </p>
+                    </div>
+                    <p> Volver al <Link to="/home">Home</Link> </p>
 
-            </form>
+                </form>
 
                 <div className=" ml-80 w-[600px]">
                     <h1 className='font-serif text-4xl text-start text-chocolate-blanco'>¡Únete a nuestra comunidad chocolatera! Regístrate para acceder a ofertas exclusivas, recibir noticias y descubrir más sobre el apasionante mundo del chocolate. ¡Haz parte de nuestra familia chocolatera hoy!</h1>
                 </div>
             </Fade>
+            {
+                modal && <div className={style.modalContainer}>
+                    <div className={style.infoContainer}>
+                        <p className={style.mensaje}>{modalMsg} </p>
+                        {ok &&
+                            <Link to="/login"><button className={style.modal}>CONTINUAR AL LOGIN</button></Link>
+                        }
+                        {
+                            !ok && 
+                            <Link to="/login"><button className={style.modal}>CONTINUAR AL LOGIN</button></Link>
+
+                        }
+                    </div>
+                </div>
+            }
 
         </div>
     )
