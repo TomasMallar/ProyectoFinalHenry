@@ -131,8 +131,8 @@ return(
         <Redirect to="/home" />
     ):(
             <><button onClick={handleOnClickGoogle} type="button" className={style.loginBtnGoogle}>
-                Sign in with Google
-            </button><button className={style.loginBtnFacebook} onClick={handleOnClickFacebook}>Sign In With Facebook</button></>
+                Continue with Google
+            </button><button className={style.loginBtnFacebook} onClick={handleOnClickFacebook}>Continue with Facebook account</button></>
 )}</>
 )
 
