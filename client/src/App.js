@@ -39,7 +39,7 @@ import BarCharProductSold from './Components/Charts/BarCharProductSold';
 import Landing from './Pages/Landing/Landing';
 import Dashboard from './Pages/Dashboard/Dashborad';
 import Statistics from './Pages/Statistics/Statistics';
-import Users from './Pages/List/List';
+import Users from './Pages/UsersList/List';
 
 
 import EditProfileName from './Components/EditProfileName/EditProfileName';
@@ -50,7 +50,7 @@ import EditProfileDate from './Components/EditProfileDate/EditProfileDate';
 import EditProfilePassword from './Components/EditProfilePassword/EditProfilePassword';
 import EditProfileImage from './Components/EditProfileImage/EditProfileImage'
 import Orders from './Pages/Orders/OrdersList';
-
+import Sales from './Pages/Sales/Sales'
 function App() {
 
   return (
@@ -87,6 +87,7 @@ function App() {
         <PrivateRoute exact path="/statistics" component={() => <> <Statistics/></>} />
         <PrivateRoute exact path="/users" component={() => <> <Users/></>} />
         <PrivateRoute exact path="/orders" component={() => <> <Orders/></>} />
+        <PrivateRoute exact path="/sales" component={() => <> <Sales/></>} />
 
       
         <PrivateRouteUser exact path="/editname" component={() => <><NavBar /><EditProfileName /><Footer /></>}/>

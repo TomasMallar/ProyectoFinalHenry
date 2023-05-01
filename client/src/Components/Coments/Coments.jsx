@@ -10,26 +10,24 @@ const Coments = () => {
     const history = useHistory()
 
     const [comments, setComments] = useState([])
-    console.log(comments, "Local state comments");
     const [currentComment, setCurrentComment] = useState('')
     const [commentsDeleted, setCommentsDeleted] = useState(false)
     const [commentsUpdated, setCommentsUpdated] = useState(false)
     const [editComment, setEditComment] = useState({ id: null, content: '' })
     const [userData, setUserData] = useState(null)
     const { id } = useParams()
-    console.log(comments);
+    const [cont, setCont] = useState(0)
+
     const token = sessionStorage.getItem('token');
     let userId = null;
     if (token) {
         const decodedToken = jwt_decode(token);
         userId = decodedToken.id;
-        console.log(userId, "user ID");
     }
-    console.log(id, "product ID");
+    
     useEffect(() => {
         const getAllComents = async () => {
-            const response = await axios.get(`http://localhost:3001/coments/${id}`)
-
+            const response = await axios.get(`http://localhost:3001/coments/${id}?page=${cont}`)
             setComments(response.data)
             setLatestComments(response.data.length)
         }
@@ -62,8 +60,9 @@ const Coments = () => {
             content: currentComment
         }
         const response = await axios.post('http://localhost:3001/coments', newComment)
-        console.log(response, "posteo de comment");
-        setComments([response.data, ...comments])
+        setCurrentComment("")
+        console.log(currentComment, "comment:");
+        setComments([...comments, response.data ])
     }
 
     const deleteComment = async (event) => {
@@ -93,15 +92,18 @@ const Coments = () => {
     const editCommentHandler = (comment) => {
         setEditComment({ id: comment.id, content: comment.content })
     }
-    const [cont, setCont] = useState(2)
     const [latestComments, setLatestComments] = useState(null)
     const pagesHandler = async () => {
-        const response = await axios.get(`http://localhost:3001/coments/${id}?page=${cont}`)
-        setCont(cont + 1)
-        setComments([...comments, ...response.data])
-        setLatestComments(response.data.length)
+        if (cont+1 <= Math.ceil(comments.length/3) ) {            
+            setCont (cont+1)
+            console.log(`http://localhost:3001/coments/${id}?page=${cont}`);
+            const response = await axios.get(`http://localhost:3001/coments/${id}?page=${cont}`)
+            setComments([...comments, ...response.data])
+            console.log(comments, "comments del ver mas", response.data);
+            setLatestComments(response.data.length)
+        } else return
     }
-
+console.log("comments: ",comments, "LatestComments:", latestComments);
     return (
         <div className="flex flex-col items-center justify-center w-[100%] bg-chocolate-blanco rounded-xl">
             <div className="w-full">
@@ -162,7 +164,7 @@ const Coments = () => {
                     </div>
                 </Fade>
                 {
-                    latestComments === 3 &&
+                    // latestComments === 3 &&
                     <button onClick={pagesHandler} className='p-1 m-10 font-serif font-bold rounded-lg shadow-sm bg-chocolate-claro text-chocolate-oscuro shadow-chocolate-claro hover:bg-chocolate-blanco'>
                         Ver mas comentarios...
                     </button>

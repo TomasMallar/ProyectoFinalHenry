@@ -18,6 +18,10 @@ import {
     GET_INFO,
     GET_USER_ORDER,
     GET_ORDERS_INFO,
+    GET_USERS_INFO,
+    DELETE_USER,
+    GET_USER_INFO,
+    GET_SALES_INFO
 } from "../Action-types/Action-types"
 
 const initialState = {
@@ -33,6 +37,9 @@ const initialState = {
     metrics: {},
     order: {},
     ordersInfo: {},
+    usersInfo: [],
+    userInfo: {},
+    salesInfo: [],
 }
 const reducer = (state = initialState, action) => {
     switch (action.type) {
@@ -149,6 +156,28 @@ const reducer = (state = initialState, action) => {
             return {
                 ...state,
                 ordersInfo: action.payload,
+            }
+        case GET_USERS_INFO:
+            return {
+                ...state,
+                usersInfo: action.payload,
+            }
+        case DELETE_USER:
+            const updatedUsers = state.usersInfo.filter(user => user.id !== action.payload);
+            return {
+                ...state,
+                usersInfo: updatedUsers
+
+            };
+        case GET_USER_INFO:
+            return {
+                ...state,
+                userInfo: action.payload,
+            }
+        case GET_SALES_INFO:
+            return {
+                ...state,
+                salesInfo: action.payload,
             }
 
         default:

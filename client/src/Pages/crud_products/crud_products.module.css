@@ -118,3 +118,8 @@ color: #3F2822;
     width: 100%;
 
   }
+  .pages {
+    margin-bottom: 10px;
+    margin-top: 10px;
+    align-items: center;
+}

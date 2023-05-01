@@ -6,7 +6,8 @@ import { Link } from "react-router-dom"
 import ModalMailing from "../../Components/ModalMailing/ModalMailing"
 import SideBar from "../../Components/SideBar/SideBar"
 import Fade from "react-reveal"
-
+import Pagination from '@mui/material/Pagination';
+import Stack from '@mui/material/Stack';
 
 export default function CrudProducts(props) {
     // const history = useHistory()
@@ -28,6 +29,7 @@ export default function CrudProducts(props) {
     const allProducts = useSelector((state) => state.chocolates)
     const allCategories = useSelector((state) => state.categories)
     const allTypes = useSelector((state) => state.types)
+    const pages = useSelector ((state) => state.chocolates.totalPages)
 
     useEffect(() => {
         dispatch(getProductsAdvanceController(queries.name, queries.category, queries.type, queries.orderBy, queries.orderDirection, queries.page))
@@ -62,18 +64,9 @@ export default function CrudProducts(props) {
         setQueries({ ...queries, edited: c })
     }
 
-    //-----------------------------------------Pages-----------------------------------
-    const handleonClickPages = (event) => {
-        if (event.target.value > 0 && event.target.value <= allProducts.totalPages) {
-            setQueries({ ...queries, page: event.target.value })
-        }
-
-    }
-    const totalPages = allProducts.totalPages
-    const TotalPagesArray = []
-    for (let i = 1; i <= totalPages; i++) {
-        TotalPagesArray.push(i)
-    }
+    const handleChange = (event, value) => {
+        setQueries({...queries, page:value});
+    };
 
     const handleOpenModal = () => {
         setModalOpen(true);
@@ -103,17 +96,10 @@ export default function CrudProducts(props) {
                             </div>
                         </div>
 
-                        <div className={style.pagesButtons}>
-                            {/* Buttons of the Pages */}
-                            <button value={1} onClick={handleonClickPages}>Inicio</button>
-                            <button value={queries.page - 1} onClick={handleonClickPages}>Página anterior</button>
-                            {TotalPagesArray.map(p => {
-                                return <button value={p} onClick={handleonClickPages} className={Number(queries.page) === (p) ? style.selected : ''}> {p} </button>
-                            })}
-                            <button value={Number(queries.page) + 1} onClick={handleonClickPages}>Página Siguiente</button>
-                            <button value={Number(allProducts.totalPages)} onClick={handleonClickPages}>Final</button>
-                        </div>
-
+                      
+                        <Stack spacing={2} className={style.pages}>
+                <Pagination count={pages} onChange={handleChange} size="large" />
+            </Stack>
 
                         <div className={style.container}>
                             <h3 className={style.cell}>ID</h3>
@@ -187,6 +173,10 @@ export default function CrudProducts(props) {
                     </Fade>
                 </div>
             </div>
+              
+            <Stack spacing={2} className={style.pages}>
+                <Pagination count={pages} onChange={handleChange} size="large"/>
+            </Stack>
         </>
     )
 }

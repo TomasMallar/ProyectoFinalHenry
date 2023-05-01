@@ -19,6 +19,12 @@ export const GET_INFO = 'GET_INFO'
 export const GET_USER_ORDER = 'GET_USER_ORDER';
 export const GET_ORDERS_INFO = "GET_ORDERS_INFO"
 export const GET_SALES_INFO = "GET_SALES_INFO"
+export const GET_USERS_INFO = "GET_USERS_INFO"
+export const DELETE_USER = "DELETE_USER"
+export const GET_USER_INFO = "GET_USER_INFO"
+
+
+
 
 
 
