@@ -1,10 +1,11 @@
 import style from './NewUser.module.css'
 import { Link } from 'react-router-dom'
-import { useState, useRef, useEffect } from 'react'
-import { useDispatch } from 'react-redux'
+import { useState, useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import Validations from "./validations"
-import { addUser } from '../../Redux/Actions/Actions'
+import { addUser, resetErrorMessage } from '../../Redux/Actions/Actions'
 import Fade from "react-reveal"
+
 
 
 export default function User() {
@@ -26,8 +27,18 @@ export default function User() {
     // const [selectedFlavors, setSelectedFlavors] = useState([])
 
     const [modal, setModal] = useState(false)
-    const [modalMsg, setModalMsg] = useState({ msg: "", ok: false })
+    const [modalFail, setModalFaile] = useState(false)
+    const [axiosResponse, setAxiosResponse] = useState(false)
+    const [response, setResponse] = useState("")
 
+    
+  const [postErrors, setPostErrors] = useState('');
+  const errorMessage = useSelector((state) => state.errorMessage);
+
+  useEffect(() => {
+    setPostErrors(errorMessage);
+  }, [errorMessage]);
+  console.log(postErrors, "POST ERRORS");
 
     //E. Local para validar errores
     const [errors, setErrors] = useState({})
@@ -36,7 +47,7 @@ export default function User() {
 
         // setNewUser({ ...newUser, favorites_tastes: selectedFlavors })
         setErrors({})
-
+        
     }, []
     )
 
@@ -73,36 +84,46 @@ export default function User() {
 
     // }
 
-    const handleSubmit = (event) => {
+    const handleSubmit = async(event) => {
         event.preventDefault()
         setErrors(Validations({ ...newUser, [event.target.name]: event.target.value }))
         const arrayErrors = Object.keys(errors)
         // chequea si existe name para que si no pones nada en ningun campo no se cree el usuario
         if (arrayErrors.length || !newUser.name) {
-            // eslint-disable-next-line
+            console.log(arrayErrors, "errores");
             setModal(true)
-            setModalMsg({ msg: "ERRORES EN EL FORMULARIO USUARIO NO CREADO 😢", ok: false })
-
-
+            setModalFaile(true)
         } else {
-            dispatch(addUser(newUser))
-
-            // eslint-disable-next-line
-            setNewUser({
-                name: "",
-                surname: "",
-                date_of_birth: "",
-                mail: "",
-                phone: "",
-                password: "",
-            })
             setModal(true)
-            setModalMsg({ msg: "FELICITACIONES CREASTE TU USUARIO  🚀", ok: true })
-
+            dispatch(addUser(newUser))
         }
+        if (postErrors) {
+            console.log(postErrors, postErrors.length > 0, " post Errors");
+            setAxiosResponse(true)
+        }
+                // setNewUser({
+                //     name: "",
+                //     surname: "",
+                //     date_of_birth: "",
+                //     mail: "",
+                //     phone: "",
+                //     password: "",
+                // }) 
+
     }
 
-
+    const handleModalfail = (event) => {
+        event.preventDefault()
+        setModal(false)
+        setModalFaile(false)
+        setAxiosResponse(false)
+        dispatch(resetErrorMessage())
+    }
+    const handleModal = () => {
+        setModal(!modal)
+    }
+    console.log("Response:", postErrors);
+    console.log("Modal:",modal, "Modal Fail:",modalFail, "AxiosResponse:",axiosResponse);
 
     return (
 
@@ -215,7 +236,6 @@ export default function User() {
 
                     </div>
                     <p> Volver al <Link to="/home">Home</Link> </p>
-
                 </form>
 
                 <div className=" ml-80 w-[600px]">
@@ -223,17 +243,29 @@ export default function User() {
                 </div>
             </Fade>
             {
-                modal && <div className={style.modalContainer}>
+                modal && modalFail===false && axiosResponse===false &&<div className={style.modalContainer}>
                     <div className={style.infoContainer}>
-                        <p className={style.mensaje}>{modalMsg} </p>
-                        {ok &&
+                        <p className={style.mensaje}>FELICITACIONES CREASTE TU USUARIO!! </p>
                             <Link to="/login"><button className={style.modal}>CONTINUAR AL LOGIN</button></Link>
-                        }
-                        {
-                            !ok && 
-                            <Link to="/login"><button className={style.modal}>CONTINUAR AL LOGIN</button></Link>
-
-                        }
+                            <button onClick={handleModal}>MODAL</button>
+                    </div>
+                </div>
+            }
+             {
+                modal && modalFail===true && <div className={style.modalContainer}>
+                    <div className={style.infoContainer}>
+                        <p className={style.mensaje}>REVISAR ERRORES DEL FORMULARIO!!" </p>
+                            <button className={style.modal} onClick={handleModalfail} >Revisar formulario</button>
+                            <button onClick={handleModal}>MODAL</button>
+                    </div>
+                </div>
+            }
+             {
+                modal && axiosResponse===true && <div className={style.modalContainer}>
+                    <div className={style.infoContainer}>
+                        <p className={style.mensaje}>{postErrors} </p>
+                            <button className={style.modal} onClick={handleModalfail} >Revisar formulario</button>
+                            <button onClick={handleModal}>MODAL</button>
                     </div>
                 </div>
             }
