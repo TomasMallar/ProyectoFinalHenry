@@ -175,65 +175,98 @@ export default function CreateProduct() {
 
     return (
         <div className={style.container}>
+
             <form onSubmit={handleSubmit} className={style.formContainer}>
+
                 <div className={style.inputContainer}>
-                    <label htmlFor="name">Nombre del Producto: </label>
+                    <label htmlFor="name">
+                        Nombre del Producto:
+                    </label>
                     <input onChange={handleOnChangeInput} type="text" name="name" placeholder="nombre del producto" value={newChocolate.name} />
-                    <p className={style.error}>{errors.name}</p>
-                </div>
-                <div className={style.inputContainer}>
-                    <label htmlFor="price">Precio: </label>
-                    <input onChange={handleOnChangeInput} type="number" name="price" placeholder="precio del producto" value={newChocolate.price} />
-                    <p className={style.error}>{errors.price}</p>
-                </div>
-                <div className={style.inputContainer}>
-                    <label htmlFor="stock">Cantidad en stock: </label>
-                    <input onChange={handleOnChangeInput} type="number" name="stock" placeholder="stock del producto" value={newChocolate.stock} />
-                    <p className={style.error}>{errors.stock}</p>
+
+                    <p className={style.error}>
+                        {errors.name}
+                    </p>
                 </div>
 
                 <div className={style.inputContainer}>
-                    <label htmlFor="image">Imagen (url): </label>
+                    <label htmlFor="price">Precio: </label>
+                    <input onChange={handleOnChangeInput} type="number" name="price" placeholder="precio del producto" value={newChocolate.price} />
+
+                    <p className={style.error}>
+                        {errors.price}
+                    </p>
+                </div>
+
+                <div className={style.inputContainer}>
+                    <label htmlFor="stock">
+                        Cantidad en stock:
+                    </label>
+                    <input onChange={handleOnChangeInput} type="number" name="stock" placeholder="stock del producto" value={newChocolate.stock} />
+                    <p className={style.error}>
+                        {errors.stock}
+                    </p>
+                </div>
+
+                <div className={style.inputContainer}>
+                    <label htmlFor="image">
+                        Imagen (url):
+                    </label>
                     <div>
                         <input type="file" name="image" onChange={handleFileInputChange} value={fileInputState} />
-                        <button type="button" onClick={handleSubmitFile}>aceptar</button>
+                        <button type="button" onClick={handleSubmitFile}>
+                            aceptar
+                        </button>
                     </div>
                 </div>
                 <div className={style.inputContainer}>
-                    <label htmlFor="ingredients">Ingredientes:</label>
+                    <label htmlFor="ingredients">
+                        Ingredientes:
+                    </label>
                     <input name="ingredients" id="type" list="dataListIngredients" ref={inputSelectedIngredientRef} />
+
                     <datalist id="dataListIngredients">
+
                         {ingredients.map(ingred => {
                             return <option value={ingred} key={ingred}></option>
                         })}
                     </datalist>
                     <Button text="Añadir Ingrediente" onClick={handleOnClickAddIngredient}></Button>
-                    <p className={style.error}>{errors.ingredients}</p>
+                    <p className={style.error}>
+                        {errors.ingredients}
+                    </p>
                 </div>
                 <div className={style.inputContainer}>
                     {
                         selectedIngredients.map((ingred) => {
                             return (
                                 <div>
-                                    <span>{ingred} </span>
-                                    <button value={ingred} onClick={handleOnclickXIngredient}>X</button>
+                                    <span>
+                                        {ingred}
+                                    </span>
+                                    <button value={ingred} onClick={handleOnclickXIngredient}>
+                                        X
+                                    </button>
                                 </div>
-
                             )
-
                         })
                     }
                 </div>
                 <div className={style.inputContainer}>
-                    <label htmlFor="types">Tipos:</label>
+                    <label htmlFor="types">
+                        Tipos:
+                    </label>
                     <input name="types" id="type" list="dataListTypes" ref={inputSelectedTypeRef} />
+
                     <datalist id="dataListTypes">
                         {types.map(type => {
                             return <option value={type} key={type}></option>
                         })}
                     </datalist>
                     <Button text="Añadir Tipo" onClick={handleOnClickAddType}></Button>
-                    <p className={style.error}>{errors.types}</p>
+                    <p className={style.error}>
+                        {errors.types}
+                    </p>
                 </div>
                 <div className={style.inputContainer}>
                     {
@@ -241,24 +274,30 @@ export default function CreateProduct() {
                             return (
                                 <div>
                                     <span>{type} </span>
-                                    <button value={type} onClick={handleOnclickXType}>X</button>
+                                    <button value={type} onClick={handleOnclickXType}>
+                                        X
+                                    </button>
                                 </div>
-
                             )
-
                         })
                     }
                 </div>
                 <div className={style.inputContainer}>
-                    <label htmlFor="category">Categorias:</label>
+                    <label htmlFor="category">
+                        Categorias:
+                    </label>
                     <input name="category" id="category" list="dataListCategories" ref={inputSelectedCategoryRef} />
+
                     <datalist id="dataListCategories">
                         {categories.map((c) => {
                             return <option value={c} key={c}></option>
                         })}
                     </datalist>
+
                     <Button text="Añadir Categoria" onClick={handleOnClickAddCategory}></Button>
-                    <p className={style.error}>{errors.categories}</p>
+                    <p className={style.error}>
+                        {errors.categories}
+                    </p>
                 </div>
                 <div className={style.inputContainer}>
 
@@ -278,7 +317,9 @@ export default function CreateProduct() {
                 <input type="submit" value="Crear Producto" />
             </form>
             <div>
-                <h2 className={style.visTitle}>Pre-Visualización</h2>
+                <h2 className={style.visTitle}>
+                    Pre-Visualización
+                </h2>
                 <CreateProdCard name={newChocolate.name} image={previewSource} price={newChocolate.price} ingredients={newChocolate.ingredients} type={newChocolate.types} categories={newChocolate.categories} />
             </div>
         </div>

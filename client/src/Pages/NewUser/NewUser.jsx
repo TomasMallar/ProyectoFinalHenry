@@ -209,7 +209,6 @@ export default function User() {
                         <input type="submit" value="Crear Cuenta" className="p-1 font-serif font-bold rounded-lg shadow-sm bg-chocolate-claro text-chocolate-oscuro shadow-chocolate-claro hover:bg-chocolate-mantecol" />
 
                 </div>
-                <p> Volver al <Link to="/home">Home</Link> </p>
 
             </form>
 

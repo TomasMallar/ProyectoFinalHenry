@@ -83,110 +83,171 @@ export default function CrudProducts(props) {
     };
 
     return (
-        <>
+        <div className="flex">
+            <SideBar />
+            <div>
+                <Fade cascade>
+                    <p className="relative inline-block w-full px-8 py-4 text-5xl font-bold leading-tight tracking-wide uppercase rounded-lg shadow-md text-chocolate-oscuro bg-chocolate-mantecol box h-fit">
+                        PRODUCTS
+                    </p>
+                    <div className="flex items-center justify-center p-3 h-fit ">
 
-            <div className={style.cont}>
-                <SideBar />
-                <div className={style.totalContainer}>
-                    <Fade cascade>
-                        <p className={style.top}>PRODUCTS</p>
-                        <div className={style.searchBar}>
-                            <img className={style.img} alt="lupa" src="https://res.cloudinary.com/dgxs2jcyu/image/upload/v1681582108/lupa_yidfrt.png" />
-                            <input type="search" name="name" value={queries.name} placeholder="Buscar Producto" onChange={handleInputChangeSearchBar} />
-                            <Link to="/createProduct"> <button className={style.buttonNewProd}>AGREGAR NUEVO PRODUCTO</button></Link>
-                            <Link to="/editCategoryTypeIngredient"> <button className={style.buttonNewProd}>EDITAR INGREDIENTES / TIPOS / CATEGORIAS</button></Link>
-                            <div>
-                                <button className={style.buttonNewProd} onClick={handleOpenModal}>
-                                    MAILING
-                                </button>
-                                {modalOpen && <ModalMailing onClose={handleCloseModal} />}
-                            </div>
-                        </div>
+                        <input type="search" name="name" value={queries.name} placeholder="Buscar Producto" onChange={handleInputChangeSearchBar} className="p-2 text-base border-none shadow-sm bg-chocolate-mantecol w-45 rounded-2xl text-chocolate-oscuro shadow-chocolate-bombom cursor-text focus:outline-chocolate-bombom" />
 
-                        <div className={style.pagesButtons}>
-                            {/* Buttons of the Pages */}
-                            <button value={1} onClick={handleonClickPages}>Inicio</button>
-                            <button value={queries.page - 1} onClick={handleonClickPages}>Página anterior</button>
-                            {TotalPagesArray.map(p => {
-                                return <button value={p} onClick={handleonClickPages} className={Number(queries.page) === (p) ? style.selected : ''}> {p} </button>
-                            })}
-                            <button value={Number(queries.page) + 1} onClick={handleonClickPages}>Página Siguiente</button>
-                            <button value={Number(allProducts.totalPages)} onClick={handleonClickPages}>Final</button>
-                        </div>
+                        <Link to="/createProduct">
+                            <button className="p-1 ml-10 font-serif font-bold rounded-lg shadow-sm bg-chocolate-oscuro text-chocolate-blanco shadow-chocolate-claro hover:bg-chocolate-mantecol hover:text-chocolate-oscuro">
+                                AGREGAR NUEVO PRODUCTO
+                            </button>
+                        </Link>
+                        <Link to="/editCategoryTypeIngredient">
 
-
-                        <div className={style.container}>
-                            <h3 className={style.cell}>ID</h3>
-                            <h3 className={style.cell}>NOMBRE PRODUCTO</h3>
-                            <h3 className={style.cell}>PRECIO</h3>
-                            <h3 className={style.cell}>STOCK</h3>
-                            <h3 className={style.cell}>IMAGEN</h3>
-                            <h3 className={style.cell}>INGREDIENTES</h3>
-                            <select className={style.cell} name="type" onChange={handleOnChangeFilter}>
-                                <option className={style.cell} value="TIPOS" defaultValue="TIPOS">TIPOS</option>
-                                {allTypes?.map(t => {
-                                    return (
-                                        <option className={style.cell} value={t.name}>{t.name}</option>
-                                    )
-                                })}
-                            </select>
-                            <select className={style.cell} name="category" onChange={handleOnChangeFilter}>
-                                <option className={style.cell} value="CATEGORIAS" defaultValue="CATEGORIAS">CATEGORIAS</option>
-                                {allCategories.map(c => {
-                                    return (
-
-                                        <option className={style.cell} value={c.name}>{c.name}</option>
-                                    )
-                                })}
-                            </select>
-
-                            <h3 className={style.cell}>EDITAR</h3>
-                            <h3 className={style.cell}>ELIMINAR</h3>
-
-                        </div>
+                            <button className="p-1 ml-10 font-serif font-bold rounded-lg shadow-sm bg-chocolate-oscuro text-chocolate-blanco shadow-chocolate-claro hover:bg-chocolate-mantecol hover:text-chocolate-oscuro">
+                                EDITAR INGREDIENTES / TIPOS / CATEGORIAS
+                            </button>
+                        </Link>
                         <div>
-                            {allProducts.products?.map(c => {
+                            <button className="p-1 ml-10 font-serif font-bold rounded-lg shadow-sm bg-chocolate-oscuro text-chocolate-blanco shadow-chocolate-claro hover:bg-chocolate-mantecol hover:text-chocolate-oscuro" onClick={handleOpenModal}>
+                                MAILING
+                            </button>
+                            {modalOpen && <ModalMailing onClose={handleCloseModal} />}
+                        </div>
+                    </div>
+
+                    <div className="flex justify-center py-5">
+                        {/* Buttons of the Pages */}
+                        <button value={1} onClick={handleonClickPages} className="p-1 m-1 font-serif border border-solid shadow-sm cursor-pointer bg-chocolate-mantecol border-chocolate-oscuro rounded-2xl text-chocolate-oscuro shadow-chocolate-bombom hover:bg-chocolate-bombom hover:text-chocolate-blanco">
+                            Inicio
+                        </button>
+                        <button value={queries.page - 1} onClick={handleonClickPages}
+                            className="p-1 m-1 font-serif border border-solid shadow-sm cursor-pointer bg-chocolate-mantecol border-chocolate-oscuro rounded-2xl text-chocolate-oscuro shadow-chocolate-bombom hover:bg-chocolate-bombom hover:text-chocolate-blanco">
+                            Página anterior
+                        </button>
+                        {TotalPagesArray.map(p => {
+                            return <button value={p} onClick={handleonClickPages} className={Number(queries.page) === (p) ? " m-1 p-1 bg-chocolate-bombom border border-solid border-chocolate-oscuro rounded-2xl text-chocolate-blanco shadow-sm shadow-chocolate-bombom cursor-pointer font-serif"
+
+                                : "p-1 m-1 bg-chocolate-mantecol border border-solid border-chocolate-oscuro rounded-2xl text-chocolate-oscuro shadow-sm shadow-chocolate-bombom cursor-pointer font-serif hover:bg-chocolate-bombom hover:text-chocolate-blanco"}> {p} </button>
+                        })}
+                        <button value={Number(queries.page) + 1} onClick={handleonClickPages} className="p-1 m-1 font-serif border border-solid shadow-sm cursor-pointer bg-chocolate-mantecol border-chocolate-oscuro rounded-2xl text-chocolate-oscuro shadow-chocolate-bombom hover:bg-chocolate-bombom hover:text-chocolate-blanco">
+                            Página Siguiente
+                        </button>
+                        <button value={Number(allProducts.totalPages)} onClick={handleonClickPages} className="p-1 m-1 font-serif border border-solid shadow-sm cursor-pointer bg-chocolate-mantecol border-chocolate-oscuro rounded-2xl text-chocolate-oscuro shadow-chocolate-bombom hover:bg-chocolate-bombom hover:text-chocolate-blanco">
+                            Final
+                        </button>
+                    </div>
+
+
+                    <div className="flex flex-row items-center justify-around border p-2.5 w-[80vw] mx-2.5">
+                        <h3 className="">
+                            ID
+                        </h3>
+                        <h3 className="w-32 mr-2 text-sm text-center h-fit basis-36 ">
+                            NOMBRE PRODUCTO
+                        </h3>
+                        <h3 className="w-32 mr-2 text-sm text-center h-fit basis-36 ">
+                            PRECIO
+                        </h3>
+                        <h3 className="w-32 mr-2 text-sm text-center h-fit basis-36 ">
+                            STOCK
+                        </h3>
+                        <h3 className="w-32 mr-2 text-sm text-center h-fit basis-36 ">
+                            IMAGEN
+                        </h3>
+                        <h3 className="w-32 mr-2 text-sm text-center h-fit basis-36 ">
+                            INGREDIENTES
+                        </h3>
+                        <select className="w-32 mr-2 text-sm text-center h-fit basis-36 " name="type" onChange={handleOnChangeFilter}>
+                            <option className="w-32 mr-2 text-sm text-center h-fit basis-36 " value="TIPOS" defaultValue="TIPOS">
+                                TIPOS
+                            </option>
+                            {allTypes?.map(t => {
                                 return (
-                                    <div key={c.id} className={style.container}>
-                                        <p className={style.cell}>{c.id}</p>
-                                        <p className={style.cell}>{c.name}</p>
-                                        <p className={style.cell}>{c.price}</p>
-                                        <p className={style.cell}>{c.stock}</p>
-                                        <img src={c.image} alt={c.name} className={style.image} />
-                                        <div>
-                                            {c.ingredients.length ? c.ingredients.map(i => {
-                                                return (
-
-                                                    <p className={style.cell}>{i}</p>
-                                                )
-                                            }) : <p className={style.cell}>N/A</p>}
-                                        </div>
-                                        <div>
-                                            {c.types.length ? c.types.map(t => {
-                                                return (
-                                                    <p className={style.cell}>{t}</p>
-                                                )
-                                            }) : <p className={style.cell}>N/A</p>}
-                                        </div>
-
-                                        <div>
-                                            {c.categories.length ? c.categories.map(t => {
-                                                return (
-                                                    <p className={style.cell}>{t}</p>
-                                                )
-                                            }) : <p className={style.cell}>N/A</p>}
-                                        </div>
-
-                                        <Link to="/editProduct"><button className={style.editButton} value={c} onClick={() => { handleOnClickEdit(c) }}>Editar</button> </Link>
-                                        <button className={style.deleteButton} value={c.id} onClick={handleOnClickDelete}>Eliminar</button>
-
-                                    </div>
+                                    <option className="w-32 mr-2 text-sm text-center h-fit basis-36 " value={t.name}>
+                                        {t.name}
+                                    </option>
                                 )
                             })}
-                        </div>
-                    </Fade>
-                </div>
+                        </select>
+                        <select className="w-32 mr-2 text-sm text-center h-fit basis-36 " name="category" onChange={handleOnChangeFilter}>
+
+                            <option className="w-32 mr-2 text-sm text-center h-fit basis-36 " value="CATEGORIAS" defaultValue="CATEGORIAS">
+                                CATEGORIAS
+                            </option>
+                            {allCategories.map(c => {
+                                return (
+                                    <option className="w-32 mr-2 text-sm text-center h-fit basis-36 " value={c.name}>
+                                        {c.name}
+                                    </option>
+                                )
+                            })}
+                        </select>
+
+                        <h3 className="w-32 mr-2 text-sm text-center h-fit basis-36 ">
+                            EDITAR
+                        </h3>
+                        <h3 className="w-32 mr-2 text-sm text-center h-fit basis-36 ">
+                            ELIMINAR
+                        </h3>
+
+                    </div>
+                    <div>
+                        {allProducts.products?.map(c => {
+                            return (
+                                <div key={c.id} className="flex flex-row items-center justify-around border p-2.5 w-[80vw] mx-2.5">
+                                    <p className="w-32 mr-2 text-sm text-center h-fit basis-36 ">
+                                        {c.id}
+                                    </p>
+                                    <p className="w-32 mr-2 text-sm text-center h-fit basis-36 ">
+                                        {c.name}
+                                    </p>
+                                    <p className="w-32 mr-2 text-sm text-center h-fit basis-36 ">
+                                        {c.price}
+                                    </p>
+                                    <p className="w-32 mr-2 text-sm text-center h-fit basis-36 ">
+                                        {c.stock}
+                                    </p>
+                                    <img src={c.image} alt={c.name} className="w-24 h-16 " />
+
+                                    <div>
+                                        {c.ingredients.length ? c.ingredients.map(i => {
+                                            return (
+
+                                                <p className="w-32 mr-2 text-sm text-center h-fit basis-36 ">{i}</p>
+                                            )
+                                        }) : <p className="w-32 mr-2 text-sm text-center h-fit basis-36 ">N/A</p>}
+                                    </div>
+
+                                    <div>
+                                        {c.types.length ? c.types.map(t => {
+                                            return (
+                                                <p className="w-32 mr-2 text-sm text-center h-fit basis-36 ">{t}</p>
+                                            )
+                                        }) : <p className="w-32 mr-2 text-sm text-center h-fit basis-36 ">N/A</p>}
+                                    </div>
+
+                                    <div>
+                                        {c.categories.length ? c.categories.map(t => {
+                                            return (
+                                                <p className="w-32 mr-2 text-sm text-center h-fit basis-36 ">{t}</p>
+                                            )
+                                        }) : <p className="w-32 mr-2 text-sm text-center h-fit basis-36 ">N/A</p>}
+                                    </div>
+
+                                    <Link to="/editProduct">
+                                        <button className="p-1 mx-6 font-serif font-bold rounded-lg shadow-sm bg-chocolate-oscuro text-chocolate-blanco shadow-chocolate-claro hover:bg-chocolate-mantecol hover:text-chocolate-oscuro" value={c} onClick={() => { handleOnClickEdit(c) }}>
+                                            Editar
+                                        </button>
+                                    </Link>
+
+                                    <button className="p-1 mx-6 font-serif font-bold rounded-lg shadow-sm bg-chocolate-oscuro text-chocolate-blanco shadow-chocolate-claro hover:bg-chocolate-mantecol hover:text-chocolate-oscuro" value={c.id} onClick={handleOnClickDelete}>
+                                        Eliminar
+                                    </button>
+
+                                </div>
+                            )
+                        })}
+                    </div>
+                </Fade>
             </div>
-        </>
+        </div>
     )
 }

@@ -542,6 +542,38 @@ video {
   margin-top: 1.5rem;
   margin-bottom: 1.5rem;
 }
+.my-2 {
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+.my-2\.5 {
+  margin-top: 0.625rem;
+  margin-bottom: 0.625rem;
+}
+.mx-2 {
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
+}
+.mx-2\.5 {
+  margin-left: 0.625rem;
+  margin-right: 0.625rem;
+}
+.mx-3 {
+  margin-left: 0.75rem;
+  margin-right: 0.75rem;
+}
+.mx-4 {
+  margin-left: 1rem;
+  margin-right: 1rem;
+}
+.mx-5 {
+  margin-left: 1.25rem;
+  margin-right: 1.25rem;
+}
+.mx-6 {
+  margin-left: 1.5rem;
+  margin-right: 1.5rem;
+}
 .mb-1 {
   margin-bottom: 0.25rem;
 }
@@ -596,8 +628,23 @@ video {
 .mt-7 {
   margin-top: 1.75rem;
 }
+.ml-10 {
+  margin-left: 2.5rem;
+}
+.ml-2 {
+  margin-left: 0.5rem;
+}
+.ml-2\.5 {
+  margin-left: 0.625rem;
+}
+.mr-2 {
+  margin-right: 0.5rem;
+}
 .block {
   display: block;
+}
+.inline-block {
+  display: inline-block;
 }
 .flex {
   display: flex;
@@ -727,6 +774,18 @@ video {
 .w-full {
   width: 100%;
 }
+.w-screen {
+  width: 100vw;
+}
+.w-\[80vw\] {
+  width: 80vw;
+}
+.w-32 {
+  width: 8rem;
+}
+.w-24 {
+  width: 6rem;
+}
 .basis-1\/2 {
   flex-basis: 50%;
 }
@@ -735,6 +794,9 @@ video {
 }
 .basis-full {
   flex-basis: 100%;
+}
+.basis-36 {
+  flex-basis: 9rem;
 }
 .transform {
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
@@ -968,6 +1030,10 @@ video {
   padding-left: 1.5rem;
   padding-right: 1.5rem;
 }
+.px-8 {
+  padding-left: 2rem;
+  padding-right: 2rem;
+}
 .py-4 {
   padding-top: 1rem;
   padding-bottom: 1rem;
@@ -975,6 +1041,10 @@ video {
 .py-6 {
   padding-top: 1.5rem;
   padding-bottom: 1.5rem;
+}
+.py-5 {
+  padding-top: 1.25rem;
+  padding-bottom: 1.25rem;
 }
 .pb-2 {
   padding-bottom: 0.5rem;
@@ -1002,6 +1072,9 @@ video {
 }
 .text-left {
   text-align: left;
+}
+.text-center {
+  text-align: center;
 }
 .text-justify {
   text-align: justify;
@@ -1040,6 +1113,10 @@ video {
   font-size: 1.25rem;
   line-height: 1.75rem;
 }
+.text-sm {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+}
 .font-bold {
   font-weight: 700;
 }
@@ -1060,6 +1137,12 @@ video {
 }
 .leading-7 {
   line-height: 1.75rem;
+}
+.leading-tight {
+  line-height: 1.25;
+}
+.tracking-wide {
+  letter-spacing: 0.025em;
 }
 .text-chocolate-blanco {
   --tw-text-opacity: 1;
@@ -1159,6 +1242,10 @@ video {
 .hover\:text-chocolate-blanco:hover {
   --tw-text-opacity: 1;
   color: rgb(239 239 235 / var(--tw-text-opacity));
+}
+.hover\:text-chocolate-oscuro:hover {
+  --tw-text-opacity: 1;
+  color: rgb(63 40 34 / var(--tw-text-opacity));
 }
 .hover\:underline:hover {
   text-decoration-line: underline;
