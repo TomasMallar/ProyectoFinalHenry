@@ -32,7 +32,7 @@ async function loadProductHandler(req, res) {
         
         if(users && users.length){
           console.log(users)
-          await Promise.all(users.map(user => postNewUser(user.name, user.surname, user.password, user.mail, user.phone, user.date_of_birth)));
+          await Promise.all(users.map(user => postNewUser(user)));
         }
         
 
