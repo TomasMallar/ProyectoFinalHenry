@@ -164,7 +164,7 @@ export default function CreateProduct() {
         console.log(base64EncodedImage);
 
         try {
-            const response = await axios.post('http://localhost:3001/upload', { data: base64EncodedImage });
+            const response = await axios.post('http://localhost:3001/upload/product', { data: base64EncodedImage });
             console.log(response.data.secure_url)
             setNewChocolate({ ...newChocolate, image: response.data.secure_url })
         } catch (error) {

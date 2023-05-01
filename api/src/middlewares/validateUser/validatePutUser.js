@@ -4,7 +4,6 @@ const validatePutUser = (req, res, next) => {
     if(!Object.keys(req.body).length) {
         throw new Error("You must provide at least one piece of information to update");
     }
-    console.log(req.body);
 
     const schema = Joi.object({
         name: Joi.string().allow("").optional(),
@@ -13,6 +12,7 @@ const validatePutUser = (req, res, next) => {
         date_of_birth: Joi.string().optional(),
         password: Joi.string().optional(),
         phone: Joi.number().optional(),
+        image: Joi.string().optional()
       });
 
     const { error } = schema.validate(req.body);

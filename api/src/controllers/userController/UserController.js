@@ -75,6 +75,7 @@ const postNewUser = async ({
   phone,
   mail,
   date_of_birth,
+  image
 }) => {
   try {
     const passwordHash = await encrypt(password);
@@ -91,6 +92,7 @@ const postNewUser = async ({
         mail,
         date_of_birth,
         rolId: roles.id,
+        image
       },
     });
 
@@ -107,6 +109,7 @@ const postNewUser = async ({
         phone: user.phone,
         mail: user.mail,
         date_of_birth: user.date_of_birth,
+        image: user.image
       },
       token,
     };
@@ -136,6 +139,7 @@ const postLoginUser = async ({ mail, password }) => {
         phone: user.phone,
         mail: user.mail,
         date_of_birth: user.date_of_birth,
+        image: user.image
       },
       token,
     };
@@ -145,71 +149,72 @@ const postLoginUser = async ({ mail, password }) => {
 };
 
 const updateUser = async (id, userData) => {
-  try {
-    const user = await User.findByPk(id);
 
-    if (!user) throw new Error('User not found');
+  const user = await User.findByPk(id);
 
-    if (userData.password) {
-      const checkPassword = await compare(userData.password, user.password);
+  if (!user) throw new Error('User not found');
 
-      if (checkPassword) {
-        throw new Error(
-          'The password is the same as the current one, you must type a new one'
-        );
-      }
+  if (userData.password) {
+    const checkPassword = await compare(userData.password, user.password);
 
-      const passwordHash = await encrypt(userData.password);
-
-      userData.password = passwordHash;
+    if (checkPassword) {
+      throw new Error(
+        'The password is the same as the current one, you must type a new one'
+      );
     }
+
+    const passwordHash = await encrypt(userData.password);
+
+    userData.password = passwordHash;
+  }
+
+    await User.update({image: userData.image}, { where: { id } })
 
     if (
       userData.name === user.name ||
       userData.surname === user.surname ||
       userData.phone === user.phone ||
       userData.date_of_birth === user.date_of_birth ||
-      userData.mail === user.mail
+      userData.mail === user.mail 
     ) {
       throw new Error(
         'The data provided is the same as the current data. No update is necessary.'
       );
+    } else {
+      await User.update(userData, { where: { id } });
+    
+      const { name, surname, mail, date_of_birth, phone, image } = await User.findByPk(
+        id
+      );
+    
+      return {
+        message: 'User updated successfully',
+        user: {
+          id,
+          name,
+          surname,
+          mail,
+          date_of_birth,
+          phone,
+          image
+        },
+      };
     }
 
-    await User.update(userData, { where: { id } });
-
-    const { name, surname, mail, date_of_birth, phone } = await User.findByPk(
-      id
-    );
-
-    return {
-      message: 'User updated successfully',
-      user: {
-        id,
-        name,
-        surname,
-        mail,
-        date_of_birth,
-        phone,
-      },
-    };
-  } catch (error) {
-    throw new Error(error.message);
-  }
 };
 
 const deleteUser = async (id) => {
-    try {
-        const user = await User.findByPk(id);
+  try {
+    const user = await User.findByPk(id);
 
-        if(!user) throw new Error("User not found")
+    if (!user) throw new Error("User not found")
 
-        await User.destroy({ where: { id }});
+    await User.destroy({ where: { id } });
 
-        return { message: "User deleted successfully"};
-    } catch (error) {
-        throw new Error(error.message);
-    }
+    return { message: "User deleted successfully" };
+  } catch (error) {
+    throw new Error(error.message);
+  }
 }
 
 const getUserOrder = async (id, page = 1, limit = 4) => {
