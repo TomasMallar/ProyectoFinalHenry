@@ -1,11 +1,12 @@
 const { Sale, Order, User, Product, OrderItem } = require('../../db');
 const { Op } = require('sequelize');
 
-async function getOrdersReport(year, month = null, page = 1, pageSize = 100) {
+async function getOrdersUserReport(year, month = null, page = 1, pageSize = 100, userId) {
   const options = {
     order: [['createdAt', 'DESC']],
     limit: pageSize,
     offset: (page - 1) * pageSize,
+    where: { userId: userId }, // condición para filtrar las órdenes del usuario
   };
 
   let monthTotal = 0; // Inicializamos la variable monthTotal en 0
@@ -23,11 +24,14 @@ async function getOrdersReport(year, month = null, page = 1, pageSize = 100) {
           { [Op.gte]: new Date(year, month - 1, 1) },
           { [Op.lte]: new Date(year, month, 0, 23, 59, 59, 999) }
         ]
-      }
+      },
+      userId : userId , // condición para filtrar las órdenes del usuario
+
     };
     console.log(options);
     // Obtenemos la suma total de la columna "amount" para el mes proporcionado
   }
+
 
 //   const sales = await Sale.findAndCountAll(options);
 const sales = await Order.findAndCountAll({
@@ -35,8 +39,8 @@ const sales = await Order.findAndCountAll({
     include: [
         {
             model: User,
-            as: 'user',
-        },
+            as: 'user'
+          },
         {
             model: OrderItem,
             as: 'items',
@@ -46,14 +50,14 @@ const sales = await Order.findAndCountAll({
                     as: 'product',
                 },
             ],
-        },
-        {
+          },
+          {
             model: Sale,
             as: 'sale',
-        },
-    ],
-    distinct: true, // Agregar esta opción para asegurarse de que los registros sean únicos
-});
+          },
+        ],
+        distinct: true, // Agregar esta opción para asegurarse de que los registros sean únicos
+      });
 
   
 
@@ -65,7 +69,7 @@ const sales = await Order.findAndCountAll({
 
   const totalPages = Math.ceil(sales.count / pageSize);
 
-  return { page, pageSize, totalOrders: sales.count, totalPages, report:report.sales, };
+  return { page, pageSize, totalPages, totalOrders: sales.count, report:report.sales };
 }
 
-module.exports = {getOrdersReport};
+module.exports = {getOrdersUserReport};
