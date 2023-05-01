@@ -9,7 +9,8 @@ const { getTotalSalesByMonthHandler } = require("../../handlers/metricHandlers/g
 const { getMonthPerformanceHandler } = require("../../handlers/metricHandlers/getMonthPerformanceHandler");
 const {getAllSalesPaginatedHandler} = require("../../handlers/metricHandlers/getAllSalesPaginatedHandler");
 const {getAllOrdersPaginatedHandler} = require("../../handlers/metricHandlers/getAllOrdersPaginatedHandler");
-
+const {getSalesByUserHandler} = require("../../handlers/metricHandlers/getSalesByUserHandler");
+const {getOrdersByUserHandler} = require("../../handlers/metricHandlers/getOrdersByUserHandler");
 
 const routerMetric = Router();
 
@@ -23,6 +24,8 @@ routerMetric.get('/average-amount-sales', getAverageAmountSalesHandler) ;
 routerMetric.get('/month-performance', getMonthPerformanceHandler);
 routerMetric.get('/all-sales', getAllSalesPaginatedHandler );
 routerMetric.get('/all-orders', getAllOrdersPaginatedHandler );
+routerMetric.get('/all-sales/user', getSalesByUserHandler );
+routerMetric.get('/all-orders/user', getOrdersByUserHandler );
 
 
 module.exports = routerMetric;

@@ -52,7 +52,8 @@ const sales = await Sale.findAndCountAll({
           }
         }
       ]
-    }
+    },
+    distinct: true, // Agregar esta opción para asegurarse de que los registros sean únicos
   });
   
 
@@ -68,7 +69,7 @@ const sales = await Sale.findAndCountAll({
     return { report: report.sales, monthTotal, page, pageSize, totalPages, totalHistoric };
   }
 
-  return { report:report.sales, page, pageSize, totalPages };
+  return { page, pageSize, totalPages, totalSales:sales.count, report:report.sales, };
 }
 
 module.exports = {getSalesReport};
