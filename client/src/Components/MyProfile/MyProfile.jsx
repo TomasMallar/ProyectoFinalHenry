@@ -32,7 +32,7 @@ const MyProfile = () => {
   return (
     <div className={style.container}>
       <div className={style.containerInfo}>
-        <div className={style.initials}><img src={image} alt={initials} /></div>
+        <div className={style.initials}><img src={image} alt={initials} className={style.initials} /></div>
         <Link to="/editimage" className={style.button}>Editar</Link>
         <h2 className={style.nameSurname}>{name} {surname}</h2>
         

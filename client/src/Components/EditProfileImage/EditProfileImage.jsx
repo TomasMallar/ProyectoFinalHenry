@@ -6,6 +6,7 @@ import { useDispatch } from 'react-redux';
 import jwt_decode from 'jwt-decode';
 import { Redirect } from 'react-router-dom';
 import axios from 'axios';
+import style from './EditProfileImage.module.css'
 
 const EditProfileImage = () => {
     const dispatch = useDispatch();
@@ -74,7 +75,7 @@ const EditProfileImage = () => {
         e.preventDefault()
         if (!previewSource) return
 
-        const response = await axios.put('http://localhost:3001/coments/all', { userId: userId, image: editProfile.image})
+        const response = await axios.put('http://localhost:3001/coments/all', { userId: userId, image: editProfile.image })
         console.log(response.data);
         const userData = JSON.parse(sessionStorage.getItem('user'));
         dispatch(PutEditProfile(id, userData))
@@ -90,7 +91,12 @@ const EditProfileImage = () => {
             <form onSubmit={handleSubmit} >
                 <div >
                     <div>
-                        <img src={previewSource} />
+                        <div className={style.containerImage}>
+                            <img src={previewSource 
+                            ? previewSource 
+                            : "https://i.pinimg.com/564x/88/b4/4e/88b44e2f78161c673f92346540e1ebee.jpg"
+                            } className={style.image}/>
+                        </div>
                         <input type="file" name="image" onChange={handleFileInputChange} value={fileInputState} />
                         <button type="button" onClick={handleSubmitFile}>aceptar</button>
                     </div>

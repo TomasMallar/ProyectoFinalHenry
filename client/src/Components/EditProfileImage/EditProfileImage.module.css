@@ -1,0 +1,10 @@
+.containerImage {
+    border: 1px solid black;
+    height: 400px;
+    width: 400px;
+}
+
+.image {
+    height: 400px;
+    width: 400px; 
+}
