@@ -1,9 +1,23 @@
 .dataTable {
 
-    height: 100vh;
-    padding: 15px;
+    height: fit-content;
+    padding-left: 15px;
+    padding-right: 15px;
+
 }
 
-.cellTitle{
+.cellTitle {
     font-weight: bold;
+}
+
+.header {
+    background-color: lightgrey;
+    color: black;
+    font-weight: bold;
+}
+
+.pages {
+    margin-bottom: 10px;
+    margin-top: 10px;
+    align-items: center;
 }

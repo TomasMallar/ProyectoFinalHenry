@@ -6,7 +6,8 @@ import { Link } from "react-router-dom"
 import ModalMailing from "../../Components/ModalMailing/ModalMailing"
 import SideBar from "../../Components/SideBar/SideBar"
 import Fade from "react-reveal"
-
+import Pagination from '@mui/material/Pagination';
+import Stack from '@mui/material/Stack';
 
 export default function CrudProducts(props) {
     // const history = useHistory()
@@ -28,6 +29,7 @@ export default function CrudProducts(props) {
     const allProducts = useSelector((state) => state.chocolates)
     const allCategories = useSelector((state) => state.categories)
     const allTypes = useSelector((state) => state.types)
+    const pages = useSelector ((state) => state.chocolates.totalPages)
 
     useEffect(() => {
         dispatch(getProductsAdvanceController(queries.name, queries.category, queries.type, queries.orderBy, queries.orderDirection, queries.page))
@@ -62,18 +64,9 @@ export default function CrudProducts(props) {
         setQueries({ ...queries, edited: c })
     }
 
-    //-----------------------------------------Pages-----------------------------------
-    const handleonClickPages = (event) => {
-        if (event.target.value > 0 && event.target.value <= allProducts.totalPages) {
-            setQueries({ ...queries, page: event.target.value })
-        }
-
-    }
-    const totalPages = allProducts.totalPages
-    const TotalPagesArray = []
-    for (let i = 1; i <= totalPages; i++) {
-        TotalPagesArray.push(i)
-    }
+    const handleChange = (event, value) => {
+        setQueries({...queries, page:value});
+    };
 
     const handleOpenModal = () => {
         setModalOpen(true);
@@ -113,28 +106,10 @@ export default function CrudProducts(props) {
                         </div>
                     </div>
 
-                    <div className="flex justify-center py-5">
-                        {/* Buttons of the Pages */}
-                        <button value={1} onClick={handleonClickPages} className="p-1 m-1 font-serif border border-solid shadow-sm cursor-pointer bg-chocolate-mantecol border-chocolate-oscuro rounded-2xl text-chocolate-oscuro shadow-chocolate-bombom hover:bg-chocolate-bombom hover:text-chocolate-blanco">
-                            Inicio
-                        </button>
-                        <button value={queries.page - 1} onClick={handleonClickPages}
-                            className="p-1 m-1 font-serif border border-solid shadow-sm cursor-pointer bg-chocolate-mantecol border-chocolate-oscuro rounded-2xl text-chocolate-oscuro shadow-chocolate-bombom hover:bg-chocolate-bombom hover:text-chocolate-blanco">
-                            Página anterior
-                        </button>
-                        {TotalPagesArray.map(p => {
-                            return <button value={p} onClick={handleonClickPages} className={Number(queries.page) === (p) ? " m-1 p-1 bg-chocolate-bombom border border-solid border-chocolate-oscuro rounded-2xl text-chocolate-blanco shadow-sm shadow-chocolate-bombom cursor-pointer font-serif"
-
-                                : "p-1 m-1 bg-chocolate-mantecol border border-solid border-chocolate-oscuro rounded-2xl text-chocolate-oscuro shadow-sm shadow-chocolate-bombom cursor-pointer font-serif hover:bg-chocolate-bombom hover:text-chocolate-blanco"}> {p} </button>
-                        })}
-                        <button value={Number(queries.page) + 1} onClick={handleonClickPages} className="p-1 m-1 font-serif border border-solid shadow-sm cursor-pointer bg-chocolate-mantecol border-chocolate-oscuro rounded-2xl text-chocolate-oscuro shadow-chocolate-bombom hover:bg-chocolate-bombom hover:text-chocolate-blanco">
-                            Página Siguiente
-                        </button>
-                        <button value={Number(allProducts.totalPages)} onClick={handleonClickPages} className="p-1 m-1 font-serif border border-solid shadow-sm cursor-pointer bg-chocolate-mantecol border-chocolate-oscuro rounded-2xl text-chocolate-oscuro shadow-chocolate-bombom hover:bg-chocolate-bombom hover:text-chocolate-blanco">
-                            Final
-                        </button>
-                    </div>
-
+                      
+                        <Stack spacing={2} className={style.pages}>
+                <Pagination count={pages} onChange={handleChange} size="large" />
+            </Stack>
 
                     <div className="flex flex-row items-center justify-around border p-2.5 w-[80vw] mx-2.5">
                         <h3 className="">
@@ -242,12 +217,17 @@ export default function CrudProducts(props) {
                                         Eliminar
                                     </button>
 
-                                </div>
-                            )
-                        })}
-                    </div>
-                </Fade>
+                                    </div>
+                                )
+                            })}
+                        </div>
+                    </Fade>
+                </div>
             </div>
-        </div>
+              
+            <Stack spacing={2} className={style.pages}>
+                <Pagination count={pages} onChange={handleChange} size="large"/>
+            </Stack>
+        </>
     )
 }

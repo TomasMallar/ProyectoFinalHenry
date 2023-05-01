@@ -39,7 +39,7 @@ import BarCharProductSold from './Components/Charts/BarCharProductSold';
 import Landing from './Pages/Landing/Landing';
 import Dashboard from './Pages/Dashboard/Dashborad';
 import Statistics from './Pages/Statistics/Statistics';
-import Users from './Pages/List/List';
+import Users from './Pages/UsersList/List';
 
 
 import EditProfileName from './Components/EditProfileName/EditProfileName';
@@ -49,7 +49,7 @@ import EditProfileMail from './Components/EditProfileMail/EditProfileMail';
 import EditProfileDate from './Components/EditProfileDate/EditProfileDate';
 import EditProfilePassword from './Components/EditProfilePassword/EditProfilePassword';
 import Orders from './Pages/Orders/OrdersList';
-
+import Sales from './Pages/Sales/Sales'
 function App() {
 
   return (
@@ -82,10 +82,11 @@ function App() {
         <Route path="/about"><NavBar /><About /> <Footer /></Route>
         <PrivateRouteUser exact path="/myshopping" component={() => <><NavBar /><MyShopping /><Footer /></>} />
         <PrivateRouteUser exact path="/myprofile" component={() => <><NavBar /><MyProfile /><Footer /></>} />
-        <PrivateRoute exact path="/dashboard" component={() => <> <Dashboard /><Footer /></>} />
-        <PrivateRoute exact path="/statistics" component={() => <> <Statistics/><Footer /></>} />
-        <PrivateRoute exact path="/users" component={() => <> <Users/><Footer /></>} />
-        <PrivateRoute exact path="/orders" component={() => <> <Orders/><Footer /></>} />
+        <PrivateRoute exact path="/dashboard" component={() => <> <Dashboard /></>} />
+        <PrivateRoute exact path="/statistics" component={() => <> <Statistics/></>} />
+        <PrivateRoute exact path="/users" component={() => <> <Users/></>} />
+        <PrivateRoute exact path="/orders" component={() => <> <Orders/></>} />
+        <PrivateRoute exact path="/sales" component={() => <> <Sales/></>} />
 
       
         <PrivateRouteUser exact path="/editname" component={() => <><NavBar /><EditProfileName /><Footer /></>}/>

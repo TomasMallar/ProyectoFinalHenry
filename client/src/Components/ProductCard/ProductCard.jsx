@@ -60,7 +60,7 @@ const ProductCard = ({ id, name, image, price, category }) => {
 
                         <div className="flex flex-col justify-center h-16 m-1 mb-1 text-justify">
                             {category?.map((c) => {
-                                return <p className="leading-5 text-start">
+                                return <p className="leading-5 text-start" key={c}>
                                     - {c}
                                 </p>
                             })}
