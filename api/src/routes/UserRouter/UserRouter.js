@@ -27,7 +27,7 @@ routerUser.get('/profile/:id', getOneUserHandler);
 routerUser.get('/search-user', getSearchUserHandler);
 routerUser.delete('/delete/:id', deleteUserHandler);
 
-routerUser.put('/update/:id', validatePutUser, updateUserHandler);
+routerUser.put('/update/:id', updateUserHandler);
 
 routerUser.post('/register', validatePostRegister, postNewtUserHandler);
 routerUser.post('/login', validatePostLogin, postLoginUserHandler);

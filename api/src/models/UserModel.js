@@ -53,6 +53,10 @@ module.exports = (sequelize) => {
                     isNumeric: true
                 }
             },
+            image: {
+                type: DataTypes.STRING,
+                allowNull: false,
+            },
             emailVerified: {
                 type: DataTypes.BOOLEAN,
                 allowNull: false,

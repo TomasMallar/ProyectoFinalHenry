@@ -15,8 +15,9 @@ const Coments = () => {
     const [commentsDeleted, setCommentsDeleted] = useState(false)
     const [commentsUpdated, setCommentsUpdated] = useState(false)
     const [editComment, setEditComment] = useState({ id: null, content: '' })
+    const [userData, setUserData] = useState(null)
     const { id } = useParams()
-
+    console.log(comments);
     const token = sessionStorage.getItem('token');
     let userId = null;
     if (token) {
@@ -28,14 +29,24 @@ const Coments = () => {
     useEffect(() => {
         const getAllComents = async () => {
             const response = await axios.get(`http://localhost:3001/coments/${id}`)
+
             setComments(response.data)
             setLatestComments(response.data.length)
         }
         getAllComents()
     }, [commentsDeleted, commentsUpdated])
 
-    const onChangeHandler = (event) => {
+    useEffect(async () => {
+        if (userId) {
+            const userById = await axios.get(`http://localhost:3001/users/profile/${userId}`)
+            console.log(userById.data, 'holaaaa');
+            setUserData(userById.data)
+        }
+    }, [])
+
+    const onChangeHandler = async (event) => {
         setCurrentComment(event.target.value)
+
     }
 
     const postComment = async () => {
@@ -51,7 +62,7 @@ const Coments = () => {
             content: currentComment
         }
         const response = await axios.post('http://localhost:3001/coments', newComment)
-    console.log(response, "posteo de comment");
+        console.log(response, "posteo de comment");
         setComments([response.data, ...comments])
     }
 
@@ -107,7 +118,9 @@ const Coments = () => {
 
                         {comments.map((comment, index) => (
                             <div key={comment.id} className="">
-
+                                <div>
+                                </div>
+                                <img src={comment.image} alt="" />
 
                                 <div className='flex items-center justify-between pt-3'>
                                     <h3>
@@ -120,7 +133,7 @@ const Coments = () => {
 
                                 {editComment.id === comment.id ? (
                                     <form onSubmit={editCommentSubmit} >
-                                        <textarea value={editComment.content} onChange={(event) => setEditComment({ ...editComment, content: event.target.value })} maxlength="150"  className="p-4 mb-2 text-base border-none shadow-sm bg-chocolate-mantecol w-[70%] h-28 rounded-2xl text-chocolate-oscuro shadow-chocolate-bombom cursor-text focus:outline-chocolate-bombom"/>
+                                        <textarea value={editComment.content} onChange={(event) => setEditComment({ ...editComment, content: event.target.value })} maxlength="150" className="p-4 mb-2 text-base border-none shadow-sm bg-chocolate-mantecol w-[70%] h-28 rounded-2xl text-chocolate-oscuro shadow-chocolate-bombom cursor-text focus:outline-chocolate-bombom" />
                                         <button name={comment.id} type="submit" className='p-1 m-2 font-serif font-bold rounded-lg shadow-sm bg-chocolate-claro text-chocolate-oscuro shadow-chocolate-claro hover:bg-chocolate-blanco'>
                                             Guardar
                                         </button>

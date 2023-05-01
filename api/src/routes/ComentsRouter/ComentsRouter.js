@@ -1,5 +1,5 @@
 const {Router} = require('express')
-const { getAllComents, postNewComent, updateComent, deleteComents } = require('../../handlers/comentsHandler/comentsHandler')
+const { getAllComents, postNewComent, updateComent, deleteComents, updateImageAllComents } = require('../../handlers/comentsHandler/comentsHandler')
 
 const routerComents = Router()
 
@@ -8,6 +8,7 @@ routerComents.get('/:id', getAllComents)
 routerComents.post('/', postNewComent)
 
 routerComents.put('/', updateComent)
+routerComents.put('/all', updateImageAllComents)
 
 routerComents.delete('/:comentId', deleteComents)
 

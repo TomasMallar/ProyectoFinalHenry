@@ -12,8 +12,6 @@ const getComents = async(id, page) => {
         ...options
     }
     )
-
-
     return rows
 }
 
@@ -25,7 +23,8 @@ const postComent = async(userId, content, productId) => {
         name: user.dataValues.name + ' ' + user.dataValues.surname,
         content: content,
         userId: user.id,
-        productId: product.id
+        productId: product.id,
+        image: user.image
     })
     return newComent
 }
@@ -43,6 +42,16 @@ const putComent = async(userId, comentId, content) => {
     return findComment
 }   
 
+const updateAllComents =  async(userId, image) => {
+    console.log(userId);
+    console.log(image);
+    const newImagesAllComents = await Coment.update({image: image}, {
+        where: {userId: userId}
+    })
+
+    return newImagesAllComents
+}
+
 const deleteComent = async(userId, comentId) => {
     
     const deletedComent = await Coment.destroy({
@@ -59,5 +68,6 @@ module.exports = {
     getComents,
     postComent,
     putComent,
-    deleteComent
+    deleteComent,
+    updateAllComents
 }
