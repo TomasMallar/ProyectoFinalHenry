@@ -108,9 +108,6 @@ const handleChange = (event, value) => {
     // </div>
     <div>
       <Typography variant='h3' sx={{padding: '20px'}}>Mis órdenes</Typography>
-        <Stack spacing={2} className={s.pages}>
-                <Pagination count={pages} onChange={handleChange}size="large" />
-            </Stack>
       <TableContainer component={Paper} className={s.dataTable}>
         <Table aria-label="collapsible table">
           <TableHead>
