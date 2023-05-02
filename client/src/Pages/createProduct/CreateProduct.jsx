@@ -228,13 +228,13 @@ export default function CreateProduct() {
                         <Fade bottom opposite cascade >
                             <span className="p-0 m-0 text-xs text-chocolate-bombom">{errors.categories}</span>
                         </Fade>
-                        <div className="flex flex-col flex-wrap items-center justify-center w-56 mr-2 h-36">
+                        <div className="flex flex-col flex-wrap items-center justify-center w-56 mr-2 max-h-36">
                             {
                                 selectedCategories.map((type) => {
                                     return (
-                                        <div >
-                                            <span>{type} </span>
-                                            <button value={type} onClick={handleOnclickXCategory}>X</button>
+                                        <div className='flex justify-between w-[40%] text-left text m-1'>
+                                            <span className='m-1'>{type} </span>
+                                            <button value={type} onClick={handleOnclickXCategory}className='p-1 rounded-lg shadow-sm h-fit bg-chocolate-claro text-chocolate-oscuro shadow-chocolate-claro hover:bg-chocolate-mantecol'>X</button>
                                         </div>
 
                                     )
@@ -267,15 +267,15 @@ export default function CreateProduct() {
                         <Fade bottom opposite cascade >
                             <span className="p-0 m-0 text-xs text-chocolate-bombom">{errors.ingredients}</span>
                         </Fade>
-                        <div className="flex flex-col flex-wrap items-center justify-center w-56 mr-2 h-36">
+                        <div className="flex flex-col flex-wrap items-center justify-center w-56 mr-2 max-h-36">
                             {
                                 selectedIngredients.map((ingred) => {
                                     return (
-                                        <div>
-                                            <span>
+                                        <div className='flex justify-between text-left w-[40%] m-1'>
+                                            <span className='m-1'>
                                                 {ingred}
                                             </span>
-                                            <button value={ingred} onClick={handleOnclickXIngredient}>
+                                            <button value={ingred} onClick={handleOnclickXIngredient} className='p-1 rounded-lg shadow-sm bg-chocolate-claro text-chocolate-oscuro shadow-chocolate-claro hover:bg-chocolate-mantecol'>
                                                 X
                                             </button>
                                         </div>
@@ -304,13 +304,13 @@ export default function CreateProduct() {
                         <Fade bottom opposite cascade >
                             <span className="p-0 m-0 text-xs text-chocolate-bombom">{errors.types}</span>
                         </Fade>
-                        <div className="flex flex-col flex-wrap items-center justify-center w-56 mr-2 h-36">
+                        <div className="flex flex-col flex-wrap items-center justify-center w-56 mr-2 max-h-36">
                             {
                                 selectedTypes.map((type) => {
                                     return (
-                                        <div>
-                                            <span>{type} </span>
-                                            <button value={type} onClick={handleOnclickXType}>
+                                        <div className='flex justify-between text-left w-[40%] m-1'>
+                                        <span className='m-1'> {type} </span>
+                                            <button value={type} onClick={handleOnclickXType} className='p-1 rounded-lg shadow-sm bg-chocolate-claro text-chocolate-oscuro shadow-chocolate-claro hover:bg-chocolate-mantecol'>
                                                 X
                                             </button>
                                         </div>
@@ -323,7 +323,7 @@ export default function CreateProduct() {
 
 
 
-                <div className="flex flex-col items-center justify-start w-56 h-36">
+                <div className="flex flex-col items-center justify-start w-56 mt-5 h-36">
                         <label htmlFor="image">
                             Imagen (url):
                         </label>
@@ -335,10 +335,11 @@ export default function CreateProduct() {
                             </button>
                         </div>
                     </div>
-                <input type="submit" value="Crear Producto" />
+                <input type="submit" value="Crear Producto"  className='p-1 font-serif font-bold rounded-lg shadow-sm bg-chocolate-claro text-chocolate-oscuro shadow-chocolate-claro hover:bg-chocolate-mantecol'/>
             </form>
-            <div>
-                <h2 className={style.visTitle}>
+
+            <div className='w-[50%] h-full flex flex-col justify-center items-center '>
+                <h2 className="text-2xl text-chocolate-blanco">
                     Pre-Visualización
                 </h2>
                 <CreateProdCard name={newChocolate.name} image={previewSource} price={newChocolate.price} ingredients={newChocolate.ingredients} type={newChocolate.types} categories={newChocolate.categories} />

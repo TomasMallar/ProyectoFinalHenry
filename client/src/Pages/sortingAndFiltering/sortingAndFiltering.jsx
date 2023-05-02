@@ -155,7 +155,7 @@ export default function SortingAndFiltering(props) {
             {c}
           </button>
         })}
-        <button id="category" onClick={(event) => handleClick("Clear", event)} className="font-serif border border-solid shadow-sm cursor-pointer shadow-chocolate-bombom w-fit bg-chocolate-bombom border-chocolate-oscuro rounded-2xl text-chocolate-blanco">
+        <button id="category" onClick={(event) => handleClick("Clear", event)} className="px-2 py-1 font-serif border border-solid shadow-sm cursor-pointer shadow-chocolate-bombom w-fit h-fit bg-chocolate-bombom border-chocolate-oscuro rounded-2xl text-chocolate-blanco">
           Borrar todos los filtros
         </button>
       </div>
@@ -175,7 +175,7 @@ export default function SortingAndFiltering(props) {
                 {c}
               </button>
             })}
-            <button id="types" onClick={(event) => handleClick("Clear", event)} className="font-serif border border-solid shadow-sm cursor-pointer shadow-chocolate-bombom w-fit bg-chocolate-bombom border-chocolate-oscuro rounded-2xl text-chocolate-blanco">
+            <button id="types" onClick={(event) => handleClick("Clear", event)} className="px-2 py-1 font-serif border border-solid shadow-sm cursor-pointer shadow-chocolate-bombom w-fit h-fit bg-chocolate-bombom border-chocolate-oscuro rounded-2xl text-chocolate-blanco">
               Borrar todos los filtros
             </button>
           </div>
