@@ -202,7 +202,7 @@ export default function CreateProduct() {
                 </div>
 
                 <div className='flex'>
-                    <div className="flex flex-col flex-wrap items-center justify-center w-56 mr-2 h-36">
+                    <div className="flex flex-col flex-wrap items-center justify-start w-56 mr-2 h-36">
                         <label htmlFor="stock">
                             Cantidad en stock:
                         </label>
@@ -232,7 +232,7 @@ export default function CreateProduct() {
                             {
                                 selectedCategories.map((type) => {
                                     return (
-                                        <div>
+                                        <div >
                                             <span>{type} </span>
                                             <button value={type} onClick={handleOnclickXCategory}>X</button>
                                         </div>
@@ -253,7 +253,12 @@ export default function CreateProduct() {
                         <input name="ingredients" id="type" list="dataListIngredients" ref={inputSelectedIngredientRef} className="flex flex-col justify-between p-2 mb-3 text-base border-none shadow-sm rounded-2xl bg-chocolate-mantecol w-44 text-chocolate-oscuro shadow-chocolate-bombom focus:outline focus:outline-chocolate-oscuro" />
                         <datalist id="dataListIngredients">
                             {ingredients.map(ingred => {
-                                return <option value={ingred} key={ingred}></option>
+                                // para que no se rompa
+                                if (typeof ingred === 'string') {
+                                    return <option value={ingred} key={ingred}></option>
+                                } else {
+                                    return null;
+                                }
                             })}
                         </datalist>
                         <button onClick={handleOnClickAddIngredient} className="p-1 font-serif font-bold rounded-lg shadow-sm bg-chocolate-claro text-chocolate-oscuro shadow-chocolate-claro hover:bg-chocolate-mantecol">
@@ -286,7 +291,11 @@ export default function CreateProduct() {
                         <input name="types" id="type" list="dataListTypes" ref={inputSelectedTypeRef} className="flex flex-col justify-between p-2 mb-3 text-base border-none shadow-sm rounded-2xl bg-chocolate-mantecol w-44 text-chocolate-oscuro shadow-chocolate-bombom focus:outline focus:outline-chocolate-oscuro" />
                         <datalist id="dataListTypes">
                             {types.map(type => {
-                                return <option value={type} key={type}></option>
+                                if (typeof type === 'string') {
+                                    return <option value={type} key={type}></option>
+                                } else {
+                                    return null;
+                                }
                             })}
                         </datalist>
                         <button onClick={handleOnClickAddType} className="p-1 font-serif font-bold rounded-lg shadow-sm bg-chocolate-claro text-chocolate-oscuro shadow-chocolate-claro hover:bg-chocolate-mantecol">
@@ -314,18 +323,18 @@ export default function CreateProduct() {
 
 
 
-                {/* <div className="flex flex-col flex-wrap items-center justify-center w-56 mr-2 h-36">
+                <div className="flex flex-col items-center justify-start w-56 h-36">
                         <label htmlFor="image">
                             Imagen (url):
                         </label>
                         <div>
-                            <input type="file" name="image" onChange={handleFileInputChange} value={fileInputState}  className="p-1 font-serif font-bold rounded-lg shadow-sm bg-chocolate-claro text-chocolate-oscuro shadow-chocolate-claro hover:bg-chocolate-mantecol"/>
+                            <input type="file" name="image" onChange={handleFileInputChange} value={fileInputState}  className="p-1 mb-3 font-serif font-bold rounded-lg shadow-sm bg-chocolate-claro text-chocolate-oscuro shadow-chocolate-claro hover:bg-chocolate-mantecol"/>
 
                             <button type="button" onClick={handleSubmitFile} className="p-1 font-serif font-bold rounded-lg shadow-sm bg-chocolate-claro text-chocolate-oscuro shadow-chocolate-claro hover:bg-chocolate-mantecol">
                                 aceptar
                             </button>
                         </div>
-                    </div> */}
+                    </div>
                 <input type="submit" value="Crear Producto" />
             </form>
             <div>
