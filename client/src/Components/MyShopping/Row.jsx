@@ -26,6 +26,13 @@ export default function Roow(props) {
     const [open, setOpen] = React.useState(false);
     const dispatch = useDispatch()
 
+    const statusColors = {
+      pending: 'blue',
+      cancelled: 'red',
+      approved: '#00c176',
+      rejected: '#fb6900'
+    };
+
     const cancelOrder = () => {
       Swal.fire({
         title: '¿Estás seguro?',
@@ -65,7 +72,7 @@ export default function Roow(props) {
           <TableCell align="right">{row.paymentMethod}</TableCell>
           <TableCell align="right">{row.totalAmount}</TableCell>
           <TableCell align="right">{row.date}</TableCell>
-          <TableCell align="right">{row.statusSale}</TableCell>
+          <TableCell align="right" style={{ color: statusColors[row.statusSale] }}>{row.statusSale}</TableCell>
           <TableCell align="right">
             {row.statusSale !== "pending" ? (
               <button disabled>-</button>
