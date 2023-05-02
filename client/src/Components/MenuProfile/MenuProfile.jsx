@@ -23,14 +23,12 @@ const MenuProfile = () => {
         }
         <div className={`${styles.containerNav} ${isNavActive ? styles.active : ""}`}>
           <div className={`${styles.buttonsNav} ${isNavActive ? styles.active : ""}`}>
-            <Link to="/myshopping">My Shopping</Link>
-            <Link to="/myprofile">My Profile</Link>
+            <Link to="/myshopping">Mis órdenes</Link>
+            <Link to="/myprofile">Mi perfil</Link>
           </div>
         </div>
       </Flip>
     </div >
-
-
   )
 }
 
