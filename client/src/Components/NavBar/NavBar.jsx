@@ -4,12 +4,13 @@ import carImagen from "../../img/shopping-cart.png"
 import logo from "../../img/logoBlack.png"
 import MenuProfile from "../MenuProfile/MenuProfile";
 import Fade from 'react-reveal/Flip';
-import { useState, useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { removeOrderUser } from "../../Redux/Actions/Actions";
 
 export default function NavBar() {
     const history = useHistory();
     const userRole = localStorage.getItem('userRole');
-
+    const dispatch = useDispatch()
     const handleLogout = () => {
         localStorage.removeItem("token");
         localStorage.removeItem("userRole");
@@ -18,6 +19,7 @@ export default function NavBar() {
         localStorage.removeItem("id");
         localStorage.removeItem("mail");
         localStorage.removeItem('cartItems');
+        dispatch(removeOrderUser())
         history.push("/home");
         window.location.reload();
     };
