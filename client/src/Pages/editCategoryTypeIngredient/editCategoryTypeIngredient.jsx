@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux'
-import { DeleteElement, getProductsAdvanceController,GetAllCategories, GetAllIngredientWithId, GetAllTypesWithId, PutElement } from '../../Redux/Actions/Actions'
+import { DeleteElement, getProductsAdvanceController, GetAllCategories, GetAllIngredientWithId, GetAllTypesWithId, PutElement } from '../../Redux/Actions/Actions'
 import { useState, useEffect } from 'react'
 import { addIngredientCategoryType } from '../../Redux/Actions/Actions'
 import style from './editCTI.module.css'
@@ -42,7 +42,7 @@ export default function EditCategoryTypeIngredient() {
         }
 
     }
-   
+
 
     const handleOnClickAdd = (event) => {
         const objToAdd = { name: searchBar }
@@ -96,10 +96,10 @@ export default function EditCategoryTypeIngredient() {
 
     }
     return (
-        <div>
+        <div className='min-h-screen'>
             <button onClick={handleOnClickEdit} className={style.buttonEditElement} value={"ingredient"}>EDITAR INGREDIENTE </button>
             <button onClick={handleOnClickEdit} className={style.buttonEditElement} value={"categories"}>EDITAR CATEGORÍA </button>
-            <button  onClick={handleOnClickEdit} className={style.buttonEditElement} value={"types"}>EDITAR TIPO </button>
+            <button onClick={handleOnClickEdit} className={style.buttonEditElement} value={"types"}>EDITAR TIPO </button>
             <div className={style.addContainer}>
                 {toAdd !== "" && <div>
                     <br />

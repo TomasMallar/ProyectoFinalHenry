@@ -4,10 +4,12 @@ import carImagen from "../../img/shopping-cart.png"
 import logo from "../../img/logoBlack.png"
 import MenuProfile from "../MenuProfile/MenuProfile";
 import Fade from 'react-reveal/Flip';
+import { useState, useEffect } from "react";
 
 export default function NavBar() {
     const history = useHistory();
     const userRole = localStorage.getItem('userRole');
+
     const handleLogout = () => {
         localStorage.removeItem("token");
         localStorage.removeItem("userRole");
@@ -57,7 +59,7 @@ export default function NavBar() {
                     )}
 
                     {userRole === '1' && (
-                            <MenuProfile />
+                        <MenuProfile />
                     )}
 
                     <Link to="/carrito" className="text-2xl list-none text-chocolate-oscuro no-underline pl-3.5  font-serif">
