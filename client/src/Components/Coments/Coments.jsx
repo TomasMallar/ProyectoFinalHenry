@@ -36,10 +36,6 @@ const Coments = () => {
         getAllComents()
     }, [commentsDeleted])
 
-
-
-
-
     const onChangeHandler = async (event) => {
         setCurrentComment(event.target.value)
 
@@ -112,7 +108,11 @@ const Coments = () => {
             setComments([...comments, ...response.data])
             console.log([...comments, ...response.data], "comments del ver mas");
             setLatestComments(response.data.length)
-        } else return
+        } else 
+        {
+            setLatestComments(null)
+            return
+        }
     }
     console.log("comments: ", comments, "LatestComments:", latestComments);
     return (
