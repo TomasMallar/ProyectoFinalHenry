@@ -89,7 +89,7 @@ export default function Login() {
                                     type="text"
                                     id="username"
                                     ref={userRef}
-                                    autoComplete='off'
+                                    autoComplete='on'
                                     onChange={handleUsername}
                                     value={user}
                                     placeholder="username"
