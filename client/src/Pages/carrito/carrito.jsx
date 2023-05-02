@@ -5,9 +5,26 @@ import ButtonMPTotal from "../../Components/MercadoPagoTotal/MercadoPagoTotal";
 import { Link } from "react-router-dom";
 import Fade from "react-reveal/Fade"
 import axios from "axios";
+import jwtDecode from 'jwt-decode';
 
 const Carrito = () => {
   const [cartItemsInCart, setCartItemsInCart] = useState([]);
+
+  const saveCartToDB = async (cartItems) => {
+    const token = localStorage.getItem("token");
+    const decodedToken = jwtDecode(token);
+    const id = decodedToken.id
+    const cartItemsClean = cartItems.map(item => {
+      return {id: item.id, quantity: item.quantity};
+    });
+    try {
+      const response = await axios.post(`http://localhost:3001/cart/${id}`, {cartItems: cartItemsClean});
+      console.log(response.data.message);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   useEffect(() => {
     const storedCartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
   
@@ -26,6 +43,7 @@ const Carrito = () => {
   const handleDeleteCart = () => {
     localStorage.removeItem("cartItems");
     setCartItemsInCart([]);
+    saveCartToDB([]);
   };
 
   const [stock, setStock] = useState(null)
@@ -45,6 +63,7 @@ const Carrito = () => {
     }
     setCartItemsInCart(updatedCartItems);
     localStorage.setItem("cartItems", JSON.stringify(updatedCartItems));
+    saveCartToDB(updatedCartItems);
   };
 
   const handleRemoveFromCart = (item) => {
@@ -60,6 +79,7 @@ const Carrito = () => {
     }
     setCartItemsInCart(updatedCartItems);
     localStorage.setItem("cartItems", JSON.stringify(updatedCartItems));
+    saveCartToDB(updatedCartItems);
   };
 
   const handleDeleteFromCart = (item) => {
@@ -68,6 +88,7 @@ const Carrito = () => {
     );
     setCartItemsInCart(updatedCartItems);
     localStorage.setItem("cartItems", JSON.stringify(updatedCartItems));
+    saveCartToDB(updatedCartItems);
   };
 
   const buildProductsObject = (cartItems) => {
