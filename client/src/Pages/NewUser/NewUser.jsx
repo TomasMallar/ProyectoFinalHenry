@@ -22,6 +22,7 @@ export default function User() {
         mail: "",
         phone: "",
         password: "",
+        image: "https://i.pinimg.com/564x/88/b4/4e/88b44e2f78161c673f92346540e1ebee.jpg"
     })
     // E.Local guarda las preferencias de chocolate del usuario del usuario
     const [selectedFlavors, setSelectedFlavors] = useState([])
@@ -79,8 +80,9 @@ export default function User() {
             // eslint-disable-next-line
             alert("Usuario no creado verificar errores en el formulario ", '\ud83e\uddd0')
         } else {
+            
             dispatch(addUser(newUser))
-
+            
             // eslint-disable-next-line
             setNewUser({
                 name: "",

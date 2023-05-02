@@ -10,6 +10,7 @@ const MyProfile = () => {
     mail: '',
     phone: '',
     date_of_birth: '',
+    image: ''
   });
 
   useEffect(() => {
@@ -18,7 +19,7 @@ const MyProfile = () => {
     setUser(userData);
   }, []);
 
-  const { id, name, surname, mail, phone, date_of_birth } = user;
+  const { id, name, surname, mail, phone, date_of_birth, image } = user;
 
   useEffect(() => {
     const updatedUserData = { ...user, name, surname };
@@ -31,7 +32,8 @@ const MyProfile = () => {
   return (
     <div className={style.container}>
       <div className={style.containerInfo}>
-        <div className={style.initials}>{initials}</div>
+        <div className={style.initials}><img src={image} alt={initials} className={style.initials} /></div>
+        <Link to="/editimage" className={style.button}>Editar</Link>
         <h2 className={style.nameSurname}>{name} {surname}</h2>
         
         <div className={style.containerInfo2}>

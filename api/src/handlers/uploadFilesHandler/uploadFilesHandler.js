@@ -11,7 +11,21 @@ const uploadImage = async(req, res) => {
     try {
         const fileStr = req.body.data
         const uploadedResponse = await cloudinary.uploader.upload(fileStr, {
-            upload_preset: 'chocolateHub'
+            upload_preset: 'chocolateHub',
+            folder: 'theChocolateHub'
+        })
+        res.status(200).json(uploadedResponse)
+    } catch (error) {
+        res.status(400).json({error: error.message})
+    }
+}
+
+const uploadImageProfile = async(req, res) => {
+    try {
+        const fileStr = req.body.data
+        const uploadedResponse = await cloudinary.uploader.upload(fileStr, {
+            upload_preset: 'chocolateHub',
+            folder: 'PerfilDeUsuario'
         })
         res.status(200).json(uploadedResponse)
     } catch (error) {
@@ -21,4 +35,5 @@ const uploadImage = async(req, res) => {
 
 module.exports = {
     uploadImage,
+    uploadImageProfile
 }
