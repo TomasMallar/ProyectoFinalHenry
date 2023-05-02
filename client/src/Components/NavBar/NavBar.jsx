@@ -15,6 +15,7 @@ export default function NavBar() {
         sessionStorage.removeItem("Name");
         sessionStorage.removeItem("id");
         sessionStorage.removeItem("mail");
+        localStorage.removeItem('cartItems');
         history.push("/home");
         window.location.reload();
     };

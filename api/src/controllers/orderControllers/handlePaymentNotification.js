@@ -55,6 +55,7 @@ const handlePaymentNotification = async (req, res, next) => {
           const newStock = product.stock - item.quantity;
           await product.update({ totalSold: newTotalSold, stock: newStock });
         });
+        localStorage.removeItem('cartItems');
       }
 
 
@@ -63,28 +64,6 @@ const handlePaymentNotification = async (req, res, next) => {
       next(error);
     }
   }
-
-  // if (topic === 'merchant_order') {
-  //   try {
-  //     console.log("LLEGAMOS AL MERCHANT ORDER")
-  //     const merchantOrder = await mercadopago.merchant_orders.findById(id);
-  //     const orderId = merchantOrder.external_reference;
-      
-  //     const [sale, created] = await Sale.findOrCreate({
-  //       where: {
-  //         orderId: orderId
-  //       }
-  //     });
-
-  //     console.log("ACA DEBERIA DE VER EL SALE", sale)
-  //     console.log("ACA DEBERIA DE VER EL AMOUNT", merchantOrder.total_amount)
-
-  //     await sale.update({amount: merchantOrder.total_amount});
-      
-  //   } catch (error) {
-  
-  //   }
-  // }
 
   }
 
