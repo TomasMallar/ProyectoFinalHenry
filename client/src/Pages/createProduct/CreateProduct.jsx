@@ -7,6 +7,7 @@ import Button from '../../Components/Button/Button'
 import Validations from './validations'
 import { useHistory } from 'react-router-dom'
 import axios from 'axios'
+import { Fade } from 'react-reveal'
 
 export default function CreateProduct() {
 
@@ -174,146 +175,157 @@ export default function CreateProduct() {
 
 
     return (
-        <div className={style.container}>
+        <div className="bg-[url('https://cdn.pixabay.com/photo/2017/08/01/02/10/dark-2562840_1280.jpg')] bg-cover w-full h-full flex justify-start items-center font-serif bg-chocolate-blanco text-chocolate-oscuro">
 
-            <form onSubmit={handleSubmit} className={style.formContainer}>
+            <form onSubmit={handleSubmit} className="flex flex-col items-center justify-center h-full p-8 w-[50%] bg-chocolate-blanco">
 
-                <div className={style.inputContainer}>
-                    <label htmlFor="name">
-                        Nombre del Producto:
-                    </label>
-                    <input onChange={handleOnChangeInput} type="text" name="name" placeholder="nombre del producto" value={newChocolate.name} />
-
-                    <p className={style.error}>
-                        {errors.name}
-                    </p>
-                </div>
-
-                <div className={style.inputContainer}>
-                    <label htmlFor="price">Precio: </label>
-                    <input onChange={handleOnChangeInput} type="number" name="price" placeholder="precio del producto" value={newChocolate.price} />
-
-                    <p className={style.error}>
-                        {errors.price}
-                    </p>
-                </div>
-
-                <div className={style.inputContainer}>
-                    <label htmlFor="stock">
-                        Cantidad en stock:
-                    </label>
-                    <input onChange={handleOnChangeInput} type="number" name="stock" placeholder="stock del producto" value={newChocolate.stock} />
-                    <p className={style.error}>
-                        {errors.stock}
-                    </p>
-                </div>
-
-                <div className={style.inputContainer}>
-                    <label htmlFor="image">
-                        Imagen (url):
-                    </label>
-                    <div>
-                        <input type="file" name="image" onChange={handleFileInputChange} value={fileInputState} />
-                        <button type="button" onClick={handleSubmitFile}>
-                            aceptar
-                        </button>
+                <div className='flex'>
+                    <div className="flex flex-col flex-wrap items-center justify-center w-56 h-36">
+                        <label htmlFor="name">
+                            Nombre del Producto:
+                        </label>
+                        <input onChange={handleOnChangeInput} type="text" name="name" placeholder="nombre del producto" value={newChocolate.name} className="flex flex-col justify-between p-2 mb-3 text-base border-none shadow-sm rounded-2xl bg-chocolate-mantecol w-44 text-chocolate-oscuro shadow-chocolate-bombom focus:outline focus:outline-chocolate-oscuro" />
+                        <Fade bottom opposite cascade >
+                            <span className="p-0 m-0 text-xs text-chocolate-bombom">{errors.name}</span>
+                        </Fade>
+                    </div>
+                    <div className="flex flex-col flex-wrap items-center justify-center w-56 mr-2 h-36">
+                        <label htmlFor="price">
+                            Precio:
+                        </label>
+                        <input onChange={handleOnChangeInput} type="number" name="price" placeholder="precio del producto" value={newChocolate.price}
+                            className="flex flex-col justify-between p-2 mb-3 text-base border-none shadow-sm rounded-2xl bg-chocolate-mantecol w-44 text-chocolate-oscuro shadow-chocolate-bombom focus:outline focus:outline-chocolate-oscuro" />
+                        <Fade bottom opposite cascade >
+                            <span className="p-0 m-0 text-xs text-chocolate-bombom">{errors.price}</span>
+                        </Fade>
                     </div>
                 </div>
-                <div className={style.inputContainer}>
-                    <label htmlFor="ingredients">
-                        Ingredientes:
-                    </label>
-                    <input name="ingredients" id="type" list="dataListIngredients" ref={inputSelectedIngredientRef} />
 
-                    <datalist id="dataListIngredients">
+                <div className='flex'>
+                    <div className="flex flex-col flex-wrap items-center justify-center w-56 mr-2 h-36">
+                        <label htmlFor="stock">
+                            Cantidad en stock:
+                        </label>
+                        <input onChange={handleOnChangeInput} type="number" name="stock" placeholder="stock del producto" value={newChocolate.stock} className="flex flex-col justify-between p-2 mb-3 text-base border-none shadow-sm rounded-2xl bg-chocolate-mantecol w-44 text-chocolate-oscuro shadow-chocolate-bombom focus:outline focus:outline-chocolate-oscuro" />
+                        <Fade bottom opposite cascade >
+                            <span className="p-0 m-0 text-xs text-chocolate-bombom">{errors.stock}</span>
+                        </Fade>
+                    </div>
 
-                        {ingredients.map(ingred => {
-                            return <option value={ingred} key={ingred}></option>
-                        })}
-                    </datalist>
-                    <Button text="Añadir Ingrediente" onClick={handleOnClickAddIngredient}></Button>
-                    <p className={style.error}>
-                        {errors.ingredients}
-                    </p>
+                    <div className="flex flex-col flex-wrap items-center justify-center w-56 mr-2 max-h-96">
+                        <label htmlFor="category">
+                            Categorias:
+                        </label>
+                        <input name="category" id="category" list="dataListCategories" ref={inputSelectedCategoryRef} className="flex flex-col justify-between p-2 mb-3 text-base border-none shadow-sm rounded-2xl bg-chocolate-mantecol w-44 text-chocolate-oscuro shadow-chocolate-bombom focus:outline focus:outline-chocolate-oscuro" />
+                        <datalist id="dataListCategories">
+                            {categories.map((c) => {
+                                return <option value={c} key={c}></option>
+                            })}
+                        </datalist>
+                        <button onClick={handleOnClickAddCategory} className="p-1 font-serif font-bold rounded-lg shadow-sm bg-chocolate-claro text-chocolate-oscuro shadow-chocolate-claro hover:bg-chocolate-mantecol">
+                            Añadir Categoria
+                        </button>
+                        <Fade bottom opposite cascade >
+                            <span className="p-0 m-0 text-xs text-chocolate-bombom">{errors.categories}</span>
+                        </Fade>
+                        <div className="flex flex-col flex-wrap items-center justify-center w-56 mr-2 h-36">
+                            {
+                                selectedCategories.map((type) => {
+                                    return (
+                                        <div>
+                                            <span>{type} </span>
+                                            <button value={type} onClick={handleOnclickXCategory}>X</button>
+                                        </div>
+
+                                    )
+
+                                })
+                            }
+                        </div>
+                    </div>
                 </div>
-                <div className={style.inputContainer}>
-                    {
-                        selectedIngredients.map((ingred) => {
-                            return (
-                                <div>
-                                    <span>
-                                        {ingred}
-                                    </span>
-                                    <button value={ingred} onClick={handleOnclickXIngredient}>
-                                        X
-                                    </button>
-                                </div>
-                            )
-                        })
-                    }
+
+                <div className='flex'>
+                    <div className="flex flex-col flex-wrap items-center justify-center w-56 mr-2 max-h-96">
+                        <label htmlFor="ingredients">
+                            Ingredientes:
+                        </label>
+                        <input name="ingredients" id="type" list="dataListIngredients" ref={inputSelectedIngredientRef} className="flex flex-col justify-between p-2 mb-3 text-base border-none shadow-sm rounded-2xl bg-chocolate-mantecol w-44 text-chocolate-oscuro shadow-chocolate-bombom focus:outline focus:outline-chocolate-oscuro" />
+                        <datalist id="dataListIngredients">
+                            {ingredients.map(ingred => {
+                                return <option value={ingred} key={ingred}></option>
+                            })}
+                        </datalist>
+                        <button onClick={handleOnClickAddIngredient} className="p-1 font-serif font-bold rounded-lg shadow-sm bg-chocolate-claro text-chocolate-oscuro shadow-chocolate-claro hover:bg-chocolate-mantecol">
+                            Añadir Ingrediente
+                        </button>
+                        <Fade bottom opposite cascade >
+                            <span className="p-0 m-0 text-xs text-chocolate-bombom">{errors.ingredients}</span>
+                        </Fade>
+                        <div className="flex flex-col flex-wrap items-center justify-center w-56 mr-2 h-36">
+                            {
+                                selectedIngredients.map((ingred) => {
+                                    return (
+                                        <div>
+                                            <span>
+                                                {ingred}
+                                            </span>
+                                            <button value={ingred} onClick={handleOnclickXIngredient}>
+                                                X
+                                            </button>
+                                        </div>
+                                    )
+                                })
+                            }
+                        </div>
+                    </div>
+                    <div className="flex flex-col flex-wrap items-center justify-center w-56 mr-2 max-h-96 ">
+                        <label htmlFor="types">
+                            Tipos:
+                        </label>
+                        <input name="types" id="type" list="dataListTypes" ref={inputSelectedTypeRef} className="flex flex-col justify-between p-2 mb-3 text-base border-none shadow-sm rounded-2xl bg-chocolate-mantecol w-44 text-chocolate-oscuro shadow-chocolate-bombom focus:outline focus:outline-chocolate-oscuro" />
+                        <datalist id="dataListTypes">
+                            {types.map(type => {
+                                return <option value={type} key={type}></option>
+                            })}
+                        </datalist>
+                        <button onClick={handleOnClickAddType} className="p-1 font-serif font-bold rounded-lg shadow-sm bg-chocolate-claro text-chocolate-oscuro shadow-chocolate-claro hover:bg-chocolate-mantecol">
+                            Añadir Tipo
+                        </button>
+                        <Fade bottom opposite cascade >
+                            <span className="p-0 m-0 text-xs text-chocolate-bombom">{errors.types}</span>
+                        </Fade>
+                        <div className="flex flex-col flex-wrap items-center justify-center w-56 mr-2 h-36">
+                            {
+                                selectedTypes.map((type) => {
+                                    return (
+                                        <div>
+                                            <span>{type} </span>
+                                            <button value={type} onClick={handleOnclickXType}>
+                                                X
+                                            </button>
+                                        </div>
+                                    )
+                                })
+                            }
+                        </div>
+                    </div>
                 </div>
-                <div className={style.inputContainer}>
-                    <label htmlFor="types">
-                        Tipos:
-                    </label>
-                    <input name="types" id="type" list="dataListTypes" ref={inputSelectedTypeRef} />
 
-                    <datalist id="dataListTypes">
-                        {types.map(type => {
-                            return <option value={type} key={type}></option>
-                        })}
-                    </datalist>
-                    <Button text="Añadir Tipo" onClick={handleOnClickAddType}></Button>
-                    <p className={style.error}>
-                        {errors.types}
-                    </p>
-                </div>
-                <div className={style.inputContainer}>
-                    {
-                        selectedTypes.map((type) => {
-                            return (
-                                <div>
-                                    <span>{type} </span>
-                                    <button value={type} onClick={handleOnclickXType}>
-                                        X
-                                    </button>
-                                </div>
-                            )
-                        })
-                    }
-                </div>
-                <div className={style.inputContainer}>
-                    <label htmlFor="category">
-                        Categorias:
-                    </label>
-                    <input name="category" id="category" list="dataListCategories" ref={inputSelectedCategoryRef} />
 
-                    <datalist id="dataListCategories">
-                        {categories.map((c) => {
-                            return <option value={c} key={c}></option>
-                        })}
-                    </datalist>
 
-                    <Button text="Añadir Categoria" onClick={handleOnClickAddCategory}></Button>
-                    <p className={style.error}>
-                        {errors.categories}
-                    </p>
-                </div>
-                <div className={style.inputContainer}>
+                {/* <div className="flex flex-col flex-wrap items-center justify-center w-56 mr-2 h-36">
+                        <label htmlFor="image">
+                            Imagen (url):
+                        </label>
+                        <div>
+                            <input type="file" name="image" onChange={handleFileInputChange} value={fileInputState}  className="p-1 font-serif font-bold rounded-lg shadow-sm bg-chocolate-claro text-chocolate-oscuro shadow-chocolate-claro hover:bg-chocolate-mantecol"/>
 
-                    {
-                        selectedCategories.map((type) => {
-                            return (
-                                <div>
-                                    <span>{type} </span>
-                                    <button value={type} onClick={handleOnclickXCategory}>X</button>
-                                </div>
-
-                            )
-
-                        })
-                    }
-                </div>
+                            <button type="button" onClick={handleSubmitFile} className="p-1 font-serif font-bold rounded-lg shadow-sm bg-chocolate-claro text-chocolate-oscuro shadow-chocolate-claro hover:bg-chocolate-mantecol">
+                                aceptar
+                            </button>
+                        </div>
+                    </div> */}
                 <input type="submit" value="Crear Producto" />
             </form>
             <div>

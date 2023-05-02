@@ -82,11 +82,11 @@ function App() {
         <Route path="/about"><NavBar /><About /> <Footer /></Route>
         <PrivateRouteUser exact path="/myshopping" component={() => <><NavBar /><MyShopping /><Footer /></>} />
         <PrivateRouteUser exact path="/myprofile" component={() => <><NavBar /><MyProfile /><Footer /></>} />
-        <PrivateRoute exact path="/dashboard" component={() => <> <Dashboard /></>} />
-        <PrivateRoute exact path="/statistics" component={() => <> <Statistics/></>} />
-        <PrivateRoute exact path="/users" component={() => <> <Users/></>} />
-        <PrivateRoute exact path="/orders" component={() => <> <Orders/></>} />
-        <PrivateRoute exact path="/sales" component={() => <> <Sales/></>} />
+        <PrivateRoute exact path="/dashboard" component={() => <> <Dashboard /> <Footer /></>} />
+        <PrivateRoute exact path="/statistics" component={() => <> <Statistics/> <Footer /></>} />
+        <PrivateRoute exact path="/users" component={() => <> <Users/> <Footer /></>} />
+        <PrivateRoute exact path="/orders" component={() => <> <Orders/> <Footer /></>} />
+        <PrivateRoute exact path="/sales" component={() => <> <Sales/> <Footer /></>} />
 
       
         <PrivateRouteUser exact path="/editname" component={() => <><NavBar /><EditProfileName /><Footer /></>}/>

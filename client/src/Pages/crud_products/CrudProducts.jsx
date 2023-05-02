@@ -29,7 +29,7 @@ export default function CrudProducts(props) {
     const allProducts = useSelector((state) => state.chocolates)
     const allCategories = useSelector((state) => state.categories)
     const allTypes = useSelector((state) => state.types)
-    const pages = useSelector ((state) => state.chocolates.totalPages)
+    const pages = useSelector((state) => state.chocolates.totalPages)
 
     useEffect(() => {
         dispatch(getProductsAdvanceController(queries.name, queries.category, queries.type, queries.orderBy, queries.orderDirection, queries.page))
@@ -65,7 +65,7 @@ export default function CrudProducts(props) {
     }
 
     const handleChange = (event, value) => {
-        setQueries({...queries, page:value});
+        setQueries({ ...queries, page: value });
     };
 
     const handleOpenModal = () => {
@@ -78,7 +78,7 @@ export default function CrudProducts(props) {
     return (
         <div className="flex">
             <SideBar />
-            <div>
+            <div className="ml-4">
                 <Fade cascade>
                     <p className="relative inline-block w-full px-8 py-4 text-5xl font-bold leading-tight tracking-wide uppercase rounded-lg shadow-md text-chocolate-oscuro bg-chocolate-mantecol box h-fit">
                         PRODUCTS
@@ -102,14 +102,9 @@ export default function CrudProducts(props) {
                             <button className="p-1 ml-10 font-serif font-bold rounded-lg shadow-sm bg-chocolate-oscuro text-chocolate-blanco shadow-chocolate-claro hover:bg-chocolate-mantecol hover:text-chocolate-oscuro" onClick={handleOpenModal}>
                                 MAILING
                             </button>
-                            {modalOpen && <ModalMailing onClose={handleCloseModal} />}
+
                         </div>
                     </div>
-
-                      
-                        <Stack spacing={2} className={style.pages}>
-                <Pagination count={pages} onChange={handleChange} size="large" />
-            </Stack>
 
                     <div className="flex flex-row items-center justify-around border p-2.5 w-[80vw] mx-2.5">
                         <h3 className="">
@@ -217,17 +212,18 @@ export default function CrudProducts(props) {
                                         Eliminar
                                     </button>
 
-                                    </div>
-                                )
-                            })}
-                        </div>
-                    </Fade>
-                </div>
+                                </div>
+                            )
+                        })}
+                        {modalOpen && <ModalMailing onClose={handleCloseModal} />}
+                    </div>
+
+                    <Stack spacing={2} className="my-2.5 items-center">
+                        <Pagination count={pages} onChange={handleChange} size="large" />
+                    </Stack>
+
+                </Fade>
             </div>
-              
-            <Stack spacing={2} className={style.pages}>
-                <Pagination count={pages} onChange={handleChange} size="large"/>
-            </Stack>
-        </>
+        </div>
     )
 }
