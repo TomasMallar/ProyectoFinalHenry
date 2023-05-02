@@ -93,7 +93,7 @@ export const GetUserInfo = (id) => {
     return async function (dispatch) {
         try {
 
-            const response = await axios(`http://localhost:3001/users/profile/${id}`)
+            const response = await axios(`http://localhost:3001/metric/all-orders/user?userId=${id}`)
             return dispatch({
                 type: GET_USER_INFO,
                 payload: response.data

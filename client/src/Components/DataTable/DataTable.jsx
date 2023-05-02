@@ -17,6 +17,7 @@ const dispatch = useDispatch()
 const users = useSelector(state => state.usersInfo)
 const user = useSelector (state => state.userInfo)
 
+console.log(user, "soy user")
 
   useEffect(()=>{
     dispatch (GetUsersInfo())
