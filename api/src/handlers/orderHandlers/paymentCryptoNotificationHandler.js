@@ -1,4 +1,4 @@
-const { Order, Sale, Product, orderItem, conn:sequelize} = require('../../db');
+const { Order, Sale, Product, orderItem, User, Cart, conn:sequelize} = require('../../db');
 
 
 const paymentCryptoNotificationHandler = async (req, res) => {
@@ -35,6 +35,14 @@ const paymentCryptoNotificationHandler = async (req, res) => {
         await product.update({ stock: newStock });
       }
     });
+
+
+    const userId = order.userId;
+    const user = await User.findByPk(userId);
+    console.log("ESTE ES EL USER",user);
+    const cart = await Cart.findOne({ where: { userId } });
+    await cart.update({products:[]});
+
 
     res.json({ message: "Payment notification received successfully." });
   } catch (error) {

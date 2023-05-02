@@ -23,13 +23,15 @@ const Crypto = (order) => {
                 value: ethers.utils.parseEther(ether),
             });
 
-
+            console.log("SOY TX",tx);
+            console.log("SOY ORDER",order.order);
+            console.log("SOY ETHER",ether);
             const body = {
                 hash: tx.hash,
                 amount: ether,
                 orderId: order.order
             }
-            console.log(body);
+            console.log("SOY BODY",body);
             await axios.post('http://localhost:3001/payment/crypto-payment-notification', body)
             history.push('/purchase/approved');
 
@@ -41,16 +43,30 @@ const Crypto = (order) => {
         }
     };
 
-    const pesosAEther = () => {
+    const pesosAEther = async () => {
+        const storedCartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
+        const fetchCartItemsInfo = async () => {
+            const cartItemsInfo = await Promise.all(storedCartItems.map(async (cartItem) => {
+              const response = await fetch(`http://localhost:3001/products/${cartItem.id}`);
+              const product = await response.json();
+              return { ...product, quantity: cartItem.quantity };
+            }));
+            return cartItemsInfo;
+          }
         const items = JSON.parse(localStorage.getItem('cartItems'))
-        const totalPrice = items.reduce((acumulador, currentValue) => {
-            return acumulador + currentValue.price
-        }, 0)
-        console.log(totalPrice);
+        console.log("SOY ITEMS",items);
+        const items2 = await fetchCartItemsInfo(items)
+        console.log("SOY ITEMS2",items2);
+
+        const totalPrice = items2.reduce((accumulator, currentValue) => {
+            const productPrice = parseFloat(currentValue.price) * parseFloat(currentValue.quantity)
+            return accumulator + productPrice
+          }, 0)
+        console.log("SOY TOTAL PRICE",totalPrice);
 
         const cambio = 0.0000025
         let ether = totalPrice * cambio
-        console.log(ether.toString().slice(0, 7));
+        console.log("ether",ether.toString().slice(0, 7));
         return ether.toString().slice(0, 7)
     }
 
@@ -59,7 +75,7 @@ const Crypto = (order) => {
         const addr = "0x0C16F41d6e190CdA2E3A002FD518AC0B5367C3D9";
         const tx = await startPayment({ ether, addr });
 
-        console.log(tx, responseMessage);
+        console.log("RESPONSE",tx, responseMessage);
     };
 
     return (
