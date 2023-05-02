@@ -204,7 +204,11 @@ export default function CreateProduct() {
                     <input name="ingredients" id="type" list="dataListIngredients" ref={inputSelectedIngredientRef} />
                     <datalist id="dataListIngredients">
                         {ingredients.map(ingred => {
-                            return <option value={ingred} key={ingred}></option>
+                            if (typeof ingred === 'string') {
+                                return <option value={ingred} key={ingred}></option>
+                              } else {
+                                return null;
+                              }
                         })}
                     </datalist>
                     <Button text="Añadir Ingrediente" onClick={handleOnClickAddIngredient}></Button>
@@ -229,7 +233,11 @@ export default function CreateProduct() {
                     <input name="types" id="type" list="dataListTypes" ref={inputSelectedTypeRef} />
                     <datalist id="dataListTypes">
                         {types.map(type => {
-                            return <option value={type} key={type}></option>
+                            if (typeof type === 'string') {
+                                return <option value={type} key={type}></option>
+                              } else {
+                                return null;
+                              }
                         })}
                     </datalist>
                     <Button text="Añadir Tipo" onClick={handleOnClickAddType}></Button>
