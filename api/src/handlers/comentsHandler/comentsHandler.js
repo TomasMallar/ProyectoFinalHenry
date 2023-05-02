@@ -1,12 +1,24 @@
-const { getComents, postComent, putComent, deleteComent } = require('../../controllers/comentsController/comentsController')
+const { getComents, postComent, putComent, deleteComent, updateAllComents, commentsDeleted } = require('../../controllers/comentsController/comentsController')
 
 
 const getAllComents = async (req, res) => {
     try {
-        const { page = 1 } = req.query
+        const { page = 0 } = req.query
         const { id } = req.params
+        console.log(id);
         const allComents = await getComents(id, page)
         res.status(200).json(allComents)
+    } catch (error) {
+        res.status(400).json({error: error.message})
+    }
+}
+
+const updatedComments = async(req, res) => {
+    try {
+        const {productId} = req.params
+        console.log(productId);
+        const updated = await commentsDeleted(productId)
+        res.status(200).json(updated)
     } catch (error) {
         res.status(400).json({error: error.message})
     }
@@ -33,6 +45,16 @@ const updateComent = async (req, res) => {
     }
 }
 
+const updateImageAllComents = async(req, res) => {
+    try {
+        const {userId, image} = req.body
+        const comentsModifed = await updateAllComents(userId, image)
+        res.status(200).json(comentsModifed)
+    } catch (error) {
+        res.status(400).json({error: error.message})
+    }
+}
+
 const deleteComents = async (req, res) => {
     try { 
         const { comentId} = req.params
@@ -49,5 +71,7 @@ module.exports = {
     getAllComents,
     postNewComent,
     updateComent,
-    deleteComents
+    deleteComents,
+    updateImageAllComents, 
+    updatedComments
 }

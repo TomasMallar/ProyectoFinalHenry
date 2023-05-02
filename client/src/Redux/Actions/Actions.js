@@ -398,7 +398,6 @@ export const GetAllIngredientWithId = () => {
 export const PutEditProfile = (id, dataEdit) => {
     return async function (dispatch) {
         try {
-            
             const response = await axios.put(`http://localhost:3001/users/update/${id}`, 
             dataEdit, 
             {

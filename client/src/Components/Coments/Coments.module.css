@@ -26,3 +26,27 @@
 .invisible {
     display: none;
 }
+
+.profile {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    background-color: bisque;
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    font-size: 30px;
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+
+.nameAndProfile {
+    display: flex;
+    align-items: center;
+}
+
+.name {
+    margin-left: 15px;
+    
+}

@@ -1,8 +1,9 @@
 const { Router } = require('express')
-const {uploadImage} = require('../../handlers/uploadFilesHandler/uploadFilesHandler')
+const {uploadImage, uploadImageProfile} = require('../../handlers/uploadFilesHandler/uploadFilesHandler')
 
 const uploadRouter = Router()
 
-uploadRouter.post('/', uploadImage)
+uploadRouter.post('/product', uploadImage)
+uploadRouter.post('/profile', uploadImageProfile)
 
 module.exports = uploadRouter
