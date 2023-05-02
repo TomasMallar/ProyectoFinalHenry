@@ -89,11 +89,11 @@ export const DeleteUser = (id) => {
 }
 
 
-export const GetUserInfo = (id) => {
+export const GetUserInfo = (id, page) => {
     return async function (dispatch) {
         try {
 
-            const response = await axios(`http://localhost:3001/metric/all-orders/user?userId=${id}`)
+            const response = await axios(`http://localhost:3001/metric/all-orders/user?userId=${id}?page=${page}`)
             return dispatch({
                 type: GET_USER_INFO,
                 payload: response.data

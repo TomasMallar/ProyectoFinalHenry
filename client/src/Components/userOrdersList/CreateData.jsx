@@ -1,11 +1,12 @@
 
 
 export default function createData(orderId, status, date, items) {
+  console.log("amount",items?.map(item => item.quantity * item.product?.price).reduce((a, b) => a + b, 0) )
     return {
       orderId,
       status,
       date: date?.slice(0,10),
-      totalAmount:items?.map(item => item.quantity * item.product?.price).reduce((a, b) => a + b, 0),   
+      amount:items?.map(item => item.quantity * item.product?.price).reduce((a, b) => a + b, 0),   
       history: items?.map(item => {
           return {
               itemId:item.product?.id, 
