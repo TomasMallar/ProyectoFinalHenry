@@ -10,9 +10,11 @@ const Carrito = () => {
   const [cartItemsInCart, setCartItemsInCart] = useState([]);
 
   const saveCartToDB = async (cartItems) => {
-    const userId = localStorage.getItem("user").id;
+    const token = localStorage.getItem("token");
+    const decodedToken = jwtDecode(token);
+    const id = decodedToken.id
     try {
-      const response = await axios.post(`http://localhost:3001/users/${userId}/cart`, cartItems);
+      const response = await axios.post(`http://localhost:3001/cart/${id}`, {cartItems: cartItems});
       console.log(response.data.message);
     } catch (error) {
       console.error(error);

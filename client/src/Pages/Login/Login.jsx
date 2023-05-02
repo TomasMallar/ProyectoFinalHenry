@@ -50,22 +50,26 @@ export default function Login() {
                 // Guardar el rol en localStorage
                 localStorage.setItem("userRole", userRole);
                 console.log("ESTE ES EL ROL:", userRole);
+                console.log('ESTE ES EL ID', id)
+                const responses = await axios.get(`http://localhost:3001/cart?userId=${id}`);
+                const cart = responses.data.cart;
+                console.log("ESTE ES EL CART EN LOGIN");
+                console.log("ESTE ES EL CART EN LOGIN",cart);
+                console.log("ESTE ES EL CART PRODUCTS EN LOGIN",cart.products);
+                
+                if (cart) {
+                    localStorage.setItem("cartItems", JSON.stringify(cart.products));
+                } else {
+                    localStorage.setItem("cartItems", JSON.stringify([]));
+                }
                 window.location.reload();
-                  const responses = await axios.get(`http://localhost:3001/cart?userId=${response.data.user.id}`);
-  const cart = responses.data.cart;
-  console.log("ESTE ES EL CART EN LOGIN",cart);
-  if (cart) {
-    localStorage.setItem("cartItems", JSON.stringify(cart.products));
-  } else {
-    localStorage.setItem("cartItems", JSON.stringify([]));
-  }
             }
         } catch (error) {
             alert(error.response.data.message)
             console.error('There was a problem with the axios request:', error);
         }
-
-
+        
+        
     }
 
     const handleUsername = (e) => {

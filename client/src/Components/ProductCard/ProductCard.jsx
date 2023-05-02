@@ -5,6 +5,7 @@ import ButtonMP from "../IntegracionMercadoPago/IntegracionMercadoPago"
 import React, { useState, useEffect } from "react";
 import Fade from "react-reveal/Fade"
 import axios from "axios";
+import jwtDecode from 'jwt-decode';
 
 const ProductCard = ({ id, name, image, price, category }) => {
     const [cartItems, setCartItems] = useState([]);
@@ -12,9 +13,11 @@ const ProductCard = ({ id, name, image, price, category }) => {
     const product = { id, name, image, price, category };
 
     const saveCartToDB = async (cartItems) => {
-        const userId = localStorage.getItem("user").id;
+        const token = localStorage.getItem("token");
+        const decodedToken = jwtDecode(token);
+        const id = decodedToken.id
         try {
-          const response = await axios.post(`http://localhost:3001/cart/${userId}`, cartItems);
+          const response = await axios.post(`http://localhost:3001/cart/${id}`, {cartItems: cartItems});
           console.log(response.data.message);
         } catch (error) {
           console.error(error);
@@ -39,6 +42,7 @@ const ProductCard = ({ id, name, image, price, category }) => {
           });
           console.log('ESTE ES EL CARRITO ACTUALIZADO', updatedCartItems);
           localStorage.setItem("cartItems", JSON.stringify(updatedCartItems));
+          console.log("ESTO ES LO QUE SE MANDA AL BACKEND", updatedCartItems)
           saveCartToDB(updatedCartItems);
         } else {
           // Si el producto no existe, agregarlo con una cantidad de 1

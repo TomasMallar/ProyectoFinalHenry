@@ -3,6 +3,9 @@ const { Cart, User } = require('../../db');
 const getCartHandler = async (req, res) => {
   try {
     const { userId } = req.query;
+    console.log("ESTE ES EL USERID",typeof userId);
+    console.log("ESTE ES EL USERID",userId);
+    
     const user = await User.findByPk(userId);
     console.log("ESTE ES EL USER",user);
     if (!user) {
