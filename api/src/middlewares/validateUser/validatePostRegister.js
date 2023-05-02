@@ -7,7 +7,8 @@ const validatePostRegister = (req, res, next) => {
         mail: Joi.string().required(),
         date_of_birth: Joi.string().required(),
         password: Joi.string().required(),
-        phone: Joi.number().required()
+        phone: Joi.number().required(),
+        image: Joi.string().required()
     });
 
     const { error } = schema.validate(req.body);

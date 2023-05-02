@@ -48,6 +48,7 @@ import EditProfilePhone from './Components/EditProfilePhone/EditProfilePhone';
 import EditProfileMail from './Components/EditProfileMail/EditProfileMail';
 import EditProfileDate from './Components/EditProfileDate/EditProfileDate';
 import EditProfilePassword from './Components/EditProfilePassword/EditProfilePassword';
+import EditProfileImage from './Components/EditProfileImage/EditProfileImage'
 import Orders from './Pages/Orders/OrdersList';
 import Sales from './Pages/Sales/Sales'
 function App() {
@@ -95,6 +96,7 @@ function App() {
         <PrivateRouteUser exact path="/editphone" component={() => <><NavBar /><EditProfilePhone /><Footer /></>}/>
         <PrivateRouteUser exact path="/editdate" component={() => <><NavBar /><EditProfileDate /><Footer /></>}/>
         <PrivateRouteUser exact path="/editpassword" component={() => <><NavBar /><EditProfilePassword /><Footer /></>}/>
+        <PrivateRouteUser exact path="/editimage" component={()=> <><NavBar/><EditProfileImage/><Footer/></>}/>
 
         <PrivateRouteUser exact path="/editname" component={() => <><NavBar /><EditProfileName /><Footer /></>} />
         <PrivateRouteUser exact path="/editsurname" component={() => <><NavBar /><EditProfileSurname /><Footer /></>} />
