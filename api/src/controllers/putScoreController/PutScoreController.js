@@ -18,6 +18,11 @@ const updateScoreFromDB = async (score, id) => {
   }
 }
 
+const getChocolateById = async(id)=> {
+  const product = await Product.findByPk(id)
+  return product.score
+}
+
 module.exports = {
-  updateScoreFromDB,
+  updateScoreFromDB, getChocolateById
 };

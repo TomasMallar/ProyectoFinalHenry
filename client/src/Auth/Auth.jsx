@@ -1,7 +1,7 @@
 import { Route, Redirect } from 'react-router-dom';
 
 export function isAuthenticated() {
-    const token = sessionStorage.getItem('token');
+    const token = localStorage.getItem('token');
     return token !== null;
   }
 

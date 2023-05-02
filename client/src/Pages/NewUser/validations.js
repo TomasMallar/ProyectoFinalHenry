@@ -44,9 +44,9 @@ export default function Validations({ name, surname, date_of_birth, mail, phone,
     } else if (!regexPassword.regexLenght.test(password)) {
         objErrors.password = "Debe tener una longitud mínima de 8 caracteres"
     }
-    if (!favorites_tastes?.length) {
-        objErrors.favorites_tastes = "Elija al menos uno de sus chocolates favoritos"
-    }
+    // if (!favorites_tastes?.length) {
+    //     objErrors.favorites_tastes = "Elija al menos uno de sus chocolates favoritos"
+    // }
     return objErrors
 }
 

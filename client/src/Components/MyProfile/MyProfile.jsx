@@ -15,8 +15,8 @@ const MyProfile = () => {
   });
 
   useEffect(() => {
-    const userData = JSON.parse(sessionStorage.getItem('user'));
-    console.log('1',sessionStorage.getItem('user'));
+    const userData = JSON.parse(localStorage.getItem('user'));
+    console.log('1',localStorage.getItem('user'));
     setUser(userData);
   }, []);
 
@@ -24,7 +24,7 @@ const MyProfile = () => {
 
   useEffect(() => {
     const updatedUserData = { ...user, name, surname };
-    sessionStorage.setItem('user', JSON.stringify(updatedUserData));
+    localStorage.setItem('user', JSON.stringify(updatedUserData));
     console.log('2',updatedUserData);
   }, [name, surname]);
 

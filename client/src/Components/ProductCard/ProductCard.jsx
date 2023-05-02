@@ -4,40 +4,53 @@ import carImagen from "../../img/shopping-cart-cards.png"
 import ButtonMP from "../IntegracionMercadoPago/IntegracionMercadoPago"
 import React, { useState, useEffect } from "react";
 import Fade from "react-reveal/Fade"
+import axios from "axios";
+import jwtDecode from 'jwt-decode';
 
 const ProductCard = ({ id, name, image, price, category }) => {
     const [cartItems, setCartItems] = useState([]);
     const [showBubble, setShowBubble] = useState(false);
     const product = { id, name, image, price, category };
 
+    const saveCartToDB = async (cartItems) => {
+        const token = localStorage.getItem("token");
+        const decodedToken = jwtDecode(token);
+        const id = decodedToken.id
+        try {
+          const response = await axios.post(`http://localhost:3001/cart/${id}`, {cartItems: cartItems});
+          console.log(response.data.message);
+        } catch (error) {
+          console.error(error);
+        }
+      };
+
     const addToCart = (product) => {
         console.log('ESTE ES EL PRODUCTO ARMADO', product);
-        setCartItems((prevCartItems) => {
-            const existingProduct = prevCartItems.find(item => item.id === product.id);
-            console.log('ESTE ES EL PRODUCTO EXISTENTE', existingProduct);
-
-            if (existingProduct) {
-                // Si el producto ya existe, actualizar su cantidad sumando 1
-                const updatedCartItems = prevCartItems.map(item => {
-                    if (item.id === product.id) {
-                        console.log('LLEGAMOS AL MAS?');
-                        return { ...item, quantity: item.quantity + 1 };
-                    } else {
-                        return item;
-                    }
-                });
-                console.log('ESTE ES EL CARRITO ACTUALIZADO', updatedCartItems);
-                localStorage.setItem("cartItems", JSON.stringify(updatedCartItems));
-                return updatedCartItems;
+        const storedCartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
+        const existingProduct = storedCartItems.find(item => item.id === product.id);
+        console.log('ESTE ES EL PRODUCTO EXISTENTE', existingProduct);
+      
+        if (existingProduct) {
+          // Si el producto ya existe, actualizar su cantidad sumando 1
+          const updatedCartItems = storedCartItems.map(item => {
+            if (item.id === product.id) {
+              console.log('LLEGAMOS AL MAS?');
+              return { id: item.id, quantity: item.quantity + 1 };
             } else {
-                // Si el producto no existe, agregarlo con una cantidad de 1
-                const updatedCartItems = [...prevCartItems, { ...product, quantity: 1 }];
-                localStorage.setItem("cartItems", JSON.stringify(updatedCartItems));
-                return updatedCartItems;
+              return item;
             }
-        });
-        // setShowBubble(true);
-    };
+          });
+          console.log('ESTE ES EL CARRITO ACTUALIZADO', updatedCartItems);
+          localStorage.setItem("cartItems", JSON.stringify(updatedCartItems));
+          console.log("ESTO ES LO QUE SE MANDA AL BACKEND", updatedCartItems)
+          saveCartToDB(updatedCartItems);
+        } else {
+          // Si el producto no existe, agregarlo con una cantidad de 1
+          const updatedCartItems = [...storedCartItems, { id: product.id, quantity: 1 }];
+          localStorage.setItem("cartItems", JSON.stringify(updatedCartItems));
+          saveCartToDB(updatedCartItems);
+        }
+      };
 
     useEffect(() => {
         const storedCartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
@@ -46,10 +59,17 @@ const ProductCard = ({ id, name, image, price, category }) => {
 
     return (
         <div className="p-3 font-serif border border-solid shadow-lg border-chocolate-mantecol rounded-xl bg-chocolate-oscuro w-72 hover:shadow-chocolate-bombom hover:bg-chocolate-bombom">
-            <Fade cascade>
+            <Fade cascade>{
+                localStorage.getItem('token') ?(
                 <button className="border-none ml-60 w-fit" onClick={() => addToCart(product)}>
                     <img src={carImagen} alt="" className="w-8" />
+                </button>) : (
+                    <Link to="/login">
+                <button className="border-none ml-60 w-fit">
+                    <img src={carImagen} alt="" className="w-8" />
                 </button>
+                    </Link>
+                )}
                 <Link to={`/products/${id}`}>
 
                     <div className="flex flex-col items-center m-auto text-chocolate-blanco" >

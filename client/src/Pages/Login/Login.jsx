@@ -37,27 +37,39 @@ export default function Login() {
             const response = await axios.post("http://localhost:3001/users/login", data);
             console.log(response.data);
             if (response.data.user) {
-                sessionStorage.setItem("token", response.data.token);
-                sessionStorage.setItem("Name", response.data.user.name);
-                sessionStorage.setItem("user", JSON.stringify(response.data.user));
+                localStorage.setItem("token", response.data.token);
+                localStorage.setItem("Name", response.data.user.name);
+                localStorage.setItem("user", JSON.stringify(response.data.user));
                 setUser("")
                 setPassword("")
                 setSuccess(true)
                 const decodedToken = jwtDecode(response.data.token);
                 const userRole = decodedToken.rol;
                 const id = decodedToken.id
-                sessionStorage.setItem('id', id)
-                // Guardar el rol en sessionStorage
-                sessionStorage.setItem("userRole", userRole);
+                localStorage.setItem('id', id)
+                // Guardar el rol en localStorage
+                localStorage.setItem("userRole", userRole);
                 console.log("ESTE ES EL ROL:", userRole);
+                console.log('ESTE ES EL ID', id)
+                const responses = await axios.get(`http://localhost:3001/cart?userId=${id}`);
+                const cart = responses.data.cart;
+                console.log("ESTE ES EL CART EN LOGIN");
+                console.log("ESTE ES EL CART EN LOGIN",cart);
+                console.log("ESTE ES EL CART PRODUCTS EN LOGIN",cart.products);
+                
+                if (cart) {
+                    localStorage.setItem("cartItems", JSON.stringify(cart.products));
+                } else {
+                    localStorage.setItem("cartItems", JSON.stringify([]));
+                }
                 window.location.reload();
             }
         } catch (error) {
             alert(error.response.data.message)
             console.error('There was a problem with the axios request:', error);
         }
-
-
+        
+        
     }
 
     const handleUsername = (e) => {
@@ -89,7 +101,7 @@ export default function Login() {
                                     type="text"
                                     id="username"
                                     ref={userRef}
-                                    autoComplete='off'
+                                    autoComplete='on'
                                     onChange={handleUsername}
                                     value={user}
                                     placeholder="username"

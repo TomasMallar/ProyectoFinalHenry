@@ -22,7 +22,8 @@ import {
     DELETE_USER,
     GET_USER_INFO,
     GET_SALES_INFO,
-    CANCEL_ORDER_USER
+    CANCEL_ORDER_USER,
+    RESET_ERROR
 } from "../Action-types/Action-types"
 
 const initialState = {
@@ -90,6 +91,12 @@ const reducer = (state = initialState, action) => {
                 ...state,
                 errorMessage: action.payload
             }
+
+        case RESET_ERROR:
+            return {
+                ...state,
+                errorMessage: ""
+            }
         case GET_CATEGORIES:
 
             return {
@@ -138,7 +145,7 @@ const reducer = (state = initialState, action) => {
 
         case EDIT_PROFILE:
             const data = action.payload.user;
-            sessionStorage.setItem("user", JSON.stringify(data))
+            localStorage.setItem("user", JSON.stringify(data))
             return {
                 ...state
             }

@@ -31,7 +31,7 @@ const EditProfilePassword = () => {
   const [isProfileUpdated, setIsProfileUpdated] = useState(false);
   const [confirmPassword, setConfirmPassword] = useState('');
 
-  const id = sessionStorage.getItem('id');
+  const id = localStorage.getItem('id');
 
   const handleInputChange = (e) => {
     const value = e.target.value;

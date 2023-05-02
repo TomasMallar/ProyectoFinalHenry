@@ -14,15 +14,15 @@ const EditProfileImage = () => {
     const [isProfileUpdated, setIsProfileUpdated] = useState(false);
 
     const { image } = JSON.parse(
-        sessionStorage.getItem('user')
+        localStorage.getItem('user')
     );
 
-    const id = sessionStorage.getItem('id');
+    const id = localStorage.getItem('id');
 
     useEffect(() => {
-        const userData = JSON.parse(sessionStorage.getItem('user'));
+        const userData = JSON.parse(localStorage.getItem('user'));
         const updatedUserData = { ...userData, ...editProfile };
-        sessionStorage.setItem('user', JSON.stringify(updatedUserData));
+        localStorage.setItem('user', JSON.stringify(updatedUserData));
     }, [editProfile]);
 
     const [fileInputState, setFileInputState] = useState('')
@@ -63,7 +63,7 @@ const EditProfileImage = () => {
         }
     }
 
-    const token = sessionStorage.getItem('token');
+    const token = localStorage.getItem('token');
     let userId = null;
     if (token) {
         const decodedToken = jwt_decode(token);
@@ -77,10 +77,10 @@ const EditProfileImage = () => {
 
         const response = await axios.put('http://localhost:3001/coments/all', { userId: userId, image: editProfile.image })
         console.log(response.data);
-        const userData = JSON.parse(sessionStorage.getItem('user'));
+        const userData = JSON.parse(localStorage.getItem('user'));
         dispatch(PutEditProfile(id, userData))
         const updatedUserData = { ...userData, ...editProfile };
-        sessionStorage.setItem('user', JSON.stringify(updatedUserData));
+        localStorage.setItem('user', JSON.stringify(updatedUserData));
         setIsProfileUpdated(true)
     }
 

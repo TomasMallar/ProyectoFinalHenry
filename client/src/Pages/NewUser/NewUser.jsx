@@ -1,21 +1,21 @@
 import style from './NewUser.module.css'
 import { Link } from 'react-router-dom'
-import { useState, useRef } from 'react'
-import { useDispatch } from 'react-redux'
+import { useState, useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import Validations from "./validations"
-import { addUser } from '../../Redux/Actions/Actions'
-import { useHistory } from 'react-router-dom'
+import { addUser, resetErrorMessage } from '../../Redux/Actions/Actions'
 import Fade from "react-reveal"
+
+
 
 export default function User() {
     const dispatch = useDispatch()
-    const history = useHistory()
     //guarda el imput seleccionado en Tipos de Chocolates preferidos
-    const inputSelectFlavorsRef = useRef(null)
+    // const inputSelectFlavorsRef = useRef(null)
 
-    const flavors = ["Chocolate Amargo", "Chocolate con Leche", "Chocolate Blanco", "Rellenos", "Tabletas", "Con Licor", "Con Frutos Secos"]
+    // const flavors = ["Chocolate Amargo", "Chocolate con Leche", "Chocolate Blanco", "Rellenos", "Tabletas", "Con Licor", "Con Frutos Secos"]
     // E. local newUser --> guarda info que inserte el user para luego enviar al post
-    let [newUser, setNewUser] = useState({
+    const [newUser, setNewUser] = useState({
         name: "",
         surname: "",
         date_of_birth: "",
@@ -25,18 +25,32 @@ export default function User() {
         image: "https://i.pinimg.com/564x/88/b4/4e/88b44e2f78161c673f92346540e1ebee.jpg"
     })
     // E.Local guarda las preferencias de chocolate del usuario del usuario
-    const [selectedFlavors, setSelectedFlavors] = useState([])
+    // const [selectedFlavors, setSelectedFlavors] = useState([])
 
+    const [modal, setModal] = useState(false)
+    const [modalFail, setModalFaile] = useState(false)
+    const [axiosResponse, setAxiosResponse] = useState(false)
+    const [response, setResponse] = useState("")
 
-    //E. Local para validar errores 
+    
+  const [postErrors, setPostErrors] = useState('');
+  const errorMessage = useSelector((state) => state.errorMessage);
+
+  useEffect(() => {
+    setPostErrors(errorMessage);
+  }, [errorMessage]);
+  console.log(postErrors, "POST ERRORS");
+
+    //E. Local para validar errores
     const [errors, setErrors] = useState({})
 
-    // useEffect(() => {
+    useEffect(() => {
 
-    //     setNewUser({ ...newUser, favorites_tastes: selectedFlavors })
-
-    // }, [selectedFlavors]
-    // )
+        // setNewUser({ ...newUser, favorites_tastes: selectedFlavors })
+        setErrors({})
+        
+    }, []
+    )
 
     const handleInputChange = (event) => {
         if (event.target.name === "phone") {
@@ -48,58 +62,69 @@ export default function User() {
         }
     }
 
-    const handleOnClickAdd = (event) => {
-        event.preventDefault()
-        const selectedFlavor = inputSelectFlavorsRef.current.value
-        // eslint-disable-next-line
-        if (!flavors.includes(selectedFlavor)) { return alert("Elige un sabor válido!" + " " + '\ud83e\udd28') }
-        if (selectedFlavor && !selectedFlavors.includes(selectedFlavor)) {
-            setSelectedFlavors([...selectedFlavors, selectedFlavor])
-        }
-        setErrors(Validations({ ...newUser, favorites_tastes: selectedFlavor }))
-        inputSelectFlavorsRef.current.value = ""
-    }
+    // const handleOnClickAdd = (event) => {
+    //     event.preventDefault()
+    //     const selectedFlavor = inputSelectFlavorsRef.current.value
+    //     // eslint-disable-next-line
+    //     if (!flavors.includes(selectedFlavor)) { return alert("Elige un sabor válido!" + " " + '\ud83e\udd28') }
+    //     if (selectedFlavor && !selectedFlavors.includes(selectedFlavor)) {
+    //         setSelectedFlavors([...selectedFlavors, selectedFlavor])
+    //     }
+    //     setErrors(Validations({ ...newUser, favorites_tastes: selectedFlavor }))
+    //     inputSelectFlavorsRef.current.value = ""
+    // }
 
-    const handleOnclickX = (event) => {
-        event.preventDefault()
-        if (selectedFlavors.length - 1 < 1) {
-            setSelectedFlavors([])
-            setErrors(Validations({ ...newUser, favorites_tastes: [] }))
-        }
-        const updatedSelectedFlavors = selectedFlavors.filter((f) => f !== event.target.value)
-        setSelectedFlavors(updatedSelectedFlavors)
+    // const handleOnclickX = (event) => {
+    //     event.preventDefault()
+    //     if (selectedFlavors.length - 1 < 1) {
+    //         setSelectedFlavors([])
+    //         setErrors(Validations({ ...newUser, favorites_tastes: [] }))
+    //     }
+    //     const updatedSelectedFlavors = selectedFlavors.filter((f) => f !== event.target.value)
+    //     setSelectedFlavors(updatedSelectedFlavors)
 
-    }
+    // }
 
-    const handleSubmit = (event) => {
+    const handleSubmit = async(event) => {
         event.preventDefault()
         setErrors(Validations({ ...newUser, [event.target.name]: event.target.value }))
         const arrayErrors = Object.keys(errors)
-        // chequea si existe name para que si no pones nada en ningun campo no se cree el usuario 
+        // chequea si existe name para que si no pones nada en ningun campo no se cree el usuario
         if (arrayErrors.length || !newUser.name) {
-            // eslint-disable-next-line
-            alert("Usuario no creado verificar errores en el formulario ", '\ud83e\uddd0')
+            console.log(arrayErrors, "errores");
+            setModal(true)
+            setModalFaile(true)
         } else {
-            
+            setModal(true)
             dispatch(addUser(newUser))
-            
-            // eslint-disable-next-line
-            setNewUser({
-                name: "",
-                surname: "",
-                date_of_birth: "",
-                mail: "",
-                phone: "",
-                password: "",
-            })
-            console.log("SE EJECUTA NEW USER", "dispatch(addUser(newUser))", newUser);
-
-            alert("Felicitaciones has creado tu usuario !! ", '\ud83c\udf0d')
-            history.push("/login")
         }
+        if (postErrors) {
+            console.log(postErrors, postErrors.length > 0, " post Errors");
+            setAxiosResponse(true)
+        }
+                // setNewUser({
+                //     name: "",
+                //     surname: "",
+                //     date_of_birth: "",
+                //     mail: "",
+                //     phone: "",
+                //     password: "",
+                // }) 
+
     }
 
-
+    const handleModalfail = (event) => {
+        event.preventDefault()
+        setModal(false)
+        setModalFaile(false)
+        setAxiosResponse(false)
+        dispatch(resetErrorMessage())
+    }
+    const handleModal = () => {
+        setModal(!modal)
+    }
+    console.log("Response:", postErrors);
+    console.log("Modal:",modal, "Modal Fail:",modalFail, "AxiosResponse:",axiosResponse);
 
     return (
 
@@ -178,7 +203,7 @@ export default function User() {
                             </div>
                         </div>
 
-                        <div className="flex flex-col flex-wrap items-center justify-center">
+                        {/* <div className="flex flex-col flex-wrap items-center justify-center">
                             <label htmlFor="chocolates">Elige tus chocolates favoritos:</label>
                             <input name="chocolates" id="chocolates" list="dataList" ref={inputSelectFlavorsRef} className="flex flex-col justify-between p-2 mb-3 text-base border-none shadow-sm rounded-2xl bg-chocolate-mantecol w-44 text-chocolate-oscuro shadow-chocolate-bombom focus:outline focus:outline-chocolate-oscuro" />
                             <datalist id="dataList">
@@ -205,20 +230,46 @@ export default function User() {
 
                                 })
                             }
-                        </div>
+                        </div> */}
 
                         <br />
                         <input type="submit" value="Crear Cuenta" className="p-1 font-serif font-bold rounded-lg shadow-sm bg-chocolate-claro text-chocolate-oscuro shadow-chocolate-claro hover:bg-chocolate-mantecol" />
 
-                </div>
-                <p> Volver al <Link to="/home">Home</Link> </p>
-
-            </form>
+                    </div>
+                    <p> Volver al <Link to="/home">Home</Link> </p>
+                </form>
 
                 <div className=" ml-80 w-[600px]">
                     <h1 className='font-serif text-4xl text-start text-chocolate-blanco'>¡Únete a nuestra comunidad chocolatera! Regístrate para acceder a ofertas exclusivas, recibir noticias y descubrir más sobre el apasionante mundo del chocolate. ¡Haz parte de nuestra familia chocolatera hoy!</h1>
                 </div>
             </Fade>
+            {
+                modal && modalFail===false && axiosResponse===false &&<div className={style.modalContainer}>
+                    <div className={style.infoContainer}>
+                        <p className={style.mensaje}>FELICITACIONES CREASTE TU USUARIO!! </p>
+                            <Link to="/login"><button className={style.modal}>CONTINUAR AL LOGIN</button></Link>
+                            <button onClick={handleModal}>MODAL</button>
+                    </div>
+                </div>
+            }
+             {
+                modal && modalFail===true && <div className={style.modalContainer}>
+                    <div className={style.infoContainer}>
+                        <p className={style.mensaje}>REVISAR ERRORES DEL FORMULARIO!!" </p>
+                            <button className={style.modal} onClick={handleModalfail} >Revisar formulario</button>
+                            <button onClick={handleModal}>MODAL</button>
+                    </div>
+                </div>
+            }
+             {
+                modal && axiosResponse===true && <div className={style.modalContainer}>
+                    <div className={style.infoContainer}>
+                        <p className={style.mensaje}>{postErrors} </p>
+                            <button className={style.modal} onClick={handleModalfail} >Revisar formulario</button>
+                            <button onClick={handleModal}>MODAL</button>
+                    </div>
+                </div>
+            }
 
         </div>
     )

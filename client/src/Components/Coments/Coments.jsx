@@ -17,26 +17,24 @@ const Coments = () => {
     const { id } = useParams()
     const [cont, setCont] = useState(0)
 
-    const token = sessionStorage.getItem('token');
+    const token = localStorage.getItem('token');
     let userId = null;
     if (token) {
         const decodedToken = jwt_decode(token);
         userId = decodedToken.id;
     }
-
+    const [userRol, setUserRol] = useState(null)
     useEffect(() => {
         const getAllComents = async () => {
             const response = await axios.get(`http://localhost:3001/coments/${id}?page=${cont}`)
-            
+            const user = await axios.get(`http://localhost:3001/users/profile/${userId}`)
+            setUserRol(user.data.rolId);
             console.log(response.data);
             setComments(response.data)
             setLatestComments(response.data.length)
         }
         getAllComents()
     }, [commentsDeleted])
-
-
-
 
     const onChangeHandler = async (event) => {
         setCurrentComment(event.target.value)
@@ -110,7 +108,11 @@ const Coments = () => {
             setComments([...comments, ...response.data])
             console.log([...comments, ...response.data], "comments del ver mas");
             setLatestComments(response.data.length)
-        } else return
+        } else 
+        {
+            setLatestComments(null)
+            return
+        }
     }
     console.log("comments: ", comments, "LatestComments:", latestComments);
     return (
@@ -155,7 +157,7 @@ const Coments = () => {
                                         {comment.content}
                                     </p>
                                 )}
-                                {comment.userId === userId && (
+                                {((comment.userId === userId) || (userRol  === 2)) && (
                                     <div className='flex items-center justify-end'>
                                         <button onClick={() => editCommentHandler(comment)} className='p-1 m-2 font-serif font-bold rounded-lg shadow-sm bg-chocolate-claro text-chocolate-oscuro shadow-chocolate-claro hover:bg-chocolate-blanco'>
                                             Editar

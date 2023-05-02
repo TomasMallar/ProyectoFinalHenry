@@ -8,6 +8,8 @@ const PaymentApprovedRoute = ({ component: Component, ...rest }) => {
 
   const paymentSuccessful = collectionStatus === 'approved';
 
+  localStorage.clear();
+
   return (
     <Route
       {...rest}

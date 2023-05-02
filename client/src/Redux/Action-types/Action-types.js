@@ -23,6 +23,8 @@ export const GET_USERS_INFO = "GET_USERS_INFO"
 export const DELETE_USER = "DELETE_USER"
 export const GET_USER_INFO = "GET_USER_INFO"
 export const CANCEL_ORDER_USER = "CANCEL_ORDER_USER"
+export const RESET_ERROR = "RESET_ERROR"
+
 
 
 
