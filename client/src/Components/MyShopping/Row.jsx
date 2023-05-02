@@ -36,7 +36,7 @@ export default function Roow(props) {
         cancelButtonText: 'No, mantener'
       }).then((result) => {
         if (result.isConfirmed) {
-          dispatch(cancelOrderUser(row.orderId));
+          dispatch(cancelOrderUser(row.saleId, row.id));
           Swal.fire('Orden cancelada', '', 'success').then(() => {
             window.location.reload();
           });
@@ -61,10 +61,19 @@ export default function Roow(props) {
           </TableCell>
           <TableCell align="right">{row.mail}</TableCell>
           <TableCell align="right">{row.orderId}</TableCell>
+          <TableCell align="right">{row.saleId}</TableCell>
+          <TableCell align="right">{row.paymentMethod}</TableCell>
           <TableCell align="right">{row.totalAmount}</TableCell>
           <TableCell align="right">{row.date}</TableCell>
-          <TableCell align="right">{row.state}</TableCell>
-          <TableCell align="right"><button onClick={cancelOrder}>Cancelar</button></TableCell>
+          <TableCell align="right">{row.statusSale}</TableCell>
+          <TableCell align="right">
+            {row.statusSale !== "pending" ? (
+              <button disabled>-</button>
+            ) : (
+              <button onClick={cancelOrder}>Cancelar</button>
+
+           )}
+</TableCell>
         </TableRow>
         <TableRow>
           <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>

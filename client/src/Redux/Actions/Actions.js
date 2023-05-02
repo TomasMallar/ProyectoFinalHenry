@@ -20,7 +20,8 @@ import {
     EDIT_PROFILE,
     GET_USER_ORDER,
     CANCEL_ORDER_USER,
-    RESET_ERROR
+    RESET_ERROR,
+    REMOVE_ORDER_USER
 } from "../Action-types/Action-types"
 
 export const getAllChocolates = () => {
@@ -438,12 +439,17 @@ export const getUserOrder = (id, page) => {
     }
 }
 
-export const cancelOrderUser = (orderId) => {
+export const cancelOrderUser = (saleId, userId) => {
     return async function(dispatch) {
         try {
-            const response = await axios.put('http://localhost:3001/users/order-canceled', {
-                orderId: orderId
-            });
+            // const response = await axios.put('http://localhost:3001/users/order-canceled', {
+            //     orderId: orderId
+            // });
+
+            const response = await axios.post(`http://localhost:3001/payment/sales/cancel/${saleId}`, 
+            {
+                userId
+            })
 
             return dispatch({
                 type: CANCEL_ORDER_USER
@@ -451,5 +457,11 @@ export const cancelOrderUser = (orderId) => {
         } catch (error) {
             console.log(error.message);
         }
+    }
+}
+
+export const removeOrderUser = () => {
+    return {
+        type: REMOVE_ORDER_USER
     }
 }

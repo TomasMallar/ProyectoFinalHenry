@@ -134,6 +134,7 @@ const postLoginUser = async ({ mail, password }) => {
     return {
       message: 'User successfully logged in',
       user: {
+        id: user.id,
         name: user.name,
         surname: user.surname,
         phone: user.phone,

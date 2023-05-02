@@ -23,7 +23,8 @@ import {
     GET_USER_INFO,
     GET_SALES_INFO,
     CANCEL_ORDER_USER,
-    RESET_ERROR
+    RESET_ERROR,
+    REMOVE_ORDER_USER
 } from "../Action-types/Action-types"
 
 const initialState = {
@@ -191,6 +192,12 @@ const reducer = (state = initialState, action) => {
         case CANCEL_ORDER_USER: 
         return {
             ...state
+        }
+
+        case REMOVE_ORDER_USER: 
+        return {
+            ...state,
+            order: {}
         }
         
         default:
