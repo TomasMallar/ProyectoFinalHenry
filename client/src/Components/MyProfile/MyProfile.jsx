@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import style from "./MyProfile.module.css"
 import { Link } from 'react-router-dom';
+import { Box, Container } from '@mui/material';
 
 const MyProfile = () => {
   const [user, setUser] = useState({

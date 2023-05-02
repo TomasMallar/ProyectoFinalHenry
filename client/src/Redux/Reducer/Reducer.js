@@ -21,7 +21,8 @@ import {
     GET_USERS_INFO,
     DELETE_USER,
     GET_USER_INFO,
-    GET_SALES_INFO
+    GET_SALES_INFO,
+    CANCEL_ORDER_USER
 } from "../Action-types/Action-types"
 
 const initialState = {
@@ -180,6 +181,11 @@ const reducer = (state = initialState, action) => {
                 salesInfo: action.payload,
             }
 
+        case CANCEL_ORDER_USER: 
+        return {
+            ...state
+        }
+        
         default:
             return { ...state };
     }

@@ -223,7 +223,7 @@ const getUserOrder = async (id, page = 1, limit = 4) => {
   const { count, rows: orders } = await Order.findAndCountAll({
     where: { userId: id },
     attributes: { exclude: ['createdAt', 'updatedAt', 'deletedAt'] },
-    include: {
+    include: [{
       model: OrderItem,
       as: 'items',
       attributes: {
@@ -239,8 +239,12 @@ const getUserOrder = async (id, page = 1, limit = 4) => {
         model: Product,
         as: 'product',
         attributes: ['name', 'price'],
-      },
+      }
     },
+    {
+      model: Sale,
+      as: 'sale',
+    }],
     limit,
     offset,
   });
@@ -267,6 +271,19 @@ const getUserOrder = async (id, page = 1, limit = 4) => {
   return { orders: ordersWithTotal, currentPage: page, totalPages };
 };
 
+const putUserOrderCancelar = async (orderId) => {
+console.log(orderId);
+  const order = await Order.findByPk(orderId);
+
+  if (order) {
+    order.status = 'cancelled';
+    await order.save();
+    return { message: 'Se canceló correctamente' };
+  }
+
+  return { message: 'No se encontró la orden' };
+}
+
 module.exports = {
   getAllUser,
   getOneUser,
@@ -275,6 +292,7 @@ module.exports = {
   postLoginUser,
   updateUser,
   getUserOrder,
+  putUserOrderCancelar,
   // updatePassword
   deleteUser
 };

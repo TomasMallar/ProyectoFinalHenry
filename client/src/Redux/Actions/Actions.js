@@ -18,7 +18,8 @@ import {
     ADD_INGREDIENT_TYPE_CATEGORIE,
     DELETE_ELEMENT,
     EDIT_PROFILE,
-    GET_USER_ORDER
+    GET_USER_ORDER,
+    CANCEL_ORDER_USER
 } from "../Action-types/Action-types"
 
 export const getAllChocolates = () => {
@@ -414,7 +415,8 @@ export const PutEditProfile = (id, dataEdit) => {
 export const getUserOrder = (id, page) => {
     return async function (dispatch) {
       try {
-          const response = await axios.get(`http://localhost:3001/users/order/${id}?page=${page}`);
+        //   const response = await axios.get(`http://localhost:3001/users/order/${id}?page=${page}`);
+          const response = await axios.get(`http://localhost:3001/metric/all-orders/user?userId=${id}?page=${page}`);
           
           return dispatch({
             type: GET_USER_ORDER,
@@ -422,6 +424,22 @@ export const getUserOrder = (id, page) => {
           })
         } catch (error) {
           console.log(error);
+        }
+    }
+}
+
+export const cancelOrderUser = (orderId) => {
+    return async function(dispatch) {
+        try {
+            const response = await axios.put('http://localhost:3001/users/order-canceled', {
+                orderId: orderId
+            });
+
+            return dispatch({
+                type: CANCEL_ORDER_USER
+            });
+        } catch (error) {
+            console.log(error.message);
         }
     }
 }
