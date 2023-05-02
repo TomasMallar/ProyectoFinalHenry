@@ -8,6 +8,7 @@ const {
     deleteUser,
     updatePassword,
     getUserOrder,
+    putUserOrderCancelar
   } = require('../../controllers/userController/UserController');
   const {
     sendWelcomeEmail,
@@ -119,6 +120,17 @@ const {
       res.status(400).json(error.message);
     }
   };
+
+  const putUserOrderCancelarHandler = async (req, res) => {
+    try {
+      const { orderId } = req.body;
+      const orderCancelled = await putUserOrderCancelar(orderId);
+  
+      res.status(200).json(orderCancelled);
+    } catch (error) {
+      res.status(400).json(error.message);
+    }
+  };
   
   module.exports = {
     getAllUserHandler,
@@ -129,6 +141,7 @@ const {
     updateUserHandler,
     deleteUserHandler,
     getUserOrderHandler,
+    putUserOrderCancelarHandler
     // updatePasswordHanlder
   };
   
