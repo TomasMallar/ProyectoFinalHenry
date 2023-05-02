@@ -8,7 +8,7 @@ import { Link } from 'react-router-dom';
 const MyShopping = () => {
   const order = useSelector((state) => state.order);
   const dispatch = useDispatch();
-  const id = sessionStorage.getItem('id');
+  const id = localStorage.getItem('id');
   const [page, setPage] = useState(1);
   const { orders, totalPages } = order;
 console.log(orders);

@@ -14,12 +14,12 @@ export default function SideBar() {
 
     const history = useHistory()
     const handleLogout = () => {
-        sessionStorage.removeItem("token");
-        sessionStorage.removeItem("userRole");
-        sessionStorage.removeItem("user");
-        sessionStorage.removeItem("Name");
-        sessionStorage.removeItem("id");
-        sessionStorage.removeItem("mail");
+        localStorage.removeItem("token");
+        localStorage.removeItem("userRole");
+        localStorage.removeItem("user");
+        localStorage.removeItem("Name");
+        localStorage.removeItem("id");
+        localStorage.removeItem("mail");
         history.push("/home");
         window.location.reload();
     };
@@ -92,7 +92,7 @@ export default function SideBar() {
                     <li className={style.li}>
                         <LockOutlinedIcon className={style.icon} />
 <div>
-{sessionStorage.getItem("token") ? (
+{localStorage.getItem("token") ? (
                     <div>
                         <li>
                             <button className={style.span} onClick={handleLogout}>

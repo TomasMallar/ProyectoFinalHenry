@@ -2,7 +2,7 @@ import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
 
 const PrivateRoute = ({ component: Component, ...rest }) => {
-  const userRole = sessionStorage.getItem('userRole');
+  const userRole = localStorage.getItem('userRole');
   console.log("ACA TENDRIA QUE LLEGAR EL MISMO NRO DE ROL",userRole)
 
   return (
