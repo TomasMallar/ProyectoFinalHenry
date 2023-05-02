@@ -10,6 +10,7 @@ const {
   deleteUserHandler,
   updatePasswordHanlder,
   getUserOrderHandler,
+  putUserOrderCancelarHandler
 } = require('../../handlers/userHandler/UserHandler');
 
 const validatePostRegister = require('../../middlewares/validateUser/validatePostRegister');
@@ -33,6 +34,7 @@ routerUser.post('/register', validatePostRegister, postNewtUserHandler);
 routerUser.post('/login', validatePostLogin, postLoginUserHandler);
 
 routerUser.get('/order/:id', getUserOrderHandler);
+routerUser.put('/order-canceled', putUserOrderCancelarHandler);
 
 /****************RUTAS CON VALIDACIONES DEL TOKEN***************************/
 // routerUser.get('/', validateJwt, validateRoleAdm, getAllUserHandler);

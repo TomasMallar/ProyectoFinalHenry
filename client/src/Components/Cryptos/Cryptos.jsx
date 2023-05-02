@@ -9,11 +9,10 @@ const Crypto = (order) => {
     const [responseMessage, setResponseMessage] = useState('')
     const startPayment = async ({ ether, addr }) => {
         try {
-
             if (!window.ethereum) {
                 throw new Error("No crypto wallet found. Please install it.");
             }
-
+            
             await window.ethereum.send("eth_requestAccounts");
             const provider = new ethers.providers.Web3Provider(window.ethereum);
             const signer = provider.getSigner();
@@ -22,7 +21,8 @@ const Crypto = (order) => {
                 to: addr,
                 value: ethers.utils.parseEther(ether),
             });
-
+            
+            console.log('hola');
             console.log("SOY TX",tx);
             console.log("SOY ORDER",order.order);
             console.log("SOY ETHER",ether);
@@ -71,7 +71,7 @@ const Crypto = (order) => {
     }
 
     const handlePayment = async () => {
-        const ether = pesosAEther()
+        const ether = await pesosAEther()
         const addr = "0x0C16F41d6e190CdA2E3A002FD518AC0B5367C3D9";
         const tx = await startPayment({ ether, addr });
 
