@@ -51,6 +51,14 @@ export default function Login() {
                 localStorage.setItem("userRole", userRole);
                 console.log("ESTE ES EL ROL:", userRole);
                 window.location.reload();
+                  const responses = await axios.get(`http://localhost:3001/cart?userId=${response.data.user.id}`);
+  const cart = responses.data.cart;
+  console.log("ESTE ES EL CART EN LOGIN",cart);
+  if (cart) {
+    localStorage.setItem("cartItems", JSON.stringify(cart.products));
+  } else {
+    localStorage.setItem("cartItems", JSON.stringify([]));
+  }
             }
         } catch (error) {
             alert(error.response.data.message)

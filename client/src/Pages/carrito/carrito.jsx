@@ -8,6 +8,17 @@ import axios from "axios";
 
 const Carrito = () => {
   const [cartItemsInCart, setCartItemsInCart] = useState([]);
+
+  const saveCartToDB = async (cartItems) => {
+    const userId = localStorage.getItem("user").id;
+    try {
+      const response = await axios.post(`http://localhost:3001/users/${userId}/cart`, cartItems);
+      console.log(response.data.message);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   useEffect(() => {
     const storedCartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
   
@@ -26,6 +37,7 @@ const Carrito = () => {
   const handleDeleteCart = () => {
     localStorage.removeItem("cartItems");
     setCartItemsInCart([]);
+    saveCartToDB([]);
   };
 
   const [stock, setStock] = useState(null)
@@ -45,6 +57,7 @@ const Carrito = () => {
     }
     setCartItemsInCart(updatedCartItems);
     localStorage.setItem("cartItems", JSON.stringify(updatedCartItems));
+    saveCartToDB(updatedCartItems);
   };
 
   const handleRemoveFromCart = (item) => {
@@ -60,6 +73,7 @@ const Carrito = () => {
     }
     setCartItemsInCart(updatedCartItems);
     localStorage.setItem("cartItems", JSON.stringify(updatedCartItems));
+    saveCartToDB(updatedCartItems);
   };
 
   const handleDeleteFromCart = (item) => {
