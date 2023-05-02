@@ -43,19 +43,19 @@ function LoginButton() {
         const response = await axios.post("http://localhost:3001/auth/google", data);
         console.log(response.data, "soy data")
         if (response.data.token) {
-          sessionStorage.setItem("token", response.data.token);
-          sessionStorage.setItem("Name", JSON.stringify(name));
-          sessionStorage.setItem("mail", JSON.stringify(mail));
-          sessionStorage.setItem("user", JSON.stringify(data));
+          localStorage.setItem("token", response.data.token);
+          localStorage.setItem("Name", JSON.stringify(name));
+          localStorage.setItem("mail", JSON.stringify(mail));
+          localStorage.setItem("user", JSON.stringify(data));
 
 
           ;
           const decodedToken = jwtDecode(response.data.token);
           const userRole = decodedToken.rol;
           const id = decodedToken.id;
-          sessionStorage.setItem('id', id);
-          // Guardar el rol en sessionStorage
-          sessionStorage.setItem("userRole", userRole);
+          localStorage.setItem('id', id);
+          // Guardar el rol en localStorage
+          localStorage.setItem("userRole", userRole);
           console.log(response, "RESPUESTA AXIOS");
           setSuccess(true)
 
@@ -83,17 +83,17 @@ const  singInWithFacebook = () => {
      console.log(response.data, "soy data")
   
       if (response.data.token) {
-        sessionStorage.setItem("token", response.data.token);
-        sessionStorage.setItem("Name", JSON.stringify(name));
-        sessionStorage.setItem("mail",  JSON.stringify(mail));
-        sessionStorage.setItem("user",  JSON.stringify(data));
+        localStorage.setItem("token", response.data.token);
+        localStorage.setItem("Name", JSON.stringify(name));
+        localStorage.setItem("mail",  JSON.stringify(mail));
+        localStorage.setItem("user",  JSON.stringify(data));
 
         const decodedToken = jwtDecode(response.data.token);
         const userRole = decodedToken.rol;
         const id = decodedToken.id;
-        sessionStorage.setItem('id', id);
-        // Guardar el rol en sessionStorage
-        sessionStorage.setItem("userRole", userRole);
+        localStorage.setItem('id', id);
+        // Guardar el rol en localStorage
+        localStorage.setItem("userRole", userRole);
         console.log(response, "RESPUESTA AXIOS");
         setSuccess(true)
         

@@ -26,10 +26,10 @@ const EditProfileMail = () => {
   const [isProfileUpdated, setIsProfileUpdated] = useState(false);
 
   const {mail} = JSON.parse(
-    sessionStorage.getItem('user')
+    localStorage.getItem('user')
   );
 
-  const id = sessionStorage.getItem('id');
+  const id = localStorage.getItem('id');
 
   const handleInputChange = (e) => {
     const value = e.target.value;
@@ -49,9 +49,9 @@ const EditProfileMail = () => {
   };
  
   useEffect(() => {
-    const userData = JSON.parse(sessionStorage.getItem('user'));
+    const userData = JSON.parse(localStorage.getItem('user'));
     const updatedUserData = { ...userData, ...editProfile };
-    sessionStorage.setItem('user', JSON.stringify(updatedUserData));
+    localStorage.setItem('user', JSON.stringify(updatedUserData));
   }, [editProfile]);
 
   const handleSubmit = (e) => {

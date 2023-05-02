@@ -7,13 +7,13 @@ export default function ButtonMPTotal({ products }) {
   const history = useHistory();
 
   const handleOnClick = () => {
-    // obtener el token de autorización de sessionStorage
-    if (!sessionStorage.getItem('token')) {
+    // obtener el token de autorización de localStorage
+    if (!localStorage.getItem('token')) {
       alert('Debes iniciar sesión para poder comprar');
       history.push('/login');
       return;
     }
-    const token = sessionStorage.getItem('token');
+    const token = localStorage.getItem('token');
 
     // decodificar el token para obtener el ID del usuario
     const decodedToken = jwt_decode(token);

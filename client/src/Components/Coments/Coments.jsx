@@ -17,7 +17,7 @@ const Coments = () => {
     const { id } = useParams()
     const [cont, setCont] = useState(0)
 
-    const token = sessionStorage.getItem('token');
+    const token = localStorage.getItem('token');
     let userId = null;
     if (token) {
         const decodedToken = jwt_decode(token);

@@ -144,7 +144,7 @@ const reducer = (state = initialState, action) => {
 
         case EDIT_PROFILE:
             const data = action.payload.user;
-            sessionStorage.setItem("user", JSON.stringify(data))
+            localStorage.setItem("user", JSON.stringify(data))
             return {
                 ...state
             }

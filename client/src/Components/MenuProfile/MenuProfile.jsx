@@ -12,7 +12,7 @@ const MenuProfile = () => {
     setIsNavActive(!isNavActive);
   };
 
-  const { name } = JSON.parse(sessionStorage.getItem("user"));
+  const { name } = JSON.parse(localStorage.getItem("user"));
 
   return (
     <div>
