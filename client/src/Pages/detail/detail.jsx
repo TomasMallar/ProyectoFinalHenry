@@ -17,20 +17,23 @@ const Detail = () => {
     const { id } = useParams(); //takes the id form the url as it is a parameter given in the link
     //Selects from the global state only the characterDetail property
     const ChocolateDetail = useSelector((state) => state.chocolateDetail)
-    useEffect(() => {
+    const [totalVal, setTotalVal] = useState(null)
+    useEffect(async() => {
         dispatch(getChocolatesById(id));
+        const chocolateScore = await axios.get(`http://localhost:3001/score/${id}`)
+        setTotalVal(chocolateScore.data.cont)
         return () =>
             dispatch(resetChocolateDetail())
     }, [dispatch, id])
 
     // PUNTUACION
     const [rating, setRating] = useState(null);
-
     const handleClick = async (value) => {
         const response = await axios.put(`http://localhost:3001/score/${id}`, { score: value })
+        setTotalVal(response.data.score.cont)
         setRating(value)
     }
-
+    
     // carrito 
     const [cartItems, setCartItems] = useState([]);
 
@@ -85,7 +88,7 @@ const Detail = () => {
 
                         <div className="w-[50%] flex justify-between">
                             <button className="flex items-center justify-center p-2 border-none shadow-lg w-fit h-fit bg-chocolate-oscuro text-chocolate-blanco rounded-2xl shadow-chocolate-bombom hover:bg-chocolate-bombom" onClick={goBack}>
-                                <img src="https://res.cloudinary.com/dsaocvav7/image/upload/v1681707019/arrow_zxesaq.png"  alt="" className="w-5 mr-4 invert " />
+                                <img src="https://res.cloudinary.com/dsaocvav7/image/upload/v1681707019/arrow_zxesaq.png" alt="" className="w-5 mr-4 invert " />
                                 Volver
                             </button>
                             <div className="w-[80%] h-[100%]  bg-chocolate-bombom p-3 rounded-lg">
@@ -167,6 +170,23 @@ const Detail = () => {
                                         </label>
                                     );
                                 })}
+                            </div>
+                            <div className={styles.rating}>
+                                <h2 className="mb-8 text-3xl ">Promedio de valoraciones</h2>
+                                {[...Array(5)].map((star, i) => {
+                                    const ratingValue = i + 1;
+
+                                    return (
+                                        <label key={i}>
+                                            <FaStar
+                                                size={25}
+                                                color={ratingValue <= ChocolateDetail.score ? '#ffc107' : '#e4e5e9'}
+                                                style={{ marginRight: '5px', cursor: 'pointer', marginBottom: '15px' }}
+                                            />
+                                        </label>
+                                    );
+                                })}
+                                <h3>{totalVal} calificaciones</h3>
                             </div>
                         </div>
                         <div className="w-[70%] pt-20">

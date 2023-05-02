@@ -11,6 +11,7 @@ module.exports = {
       'chocolate-oscuro': '#3F2822',
       'chocolate-mantecol': '#DFD1C0',
       'chocolate-blanco': '#EFEFEB',
+      'blacky': 'rgba(0, 0, 0, 0.5)',
 
     },
   },
