@@ -1,7 +1,7 @@
 const { Order, OrderItem, Product, Sale } = require('../../db');
 
 const loadingOrders = async (sale) => {
-  const {userId, cartItems,paymentMethod,status,createdAt} = sale;
+  const {userId,cartItems,paymentMethod,status,createdAt} = sale;
   console.log(userId, cartItems);
   const newOrder = await Order.create({
     userId: userId,
@@ -39,6 +39,17 @@ const loadingOrders = async (sale) => {
     amount: amount,
     createdAt: createdAt,
   };
+
+  if (status === 'approved') {
+    const orderItems = await OrderItem.findAll({ where: { orderId : newOrder.id } });
+    
+    orderItems.forEach(async (item) => {
+      const product = await Product.findByPk(item.productId);
+      const newTotalSold = product.totalSold + item.quantity;
+      const newStock = product.stock - item.quantity;
+      await product.update({ totalSold: newTotalSold, stock: newStock });
+    });
+  }
 
   await Sale.create(saleData);
 
