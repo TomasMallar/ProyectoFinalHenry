@@ -18,7 +18,8 @@ import {
     ADD_INGREDIENT_TYPE_CATEGORIE,
     DELETE_ELEMENT,
     EDIT_PROFILE,
-    GET_USER_ORDER
+    GET_USER_ORDER,
+    RESET_ERROR
 } from "../Action-types/Action-types"
 
 export const getAllChocolates = () => {
@@ -64,6 +65,10 @@ export const resetChocolateDetail = () => ({
     type: RESET_STATE,
 
 })
+export const resetErrorMessage = () => ({
+    type: RESET_ERROR,
+
+})
 
 export const addChocolate = (newChocolate) => {
     return async function (dispatch) {
@@ -83,16 +88,21 @@ export const addChocolate = (newChocolate) => {
 export const addUser = (newUser) => {
     return async function (dispatch) {
         try {
-            console.log(newUser);
             const response = await axios.post(`http://localhost:3001/users/register`, newUser)
-            console.log(response.data);
             return dispatch({
                 type: CREATE_USER,
-                payload: response.data
+                payload: response.data,
+		        distinct: true,
+
             })
         }
         catch (error) {
-            alert(error)
+            return dispatch({
+                type: HANDLE_ERROR,
+                payload: error.response.data.message,
+		        distinct: true,
+
+            })
         }
     }
 }

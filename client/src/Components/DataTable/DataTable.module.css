@@ -8,12 +8,15 @@
   .modal {
     position: fixed;
     top: 50%;
-    left: 50%;
+    left: 60%;
     transform: translate(-50%, -50%);
-    background-color: white;
+    background-color: #3F2822;
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0px 3px 15px rgba(0, 0, 0, 0.2);
+    min-width: 70vw;
+    min-height: 50vh;
+
     z-index: 2;
   }
   
@@ -66,3 +69,24 @@
    .ButtonDetail{
     margin-right: 10px;
   }
+
+  .tabla{
+
+    min-height: 43vh;
+  }
+
+  .header {
+    background-color: lightgrey;
+    color: black;
+    font-weight: bold;
+}
+.pages {
+  margin-bottom: 10px;
+  margin-top: 10px;
+  align-items: center;
+}
+
+.info{
+  margin-top: 15px;
+}
+

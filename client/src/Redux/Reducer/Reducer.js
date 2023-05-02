@@ -21,7 +21,8 @@ import {
     GET_USERS_INFO,
     DELETE_USER,
     GET_USER_INFO,
-    GET_SALES_INFO
+    GET_SALES_INFO,
+    RESET_ERROR
 } from "../Action-types/Action-types"
 
 const initialState = {
@@ -88,6 +89,12 @@ const reducer = (state = initialState, action) => {
             return {
                 ...state,
                 errorMessage: action.payload
+            }
+
+        case RESET_ERROR:
+            return {
+                ...state,
+                errorMessage: ""
             }
         case GET_CATEGORIES:
 

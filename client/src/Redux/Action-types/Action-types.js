@@ -22,6 +22,7 @@ export const GET_SALES_INFO = "GET_SALES_INFO"
 export const GET_USERS_INFO = "GET_USERS_INFO"
 export const DELETE_USER = "DELETE_USER"
 export const GET_USER_INFO = "GET_USER_INFO"
+export const RESET_ERROR = "RESET_ERROR"
 
 
 
