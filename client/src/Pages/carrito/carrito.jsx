@@ -7,17 +7,25 @@ import Fade from "react-reveal/Fade"
 import axios from "axios";
 
 const Carrito = () => {
-  const [cartItems, setCartItems] = useState([]);
-  console.log(cartItems);
+  const [cartItemsInCart, setCartItemsInCart] = useState([]);
   useEffect(() => {
     const storedCartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
-    console.log(storedCartItems);
-    setCartItems(storedCartItems);
+  
+    const fetchCartItemsInfo = async () => {
+      const cartItemsInfo = await Promise.all(storedCartItems.map(async (cartItem) => {
+        const response = await fetch(`http://localhost:3001/products/${cartItem.id}`);
+        const product = await response.json();
+        return { ...product, quantity: cartItem.quantity };
+      }));
+      setCartItemsInCart(cartItemsInfo);
+    }
+  
+    fetchCartItemsInfo();
   }, []);
 
   const handleDeleteCart = () => {
     localStorage.removeItem("cartItems");
-    setCartItems([]);
+    setCartItemsInCart([]);
   };
 
   const [stock, setStock] = useState(null)
@@ -28,21 +36,21 @@ const Carrito = () => {
       setStock('Sin stock!')
       return
     }
-    const existingItemIndex = cartItems.findIndex((cartItem) => cartItem.id === item.id);
-    const updatedCartItems = [...cartItems];
+    const existingItemIndex = cartItemsInCart.findIndex((cartItem) => cartItem.id === item.id);
+    const updatedCartItems = [...cartItemsInCart];
     if (existingItemIndex !== -1) {
       updatedCartItems[existingItemIndex].quantity++;
     } else {
       updatedCartItems.push({ ...item, quantity: 1 });
     }
-    setCartItems(updatedCartItems);
+    setCartItemsInCart(updatedCartItems);
     localStorage.setItem("cartItems", JSON.stringify(updatedCartItems));
   };
 
   const handleRemoveFromCart = (item) => {
     stock && setStock(null)
-    const existingItemIndex = cartItems.findIndex((cartItem) => cartItem.id === item.id);
-    const updatedCartItems = [...cartItems];
+    const existingItemIndex = cartItemsInCart.findIndex((cartItem) => cartItem.id === item.id);
+    const updatedCartItems = [...cartItemsInCart];
     if (existingItemIndex !== -1) {
       if (updatedCartItems[existingItemIndex].quantity > 1) {
         updatedCartItems[existingItemIndex].quantity--;
@@ -50,15 +58,15 @@ const Carrito = () => {
         updatedCartItems.splice(existingItemIndex, 1);
       }
     }
-    setCartItems(updatedCartItems);
+    setCartItemsInCart(updatedCartItems);
     localStorage.setItem("cartItems", JSON.stringify(updatedCartItems));
   };
 
   const handleDeleteFromCart = (item) => {
-    const updatedCartItems = cartItems.filter(
+    const updatedCartItems = cartItemsInCart.filter(
       (cartItem) => cartItem.id !== item.id
     );
-    setCartItems(updatedCartItems);
+    setCartItemsInCart(updatedCartItems);
     localStorage.setItem("cartItems", JSON.stringify(updatedCartItems));
   };
 
@@ -76,7 +84,7 @@ const Carrito = () => {
 
   const calcularTotalCarrito = () => {
     let total = 0;
-    for (const item of cartItems) {
+    for (const item of cartItemsInCart) {
       total += item.price * item.quantity;
     }
     return total;
@@ -96,8 +104,8 @@ const Carrito = () => {
           <Fade left cascade>
             <div className="px-10 divide-y divide-black">
             {stock && <p>{stock}</p>}
-              {cartItems.length > 0 ? (
-                cartItems.map((item) => (
+              {cartItemsInCart.length > 0 ? (
+                cartItemsInCart.map((item) => (
                   <div key={item.id} className="flex items-center justify-between p-6">
 
                     <div className="w-[20%]">
@@ -162,7 +170,7 @@ const Carrito = () => {
             <p className="left-0 p-2 m-2 text-2xl font-bold ">
               Total del carrito: ${calcularTotalCarrito()}
             </p>
-            <ButtonMPTotal products={buildProductsObject(cartItems)} />
+            <ButtonMPTotal products={buildProductsObject(cartItemsInCart)} />
           </div>
         </div>
       </Fade>
