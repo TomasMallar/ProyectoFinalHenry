@@ -177,10 +177,10 @@ export default function CreateProduct() {
     return (
         <div className="bg-[url('https://cdn.pixabay.com/photo/2017/08/01/02/10/dark-2562840_1280.jpg')] bg-cover w-full h-full flex justify-start items-center font-serif bg-chocolate-blanco text-chocolate-oscuro">
 
-            <form onSubmit={handleSubmit} className="flex flex-col items-center justify-center h-full p-8 w-[50%] bg-chocolate-blanco">
+            <form onSubmit={handleSubmit} className="flex flex-col items-center justify-center h-full w-[50%] bg-chocolate-blanco">
 
-                <div className='flex'>
-                    <div className="flex flex-col flex-wrap items-center justify-center w-56 h-36">
+                <div className='flex justify-between w-[100%]'>
+                    <div className="flex flex-col flex-wrap items-center justify-center w-[50%] h-36">
                         <label htmlFor="name">
                             Nombre del Producto:
                         </label>
@@ -189,7 +189,7 @@ export default function CreateProduct() {
                             <span className="p-0 m-0 text-xs text-chocolate-bombom">{errors.name}</span>
                         </Fade>
                     </div>
-                    <div className="flex flex-col flex-wrap items-center justify-center w-56 mr-2 h-36">
+                    <div className="flex flex-col flex-wrap items-center justify-center w-[50%] mr-2 h-36">
                         <label htmlFor="price">
                             Precio:
                         </label>
@@ -201,8 +201,8 @@ export default function CreateProduct() {
                     </div>
                 </div>
 
-                <div className='flex'>
-                    <div className="flex flex-col flex-wrap items-center justify-start w-56 mr-2 h-36">
+                <div className='flex justify-evenly w-[100%]'>
+                    <div className="flex flex-col flex-wrap items-center justify-start w-[40%] ml-10 h-36">
                         <label htmlFor="stock">
                             Cantidad en stock:
                         </label>
@@ -212,7 +212,7 @@ export default function CreateProduct() {
                         </Fade>
                     </div>
 
-                    <div className="flex flex-col flex-wrap items-center justify-center w-56 mr-2 max-h-96">
+                    <div className="flex flex-col flex-wrap items-center justify-start w-[60%] ml-8 max-h-96">
                         <label htmlFor="category">
                             Categorias:
                         </label>
@@ -228,12 +228,12 @@ export default function CreateProduct() {
                         <Fade bottom opposite cascade >
                             <span className="p-0 m-0 text-xs text-chocolate-bombom">{errors.categories}</span>
                         </Fade>
-                        <div className="flex flex-col flex-wrap items-center justify-center w-56 mr-2 max-h-36">
+                        <div className="flex flex-col flex-wrap items-start justify-start w-full mt-2 mr-2 max-h-36">
                             {
                                 selectedCategories.map((type) => {
                                     return (
-                                        <div className='flex justify-between w-[40%] text-left text m-1'>
-                                            <span className='m-1'>{type} </span>
+                                        <div className='flex mt-1 mr-1 text-left w-fit justify-evenly '>
+                                            <span className='m-1 break-words'>-{type} </span>
                                             <button value={type} onClick={handleOnclickXCategory}className='p-1 rounded-lg shadow-sm h-fit bg-chocolate-claro text-chocolate-oscuro shadow-chocolate-claro hover:bg-chocolate-mantecol'>X</button>
                                         </div>
 
@@ -245,8 +245,8 @@ export default function CreateProduct() {
                     </div>
                 </div>
 
-                <div className='flex'>
-                    <div className="flex flex-col flex-wrap items-center justify-center w-56 mr-2 max-h-96">
+                <div className='flex justify-between w-[100%]'>
+                    <div className="flex flex-col flex-wrap items-center justify-start w-[50%] mr-2 max-h-96">
                         <label htmlFor="ingredients">
                             Ingredientes:
                         </label>
@@ -267,15 +267,15 @@ export default function CreateProduct() {
                         <Fade bottom opposite cascade >
                             <span className="p-0 m-0 text-xs text-chocolate-bombom">{errors.ingredients}</span>
                         </Fade>
-                        <div className="flex flex-col flex-wrap items-center justify-center w-56 mr-2 max-h-36">
+                        <div className="flex flex-col flex-wrap items-start justify-end w-full mt-2 ml-1 max-h-36">
                             {
                                 selectedIngredients.map((ingred) => {
                                     return (
-                                        <div className='flex justify-between text-left w-[40%] m-1'>
+                                        <div className='flex mt-1 mr-1 text-left w-fit justify-evenly'>
                                             <span className='m-1'>
-                                                {ingred}
+                                                -{ingred}
                                             </span>
-                                            <button value={ingred} onClick={handleOnclickXIngredient} className='p-1 rounded-lg shadow-sm bg-chocolate-claro text-chocolate-oscuro shadow-chocolate-claro hover:bg-chocolate-mantecol'>
+                                            <button value={ingred} onClick={handleOnclickXIngredient} className='p-1 rounded-lg shadow-sm h-fit bg-chocolate-claro text-chocolate-oscuro shadow-chocolate-claro hover:bg-chocolate-mantecol'>
                                                 X
                                             </button>
                                         </div>
@@ -284,7 +284,7 @@ export default function CreateProduct() {
                             }
                         </div>
                     </div>
-                    <div className="flex flex-col flex-wrap items-center justify-center w-56 mr-2 max-h-96 ">
+                    <div className="flex flex-col flex-wrap items-center justify-start w-[50%] mr-2 max-h-96 ">
                         <label htmlFor="types">
                             Tipos:
                         </label>
@@ -304,12 +304,12 @@ export default function CreateProduct() {
                         <Fade bottom opposite cascade >
                             <span className="p-0 m-0 text-xs text-chocolate-bombom">{errors.types}</span>
                         </Fade>
-                        <div className="flex flex-col flex-wrap items-center justify-center w-56 mr-2 max-h-36">
+                        <div className="flex flex-col flex-wrap items-center justify-center w-[50%] mr-2 max-h-36">
                             {
                                 selectedTypes.map((type) => {
                                     return (
-                                        <div className='flex justify-between text-left w-[40%] m-1'>
-                                        <span className='m-1'> {type} </span>
+                                        <div className='flex justify-between m-1 text-left'>
+                                        <span className='m-1'>-{type} </span>
                                             <button value={type} onClick={handleOnclickXType} className='p-1 rounded-lg shadow-sm bg-chocolate-claro text-chocolate-oscuro shadow-chocolate-claro hover:bg-chocolate-mantecol'>
                                                 X
                                             </button>
@@ -335,7 +335,7 @@ export default function CreateProduct() {
                             </button>
                         </div>
                     </div>
-                <input type="submit" value="Crear Producto"  className='p-1 font-serif font-bold rounded-lg shadow-sm bg-chocolate-claro text-chocolate-oscuro shadow-chocolate-claro hover:bg-chocolate-mantecol'/>
+                <input type="submit" value="Crear Producto"  className='p-1 mb-4 font-serif font-bold rounded-lg shadow-sm bg-chocolate-claro text-chocolate-oscuro shadow-chocolate-claro hover:bg-chocolate-mantecol'/>
             </form>
 
             <div className='w-[50%] h-full flex flex-col justify-center items-center '>
