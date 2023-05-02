@@ -12,32 +12,28 @@ const ProductCard = ({ id, name, image, price, category }) => {
 
     const addToCart = (product) => {
         console.log('ESTE ES EL PRODUCTO ARMADO', product);
-        setCartItems((prevCartItems) => {
-            const existingProduct = prevCartItems.find(item => item.id === product.id);
-            console.log('ESTE ES EL PRODUCTO EXISTENTE', existingProduct);
-
-            if (existingProduct) {
-                // Si el producto ya existe, actualizar su cantidad sumando 1
-                const updatedCartItems = prevCartItems.map(item => {
-                    if (item.id === product.id) {
-                        console.log('LLEGAMOS AL MAS?');
-                        return { ...item, quantity: item.quantity + 1 };
-                    } else {
-                        return item;
-                    }
-                });
-                console.log('ESTE ES EL CARRITO ACTUALIZADO', updatedCartItems);
-                localStorage.setItem("cartItems", JSON.stringify(updatedCartItems));
-                return updatedCartItems;
+        const storedCartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
+        const existingProduct = storedCartItems.find(item => item.id === product.id);
+        console.log('ESTE ES EL PRODUCTO EXISTENTE', existingProduct);
+      
+        if (existingProduct) {
+          // Si el producto ya existe, actualizar su cantidad sumando 1
+          const updatedCartItems = storedCartItems.map(item => {
+            if (item.id === product.id) {
+              console.log('LLEGAMOS AL MAS?');
+              return { id: item.id, quantity: item.quantity + 1 };
             } else {
-                // Si el producto no existe, agregarlo con una cantidad de 1
-                const updatedCartItems = [...prevCartItems, { ...product, quantity: 1 }];
-                localStorage.setItem("cartItems", JSON.stringify(updatedCartItems));
-                return updatedCartItems;
+              return item;
             }
-        });
-        // setShowBubble(true);
-    };
+          });
+          console.log('ESTE ES EL CARRITO ACTUALIZADO', updatedCartItems);
+          localStorage.setItem("cartItems", JSON.stringify(updatedCartItems));
+        } else {
+          // Si el producto no existe, agregarlo con una cantidad de 1
+          const updatedCartItems = [...storedCartItems, { id: product.id, quantity: 1 }];
+          localStorage.setItem("cartItems", JSON.stringify(updatedCartItems));
+        }
+      };
 
     useEffect(() => {
         const storedCartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
