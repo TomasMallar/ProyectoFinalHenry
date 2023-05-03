@@ -101,9 +101,8 @@ export const addUser = (newUser) => {
         catch (error) {
             return dispatch({
                 type: HANDLE_ERROR,
-                payload: error.response.data.message,
+                payload: error?.response.data.message,
 		        distinct: true,
-
             })
         }
     }
