@@ -41,7 +41,7 @@ let capsEntries = entries.map((entry) => [
 ]);
 sequelize.models = Object.fromEntries(capsEntries);
 
-const { Product, User, Category, Ingredient, Type, Rol, Order, OrderItem, Sale, Coment, Cart } = sequelize.models;
+const { Product, User, Category, Ingredient, Type, Rol, Order, OrderItem, Sale, Coment, Cart, Purchase } = sequelize.models;
 
 
 User.hasOne(Cart, { foreignKey: 'userId', as: 'cart' });
@@ -71,22 +71,13 @@ Category.belongsToMany(Product, {
 
 //Relación entre los productos y los usuarios | Habría que modificar aquí así se hace con Favoritos como dicen
 User.belongsToMany(Product, {
-  through: { model: "Favorites" },
+  through: { model: "Favorites"},
   timestamps: false,
 });
 Product.belongsToMany(User, {
-  through: { model: "Favorites" },
+  through: { model: "Favorites"},
   timestamps: false,
-});
-
-User.belongsToMany(Product, {
-  through: { model: "Purchased" },
-  timestamps: false,
-});
-Product.belongsToMany(User, {
-  through: { model: "Purchased" },
-  timestamps: false,
-});
+}); 
 
 // Relacion entre productos e ingredientes 
 Product.belongsToMany(Ingredient, {
