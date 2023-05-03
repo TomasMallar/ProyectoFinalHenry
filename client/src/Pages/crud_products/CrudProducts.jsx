@@ -81,7 +81,7 @@ export default function CrudProducts(props) {
             <div className="ml-4">
                 <Fade cascade>
                     <p className="relative inline-block w-full px-8 py-4 text-5xl font-bold leading-tight tracking-wide uppercase rounded-lg shadow-md text-chocolate-oscuro bg-chocolate-mantecol box h-fit">
-                        PRODUCTS
+                        PRODUCTOS
                     </p>
                     <div className="flex items-center justify-center p-3 h-fit ">
 
