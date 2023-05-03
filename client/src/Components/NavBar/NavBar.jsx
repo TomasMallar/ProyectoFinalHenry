@@ -61,7 +61,7 @@ export default function NavBar() {
                     )}
 
                     {userRole === '1' && (
-                            <MenuProfile />
+                        <MenuProfile />
                     )}
 
                     <Link to="/carrito" className="text-2xl list-none text-chocolate-oscuro no-underline pl-3.5  font-serif">

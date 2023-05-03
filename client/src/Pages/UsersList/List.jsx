@@ -3,8 +3,9 @@ import SideBar from '../../Components/SideBar/SideBar'
 import DataTable from '../../Components/UsersDataTable/DataTable'
 import { useState } from 'react';
 import ModalMailing from '../../Components/ModalMailing/ModalMailing';
+import { Fade } from 'react-reveal';
 
-export default function Users(){
+export default function Users() {
     const [modalOpen, setModalOpen] = useState(false);
 
     const handleOpenModal = () => {
@@ -14,21 +15,24 @@ export default function Users(){
         setModalOpen(false);
     };
     return (
-        <div className={s.list}>
-            <SideBar/>
-            <div className={s.listContainer}>
-            <p className={s.top}>USUARIOS</p>
-            <div>
-                <br />
-                            <button className="p-1 ml-10 font-serif font-bold rounded-lg shadow-sm bg-chocolate-oscuro text-chocolate-blanco shadow-chocolate-claro hover:bg-chocolate-mantecol hover:text-chocolate-oscuro" onClick={handleOpenModal}>
-                                MAILING
-                            </button>
+        <Fade>
+
+            <div className={s.list}>
+                <SideBar />
+                <div className={s.listContainer}>
+                    <p className={s.top}>USUARIOS</p>
+                    <div>
+                        <br />
+                        <button className="p-1 ml-10 font-serif font-bold rounded-lg shadow-sm bg-chocolate-oscuro text-chocolate-blanco shadow-chocolate-claro hover:bg-chocolate-mantecol hover:text-chocolate-oscuro" onClick={handleOpenModal}>
+                            MAILING
+                        </button>
                         {modalOpen && <ModalMailing onClose={handleCloseModal} />}
 
-                        </div>
+                    </div>
 
-            <DataTable/>
+                    <DataTable />
+                </div>
             </div>
-        </div>
+        </Fade>
     )
 }
