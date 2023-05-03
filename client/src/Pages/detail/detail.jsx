@@ -10,17 +10,30 @@ import axios from 'axios'
 import ButtonMP from "../../Components/IntegracionMercadoPago/IntegracionMercadoPago";
 import carImagen from "../../img/shopping-cart-cards.png";
 import Fade from "react-reveal/Fade";
+import jwt_decode from 'jwt-decode';
 
 const Detail = () => {
 
     const dispatch = useDispatch();
     const { id } = useParams(); //takes the id form the url as it is a parameter given in the link
     //Selects from the global state only the characterDetail property
+
+    const token = localStorage.getItem('token');
+    let userId = null;
+    if (token) {
+        const decodedToken = jwt_decode(token);
+        userId = decodedToken.id;
+    }
+
     const ChocolateDetail = useSelector((state) => state.chocolateDetail)
     const [totalVal, setTotalVal] = useState(null)
+    const [productsPurchased, setProductsPurchased] = useState([])
     useEffect(async() => {
         dispatch(getChocolatesById(id));
         const chocolateScore = await axios.get(`http://localhost:3001/score/${id}`)
+        const responsePurchased = await axios.get(`http://localhost:3001/productsPurchased/${id}?userId=${userId}`)
+        setProductsPurchased(responsePurchased.data)
+        console.log(responsePurchased.data);
         setTotalVal(chocolateScore.data.cont)
         return () =>
             dispatch(resetChocolateDetail())
@@ -149,7 +162,7 @@ const Detail = () => {
                     <section className="flex items-start justify-center">
                         <div className="pt-8 w-[30%]">
                             <h3 className="mb-8 text-3xl ">VALORACIONES</h3>
-                            <div className={styles.rating}>
+                            { productsPurchased.length !== 0 && <div className={styles.rating}>
                                 {[...Array(5)].map((star, i) => {
                                     const ratingValue = i + 1;
 
@@ -170,7 +183,7 @@ const Detail = () => {
                                         </label>
                                     );
                                 })}
-                            </div>
+                            </div>}
                             <div className={styles.rating}>
                                 <h2 className="mb-8 text-3xl ">Promedio de valoraciones</h2>
                                 {[...Array(5)].map((star, i) => {

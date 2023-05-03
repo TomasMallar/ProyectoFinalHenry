@@ -36,7 +36,7 @@ const cancelSaleHandler = async (req, res) => {
       if (!sale) {
         return res.status(404).json({ message: "Sale not found" });
       }
-  
+  console.log(sale);
       // Actualizar el stock de los productos
       await sequelize.transaction(async (t) => {
         for (let i = 0; i < sale.order.items.length; i++) {

@@ -22,7 +22,9 @@ import {
     DELETE_USER,
     GET_USER_INFO,
     GET_SALES_INFO,
-    RESET_ERROR
+    CANCEL_ORDER_USER,
+    RESET_ERROR,
+    REMOVE_ORDER_USER
 } from "../Action-types/Action-types"
 
 const initialState = {
@@ -187,6 +189,17 @@ const reducer = (state = initialState, action) => {
                 salesInfo: action.payload,
             }
 
+        case CANCEL_ORDER_USER: 
+        return {
+            ...state
+        }
+
+        case REMOVE_ORDER_USER: 
+        return {
+            ...state,
+            order: {}
+        }
+        
         default:
             return { ...state };
     }
