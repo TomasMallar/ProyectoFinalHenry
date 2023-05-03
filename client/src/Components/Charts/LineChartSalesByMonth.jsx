@@ -7,7 +7,7 @@ import s from './LineChartSalesByMonth.module.css';
 const LineChartSalesByMonth = () => {
     const [data, setData] = useState([]);
     useEffect(() => {
-        axios.get(`http://localhost:3001/metric/total-sales-orders-by-month`)
+        axios.get(`/metric/total-sales-orders-by-month`)
           .then(response => {
   
               const currentYear = new Date().getFullYear().toString();

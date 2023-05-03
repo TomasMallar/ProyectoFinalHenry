@@ -35,6 +35,7 @@ import BarCharSales from './Components/Charts/BarCharSales';
 import LineChartSalesByMonth from './Components/Charts/LineChartSalesByMonth';
 import PieChartSalesByPaymentAmount from './Components/Charts/PieChartSalesByPaymentAmount';
 import BarCharProductSold from './Components/Charts/BarCharProductSold';
+import axios from "axios";
 
 import Landing from './Pages/Landing/Landing';
 import Dashboard from './Pages/Dashboard/Dashborad';
@@ -49,6 +50,8 @@ import EditProfileMail from './Components/EditProfileMail/EditProfileMail';
 import EditProfileDate from './Components/EditProfileDate/EditProfileDate';
 import EditProfilePassword from './Components/EditProfilePassword/EditProfilePassword';
 import Orders from './Pages/Orders/OrdersList';
+
+axios.defaults.baseURL = "http://localhost:3001/";
 
 function App() {
 

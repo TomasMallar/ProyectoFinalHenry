@@ -40,7 +40,7 @@ function LoginButton() {
       try {
 
         console.log(data, "data de google");
-        const response = await axios.post("http://localhost:3001/auth/google", data);
+        const response = await axios.post("/auth/google", data);
         console.log(response.data, "soy data")
         if (response.data.token) {
           sessionStorage.setItem("token", response.data.token);

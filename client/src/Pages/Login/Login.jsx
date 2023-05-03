@@ -34,7 +34,7 @@ export default function Login() {
         e.preventDefault();
         const data = { mail: user, password };
         try {
-            const response = await axios.post("http://localhost:3001/users/login", data);
+            const response = await axios.post("/users/login", data);
             console.log(response.data);
             if (response.data.user) {
                 sessionStorage.setItem("token", response.data.token);
