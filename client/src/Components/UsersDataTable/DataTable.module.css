@@ -16,7 +16,6 @@
     box-shadow: 0px 3px 15px rgba(0, 0, 0, 0.2);
     min-width: 70vw;
     min-height: 50vh;
-
     z-index: 2;
   }
   
@@ -27,7 +26,7 @@
     background-color: #f1f1f1;
     border: none;
     border-radius: 50%;
-    padding: 5px 10px;
+    padding: 2px 10px;
     font-size: 20px;
     cursor: pointer;
   }
@@ -77,8 +76,8 @@
   }
 
   .header {
-    background-color:#3F2822;
-    color: white;
+    background-color:#B57F5C;
+    color: #EFEFEB;
     font-weight: bold;
 }
 .pages {

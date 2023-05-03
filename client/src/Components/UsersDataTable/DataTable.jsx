@@ -147,7 +147,7 @@ export default function DataTable() {
       renderCell: (params) => {
 
         return (
-          <button className={s.ButtonDetail} variant="contained" color="primary" value={params.row.id} onClick={handleButtonClickDetail}>
+          <button className="py-2.5 px-5 mb-2 bg-chocolate-oscuro text-chocolate-blanco border-none rounded text-base mr-2.5 mt-2.5 hover:bg-chocolate-bombom hover:shadow-xl " variant="contained" color="primary" value={params.row.id} onClick={handleButtonClickDetail}>
             Ver
           </button>
         );
@@ -161,7 +161,7 @@ export default function DataTable() {
       renderCell: (params) => {
 
         return (
-          <button className={s.buttonDelete} variant="contained" color="primary" value={params.row.id} onClick={handleButtonClickDelete}>
+          <button className="py-2.5 px-5 mb-2 bg-chocolate-oscuro text-chocolate-blanco border-none rounded text-base mr-2.5 mt-2.5 hover:bg-chocolate-bombom hover:shadow-xl " variant="contained" color="primary" value={params.row.id} onClick={handleButtonClickDelete}>
             Eliminar
           </button>
         );
