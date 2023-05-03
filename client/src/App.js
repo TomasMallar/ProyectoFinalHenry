@@ -51,7 +51,7 @@ import EditProfileDate from './Components/EditProfileDate/EditProfileDate';
 import EditProfilePassword from './Components/EditProfilePassword/EditProfilePassword';
 import Orders from './Pages/Orders/OrdersList';
 
-axios.defaults.baseURL = "http://localhost:3001/";
+axios.defaults.baseURL = "https://proyectofinalhenry-production.up.railway.app/";
 
 function App() {
 
