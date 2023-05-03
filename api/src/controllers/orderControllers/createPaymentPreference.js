@@ -36,7 +36,7 @@ const createPaymentPreference = async (orderId) => {
       failure: 'http://localhost:3000/purchase/rejected',
       pending: 'http://localhost:3000/purchase/pending',
     },
-    notification_url: 'https://da64-181-31-209-160.sa.ngrok.io/payment/handle-payment-notification',
+    notification_url: 'https://72fe-181-31-209-160.sa.ngrok.io/payment/handle-payment-notification',
   };
   
 

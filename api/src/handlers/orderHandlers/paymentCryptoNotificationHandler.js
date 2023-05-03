@@ -1,9 +1,9 @@
-const { Purchase, Order, Sale, Product, orderItem, conn: sequelize } = require('../../db');
+const { Order, Sale, Product, orderItem, User, Cart, conn:sequelize} = require('../../db');
 
 
 const paymentCryptoNotificationHandler = async (req, res) => {
   try {
-    const { orderId, hash, amount, productsId, userId } = req.body;
+    const { orderId, hash, amount } = req.body;
     console.log(productsId + "-----" + userId);
     // Buscar la orden en la base de datos y actualizar su estado a "approved"
     const order = await Order.findOne({ where: { id: orderId } });
@@ -36,10 +36,15 @@ const paymentCryptoNotificationHandler = async (req, res) => {
       }
     });
 
-    for (const productId of productsId) {
-      await Purchase.findOrCreate({ userId, productId });
-    }
+
+    const userId = order.userId;
+    const user = await User.findByPk(userId);
+    console.log("ESTE ES EL USER",user);
+    const cart = await Cart.findOne({ where: { userId } });
+    await cart.update({products:[]});
+
     
+
     res.json({ message: "Payment notification received successfully." });
   } catch (error) {
     console.error(error);

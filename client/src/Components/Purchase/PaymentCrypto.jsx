@@ -5,7 +5,7 @@ const PaymentCrypto = () => {
 
     const location = useLocation();
     const order = location.state?.order;
-    console.log(order);
+    console.log("ESTA ES LA ORDER",order);
     return (
         <div className="flex items-center justify-center p-10 font-serif bg-chocolate-blanco text-chocolate-oscuro">
             <div className="p-6 bg-chocolate-mantecol rounded-xl w-96">
