@@ -2,19 +2,10 @@ import axios from 'axios'
 import React, { useState } from 'react';
 import { ethers } from "ethers";
 import { useHistory } from 'react-router-dom';
-import jwt_decode from 'jwt-decode';
 
 const Crypto = (order) => {
     const history = useHistory();
 
-    const token = localStorage.getItem('token');
-    let userId = null;
-    if (token) {
-        const decodedToken = jwt_decode(token);
-        userId = decodedToken.id;
-    }
-
-    const [productId, setProductId] = useState([])
     const [responseMessage, setResponseMessage] = useState('')
     const startPayment = async ({ ether, addr }) => {
         try {
@@ -31,13 +22,10 @@ const Crypto = (order) => {
                 value: ethers.utils.parseEther(ether),
             });
 
-            console.log(productId);
             const body = {
-                productsId: productId,
                 hash: tx.hash,
                 amount: ether,
                 orderId: order.order,
-                userId: userId
             }
             console.log("SOY BODY", body);
             await axios.post('http://localhost:3001/payment/crypto-payment-notification', body)
@@ -65,9 +53,6 @@ const Crypto = (order) => {
         console.log("SOY ITEMS", items);
         const items2 = await fetchCartItemsInfo(items)
         console.log("SOY ITEMS2", items2);
-        const arrayIds = items2.map(item => item.id)
-        console.log(arrayIds);
-        setProductId(arrayIds)
         const totalPrice = items2.reduce((accumulator, currentValue) => {
             const productPrice = parseFloat(currentValue.price) * parseFloat(currentValue.quantity)
             return accumulator + productPrice
