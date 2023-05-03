@@ -1,9 +1,9 @@
-.dataTable {
+/* .dataTable {
     display: flex;
     flex-direction: column;
     align-items: center;
     width: 100%;
-  }
+  } */
   
   .modal {
     position: fixed;
@@ -15,8 +15,7 @@
     border-radius: 10px;
     box-shadow: 0px 3px 15px rgba(0, 0, 0, 0.2);
     min-width: 70vw;
-    min-height: 50vh;
-
+    height: 75vh;
     z-index: 2;
   }
   
@@ -71,8 +70,7 @@
   }
 
   .tabla{
-
-    min-height: 43vh;
+    height: 400px;
   }
 
   .header {

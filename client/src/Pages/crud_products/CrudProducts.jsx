@@ -125,26 +125,26 @@ export default function CrudProducts(props) {
                         <h3 className="w-32 mr-2 text-sm text-center h-fit basis-36 ">
                             INGREDIENTES
                         </h3>
-                        <select className="w-32 mr-2 text-sm text-center h-fit basis-36 " name="type" onChange={handleOnChangeFilter}>
-                            <option className="w-32 mr-2 text-sm text-center h-fit basis-36 " value="TIPOS" defaultValue="TIPOS">
+                        <select className="w-32 mr-2 text-sm text-center rounded h-fit basis-36 bg-chocolate-claro" name="type" onChange={handleOnChangeFilter}>
+                            <option className="w-32 mr-2 text-sm text-center h-fit basis-36 bg-chocolate-claro" value="TIPOS" defaultValue="TIPOS">
                                 TIPOS
                             </option>
                             {allTypes?.map(t => {
                                 return (
-                                    <option className="w-32 mr-2 text-sm text-center h-fit basis-36 " value={t.name}>
+                                    <option className="w-32 mr-2 text-sm text-center h-fit basis-36 bg-chocolate-claro" value={t.name}>
                                         {t.name}
                                     </option>
                                 )
                             })}
                         </select>
-                        <select className="w-32 mr-2 text-sm text-center h-fit basis-36 " name="category" onChange={handleOnChangeFilter}>
+                        <select className="w-32 mr-2 text-sm text-center rounded h-fit basis-36 bg-chocolate-claro " name="category" onChange={handleOnChangeFilter}>
 
-                            <option className="w-32 mr-2 text-sm text-center h-fit basis-36 " value="CATEGORIAS" defaultValue="CATEGORIAS">
+                            <option className="w-32 mr-2 text-sm text-center h-fit basis-36 bg-chocolate-claro" value="CATEGORIAS" defaultValue="CATEGORIAS">
                                 CATEGORIAS
                             </option>
                             {allCategories.map(c => {
                                 return (
-                                    <option className="w-32 mr-2 text-sm text-center h-fit basis-36 " value={c.name}>
+                                    <option className="w-32 mr-2 text-sm text-center h-fit basis-36 bg-chocolate-claro" value={c.name}>
                                         {c.name}
                                     </option>
                                 )

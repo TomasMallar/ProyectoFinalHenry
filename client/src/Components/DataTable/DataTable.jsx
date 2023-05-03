@@ -193,7 +193,7 @@ export default function DataTable() {
 
 
   return (
-    <div className={s.dataTable}>
+    <div className="flex flex-col items-center w-full">
       {openModal ? <Modal /> : null}
       <DataGrid
         rows={rows}
