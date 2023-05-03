@@ -82,7 +82,7 @@ export const addChocolate = (newChocolate) => {
             })
         }
         catch (error) {
-            alert(error)
+            console.log(error)
         }
     }
 }
@@ -255,7 +255,7 @@ export const PutProduct = (finalEditedProduct) => {
             })
         }
         catch (error) {
-            alert(error)
+            console.log(error)
         }
     }
 }
@@ -270,7 +270,7 @@ export const addIngredientCategoryType = (objToAdd, value) => {
             if(value==="ingredient") {
                 value="ingredients"
             }
-            alert(`el elemento ${objToAdd.name} se añadió correctamente a ${value}`)
+            // alert(`el elemento ${objToAdd.name} se añadió correctamente a ${value}`)
             if(value==="ingredients" || value==="types"){
             return dispatch({
                 type: ADD_INGREDIENT_TYPE_CATEGORIE,
@@ -299,7 +299,7 @@ export const DeleteElement = (id, value) => {
         try {
 
             await axios.delete(`http://localhost:3001/${value}/${id}`);
-            alert(`la categoría con id: ${id} se borró de manera exitosa`)
+            // alert(`la categoría con id: ${id} se borró de manera exitosa`)
             if(value==="ingredient") {
                 value="ingredients"
             }
@@ -326,7 +326,7 @@ export const PutElement = (objChanged, id, value) => {
         try {
             await axios.put(`http://localhost:3001/${value}/${id}`, objChanged)
         
-            alert(`Elemento con id: ${id} modificado correctamente!`)
+            // alert(`Elemento con id: ${id} modificado correctamente!`)
 
             if (value === "categories") {
                 const responseCat = await axios(`http://localhost:3001/${value}`)
@@ -350,7 +350,7 @@ export const PutElement = (objChanged, id, value) => {
 
         }
         catch (error) {
-            alert(error)
+            console.log(error)
         }
     }
 }

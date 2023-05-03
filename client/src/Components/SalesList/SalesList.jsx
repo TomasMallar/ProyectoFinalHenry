@@ -22,17 +22,18 @@ export default function DataTable() {
 
     let rows = []
     if (sales) {
+        console.log(sales,"soy sales")
         rows = sales?.map(sale => {
 
-            return { id: sale.id, amount: sale.amount, paymentMethod: sale.paymentMethod, date: sale.createdAt.slice(0, 10), status: sale.status }
+            return { id: sale.order.id, amount: sale.amount, paymentMethod: sale.paymentMethod, date: sale.createdAt.slice(0, 10), status: sale.status }
         })
 
     }
 
 
     const columns = [
-        { field: 'id', headerName: 'ID', width: 120, headerClassName: s.header },
-        { field: 'amount', headerName: 'MONTO ($)', width: 220, headerClassName: s.header },
+        { field: 'id', headerName: 'ID', width:300, headerClassName: s.header },
+        { field: 'amount', headerName: 'MONTO ($)', width: 150, headerClassName: s.header },
         { field: 'paymentMethod', headerName: 'MÉTODO DE PAGO', width: 240, headerClassName: s.header },
         {
             field: 'date',
@@ -43,8 +44,8 @@ export default function DataTable() {
         {
             field: 'status',
             headerName: 'ESTADO',
-            width: 220,
-            headerClassName: s.header
+            width: 180,
+            headerClassName: s.header,
 
         },
 

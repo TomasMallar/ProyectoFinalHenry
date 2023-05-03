@@ -190,3 +190,30 @@
 .button:hover {
   background-color: #3e8e41;
 }
+
+.buttonGoBack{
+  background-color: #5C3223; 
+  border: none; 
+  color: #fff; 
+  padding: 10px 20px; 
+  text-align: center; 
+  text-decoration: none; 
+  display: inline-block; 
+  font-size: 16px;
+  margin: 10px 5px; 
+  cursor: pointer; 
+  border-radius: 5px; 
+  box-shadow: 0px 5px 10px rgba(0,0,0,0.2); 
+  transition: all 0.3s ease; 
+}
+
+.buttonGoBack:hover{
+  background-color: #fff; 
+  color: #5C3223; 
+  box-shadow: 0px 5px 10px rgba(0,0,0,0.4); 
+}
+
+.page{
+  min-height: 100vh;
+  
+}

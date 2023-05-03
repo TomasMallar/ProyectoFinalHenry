@@ -12,9 +12,10 @@ export default function Orders(){
         <div className={s.list}>
             <SideBar/>
             <div className={s.listContainer}>
-            <p className={s.top}>ORDENES</p>
+            <p className={s.top}>VENTAS DETALLE</p>
          <CollapsibleTable/>
             </div>
         </div>
     )
+    
 }

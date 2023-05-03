@@ -48,18 +48,18 @@ export default function SideBar() {
                         <PeopleAltOutlinedIcon className={style.icon} />
                         <span className={style.span}>Usuarios</span></li>
                         </Link>
-                    <Link to="/orders">
-                    <li className={style.li}>
-                        <PendingActionsIcon className={style.icon} />
-                        <span className={style.span}>Órdenes</span></li>
-                        </Link>
+              
 
                         <Link to="/sales">
                     <li className={style.li}>
                         <PaymentsIcon className={style.icon} />
                         <span className={style.span}>Ventas</span></li>
                         </Link>
-
+                        <Link to="/orders">
+                    <li className={style.li}>
+                        <PendingActionsIcon className={style.icon} />
+                        <span className={style.span}>Ventas Detalle</span></li>
+                        </Link>
 
                     {/* <li className={style.li}>
                         <LocalShippingOutlinedIcon className={style.icon} />

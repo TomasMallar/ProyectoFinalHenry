@@ -21,11 +21,12 @@ export default function Validations({ name, price, stock, image, types, categori
     } else if (!Number(stock) > 0) {
         objErrors.stock = "Debe ingresar un stock mayor que 0"
     }
-    if (!image) {
-        objErrors.image = "Debe ingresar una url de la imágen"
-    } else if (!regexUrl.test(image)) {
-        objErrors.image = "Ingrese una url válida"
-    }
+    // if (!image) {
+    //     objErrors.image = "Debe ingresar una url de la imágen"
+    // } 
+    // else if (!regexUrl.test(image)) {
+    //     objErrors.image = "Ingrese una url válida"
+    // }
     if (!types.length) {
         objErrors.types = "Debe elegir al menos un tipo"
     }

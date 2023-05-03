@@ -9,6 +9,7 @@ export default function ModalMailing({ onClose }) {
   const handleSubmit = async (event) => {
     event.preventDefault();
     const data = { subject, text: message };
+    console.log(data, "soy lo que se manda en el mail")
     try {
       const response = await axios.post('http://localhost:3001/email/choconews', data);
       console.log(response.data);

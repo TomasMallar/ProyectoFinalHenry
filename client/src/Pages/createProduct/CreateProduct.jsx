@@ -28,6 +28,9 @@ export default function CreateProduct() {
     const [selectedCategories, setSelectedCategories] = useState([])
     const [selectedIngredients, setSelectedIngredients] = useState([])
     const [errors, setErrors] = useState({})
+    const [showModalOk, setShowModalOk] = useState(false)
+    const [showModalNotOk, setShowModalNotOk] = useState(false)
+
     const [newChocolate, setNewChocolate] = useState({
         name: "",
         price: "",
@@ -119,24 +122,43 @@ export default function CreateProduct() {
         event.preventDefault()
         setErrors(Validations(newChocolate))
         const arrayErrors = Object.keys(errors)
-        if (arrayErrors.length || !newChocolate.name) {
-            alert("Producto no creado verificar errores en el formulario ", '\ud83e\uddd0')
+        console.log("soy errors", errors)
+        if (arrayErrors.length || !newChocolate.name || !newChocolate.image) {
+            setShowModalNotOk(true)
         } else {
             dispatch(addChocolate(newChocolatePost))
-            alert("Felicitaciones has creado el producto !! ", '\ud83c\udf89')
-            setNewChocolate({
-                name: "",
-                surname: "",
-                date_of_birth: "",
-                mail: "",
-                phone: "",
-                password: "",
-                favorites_tastes: [],
-            })
-            history.push("/crudProducts")
+            // alert("Felicitaciones has creado el producto !! ", '\ud83c\udf89')
+            setShowModalOk(true)
+            // setNewChocolate({
+            //     name: "",
+            //     surname: "",
+            //     date_of_birth: "",
+            //     mail: "",
+            //     phone: "",
+            //     password: "",
+            //     favorites_tastes: [],
+            // })
+            // history.push("/crudProducts")
         }
     }
-
+    const handleSaveOk = (event) => {
+        // history.push("/crudProducts")
+        setShowModalOk(false)
+        setNewChocolate({
+            name: "",
+            surname: "",
+            date_of_birth: "",
+            mail: "",
+            phone: "",
+            password: "",
+            favorites_tastes: [],
+        })
+        history.push("/crudProducts")
+    }
+    const handleSaveNotOk = (event) => {
+        // history.push("/crudProducts")
+        setShowModalNotOk(false)
+    }
     //--------------- CLOUDINARY ------------------------------
 
     const [fileInputState, setFileInputState] = useState('')
@@ -234,7 +256,7 @@ export default function CreateProduct() {
                                     return (
                                         <div className='flex mt-1 mr-1 text-left w-fit justify-evenly '>
                                             <span className='m-1 break-words'>-{type} </span>
-                                            <button value={type} onClick={handleOnclickXCategory}className='p-1 rounded-lg shadow-sm h-fit bg-chocolate-claro text-chocolate-oscuro shadow-chocolate-claro hover:bg-chocolate-mantecol'>X</button>
+                                            <button value={type} onClick={handleOnclickXCategory} className='p-1 rounded-lg shadow-sm h-fit bg-chocolate-claro text-chocolate-oscuro shadow-chocolate-claro hover:bg-chocolate-mantecol'>X</button>
                                         </div>
 
                                     )
@@ -309,7 +331,7 @@ export default function CreateProduct() {
                                 selectedTypes.map((type) => {
                                     return (
                                         <div className='flex justify-between m-1 text-left'>
-                                        <span className='m-1'>-{type} </span>
+                                            <span className='m-1'>-{type} </span>
                                             <button value={type} onClick={handleOnclickXType} className='p-1 rounded-lg shadow-sm bg-chocolate-claro text-chocolate-oscuro shadow-chocolate-claro hover:bg-chocolate-mantecol'>
                                                 X
                                             </button>
@@ -324,18 +346,22 @@ export default function CreateProduct() {
 
 
                 <div className="flex flex-col items-center justify-start w-56 mt-5 h-36">
-                        <label htmlFor="image">
-                            Imagen (url):
-                        </label>
-                        <div>
-                            <input type="file" name="image" onChange={handleFileInputChange} value={fileInputState}  className="p-1 mb-3 font-serif font-bold rounded-lg shadow-sm bg-chocolate-claro text-chocolate-oscuro shadow-chocolate-claro hover:bg-chocolate-mantecol"/>
+                    <label htmlFor="image">
+                        Imagen (url):
+                    </label>
+                    <div>
+                        <input type="file" name="image" onChange={handleFileInputChange} value={fileInputState} className="p-1 mb-3 font-serif font-bold rounded-lg shadow-sm bg-chocolate-claro text-chocolate-oscuro shadow-chocolate-claro hover:bg-chocolate-mantecol" />
 
-                            <button type="button" onClick={handleSubmitFile} className="p-1 font-serif font-bold rounded-lg shadow-sm bg-chocolate-claro text-chocolate-oscuro shadow-chocolate-claro hover:bg-chocolate-mantecol">
-                                aceptar
-                            </button>
-                        </div>
+                        <button type="button" onClick={handleSubmitFile} className="p-1 font-serif font-bold rounded-lg shadow-sm bg-chocolate-claro text-chocolate-oscuro shadow-chocolate-claro hover:bg-chocolate-mantecol">
+                            aceptar
+                        </button>
+                        <Fade bottom opposite cascade >
+                            <span className="p-0 m-0 text-xs text-chocolate-bombom">{!newChocolate.image && " Inserte imágen"}</span>
+                        </Fade>
+
                     </div>
-                <input type="submit" value="Crear Producto"  className='p-1 mb-4 font-serif font-bold rounded-lg shadow-sm bg-chocolate-claro text-chocolate-oscuro shadow-chocolate-claro hover:bg-chocolate-mantecol'/>
+                </div>
+                <input type="submit" value="Crear Producto" className='p-1 mb-4 font-serif font-bold rounded-lg shadow-sm bg-chocolate-claro text-chocolate-oscuro shadow-chocolate-claro hover:bg-chocolate-mantecol' />
             </form>
 
             <div className='w-[50%] h-full flex flex-col justify-center items-center '>
@@ -343,6 +369,18 @@ export default function CreateProduct() {
                     Pre-Visualización
                 </h2>
                 <CreateProdCard name={newChocolate.name} image={previewSource} price={newChocolate.price} ingredients={newChocolate.ingredients} type={newChocolate.types} categories={newChocolate.categories} />
+            </div>
+            <div className={style.modal} style={{ display: showModalOk ? 'flex' : 'none' }}>
+                <div className={style.modalContent}>
+                    <h2>Producto Creado!</h2>
+                    <button onClick={handleSaveOk}>OK</button>
+                </div>
+            </div>
+            <div className={style.modal} style={{ display: showModalNotOk ? 'flex' : 'none' }}>
+                <div className={style.modalContent}>
+                    <h2>Producto no creado, verifica errores en el formulario!</h2>
+                    <button onClick={handleSaveNotOk}>OK</button>
+                </div>
             </div>
         </div>
     )
