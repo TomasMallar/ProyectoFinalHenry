@@ -1,9 +1,9 @@
-/* .dataTable {
+.dataTable {
     display: flex;
     flex-direction: column;
     align-items: center;
     width: 100%;
-  } */
+  }
   
   .modal {
     position: fixed;
@@ -15,7 +15,8 @@
     border-radius: 10px;
     box-shadow: 0px 3px 15px rgba(0, 0, 0, 0.2);
     min-width: 70vw;
-    height: 75vh;
+    min-height: 50vh;
+
     z-index: 2;
   }
   
@@ -70,12 +71,14 @@
   }
 
   .tabla{
-    height: 400px;
+
+    min-height: 43vh;
+    max-height: 60vh;
   }
 
   .header {
-    background-color: lightgrey;
-    color: black;
+    background-color:#3F2822;
+    color: white;
     font-weight: bold;
 }
 .pages {

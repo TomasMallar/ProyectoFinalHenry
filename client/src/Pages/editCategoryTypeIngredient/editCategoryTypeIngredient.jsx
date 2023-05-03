@@ -3,7 +3,9 @@ import { DeleteElement, getProductsAdvanceController, GetAllCategories, GetAllIn
 import { useState, useEffect } from 'react'
 import { addIngredientCategoryType } from '../../Redux/Actions/Actions'
 import style from './editCTI.module.css'
-import { Fade } from 'react-reveal'
+import { Link } from 'react-router-dom'
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import Validations from './validations'
 
 
 export default function EditCategoryTypeIngredient() {
@@ -17,11 +19,20 @@ export default function EditCategoryTypeIngredient() {
     const [idToEdit, setIdToEdit] = useState(0);
     const [showModal, setShowModal] = useState(false);
     const [searchBar, setSearchBar] = useState("")
+    const [errors, setErrors] = useState("")
+    const [errorsModal, setErrorsModal] = useState(false)
+    const [failModal, setFailsModal] = useState(false)
+    const [deleteModal, setDeleteModal] = useState(false)
+
+
+
     useEffect(() => {
         dispatch(GetAllIngredientWithId())
         dispatch(GetAllCategories())
         dispatch(GetAllTypesWithId())
         dispatch(getProductsAdvanceController())
+       setErrors( Validations(searchBar))
+
 
     }, [dispatch, searchBar])
 
@@ -47,18 +58,26 @@ export default function EditCategoryTypeIngredient() {
 
     const handleOnClickAdd = (event) => {
         const objToAdd = { name: searchBar }
+        setErrors(Validations(searchBar))
+        if(errors==="Ingrese un ingrediente válido"){
+            setFailsModal(true)
+        }else{
         dispatch(addIngredientCategoryType(objToAdd, toAdd))
-        setSearchBar("")
-        setToEdit([])
-        setToAdd("")
+        // setSearchBar("")
+        // setErrors("")
+        // setToEdit([])
+        // setToAdd("")
+        setErrorsModal(true)
+        }
 
     }
 
     const handleDelete = (event) => {
         const id = event.target.value
         dispatch(DeleteElement(id, toAdd))
-        setToEdit([])
-        setToAdd("")
+        // setToEdit([])
+        // setToAdd("")
+        setDeleteModal(true)
 
     }
     const handleEdit = (event) => {
@@ -68,18 +87,41 @@ export default function EditCategoryTypeIngredient() {
     }
     const handleOnChangeEdit = (event) => {
         setInputEdit(event.target.value)
+        setErrors(Validations(event.target.value))
     }
 
     const handleSave = () => {
         const objChanged = {
             name: inputEdit
         }
+        if(errors){
+setFailsModal(true)     
+   }else{
         dispatch(PutElement(objChanged, idToEdit, toAdd))
         setShowModal(false);
+        // setInputEdit("")
+        // setToEdit([])
+        // setToAdd("")
+        // setErrors("")
+        setErrorsModal(true)
+        }
+    }
+    const handleSaveOk = (event) => {
+        setSearchBar("")
         setInputEdit("")
         setToEdit([])
         setToAdd("")
+        setErrors("")
+        setErrorsModal(false)
+        setDeleteModal(false)
+        
     }
+    const handleSaveFail = (event) => {
+       
+       setFailsModal(false)
+        
+    }
+
     const handleOnChangeSearchBar = (event) => {
         setSearchBar(event.target.value)
 
@@ -88,7 +130,6 @@ export default function EditCategoryTypeIngredient() {
             setToEdit(searched)
         } else if (toAdd === "types") {
             const searched = allTypes.filter(e => e.name.includes(event.target.value))
-            console.log("soy allTypes", allTypes, "y searched", searched)
             setToEdit(searched)
         } else if (toAdd === "categories") {
             const searched = allCategories.filter(e => e.name.includes(event.target.value))
@@ -101,50 +142,25 @@ export default function EditCategoryTypeIngredient() {
     }
 
     return (
-        <div className='min-h-screen font-serif bg-chocolate-blanco'>
-            <Fade>
-                <div className="w-[50%] flex justify-between">
-                    <button className="flex items-center justify-center p-2 m-6 border-none shadow-lg w-fit h-fit bg-chocolate-oscuro text-chocolate-blanco rounded-2xl shadow-chocolate-bombom hover:bg-chocolate-bombom" onClick={goBack}>
-                        <img src="https://res.cloudinary.com/dsaocvav7/image/upload/v1681707019/arrow_zxesaq.png" alt="" className="w-5 mr-4 invert " />
-                        Volver
-                    </button>
-                </div>
+        <div className={style.page}>
+           <Link to="/crudProducts"> <button  className={style.buttonGoBack} ><ArrowBackIcon/>VOLVER A PRODUCTOS</button></Link>
+            <button onClick={handleOnClickEdit} className={style.buttonEditElement} value={"ingredient"}>EDITAR INGREDIENTE </button>
+            <button onClick={handleOnClickEdit} className={style.buttonEditElement} value={"categories"}>EDITAR CATEGORÍA </button>
+            <button  onClick={handleOnClickEdit} className={style.buttonEditElement} value={"types"}>EDITAR TIPO </button>
 
-                <button onClick={handleOnClickEdit} className="inline-block px-5 py-2 mx-6 mb-6 text-base text-center duration-300 ease-in border-none rounded shadow-lg bg-chocolate-oscuro text-chocolate-blanco hover:bg-chocolate-mantecol hover:shadow-xl hover:text-chocolate-oscuro" value={"ingredient"}>
-                    EDITAR INGREDIENTE
-                </button>
-                <button onClick={handleOnClickEdit} className="inline-block px-5 py-2 mx-6 mb-6 text-base text-center duration-300 ease-in border-none rounded shadow-lg bg-chocolate-oscuro text-chocolate-blanco hover:bg-chocolate-mantecol hover:shadow-xl hover:text-chocolate-oscuro" value={"categories"}>
-                    EDITAR CATEGORÍA
-                </button>
-                <button onClick={handleOnClickEdit} className="inline-block px-5 py-2 mx-6 mb-6 text-base text-center duration-300 ease-in border-none rounded shadow-lg bg-chocolate-oscuro text-chocolate-blanco hover:bg-chocolate-mantecol hover:shadow-xl hover:text-chocolate-oscuro" value={"types"}>
-                    EDITAR TIPO
-                </button>
-
-                <div className="font-serif flex justify-center items-center mt-2.5 mb-5 ">
-                    {toAdd !== "" && <div>
-                        <br />
-                        {toAdd === "ingredient" && <label className="mr-3 text-lg font-bold " htmlFor="toAdd">
-                            {`AÑADIR INGREDIENTE`}
-                        </label>}
-                        {toAdd === "categories" && <label className="mr-3 text-lg font-bold " htmlFor="toAdd">
-                            {`AÑADIR CATEGORÍA`}
-                        </label>}
-                        {toAdd === "types" && <label className="mr-3 text-lg font-bold " htmlFor="toAdd">
-                            {`AÑADIR TIPO`}
-                        </label>}
-
-                        <div className="flex items-center p-2.5 ml-2.5 flex-1 mt-2.5">
-                            <input className="w-5 h-5 mr-2 " type="image" src='https://res.cloudinary.com/dhh0nhqny/image/upload/v1683056755/Dise%C3%B1o_sin_t%C3%ADtulo__13_-removebg-preview_vd4tnr.png' alt="search" />
-
-                            <input className="p-4 m-2 text-base border-none shadow-sm bg-chocolate-mantecol w-45 rounded-2xl text-chocolate-oscuro shadow-chocolate-bombom cursor-text focus:outline-chocolate-bombom" type="text" name="search" value={searchBar} placeholder='Buscar o Añadir' onChange={handleOnChangeSearchBar} />
-
-                            <button className="inline-block px-5 py-2 mx-1 my-2.5 text-base text-center duration-300 ease-in border-none rounded shadow-lg bg-chocolate-oscuro text-chocolate-blanco hover:bg-chocolate-mantecol hover:shadow-xl hover:text-chocolate-oscuro" value={toAdd} onClick={handleOnClickAdd}>
-                                AÑADIR
-                            </button>
-                        </div>
-
-                    </div>}
-                </div>
+            <div className={style.addContainer}>
+                {toAdd !== "" && <div>
+                    <br />
+                    {toAdd === "ingredient" && <label className={style.label} htmlFor="toAdd">{`AÑADIR INGREDIENTE`} </label>}
+                    {toAdd === "categories" && <label className={style.label} htmlFor="toAdd">{`AÑADIR CATEGORÍA`} </label>}
+                    {toAdd === "types" && <label className={style.label} htmlFor="toAdd">{`AÑADIR TIPO`} </label>}
+                    <div className={style.searchBarContainer}>
+                        <input className={style.searchBarImg} type="image" src='https://res.cloudinary.com/dgxs2jcyu/image/upload/v1682157431/lupa_1_nxqaw2.png' alt="search" />
+                        <input className={style.searchBar} type="text" name="search" value={searchBar} placeholder='Buscar o Añadir' onChange={handleOnChangeSearchBar} />
+                        <button className={style.button} value={toAdd} onClick={handleOnClickAdd}>AÑADIR</button>
+                    </div>
+                </div>}
+            </div>
 
                 {
                     toEdit?.map(element => {
@@ -176,7 +192,27 @@ export default function EditCategoryTypeIngredient() {
                         <button onClick={() => setShowModal(false)} className="py-2.5 px-5  bg-chocolate-oscuro text-chocolate-blanco border-none rounded text-base mr-2.5 mt-2.5 hover:bg-chocolate-bombom hover:shadow-xl ">Cancelar</button>
                     </div>
                 </div>
-            </Fade>
+             
+            </div>
+
+            <div className={style.modal} style={{ display: errorsModal ? 'flex' : 'none' }}>
+                <div className={style.modalContent}>
+                    <h2>Elemento añadido!!</h2>
+                    <button onClick={handleSaveOk}>OK</button>
+                </div>
+            </div>
+            <div className={style.modal} style={{ display: failModal ? 'flex' : 'none' }}>
+                <div className={style.modalContent}>
+                    <h2>Agrege un elemento válido!!</h2>
+                    <button onClick={handleSaveFail}>OK</button>
+                </div>
+            </div>
+            <div className={style.modal} style={{ display: deleteModal ? 'flex' : 'none' }}>
+                <div className={style.modalContent}>
+                    <h2>Elemento eliminado!</h2>
+                    <button onClick={handleSaveOk}>OK</button>
+                </div>
+            </div>
         </div>
     )
 }

@@ -30,7 +30,6 @@ export default function User() {
     const [modal, setModal] = useState(false)
     const [modalFail, setModalFaile] = useState(false)
     const [axiosResponse, setAxiosResponse] = useState(false)
-    const [response, setResponse] = useState("")
 
     
   const [postErrors, setPostErrors] = useState('');
@@ -38,8 +37,10 @@ export default function User() {
 
   useEffect(() => {
     setPostErrors(errorMessage);
+    if (errorMessage !=="") {setAxiosResponse(true)}
+    console.log("se actualiza el mensaje de error al cambiar el estado", postErrors);
+
   }, [errorMessage]);
-  console.log(postErrors, "POST ERRORS");
 
     //E. Local para validar errores
     const [errors, setErrors] = useState({})
@@ -92,16 +93,23 @@ export default function User() {
         // chequea si existe name para que si no pones nada en ningun campo no se cree el usuario
         if (arrayErrors.length || !newUser.name) {
             console.log(arrayErrors, "errores");
-            setModal(true)
             setModalFaile(true)
+            setModal (true)
+
         } else {
-            setModal(true)
             dispatch(addUser(newUser))
+            setTimeout(() => {
+                setModal (true)
+            }, 500);
         }
-        if (postErrors) {
-            console.log(postErrors, postErrors.length > 0, " post Errors");
-            setAxiosResponse(true)
-        }
+        
+    if (postErrors) {
+        console.log(postErrors, postErrors.length > 0, " post Errors");
+        setAxiosResponse(true)
+        setModal (true)
+
+    }
+
                 // setNewUser({
                 //     name: "",
                 //     surname: "",
@@ -120,12 +128,8 @@ export default function User() {
         setAxiosResponse(false)
         dispatch(resetErrorMessage())
     }
-    const handleModal = () => {
-        setModal(!modal)
-    }
-    console.log("Response:", postErrors);
-    console.log("Modal:",modal, "Modal Fail:",modalFail, "AxiosResponse:",axiosResponse);
 
+    console.log("Modal:",modal, "Fails formulario:", modalFail, "AxiosFail:", axiosResponse);
     return (
 
         <div className="bg-[url('https://cdn.pixabay.com/photo/2017/08/01/02/10/dark-2562840_1280.jpg')] bg-cover w-full h-screen flex justify-start items-center font-serif bg-chocolate-blanco text-chocolate-oscuro">
@@ -248,7 +252,6 @@ export default function User() {
                     <div className={style.infoContainer}>
                         <p className={style.mensaje}>FELICITACIONES CREASTE TU USUARIO!! </p>
                             <Link to="/login"><button className={style.modal}>CONTINUAR AL LOGIN</button></Link>
-                            <button onClick={handleModal}>MODAL</button>
                     </div>
                 </div>
             }
@@ -257,7 +260,6 @@ export default function User() {
                     <div className={style.infoContainer}>
                         <p className={style.mensaje}>REVISAR ERRORES DEL FORMULARIO!!" </p>
                             <button className={style.modal} onClick={handleModalfail} >Revisar formulario</button>
-                            <button onClick={handleModal}>MODAL</button>
                     </div>
                 </div>
             }
@@ -266,7 +268,6 @@ export default function User() {
                     <div className={style.infoContainer}>
                         <p className={style.mensaje}>{postErrors} </p>
                             <button className={style.modal} onClick={handleModalfail} >Revisar formulario</button>
-                            <button onClick={handleModal}>MODAL</button>
                     </div>
                 </div>
             }

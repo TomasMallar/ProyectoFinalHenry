@@ -2,6 +2,7 @@ import { ResponsiveBar } from '@nivo/bar';
 import { ResponsiveLine } from '@nivo/line';
 import React, { useEffect, useState, useRef } from 'react';
 import axios from 'axios';
+import { Link } from 'react-router-dom/cjs/react-router-dom';
 import s from './LineChartSalesByMonth.module.css';
 
 const LineChartSalesByMonth = () => {
@@ -64,7 +65,7 @@ const LineChartSalesByMonth = () => {
     motionStiffness={90}
     motionDamping={15}
   />
-          <p className={s.link}>Ver más métricas</p>
+         <Link to="/statistics"> <p className={s.link}>Ver más métricas</p> </Link>
 
   </div>
 )}

@@ -43,6 +43,7 @@ const initialState = {
     usersInfo: [],
     userInfo: {},
     salesInfo: [],
+    
 }
 const reducer = (state = initialState, action) => {
     switch (action.type) {
@@ -118,7 +119,7 @@ const reducer = (state = initialState, action) => {
             const updatedProducts = state.chocolates.products.filter(choco => choco.id !== action.payload);
             return {
                 ...state,
-                chocolates: updatedProducts
+                chocolates: {...state.chocolates, products:updatedProducts}
 
             };
         case TOEDIT_PRODUCT:

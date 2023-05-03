@@ -34,6 +34,7 @@ export default function Row(props) {
         <TableCell align="right">{row.orderId}</TableCell>
         <TableCell align="right">{row.status}</TableCell>
         <TableCell align="right">{row.date}</TableCell>
+        <TableCell align="right">{row.paymentMethod ||"jokoo"}</TableCell>
         <TableCell align="right">{row.amount}</TableCell>
       </TableRow>
       <TableRow>
