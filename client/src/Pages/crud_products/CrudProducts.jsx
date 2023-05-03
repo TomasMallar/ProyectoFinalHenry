@@ -106,7 +106,7 @@ export default function CrudProducts(props) {
                         </div> */}
                     </div>
 
-                    <div className="flex flex-row items-center justify-around border p-2.5 w-[80vw] mx-2.5 text-chocolate-blanco bg-chocolate-oscuro">
+                    <div className="flex flex-row items-center justify-around border p-2.5 w-[80vw] mx-2.5 text-chocolate-blanco bg-chocolate-bombom">
                         <h3 className="">
                             ID
                         </h3>
@@ -125,26 +125,26 @@ export default function CrudProducts(props) {
                         <h3 className="w-32 mr-2 text-sm text-center h-fit basis-36 ">
                             INGREDIENTES
                         </h3>
-                        <select className="w-32 mr-2 text-sm text-center h-fit basis-36  bg-chocolate-oscuro" name="type" onChange={handleOnChangeFilter}>
-                            <option className="w-32 mr-2 text-sm text-center h-fit basis-36  " value="TIPOS" defaultValue="TIPOS">
+                        <select className="w-32 mr-2 text-sm text-center rounded h-fit basis-36 bg-chocolate-oscuro " name="type" onChange={handleOnChangeFilter}>
+                            <option className="w-32 mr-2 text-sm text-center h-fit basis-36 " value="TIPOS" defaultValue="TIPOS">
                                 TIPOS
                             </option>
                             {allTypes?.map(t => {
                                 return (
-                                    <option className="w-32 mr-2 text-sm text-center h-fit basis-36 " value={t.name}>
+                                    <option className="w-32 mr-2 text-sm text-center h-fit basis-36 bg-chocolate-claro text-chocolate-oscuro" value={t.name}>
                                         {t.name}
                                     </option>
                                 )
                             })}
                         </select>
-                        <select className="w-32 mr-2 text-sm text-center h-fit basis-36 bg-chocolate-oscuro" name="category" onChange={handleOnChangeFilter}>
+                        <select className="w-32 mr-2 text-sm text-center rounded h-fit basis-36 bg-chocolate-oscuro" name="category" onChange={handleOnChangeFilter}>
 
-                            <option className="w-32 mr-2 text-sm text-center h-fit basis-36 " value="CATEGORIAS" defaultValue="CATEGORIAS">
+                            <option className="w-32 mr-2 text-sm text-center h-fit basis-36 bg-chocolate-claro" value="CATEGORIAS" defaultValue="CATEGORIAS">
                                 CATEGORIAS
                             </option>
                             {allCategories.map(c => {
                                 return (
-                                    <option className="w-32 mr-2 text-sm text-center h-fit basis-36 bg-chocolate-oscuro" value={c.name}>
+                                    <option className="w-32 mr-2 text-sm text-center h-fit basis-36 bg-chocolate-claro text-chocolate-oscuro" value={c.name}>
                                         {c.name}
                                     </option>
                                 )

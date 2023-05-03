@@ -195,193 +195,205 @@ export default function CreateProduct() {
         }
     }
 
+    function goBack() {
+        window.history.back();
+    }
 
     return (
-        <div className="bg-[url('https://cdn.pixabay.com/photo/2017/08/01/02/10/dark-2562840_1280.jpg')] bg-cover w-full h-full flex justify-start items-center font-serif bg-chocolate-blanco text-chocolate-oscuro">
+        <Fade left cascade>
+            <div className="bg-[url('https://cdn.pixabay.com/photo/2017/08/01/02/10/dark-2562840_1280.jpg')] bg-cover w-full h-full flex justify-start items-center font-serif bg-chocolate-blanco text-chocolate-oscuro">
+                <form onSubmit={handleSubmit} className="flex flex-col items-center justify-center h-full w-[50%] bg-chocolate-blanco">
 
-            <form onSubmit={handleSubmit} className="flex flex-col items-center justify-center h-full w-[50%] bg-chocolate-blanco">
-
-                <div className='flex justify-between w-[100%]'>
-                    <div className="flex flex-col flex-wrap items-center justify-center w-[50%] h-36">
-                        <label htmlFor="name">
-                            Nombre del Producto:
-                        </label>
-                        <input onChange={handleOnChangeInput} type="text" name="name" placeholder="nombre del producto" value={newChocolate.name} className="flex flex-col justify-between p-2 mb-3 text-base border-none shadow-sm rounded-2xl bg-chocolate-mantecol w-44 text-chocolate-oscuro shadow-chocolate-bombom focus:outline focus:outline-chocolate-oscuro" />
-                        <Fade bottom opposite cascade >
-                            <span className="p-0 m-0 text-xs text-chocolate-bombom">{errors.name}</span>
-                        </Fade>
-                    </div>
-                    <div className="flex flex-col flex-wrap items-center justify-center w-[50%] mr-2 h-36">
-                        <label htmlFor="price">
-                            Precio:
-                        </label>
-                        <input onChange={handleOnChangeInput} type="number" name="price" placeholder="precio del producto" value={newChocolate.price}
-                            className="flex flex-col justify-between p-2 mb-3 text-base border-none shadow-sm rounded-2xl bg-chocolate-mantecol w-44 text-chocolate-oscuro shadow-chocolate-bombom focus:outline focus:outline-chocolate-oscuro" />
-                        <Fade bottom opposite cascade >
-                            <span className="p-0 m-0 text-xs text-chocolate-bombom">{errors.price}</span>
-                        </Fade>
-                    </div>
-                </div>
-
-                <div className='flex justify-evenly w-[100%]'>
-                    <div className="flex flex-col flex-wrap items-center justify-start w-[40%] ml-10 h-36">
-                        <label htmlFor="stock">
-                            Cantidad en stock:
-                        </label>
-                        <input onChange={handleOnChangeInput} type="number" name="stock" placeholder="stock del producto" value={newChocolate.stock} className="flex flex-col justify-between p-2 mb-3 text-base border-none shadow-sm rounded-2xl bg-chocolate-mantecol w-44 text-chocolate-oscuro shadow-chocolate-bombom focus:outline focus:outline-chocolate-oscuro" />
-                        <Fade bottom opposite cascade >
-                            <span className="p-0 m-0 text-xs text-chocolate-bombom">{errors.stock}</span>
-                        </Fade>
-                    </div>
-
-                    <div className="flex flex-col flex-wrap items-center justify-start w-[60%] ml-8 max-h-96">
-                        <label htmlFor="category">
-                            Categorias:
-                        </label>
-                        <input name="category" id="category" list="dataListCategories" ref={inputSelectedCategoryRef} className="flex flex-col justify-between p-2 mb-3 text-base border-none shadow-sm rounded-2xl bg-chocolate-mantecol w-44 text-chocolate-oscuro shadow-chocolate-bombom focus:outline focus:outline-chocolate-oscuro" />
-                        <datalist id="dataListCategories">
-                            {categories.map((c) => {
-                                return <option value={c} key={c}></option>
-                            })}
-                        </datalist>
-                        <button onClick={handleOnClickAddCategory} className="p-1 font-serif font-bold rounded-lg shadow-sm bg-chocolate-claro text-chocolate-oscuro shadow-chocolate-claro hover:bg-chocolate-mantecol">
-                            Añadir Categoria
+                    <div className="flex justify-between w-full">
+                        <button className="flex items-center justify-center p-2 m-4 border-none shadow-lg w-fit h-fit bg-chocolate-oscuro text-chocolate-blanco rounded-2xl shadow-chocolate-bombom hover:bg-chocolate-bombom" onClick={goBack}>
+                            <img src="https://res.cloudinary.com/dsaocvav7/image/upload/v1681707019/arrow_zxesaq.png" alt="" className="w-5 mr-4 invert " />
+                            Volver
                         </button>
-                        <Fade bottom opposite cascade >
-                            <span className="p-0 m-0 text-xs text-chocolate-bombom">{errors.categories}</span>
-                        </Fade>
-                        <div className="flex flex-col flex-wrap items-start justify-start w-full mt-2 mr-2 max-h-36">
-                            {
-                                selectedCategories.map((type) => {
-                                    return (
-                                        <div className='flex mt-1 mr-1 text-left w-fit justify-evenly '>
-                                            <span className='m-1 break-words'>-{type} </span>
-                                            <button value={type} onClick={handleOnclickXCategory} className='p-1 rounded-lg shadow-sm h-fit bg-chocolate-claro text-chocolate-oscuro shadow-chocolate-claro hover:bg-chocolate-mantecol'>X</button>
-                                        </div>
+                    </div>
 
-                                    )
-
-                                })
-                            }
+                    <div className='flex justify-between w-[100%]'>
+                        <div className="flex flex-col flex-wrap items-center justify-center w-[50%] h-36">
+                            <label htmlFor="name">
+                                Nombre del Producto:
+                            </label>
+                            <input onChange={handleOnChangeInput} type="text" name="name" placeholder="nombre del producto" autoComplete='off' value={newChocolate.name} className="flex flex-col justify-between p-2 mb-3 text-base border-none shadow-sm rounded-2xl bg-chocolate-mantecol w-44 text-chocolate-oscuro shadow-chocolate-bombom focus:outline focus:outline-chocolate-oscuro" />
+                            <Fade bottom opposite cascade >
+                                <span className="p-0 m-0 text-xs text-chocolate-bombom">{errors.name}</span>
+                            </Fade>
+                        </div>
+                        <div className="flex flex-col flex-wrap items-center justify-center w-[50%] mr-2 h-36">
+                            <label htmlFor="price">
+                                Precio:
+                            </label>
+                            <input onChange={handleOnChangeInput} type="number" name="price" placeholder="precio del producto" value={newChocolate.price}
+                                className="flex flex-col justify-between p-2 mb-3 text-base border-none shadow-sm rounded-2xl bg-chocolate-mantecol w-44 text-chocolate-oscuro shadow-chocolate-bombom focus:outline focus:outline-chocolate-oscuro" />
+                            <Fade bottom opposite cascade >
+                                <span className="p-0 m-0 text-xs text-chocolate-bombom">{errors.price}
+                                </span>
+                            </Fade>
                         </div>
                     </div>
-                </div>
 
-                <div className='flex justify-between w-[100%]'>
-                    <div className="flex flex-col flex-wrap items-center justify-start w-[50%] mr-2 max-h-96">
-                        <label htmlFor="ingredients">
-                            Ingredientes:
-                        </label>
-                        <input name="ingredients" id="type" list="dataListIngredients" ref={inputSelectedIngredientRef} className="flex flex-col justify-between p-2 mb-3 text-base border-none shadow-sm rounded-2xl bg-chocolate-mantecol w-44 text-chocolate-oscuro shadow-chocolate-bombom focus:outline focus:outline-chocolate-oscuro" />
-                        <datalist id="dataListIngredients">
-                            {ingredients.map(ingred => {
-                                // para que no se rompa
-                                if (typeof ingred === 'string') {
-                                    return <option value={ingred} key={ingred}></option>
-                                } else {
-                                    return null;
+                    <div className='flex justify-evenly w-[100%]'>
+                        <div className="flex flex-col flex-wrap items-center justify-start w-[40%] ml-10 h-36">
+                            <label htmlFor="stock">
+                                Cantidad en stock:
+                            </label>
+                            <input onChange={handleOnChangeInput} type="number" name="stock" placeholder="stock del producto" value={newChocolate.stock} className="flex flex-col justify-between p-2 mb-3 text-base border-none shadow-sm rounded-2xl bg-chocolate-mantecol w-44 text-chocolate-oscuro shadow-chocolate-bombom focus:outline focus:outline-chocolate-oscuro" />
+                            <Fade bottom opposite cascade >
+                                <span className="p-0 m-0 text-xs text-chocolate-bombom">{errors.stock}</span>
+                            </Fade>
+                        </div>
+
+                        <div className="flex flex-col flex-wrap items-center justify-start w-[60%] ml-8 max-h-96">
+                            <label htmlFor="category">
+                                Categorias:
+                            </label>
+                            <input name="category" id="category" list="dataListCategories" ref={inputSelectedCategoryRef} className="flex flex-col justify-between p-2 mb-3 text-base border-none shadow-sm rounded-2xl bg-chocolate-mantecol w-44 text-chocolate-oscuro shadow-chocolate-bombom focus:outline focus:outline-chocolate-oscuro" />
+                            <datalist id="dataListCategories">
+                                {categories.map((c) => {
+                                    return <option value={c} key={c}></option>
+                                })}
+                            </datalist>
+                            <button onClick={handleOnClickAddCategory} className="p-1 font-serif font-bold rounded-lg shadow-sm bg-chocolate-claro text-chocolate-oscuro shadow-chocolate-claro hover:bg-chocolate-mantecol">
+                                Añadir Categoria
+                            </button>
+                            <Fade bottom opposite cascade >
+                                <span className="p-0 m-0 text-xs text-chocolate-bombom">{errors.categories}</span>
+                            </Fade>
+                            <div className="flex flex-col flex-wrap items-start justify-start w-full mt-2 mr-2 max-h-36">
+                                {
+                                    selectedCategories.map((type) => {
+                                        return (
+                                            <div className='flex mt-1 mr-1 text-left w-fit justify-evenly '>
+                                                <span className='m-1 break-words'>-{type} </span>
+                                                <button value={type} onClick={handleOnclickXCategory} className='p-1 rounded-lg shadow-sm h-fit bg-chocolate-claro text-chocolate-oscuro shadow-chocolate-claro hover:bg-chocolate-mantecol'>X</button>
+                                            </div>
+
+                                        )
+
+                                    })
                                 }
-                            })}
-                        </datalist>
-                        <button onClick={handleOnClickAddIngredient} className="p-1 font-serif font-bold rounded-lg shadow-sm bg-chocolate-claro text-chocolate-oscuro shadow-chocolate-claro hover:bg-chocolate-mantecol">
-                            Añadir Ingrediente
-                        </button>
-                        <Fade bottom opposite cascade >
-                            <span className="p-0 m-0 text-xs text-chocolate-bombom">{errors.ingredients}</span>
-                        </Fade>
-                        <div className="flex flex-col flex-wrap items-start justify-end w-full mt-2 ml-1 max-h-36">
-                            {
-                                selectedIngredients.map((ingred) => {
-                                    return (
-                                        <div className='flex mt-1 mr-1 text-left w-fit justify-evenly'>
-                                            <span className='m-1'>
-                                                -{ingred}
-                                            </span>
-                                            <button value={ingred} onClick={handleOnclickXIngredient} className='p-1 rounded-lg shadow-sm h-fit bg-chocolate-claro text-chocolate-oscuro shadow-chocolate-claro hover:bg-chocolate-mantecol'>
-                                                X
-                                            </button>
-                                        </div>
-                                    )
-                                })
-                            }
+                            </div>
                         </div>
                     </div>
-                    <div className="flex flex-col flex-wrap items-center justify-start w-[50%] mr-2 max-h-96 ">
-                        <label htmlFor="types">
-                            Tipos:
-                        </label>
-                        <input name="types" id="type" list="dataListTypes" ref={inputSelectedTypeRef} className="flex flex-col justify-between p-2 mb-3 text-base border-none shadow-sm rounded-2xl bg-chocolate-mantecol w-44 text-chocolate-oscuro shadow-chocolate-bombom focus:outline focus:outline-chocolate-oscuro" />
-                        <datalist id="dataListTypes">
-                            {types.map(type => {
-                                if (typeof type === 'string') {
-                                    return <option value={type} key={type}></option>
-                                } else {
-                                    return null;
+
+                    <div className='flex justify-between w-[100%]'>
+                        <div className="flex flex-col flex-wrap items-center justify-start w-[50%] mr-2 max-h-96">
+                            <label htmlFor="ingredients">
+                                Ingredientes:
+                            </label>
+                            <input name="ingredients" id="type" list="dataListIngredients" ref={inputSelectedIngredientRef} className="flex flex-col justify-between p-2 mb-3 text-base border-none shadow-sm rounded-2xl bg-chocolate-mantecol w-44 text-chocolate-oscuro shadow-chocolate-bombom focus:outline focus:outline-chocolate-oscuro" />
+                            <datalist id="dataListIngredients">
+                                {ingredients.map(ingred => {
+                                    // para que no se rompa
+                                    if (typeof ingred === 'string') {
+                                        return <option value={ingred} key={ingred}></option>
+                                    } else {
+                                        return null;
+                                    }
+                                })}
+                            </datalist>
+                            <button onClick={handleOnClickAddIngredient} className="p-1 font-serif font-bold rounded-lg shadow-sm bg-chocolate-claro text-chocolate-oscuro shadow-chocolate-claro hover:bg-chocolate-mantecol">
+                                Añadir Ingrediente
+                            </button>
+                            <Fade bottom opposite cascade >
+                                <span className="p-0 m-0 text-xs text-chocolate-bombom">{errors.ingredients}</span>
+                            </Fade>
+                            <div className="flex flex-col flex-wrap items-start justify-end w-full mt-2 ml-1 max-h-36">
+                                {
+                                    selectedIngredients.map((ingred) => {
+                                        return (
+                                            <div className='flex mt-1 mr-1 text-left w-fit justify-evenly'>
+                                                <span className='m-1'>
+                                                    -{ingred}
+                                                </span>
+                                                <button value={ingred} onClick={handleOnclickXIngredient} className='p-1 rounded-lg shadow-sm h-fit bg-chocolate-claro text-chocolate-oscuro shadow-chocolate-claro hover:bg-chocolate-mantecol'>
+                                                    X
+                                                </button>
+                                            </div>
+                                        )
+                                    })
                                 }
-                            })}
-                        </datalist>
-                        <button onClick={handleOnClickAddType} className="p-1 font-serif font-bold rounded-lg shadow-sm bg-chocolate-claro text-chocolate-oscuro shadow-chocolate-claro hover:bg-chocolate-mantecol">
-                            Añadir Tipo
-                        </button>
-                        <Fade bottom opposite cascade >
-                            <span className="p-0 m-0 text-xs text-chocolate-bombom">{errors.types}</span>
-                        </Fade>
-                        <div className="flex flex-col flex-wrap items-center justify-center w-[50%] mr-2 max-h-36">
-                            {
-                                selectedTypes.map((type) => {
-                                    return (
-                                        <div className='flex justify-between m-1 text-left'>
-                                            <span className='m-1'>-{type} </span>
-                                            <button value={type} onClick={handleOnclickXType} className='p-1 rounded-lg shadow-sm bg-chocolate-claro text-chocolate-oscuro shadow-chocolate-claro hover:bg-chocolate-mantecol'>
-                                                X
-                                            </button>
-                                        </div>
-                                    )
-                                })
-                            }
+                            </div>
+                        </div>
+                        <div className="flex flex-col flex-wrap items-center justify-start w-[50%] mr-2 max-h-96 ">
+                            <label htmlFor="types">
+                                Tipos:
+                            </label>
+                            <input name="types" id="type" list="dataListTypes" ref={inputSelectedTypeRef} className="flex flex-col justify-between p-2 mb-3 text-base border-none shadow-sm rounded-2xl bg-chocolate-mantecol w-44 text-chocolate-oscuro shadow-chocolate-bombom focus:outline focus:outline-chocolate-oscuro" />
+                            <datalist id="dataListTypes">
+                                {types.map(type => {
+                                    if (typeof type === 'string') {
+                                        return <option value={type} key={type}></option>
+                                    } else {
+                                        return null;
+                                    }
+                                })}
+                            </datalist>
+                            <button onClick={handleOnClickAddType} className="p-1 font-serif font-bold rounded-lg shadow-sm bg-chocolate-claro text-chocolate-oscuro shadow-chocolate-claro hover:bg-chocolate-mantecol">
+                                Añadir Tipo
+                            </button>
+                            <Fade bottom opposite cascade >
+                                <span className="p-0 m-0 text-xs text-chocolate-bombom">{errors.types}</span>
+                            </Fade>
+                            <div className="flex flex-col flex-wrap items-center justify-center w-[50%] mr-2 max-h-36">
+                                {
+                                    selectedTypes.map((type) => {
+                                        return (
+                                            <div className='flex justify-between m-1 text-left'>
+                                                <span className='m-1'>-{type} </span>
+                                                <button value={type} onClick={handleOnclickXType} className='p-1 rounded-lg shadow-sm bg-chocolate-claro text-chocolate-oscuro shadow-chocolate-claro hover:bg-chocolate-mantecol'>
+                                                    X
+                                                </button>
+                                            </div>
+                                        )
+                                    })
+                                }
+                            </div>
                         </div>
                     </div>
+
+
+
+                    <div className="flex flex-col items-center justify-start w-56 mt-5 h-36">
+                        <label htmlFor="image">
+                            Imagen (url):
+                        </label>
+                        <div>
+                            <input type="file" name="image" onChange={handleFileInputChange} value={fileInputState} className="p-1 mb-3 font-serif font-bold rounded-lg shadow-sm bg-chocolate-claro text-chocolate-oscuro shadow-chocolate-claro hover:bg-chocolate-mantecol" />
+
+                            <button type="button" onClick={handleSubmitFile} className="p-1 font-serif font-bold rounded-lg shadow-sm bg-chocolate-claro text-chocolate-oscuro shadow-chocolate-claro hover:bg-chocolate-mantecol">
+                                aceptar
+                            </button>
+                            <Fade bottom opposite cascade >
+                                <span className="p-0 m-0 text-xs text-chocolate-bombom">{!newChocolate.image && " Inserte imágen"}</span>
+                            </Fade>
+
+                        </div>
+                    </div>
+                    <input type="submit" value="Crear Producto" className='p-1 mb-4 font-serif font-bold rounded-lg shadow-sm bg-chocolate-claro text-chocolate-oscuro shadow-chocolate-claro hover:bg-chocolate-mantecol' />
+                </form>
+
+                <div className='w-[50%] h-full flex flex-col justify-center items-center '>
+                    <h2 className="text-2xl text-chocolate-blanco">
+                        Pre-Visualización
+                    </h2>
+                    <CreateProdCard name={newChocolate.name} image={previewSource} price={newChocolate.price} ingredients={newChocolate.ingredients} type={newChocolate.types} categories={newChocolate.categories} />
                 </div>
-
-
-
-                <div className="flex flex-col items-center justify-start w-56 mt-5 h-36">
-                    <label htmlFor="image">
-                        Imagen (url):
-                    </label>
-                    <div>
-                        <input type="file" name="image" onChange={handleFileInputChange} value={fileInputState} className="p-1 mb-3 font-serif font-bold rounded-lg shadow-sm bg-chocolate-claro text-chocolate-oscuro shadow-chocolate-claro hover:bg-chocolate-mantecol" />
-
-                        <button type="button" onClick={handleSubmitFile} className="p-1 font-serif font-bold rounded-lg shadow-sm bg-chocolate-claro text-chocolate-oscuro shadow-chocolate-claro hover:bg-chocolate-mantecol">
-                            aceptar
-                        </button>
-                        <Fade bottom opposite cascade >
-                            <span className="p-0 m-0 text-xs text-chocolate-bombom">{!newChocolate.image && " Inserte imágen"}</span>
-                        </Fade>
-
+                <div className={style.modal} style={{ display: showModalOk ? 'flex' : 'none' }}>
+                    <div className={style.modalContent}>
+                        <h2>Producto Creado!</h2>
+                        <button onClick={handleSaveOk}>OK</button>
                     </div>
                 </div>
-                <input type="submit" value="Crear Producto" className='p-1 mb-4 font-serif font-bold rounded-lg shadow-sm bg-chocolate-claro text-chocolate-oscuro shadow-chocolate-claro hover:bg-chocolate-mantecol' />
-            </form>
-
-            <div className='w-[50%] h-full flex flex-col justify-center items-center '>
-                <h2 className="text-2xl text-chocolate-blanco">
-                    Pre-Visualización
-                </h2>
-                <CreateProdCard name={newChocolate.name} image={previewSource} price={newChocolate.price} ingredients={newChocolate.ingredients} type={newChocolate.types} categories={newChocolate.categories} />
-            </div>
-            <div className={style.modal} style={{ display: showModalOk ? 'flex' : 'none' }}>
-                <div className={style.modalContent}>
-                    <h2>Producto Creado!</h2>
-                    <button onClick={handleSaveOk}>OK</button>
+                <div className={style.modal} style={{ display: showModalNotOk ? 'flex' : 'none' }}>
+                    <div className={style.modalContent}>
+                        <h2>Producto no creado, verifica errores en el formulario!</h2>
+                        <button onClick={handleSaveNotOk}>OK</button>
+                    </div>
                 </div>
             </div>
-            <div className={style.modal} style={{ display: showModalNotOk ? 'flex' : 'none' }}>
-                <div className={style.modalContent}>
-                    <h2>Producto no creado, verifica errores en el formulario!</h2>
-                    <button onClick={handleSaveNotOk}>OK</button>
-                </div>
-            </div>
-        </div>
+        </Fade>
     )
 }
