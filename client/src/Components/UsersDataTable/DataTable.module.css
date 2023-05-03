@@ -73,6 +73,7 @@
   .tabla{
 
     min-height: 43vh;
+    max-height: 60vh;
   }
 
   .header {

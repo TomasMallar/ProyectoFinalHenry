@@ -1,26 +1,17 @@
 import s from './DataTable.module.css'
 import { DataGrid } from '@mui/x-data-grid';
-
-import {
-  useEffect, useState
-} from 'react';
+import {useEffect, useState} from 'react';
 import { useDispatch, useSelector } from 'react-redux'
 import { DeleteUser, GetUserInfo, GetUsersInfo } from '../../Redux/Actions/ActionsDashboard';
-import UserOrdersList from '../userOrdersList/userOrderList';
 import { Pagination, Stack } from '@mui/material';
-import Box from '@mui/material/Box';
-import Collapse from '@mui/material/Collapse';
-import IconButton from '@mui/material/IconButton';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
-import Typography from '@mui/material/Typography';
 import Paper from '@mui/material/Paper';
-import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
-import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
+
 import createData from '../userOrdersList/CreateData';
 import Row from '../userOrdersList/rows';
 
@@ -38,15 +29,16 @@ export default function DataTable() {
   const pages = useSelector(state => state.userInfo.totalPages)
 
   const [pageQuery, setPageQuery] = useState(1)
+
   const filas = user.report?.map(order => {
-    return createData(order.id, order.status, order.createdAt, order.items)
+    return createData(order.id, order.status, order.createdAt,order.items, order.sale.paymentMethod)
   })
 
   console.log(user, "soy user")
 
   useEffect(() => {
     dispatch(GetUsersInfo())
-    dispatch(GetUserInfo(userSelected, pageQuery))
+    // dispatch(GetUserInfo(userSelected, pageQuery))
   }, [dispatch, userSelected, pageQuery])
 
 
@@ -55,7 +47,6 @@ export default function DataTable() {
     dispatch(DeleteUser(event.target.value))
   }
   const handleButtonClickDetail = (event) => {
-
     dispatch(GetUserInfo(event.target.value,pageQuery))
     setUserSelected(event.target.value);
     setOpenModal(true);
@@ -69,6 +60,8 @@ export default function DataTable() {
     }
     const handleChange = (event, value) => {
       setPageQuery(value);
+      dispatch(GetUserInfo(userSelected, value))
+
     }
     return (
       <div className={s.modal}>
@@ -96,6 +89,7 @@ export default function DataTable() {
                 <TableCell className={s.header} align="right">Id de la Órden</TableCell>
                 <TableCell className={s.header} align="right">Estado</TableCell>
                 <TableCell className={s.header} align="right">Fecha</TableCell>
+                <TableCell className={s.header} align="right">Método de Pago</TableCell>
                 <TableCell className={s.header} align="right">Monto</TableCell>
               </TableRow>
             </TableHead>
