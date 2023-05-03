@@ -160,7 +160,7 @@ const Carrito = () => {
                     </div>
 
                     <div className="w-[30%]">
-                      <button className="hover:underline decoration-chocolate-oscuro" onClick={() => handleDeleteFromCart(item)}>
+                      <button className="p-1 mx-6 font-serif font-bold rounded-lg shadow-sm bg-red text-chocolate-blanco shadow-chocolate-claro hover:bg-LightRed " onClick={() => handleDeleteFromCart(item)}>
                         Eliminar
                       </button>
                       {/* <ButtonMP title={item.name} unit_price={item.price} /> */}

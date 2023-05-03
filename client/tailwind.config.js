@@ -12,7 +12,9 @@ module.exports = {
       'chocolate-mantecol': '#DFD1C0',
       'chocolate-blanco': '#EFEFEB',
       'blacky': 'rgba(0, 0, 0, 0.5)',
-
+      'red': 'rgb(153 27 27)',
+      'LightRed': 'rgb(220 38 38)',
+      
     },
   },
   plugins: [],
