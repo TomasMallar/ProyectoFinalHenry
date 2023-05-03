@@ -3,6 +3,8 @@ import { DeleteElement, getProductsAdvanceController,GetAllCategories, GetAllIng
 import { useState, useEffect } from 'react'
 import { addIngredientCategoryType } from '../../Redux/Actions/Actions'
 import style from './editCTI.module.css'
+import { Link } from 'react-router-dom'
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
 
 export default function EditCategoryTypeIngredient() {
@@ -21,6 +23,7 @@ export default function EditCategoryTypeIngredient() {
         dispatch(GetAllCategories())
         dispatch(GetAllTypesWithId())
         dispatch(getProductsAdvanceController())
+
 
     }, [dispatch, searchBar])
 
@@ -96,10 +99,12 @@ export default function EditCategoryTypeIngredient() {
 
     }
     return (
-        <div>
+        <div className={style.page}>
+           <Link to="/crudProducts"> <button  className={style.buttonGoBack} ><ArrowBackIcon/>VOLVER A PRODUCTOS</button></Link>
             <button onClick={handleOnClickEdit} className={style.buttonEditElement} value={"ingredient"}>EDITAR INGREDIENTE </button>
             <button onClick={handleOnClickEdit} className={style.buttonEditElement} value={"categories"}>EDITAR CATEGORÍA </button>
             <button  onClick={handleOnClickEdit} className={style.buttonEditElement} value={"types"}>EDITAR TIPO </button>
+
             <div className={style.addContainer}>
                 {toAdd !== "" && <div>
                     <br />

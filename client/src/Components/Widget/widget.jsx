@@ -13,7 +13,6 @@ import { Link } from 'react-router-dom/cjs/react-router-dom';
 
 export default function Widget({type}) {
 let data ;
-//temporary : 
 const dispatch = useDispatch()
 const info = useSelector((state) => state.metrics)
 const currentMonthSales =  info.currentMonthSales 
@@ -34,6 +33,7 @@ case "user" :
         title:"USERS",
         isMoney:false,
        link: "see all users",
+       path:"/users",
        icon: (
         <PeopleAltOutlinedIcon className={style.icon} style = {{color:'crimson', backgroundColor:"rgba(255,0,0,0.2)"}}/>
        )
@@ -46,13 +46,13 @@ case "user" :
     data = {
         title:"VTA SEMESTRAL",
         isMoney:false,
-       link: "Ver más detalles",
+       link: "Ver Todas las Ventas",
        icon: (
         <ShoppingCartOutlinedIcon className={style.icon} style = {{color:'goldenrod', backgroundColor:"rgba(218,165,32,0.2)"}}/>
        ),
        value:currentSemesterTotalSales,
        percentage:variationSemester,
-       path:"/statistics"
+       path:"/sales"
 
     }
     break;
@@ -61,7 +61,7 @@ case "user" :
         // info:info.currentMonthSales,
         title:"VTA MENSUAL",
         isMoney:true,
-       link: "Ver órdenes mensuales",
+       link: "Ver Detalle de las Ventas",
        path:"/orders",
        icon: (
         < AttachMoneyOutlinedIcon className={style.icon} style = {{color:'green', backgroundColor:"rgba(0,128,0,0.2)"}}/>
@@ -76,7 +76,7 @@ case "user" :
         // info:info.currentMonthSales,
         title:"VTA ANUAL",
         isMoney:true,
-       link: "Ver más detalles",
+       link: "Ver más métricas",
        icon: (
         <AccountBalanceWalletOutlinedIcon className={style.icon} style = {{color:'purple', backgroundColor:"rgba(128,0,128,0.2)"}}/>
        ),

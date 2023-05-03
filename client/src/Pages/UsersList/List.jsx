@@ -1,6 +1,6 @@
 import s from './List.module.css'
 import SideBar from '../../Components/SideBar/SideBar'
-import DataTable from '../../Components/DataTable/DataTable'
+import DataTable from '../../Components/UsersDataTable/DataTable'
 
 export default function Users(){
 
