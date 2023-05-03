@@ -35,6 +35,7 @@ export default function DataTable() {
 
   const users = useSelector(state => state.usersInfo)
   const user = useSelector(state => state.userInfo)
+  console.log(users);
   const pages = useSelector(state => state.userInfo.totalPages)
 
   const [pageQuery, setPageQuery] = useState(1)

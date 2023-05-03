@@ -52,6 +52,7 @@ export const GetUsersInfo = () => {
         try {
 
             const response = await axios('http://localhost:3001/users')
+            console.log(response.data);
             return dispatch({
                 type: GET_USERS_INFO,
                 payload: response.data
@@ -94,6 +95,7 @@ export const GetUserInfo = (id, page) => {
         try {
 
             const response = await axios(`http://localhost:3001/metric/all-orders/user?userId=${id}?page=${page}`)
+           
             return dispatch({
                 type: GET_USER_INFO,
                 payload: response.data

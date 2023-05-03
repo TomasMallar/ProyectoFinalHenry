@@ -56,6 +56,7 @@ const handlePaymentNotification = async (req, res, next) => {
           await product.update({ totalSold: newTotalSold, stock: newStock });
         });
         localStorage.removeItem('cartItems');
+
       }
 
 

@@ -8,7 +8,7 @@ const PaymentApprovedRoute = ({ component: Component, ...rest }) => {
 
   const paymentSuccessful = collectionStatus === 'approved';
 
-  localStorage.clear();
+  //localStorage.clear();
 
   return (
     <Route
