@@ -8,7 +8,8 @@ const {
     DATE_OF_BITH_USER,
     PASSWORD_USER,
     PHONE_USER,
-    ROLE_B
+    ROLE_B,
+    IMAGE_USER
 } = process.env;
 
 const createUser = async () => {
@@ -27,6 +28,7 @@ const createUser = async () => {
                     password : passwordHash,
                     date_of_birth : DATE_OF_BITH_USER,
                     phone : PHONE_USER,
+                    image: IMAGE_USER,
                     rolId: role.id
                 }
             })

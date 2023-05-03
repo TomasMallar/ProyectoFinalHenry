@@ -8,6 +8,7 @@ const {
     deleteUser,
     updatePassword,
     getUserOrder,
+    putUserOrderCancelar
   } = require('../../controllers/userController/UserController');
   const {
     sendWelcomeEmail,
@@ -49,8 +50,8 @@ const {
   
   const postNewtUserHandler = async (req, res) => {
     try {
-      const { name, surname, password, mail, phone, date_of_birth } = req.body;
-  
+      const { name, surname, password, mail, phone, date_of_birth, image } = req.body;
+
       const newUser = await postNewUser({
         name,
         surname,
@@ -58,6 +59,7 @@ const {
         phone,
         date_of_birth,
         password,
+        image
       });
   
       // await sendWelcomeEmail(mail, name);
@@ -86,7 +88,7 @@ const {
   const updateUserHandler = async (req, res) => {
     try {
       const { id } = req.params;
-  
+
       const update = await updateUser(id, req.body);
   
       res.status(200).json(update);
@@ -118,6 +120,17 @@ const {
       res.status(400).json(error.message);
     }
   };
+
+  const putUserOrderCancelarHandler = async (req, res) => {
+    try {
+      const { orderId } = req.body;
+      const orderCancelled = await putUserOrderCancelar(orderId);
+  
+      res.status(200).json(orderCancelled);
+    } catch (error) {
+      res.status(400).json(error.message);
+    }
+  };
   
   module.exports = {
     getAllUserHandler,
@@ -128,6 +141,7 @@ const {
     updateUserHandler,
     deleteUserHandler,
     getUserOrderHandler,
+    putUserOrderCancelarHandler
     // updatePasswordHanlder
   };
   

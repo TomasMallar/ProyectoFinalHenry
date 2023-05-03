@@ -27,8 +27,8 @@ const sortDirection= props.sortDirection?.trim()
 
 
 
-    if (errors && errors.trim().length>0) { 
-        alert (errors)
+    if (errors?.trim().length>0) { 
+        console.log (errors)
     }
 
 return (

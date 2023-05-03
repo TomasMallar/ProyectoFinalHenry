@@ -8,29 +8,44 @@ import { FaStar } from 'react-icons/fa';
 import { useState } from "react";
 import axios from 'axios'
 import ButtonMP from "../../Components/IntegracionMercadoPago/IntegracionMercadoPago";
-import carImagen from "../../img/shopping-cart-cards.png"
-
+import carImagen from "../../img/shopping-cart-cards.png";
+import Fade from "react-reveal/Fade";
+import jwt_decode from 'jwt-decode';
 
 const Detail = () => {
 
     const dispatch = useDispatch();
     const { id } = useParams(); //takes the id form the url as it is a parameter given in the link
     //Selects from the global state only the characterDetail property
+
+    const token = localStorage.getItem('token');
+    let userId = null;
+    if (token) {
+        const decodedToken = jwt_decode(token);
+        userId = decodedToken.id;
+    }
+
     const ChocolateDetail = useSelector((state) => state.chocolateDetail)
-    useEffect(() => {
+    const [totalVal, setTotalVal] = useState(null)
+    const [productsPurchased, setProductsPurchased] = useState([])
+    useEffect(async() => {
         dispatch(getChocolatesById(id));
+        const chocolateScore = await axios.get(`/score/${id}`)
+        const responsePurchased = await axios.get(`/productsPurchased/${id}?userId=${userId}`)
+        setProductsPurchased(responsePurchased.data)
+        console.log(responsePurchased.data);
+        setTotalVal(chocolateScore.data.cont)
         return () =>
             dispatch(resetChocolateDetail())
     }, [dispatch, id])
 
     // PUNTUACION
     const [rating, setRating] = useState(null);
-
     const handleClick = async (value) => {
         const response = await axios.put(`/score/${id}`, { score: value })
         setRating(value)
     }
-
+    
     // carrito 
     const [cartItems, setCartItems] = useState([]);
 
@@ -69,107 +84,130 @@ const Detail = () => {
 
     // carrito 
 
+    function goBack() {
+        window.history.back();
+    }
+
+
     return (
         <div className="w-full h-full font-serif p-9 bg-chocolate-blanco">
-            {/* container del detail */}
-            <div className="w-full h-full rounded-lg p-9 bg-chocolate-mantecol">
-                {/* seccion del producto  */}
-                <section className="flex items-center justify-between">
+            <Fade cascade>
 
-                    <div className="w-[50%] flex justify-between">
-                        <Link to={`/products`} className="w-[20%] h-fit">
-                            <button className="flex items-center justify-center p-2 border-none shadow-lg w-fit h-fit bg-chocolate-oscuro text-chocolate-blanco rounded-2xl shadow-chocolate-bombom hover:bg-chocolate-bombom">
+                {/* container del detail */}
+                <div className="w-full h-full rounded-lg p-9 bg-chocolate-mantecol">
+                    {/* seccion del producto  */}
+                    <section className="flex items-center justify-between">
+
+                        <div className="w-[50%] flex justify-between">
+                            <button className="flex items-center justify-center p-2 border-none shadow-lg w-fit h-fit bg-chocolate-oscuro text-chocolate-blanco rounded-2xl shadow-chocolate-bombom hover:bg-chocolate-bombom" onClick={goBack}>
                                 <img src="https://res.cloudinary.com/dsaocvav7/image/upload/v1681707019/arrow_zxesaq.png" alt="" className="w-5 mr-4 invert " />
                                 Volver
                             </button>
-                        </Link>
-                        <div className="w-[80%] h-[100%]  bg-chocolate-bombom p-3 rounded-lg">
-                            <img className="w-[488px] h-[489px] rounded-lg" src={ChocolateDetail.image} alt={ChocolateDetail.name} />
+                            <div className="w-[80%] h-[100%]  bg-chocolate-bombom p-3 rounded-lg">
+                                <img className="w-[488px] h-[489px] rounded-lg" src={ChocolateDetail.image} alt={ChocolateDetail.name} />
+                            </div>
                         </div>
-                    </div>
 
-                    <div className="w-[50%] flex flex-col">
-                        <h1 className="p-2 m-2 text-4xl font-bold basis-full">
-                            {ChocolateDetail.name}
-                        </h1>
-                        <h3 className="p-2 m-2 text-2xl font-semibold basis-full">
-                            $ {ChocolateDetail.price}
-                        </h3>
+                        <div className="w-[50%] flex flex-col">
+                            <h1 className="p-2 m-2 text-4xl font-bold basis-full">
+                                {ChocolateDetail.name}
+                            </h1>
+                            <h3 className="p-2 m-2 text-2xl font-semibold basis-full">
+                                $ {ChocolateDetail.price}
+                            </h3>
 
-                        <div className="flex flex-row px-5 my-6">
-                            <div className="flex flex-col items-start justify-start px-5 basis-1/2">
-                                <p className="px-2 text-xl font-semibold ">
-                                    Categorias
+                            <div className="flex flex-row px-5 my-6">
+                                <div className="flex flex-col items-start justify-start px-5 basis-1/2">
+                                    <p className="px-2 text-xl font-semibold ">
+                                        Categorias
+                                    </p>
+                                    {ChocolateDetail.categories?.map((c) => {
+                                        return (
+                                            <p key={c} className="p-2 text-lg">
+                                                - {c}
+                                            </p>
+                                        )
+                                    })}
+                                </div>
+                                <div className="flex flex-col items-start justify-start px-5 basis-1/2">
+                                    <p className="px-2 text-xl font-semibold">
+                                        Ingredientes
+                                    </p>
+                                    {ChocolateDetail.ingredients?.map((c) => {
+                                        return (
+                                            <p key={c} className="p-2 text-lg">
+                                                - {c}
+                                            </p>
+                                        )
+                                    })}
+                                </div>
+                            </div>
+
+                            <div className="flex flex-row items-center">
+                                <p className="text-xl font-semibold basis-1/3">
+                                    Stock: {ChocolateDetail.stock}
                                 </p>
-                                {ChocolateDetail.categories?.map((c) => {
+                                <div className="basis-1/3">
+                                    <ButtonMP title={ChocolateDetail.name} unit_price={ChocolateDetail.price} />
+                                </div>
+                                <button className="p-1 m-2 font-serif font-bold rounded-lg shadow-sm bg-chocolate-claro text-chocolate-oscuro shadow-chocolate-claro hover:bg-chocolate-blanco basis-1/3" onClick={() => addToCart(ChocolateDetail)}>
+                                    AGREGAR AL CARRO
+                                </button>
+                            </div>
+                        </div>
+                    </section>
+
+                    {/* seccion de valoraciones */}
+                    <section className="flex items-start justify-center">
+                        <div className="pt-8 w-[30%]">
+                            <h3 className="mb-8 text-3xl ">VALORACIONES</h3>
+                            { productsPurchased.length !== 0 && <div className={styles.rating}>
+                                {[...Array(5)].map((star, i) => {
+                                    const ratingValue = i + 1;
+
                                     return (
-                                        <p key={c} className="p-2 text-lg">
-                                            - {c}
-                                        </p>
-                                    )
+                                        <label key={i}>
+                                            <input
+                                                type="radio"
+                                                name="rating"
+                                                value={ratingValue}
+                                                onClick={() => handleClick(ratingValue)}
+                                            />
+                                            <FaStar
+                                                size={25}
+                                                color={ratingValue <= rating ? '#ffc107' : '#e4e5e9'}
+                                                style={{ marginRight: '5px', cursor: 'pointer', marginBottom: '15px' }}
+
+                                            />
+                                        </label>
+                                    );
                                 })}
-                            </div>
-                            <div className="flex flex-col items-start justify-start px-5 basis-1/2">
-                                <p className="px-2 text-xl font-semibold">
-                                    Ingredientes
-                                </p>
-                                {ChocolateDetail.ingredients?.map((c) => {
+                            </div>}
+                            <div className={styles.rating}>
+                                <h2 className="mb-8 text-3xl ">Promedio de valoraciones</h2>
+                                {[...Array(5)].map((star, i) => {
+                                    const ratingValue = i + 1;
+
                                     return (
-                                        <p key={c} className="p-2 text-lg">
-                                            - {c}
-                                        </p>
-                                    )
+                                        <label key={i}>
+                                            <FaStar
+                                                size={25}
+                                                color={ratingValue <= ChocolateDetail.score ? '#ffc107' : '#e4e5e9'}
+                                                style={{ marginRight: '5px', cursor: 'pointer', marginBottom: '15px' }}
+                                            />
+                                        </label>
+                                    );
                                 })}
+                                <h3>{totalVal} calificaciones</h3>
                             </div>
                         </div>
-
-                        <div className="flex flex-row items-center">
-                            <p className="text-xl font-semibold basis-1/3">
-                                Stock: {ChocolateDetail.stock}
-                            </p>
-                            <div className="basis-1/3">
-                                <ButtonMP title={ChocolateDetail.name} unit_price={ChocolateDetail.price} />
-                            </div>
-                            <button className="p-1 m-2 font-serif font-bold rounded-lg shadow-sm bg-chocolate-claro text-chocolate-oscuro shadow-chocolate-claro hover:bg-chocolate-blanco basis-1/3" onClick={() => addToCart(ChocolateDetail)}>
-                                AGREGAR AL CARRO
-                            </button>
+                        <div className="w-[70%] pt-20">
+                            <Coments></Coments>
                         </div>
-                    </div>
-                </section>
+                    </section>
 
-                {/* seccion de valoraciones */}
-                <section className="flex items-start justify-center">
-                    <div className="pt-8 w-[30%]">
-                        <h3 className="mb-8 text-3xl ">VALORACIONES</h3>
-                        <div className={styles.rating}>
-                            {[...Array(5)].map((star, i) => {
-                                const ratingValue = i + 1;
-
-                                return (
-                                    <label key={i}>
-                                        <input
-                                            type="radio"
-                                            name="rating"
-                                            value={ratingValue}
-                                            onClick={() => handleClick(ratingValue)}
-                                        />
-                                        <FaStar
-                                            size={25}
-                                            color={ratingValue <= rating ? '#ffc107' : '#e4e5e9'}
-                                            style={{ marginRight: '5px', cursor: 'pointer', marginBottom: '15px' }}
-
-                                        />
-                                    </label>
-                                );
-                            })}
-                        </div>
-                    </div>
-                    <div className="w-[70%] pt-20 h-full">
-                        <Coments></Coments>
-                    </div>
-                </section>
-
-            </div>
+                </div>
+            </Fade>
         </div>
     )
 }

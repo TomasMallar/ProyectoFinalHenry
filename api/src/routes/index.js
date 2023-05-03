@@ -16,6 +16,8 @@ const routerMetric = require('./MetricRouter/MetricRouter')
 const routerComents = require('./ComentsRouter/ComentsRouter')
 const uploadRouter = require('./uploadFiles/uploadFiles')
 const routerPDF = require('./PDFRouter/PDFRouter')
+const routerCart = require('./CartRouter/CartRouter')
+const routerPurchased = require('./ProductsPurchasedRouter/ProductsPurchasedRouter')
 const router = Router();
 
 const passport = require("passport");
@@ -44,6 +46,8 @@ router.use('/payment', routerPayment)
 
 router.use('/metric',routerMetric)
 
+router.use('/cart', routerCart)
+
 //Autenticación con google
 router.use("/auth", routerAuth);
 
@@ -55,5 +59,7 @@ router.use('/coments', routerComents)
 router.use('/upload', uploadRouter)
 
 router.use('/pdf', routerPDF)
+
+router.use('/productsPurchased', routerPurchased)
 
 module.exports = router;

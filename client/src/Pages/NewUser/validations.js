@@ -33,20 +33,20 @@ export default function Validations({ name, surname, date_of_birth, mail, phone,
     if (!phone) {
         objErrors.phone = "Debe ingresar su celular"
     } else if (!regexPhone.test(phone)) {
-        objErrors.phone = "Ingrese un celular válido con el formato codigo de area seguido de su número "
+        objErrors.phone = "Ingrese un celular con el \n codigo de area seguido de su número "
     }
     if (!password) {
         objErrors.password = "Debe elegir una contraseña"
     } else if (!regexPassword.regexMayus.test(password)) {
         objErrors.password = "Debe tener al menos una letra mayúscula"
-    }else if (!regexPassword.regexCSpecial.test(password)) {
+    } else if (!regexPassword.regexCSpecial.test(password)) {
         objErrors.password = "Debe tener al menos un carácter especial"
-    }else if (!regexPassword.regexLenght.test(password)) {
+    } else if (!regexPassword.regexLenght.test(password)) {
         objErrors.password = "Debe tener una longitud mínima de 8 caracteres"
     }
-    if(!favorites_tastes?.length){
-        objErrors.favorites_tastes = "Elija al menos uno de sus chocolates favoritos"
-    }
-return objErrors
+    // if (!favorites_tastes?.length) {
+    //     objErrors.favorites_tastes = "Elija al menos uno de sus chocolates favoritos"
+    // }
+    return objErrors
 }
 

@@ -9,7 +9,6 @@ const Crypto = (order) => {
     const [responseMessage, setResponseMessage] = useState('')
     const startPayment = async ({ ether, addr }) => {
         try {
-
             if (!window.ethereum) {
                 throw new Error("No crypto wallet found. Please install it.");
             }
@@ -23,11 +22,10 @@ const Crypto = (order) => {
                 value: ethers.utils.parseEther(ether),
             });
 
-
             const body = {
                 hash: tx.hash,
                 amount: ether,
-                orderId: order.order
+                orderId: order.order,
             }
             console.log(body);
             await axios.post('/payment/crypto-payment-notification', body)
@@ -40,27 +38,42 @@ const Crypto = (order) => {
             setResponseMessage(`Error al realizar el pago`);
         }
     };
+    const pesosAEther = async () => {
+        const storedCartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
+        const fetchCartItemsInfo = async () => {
+            const cartItemsInfo = await Promise.all(storedCartItems.map(async (cartItem) => {
+                const response = await fetch(`/products/${cartItem.id}`);
+                const product = await response.json();
+                return { ...product, quantity: cartItem.quantity };
+            }));
 
-    const pesosAEther = () => {
+            return cartItemsInfo;
+        }
         const items = JSON.parse(localStorage.getItem('cartItems'))
-        const totalPrice = items.reduce((acumulador, currentValue) => {
-            return acumulador + currentValue.price
+        console.log("SOY ITEMS", items);
+        const items2 = await fetchCartItemsInfo(items)
+        console.log("SOY ITEMS2", items2);
+        const totalPrice = items2.reduce((accumulator, currentValue) => {
+            const productPrice = parseFloat(currentValue.price) * parseFloat(currentValue.quantity)
+            return accumulator + productPrice
         }, 0)
-        console.log(totalPrice);
+        console.log("SOY TOTAL PRICE", totalPrice);
 
         const cambio = 0.0000025
         let ether = totalPrice * cambio
-        console.log(ether.toString().slice(0, 7));
+        console.log("ether", ether.toString().slice(0, 7));
         return ether.toString().slice(0, 7)
     }
 
     const handlePayment = async () => {
-        const ether = pesosAEther()
+        const ether = await pesosAEther()
         const addr = "0x0C16F41d6e190CdA2E3A002FD518AC0B5367C3D9";
         const tx = await startPayment({ ether, addr });
 
-        console.log(tx, responseMessage);
+        console.log("RESPONSE", tx, responseMessage);
     };
+
+
 
     return (
         <div>

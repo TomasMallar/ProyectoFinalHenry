@@ -18,7 +18,10 @@ import {
     ADD_INGREDIENT_TYPE_CATEGORIE,
     DELETE_ELEMENT,
     EDIT_PROFILE,
-    GET_USER_ORDER
+    GET_USER_ORDER,
+    CANCEL_ORDER_USER,
+    RESET_ERROR,
+    REMOVE_ORDER_USER
 } from "../Action-types/Action-types"
 
 export const getAllChocolates = () => {
@@ -64,6 +67,10 @@ export const resetChocolateDetail = () => ({
     type: RESET_STATE,
 
 })
+export const resetErrorMessage = () => ({
+    type: RESET_ERROR,
+
+})
 
 export const addChocolate = (newChocolate) => {
     return async function (dispatch) {
@@ -75,7 +82,7 @@ export const addChocolate = (newChocolate) => {
             })
         }
         catch (error) {
-            alert(error)
+            console.log(error)
         }
     }
 }
@@ -88,11 +95,17 @@ export const addUser = (newUser) => {
             console.log(response.data);
             return dispatch({
                 type: CREATE_USER,
-                payload: response.data
+                payload: response.data,
+		        distinct: true,
+
             })
         }
         catch (error) {
-            alert(error)
+            return dispatch({
+                type: HANDLE_ERROR,
+                payload: error?.response.data.message,
+		        distinct: true,
+            })
         }
     }
 }
@@ -244,7 +257,7 @@ export const PutProduct = (finalEditedProduct) => {
             })
         }
         catch (error) {
-            alert(error)
+            console.log(error)
         }
     }
 }
@@ -259,7 +272,7 @@ export const addIngredientCategoryType = (objToAdd, value) => {
             if(value==="ingredient") {
                 value="ingredients"
             }
-            alert(`el elemento ${objToAdd.name} se añadió correctamente a ${value}`)
+            // alert(`el elemento ${objToAdd.name} se añadió correctamente a ${value}`)
             if(value==="ingredients" || value==="types"){
             return dispatch({
                 type: ADD_INGREDIENT_TYPE_CATEGORIE,
@@ -315,7 +328,7 @@ export const PutElement = (objChanged, id, value) => {
         try {
             await axios.put(`/${value}/${id}`, objChanged)
         
-            alert(`Elemento con id: ${id} modificado correctamente!`)
+            // alert(`Elemento con id: ${id} modificado correctamente!`)
 
             if (value === "categories") {
                 const responseCat = await axios(`/${value}`)
@@ -339,7 +352,7 @@ export const PutElement = (objChanged, id, value) => {
 
         }
         catch (error) {
-            alert(error)
+            console.log(error)
         }
     }
 }
@@ -388,7 +401,6 @@ export const GetAllIngredientWithId = () => {
 export const PutEditProfile = (id, dataEdit) => {
     return async function (dispatch) {
         try {
-            
             const response = await axios.put(`/users/update/${id}`, 
             dataEdit, 
             {
@@ -415,7 +427,8 @@ export const PutEditProfile = (id, dataEdit) => {
 export const getUserOrder = (id, page) => {
     return async function (dispatch) {
       try {
-          const response = await axios.get(`/users/order/${id}?page=${page}`);
+        //   const response = await axios.get(`/users/order/${id}?page=${page}`);
+          const response = await axios.get(`/metric/all-orders/user?userId=${id}?page=${page}`);
           
           return dispatch({
             type: GET_USER_ORDER,
@@ -424,5 +437,32 @@ export const getUserOrder = (id, page) => {
         } catch (error) {
           console.log(error);
         }
+    }
+}
+
+export const cancelOrderUser = (saleId, userId) => {
+    return async function(dispatch) {
+        try {
+            // const response = await axios.put('/users/order-canceled', {
+            //     orderId: orderId
+            // });
+
+            const response = await axios.post(`/payment/sales/cancel/${saleId}`, 
+            {
+                userId
+            })
+
+            return dispatch({
+                type: CANCEL_ORDER_USER
+            });
+        } catch (error) {
+            console.log(error.message);
+        }
+    }
+}
+
+export const removeOrderUser = () => {
+    return {
+        type: REMOVE_ORDER_USER
     }
 }

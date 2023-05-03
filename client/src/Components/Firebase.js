@@ -39,17 +39,17 @@
 //       console.log(data, "data de google");
 //       const response = await axios.post("http://localhost:3001/auth/google", data);
 //       if (response.data.token) {
-//         sessionStorage.setItem("token", response.data.token);
-//         sessionStorage.setItem("Name", name);
-//         sessionStorage.setItem("user", mail);
+//         localStorage.setItem("token", response.data.token);
+//         localStorage.setItem("Name", name);
+//         localStorage.setItem("user", mail);
 
 //         ;
 //         const decodedToken = jwtDecode(response.data.token);
 //         const userRole = decodedToken.rol;
 //         const id = decodedToken.id;
-//         sessionStorage.setItem('id', id);
-//         // Guardar el rol en sessionStorage
-//         sessionStorage.setItem("userRole", userRole);
+//         localStorage.setItem('id', id);
+//         // Guardar el rol en localStorage
+//         localStorage.setItem("userRole", userRole);
 //         console.log(response, "RESPUESTA AXIOS");
         
 //       }
@@ -69,10 +69,10 @@
 //     const token = result.user.accessToken
 //     const role = 1
 
-//     sessionStorage.setItem("name", name)
-//     sessionStorage.setItem("surname", surname)
-//     sessionStorage.setItem("token", token)
-//     sessionStorage.setItem("role", role)
+//     localStorage.setItem("name", name)
+//     localStorage.setItem("surname", surname)
+//     localStorage.setItem("token", token)
+//     localStorage.setItem("role", role)
      
 //     console.log(result);
 

@@ -14,12 +14,12 @@ export default function SideBar() {
 
     const history = useHistory()
     const handleLogout = () => {
-        sessionStorage.removeItem("token");
-        sessionStorage.removeItem("userRole");
-        sessionStorage.removeItem("user");
-        sessionStorage.removeItem("Name");
-        sessionStorage.removeItem("id");
-        sessionStorage.removeItem("mail");
+        localStorage.removeItem("token");
+        localStorage.removeItem("userRole");
+        localStorage.removeItem("user");
+        localStorage.removeItem("Name");
+        localStorage.removeItem("id");
+        localStorage.removeItem("mail");
         history.push("/home");
         window.location.reload();
     };
@@ -43,21 +43,23 @@ export default function SideBar() {
                         <StorefrontIcon className={style.icon} />
                         <span className={style.span}>Productos</span></li>
                     </Link>
+                    <Link to="/users">
                     <li className={style.li}>
                         <PeopleAltOutlinedIcon className={style.icon} />
                         <span className={style.span}>Usuarios</span></li>
-                    <Link to="/orders">
-                    <li className={style.li}>
-                        <PendingActionsIcon className={style.icon} />
-                        <span className={style.span}>Órdenes</span></li>
                         </Link>
+              
 
-                        <Link to="">
+                        <Link to="/sales">
                     <li className={style.li}>
                         <PaymentsIcon className={style.icon} />
                         <span className={style.span}>Ventas</span></li>
                         </Link>
-
+                        <Link to="/orders">
+                    <li className={style.li}>
+                        <PendingActionsIcon className={style.icon} />
+                        <span className={style.span}>Ventas Detalle</span></li>
+                        </Link>
 
                     {/* <li className={style.li}>
                         <LocalShippingOutlinedIcon className={style.icon} />
@@ -90,7 +92,7 @@ export default function SideBar() {
                     <li className={style.li}>
                         <LockOutlinedIcon className={style.icon} />
 <div>
-{sessionStorage.getItem("token") ? (
+{localStorage.getItem("token") ? (
                     <div>
                         <li>
                             <button className={style.span} onClick={handleLogout}>

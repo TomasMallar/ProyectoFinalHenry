@@ -18,6 +18,13 @@ import {
     GET_INFO,
     GET_USER_ORDER,
     GET_ORDERS_INFO,
+    GET_USERS_INFO,
+    DELETE_USER,
+    GET_USER_INFO,
+    GET_SALES_INFO,
+    CANCEL_ORDER_USER,
+    RESET_ERROR,
+    REMOVE_ORDER_USER
 } from "../Action-types/Action-types"
 
 const initialState = {
@@ -33,6 +40,10 @@ const initialState = {
     metrics: {},
     order: {},
     ordersInfo: {},
+    usersInfo: [],
+    userInfo: {},
+    salesInfo: [],
+    
 }
 const reducer = (state = initialState, action) => {
     switch (action.type) {
@@ -82,6 +93,12 @@ const reducer = (state = initialState, action) => {
                 ...state,
                 errorMessage: action.payload
             }
+
+        case RESET_ERROR:
+            return {
+                ...state,
+                errorMessage: ""
+            }
         case GET_CATEGORIES:
 
             return {
@@ -102,7 +119,7 @@ const reducer = (state = initialState, action) => {
             const updatedProducts = state.chocolates.products.filter(choco => choco.id !== action.payload);
             return {
                 ...state,
-                chocolates: updatedProducts
+                chocolates: {...state.chocolates, products:updatedProducts}
 
             };
         case TOEDIT_PRODUCT:
@@ -130,7 +147,7 @@ const reducer = (state = initialState, action) => {
 
         case EDIT_PROFILE:
             const data = action.payload.user;
-            sessionStorage.setItem("user", JSON.stringify(data))
+            localStorage.setItem("user", JSON.stringify(data))
             return {
                 ...state
             }
@@ -150,7 +167,40 @@ const reducer = (state = initialState, action) => {
                 ...state,
                 ordersInfo: action.payload,
             }
+        case GET_USERS_INFO:
+            return {
+                ...state,
+                usersInfo: action.payload,
+            }
+        case DELETE_USER:
+            const updatedUsers = state.usersInfo.filter(user => user.id !== action.payload);
+            return {
+                ...state,
+                usersInfo: updatedUsers
 
+            };
+        case GET_USER_INFO:
+            return {
+                ...state,
+                userInfo: action.payload,
+            }
+        case GET_SALES_INFO:
+            return {
+                ...state,
+                salesInfo: action.payload,
+            }
+
+        case CANCEL_ORDER_USER: 
+        return {
+            ...state
+        }
+
+        case REMOVE_ORDER_USER: 
+        return {
+            ...state,
+            order: {}
+        }
+        
         default:
             return { ...state };
     }

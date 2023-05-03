@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import { PutEditProfile } from '../../Redux/Actions/Actions';
 import { useDispatch } from 'react-redux';
 import { Redirect } from 'react-router-dom';
+import Swal from 'sweetalert2';
 
 const validate = (data) => {
   const errors = {};
@@ -14,7 +15,8 @@ const validate = (data) => {
   }
 
   if (!data.confirmPassword) {
-    errors.confirmPassword = 'El campo de confirmación de contraseña es obligatorio';
+    errors.confirmPassword =
+      'El campo de confirmación de contraseña es obligatorio';
   }
 
   if (data.password !== data.confirmPassword) {
@@ -22,7 +24,7 @@ const validate = (data) => {
   }
 
   return errors;
-}
+};
 
 const EditProfilePassword = () => {
   const dispatch = useDispatch();
@@ -31,12 +33,12 @@ const EditProfilePassword = () => {
   const [isProfileUpdated, setIsProfileUpdated] = useState(false);
   const [confirmPassword, setConfirmPassword] = useState('');
 
-  const id = sessionStorage.getItem('id');
+  const id = localStorage.getItem('id');
 
   const handleInputChange = (e) => {
     const value = e.target.value;
     const property = e.target.name;
-  
+
     if (property === 'password') {
       setErrors(
         validate({
@@ -65,18 +67,34 @@ const EditProfilePassword = () => {
     e.preventDefault();
 
     if (Object.keys(editProfile).length === 0) {
-      alert('Por favor, complete los campos');
+      Swal.fire({
+        icon: 'warning',
+        title: 'Por favor, complete los campos',
+        showConfirmButton: false,
+        timer: 2000,
+      });
       return;
     }
-    
-    if(!errors.password){
+
+    if (!errors.password) {
       dispatch(PutEditProfile(id, editProfile));
-      alert('Perfil editado');
-      setIsProfileUpdated(true);
-      setErrors('');
-      setEditProfile({});
+      Swal.fire({
+        icon: 'success',
+        title: 'Perfil editado',
+        showConfirmButton: false,
+        timer: 2000,
+      }).then(() => {
+        setIsProfileUpdated(true);
+        setErrors('');
+        setEditProfile({});
+      });
     } else {
-      alert("Something went wrong. Please try again");
+      Swal.fire({
+        icon: 'error',
+        title: 'Algo salió mal, por favor intenta nuevamente',
+        showConfirmButton: false,
+        timer: 2000,
+      });
       setIsProfileUpdated(false);
     }
   };
@@ -85,40 +103,43 @@ const EditProfilePassword = () => {
     <Redirect to='/myprofile' />
   ) : (
     <div className={style.container}>
+      <h3 className={style.title}>Edita aquí tu contraseña por favor:</h3>
       <form onSubmit={handleSubmit} className={style.form}>
         <div className={style.container}>
-        <div className={style.campos}>
-          <label htmlFor='password'>New password</label>
-          <input
-            name='password'
-            value={editProfile.password}
-            onChange={handleInputChange}
-            type='password'
-          />
-        </div>
+          <div className={style.campos}>
+            <label htmlFor='password'>New password</label>
+            <input
+              name='password'
+              value={editProfile.password}
+              onChange={handleInputChange}
+              type='password'
+            />
+          </div>
 
-        <div className={style.campos}>
-          <label htmlFor='confirmPassword'>Confirm new password</label>
-          <input
-            name='confirmPassword'
-            value={confirmPassword}
-            onChange={handleInputChange}
-            type='password'
-          />
-        </div>
+          <div className={style.campos}>
+            <label htmlFor='confirmPassword'>Confirm new password</label>
+            <input
+              name='confirmPassword'
+              value={confirmPassword}
+              onChange={handleInputChange}
+              type='password'
+            />
+          </div>
 
-        <p className={style.errors}>{errors.password}</p>
-        <p className={style.errors}>{errors.confirmPassword}</p>
-        <button type='submit' className={style.button}>
-          Guardar
-        </button>
-        <Link to='/myprofile' className={style.buttonCancelar}>
-          Cancelar
-        </Link>
+          <p className={style.errors}>{errors.password}</p>
+          <p className={style.errors}>{errors.confirmPassword}</p>
+          <div className={style.divButton}>
+            <button type='submit' className={style.button}>
+              Guardar
+            </button>
+            <Link to='/myprofile' className={style.buttonCancelar}>
+              Cancelar
+            </Link>
+          </div>
         </div>
       </form>
     </div>
   );
-}
+};
 
-export default EditProfilePassword
+export default EditProfilePassword;

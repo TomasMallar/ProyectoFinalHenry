@@ -52,6 +52,7 @@ const sales = await Order.findAndCountAll({
             as: 'sale',
         },
     ],
+    distinct: true, // Agregar esta opción para asegurarse de que los registros sean únicos
 });
 
   
@@ -64,7 +65,7 @@ const sales = await Order.findAndCountAll({
 
   const totalPages = Math.ceil(sales.count / pageSize);
 
-  return { report:report.sales, page, pageSize, totalPages };
+  return { page, pageSize, totalOrders: sales.count, totalPages, report:report.sales, };
 }
 
 module.exports = {getOrdersReport};

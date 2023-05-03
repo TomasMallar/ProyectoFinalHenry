@@ -140,7 +140,7 @@ export default function SortingAndFiltering(props) {
           </option>
         </select>
       </div>
-      <div className="flex flex-wrap justify-start h-full gap-1 ml-5">
+      <div className="flex flex-wrap justify-start h-20 gap-1 mb-10 ml-5">
         {categories?.map((c) => {
           return <button
             id="category"
@@ -148,19 +148,19 @@ export default function SortingAndFiltering(props) {
             onClick={(event) => handleClick(c, event)}
             className={
               fitlerCategories?.includes(c) 
-              ? "font-serif border border-solid shadow-sm cursor-pointer shadow-chocolate-bombom w-fit bg-chocolate-oscuro border-chocolate-oscuro rounded-2xl text-chocolate-blanco" 
+              ? "font-serif border border-solid shadow-sm cursor-pointer shadow-chocolate-bombom w-fit h-fit py-1 px-2 bg-chocolate-oscuro border-chocolate-oscuro rounded-2xl text-chocolate-blanco" 
               
-              : "font-serif border border-solid shadow-sm cursor-pointer shadow-chocolate-bombom w-fit bg-chocolate-mantecol border-chocolate-oscuro rounded-2xl text-chocolate-oscuro hover:bg-chocolate-oscuro hover:text-chocolate-blanco"}
+              : "font-serif border border-solid shadow-sm cursor-pointer shadow-chocolate-bombom w-fit h-fit py-1 px-2 bg-chocolate-mantecol border-chocolate-oscuro rounded-2xl text-chocolate-oscuro hover:bg-chocolate-oscuro hover:text-chocolate-blanco"}
           >
             {c}
           </button>
         })}
-        <button id="category" onClick={(event) => handleClick("Clear", event)} className="font-serif border border-solid shadow-sm cursor-pointer shadow-chocolate-bombom w-fit bg-chocolate-bombom border-chocolate-oscuro rounded-2xl text-chocolate-blanco">
+        <button id="category" onClick={(event) => handleClick("Clear", event)} className="px-2 py-1 font-serif border border-solid shadow-sm cursor-pointer shadow-chocolate-bombom w-fit h-fit bg-chocolate-bombom border-chocolate-oscuro rounded-2xl text-chocolate-blanco">
           Borrar todos los filtros
         </button>
       </div>
 
-          <div className="flex flex-wrap justify-start h-full gap-1 ml-5">
+          <div className="flex flex-wrap justify-start h-20 gap-1 mb-10 ml-5">
             {statetypes?.map((c) => {
               return <button
                 id="types"
@@ -168,14 +168,14 @@ export default function SortingAndFiltering(props) {
                 onClick={(event) => handleClick(c, event)}
                 className={
                   fitlerCategories?.includes(c)
-                    ? "font-serif border border-solid shadow-sm cursor-pointer shadow-chocolate-bombom w-fit bg-chocolate-oscuro border-chocolate-oscuro rounded-2xl text-chocolate-blanco"
+                    ? "font-serif border border-solid shadow-sm cursor-pointer shadow-chocolate-bombom w-fit h-fit py-1 px-2 bg-chocolate-oscuro border-chocolate-oscuro rounded-2xl text-chocolate-blanco"
 
-                    : "font-serif border border-solid shadow-sm cursor-pointer shadow-chocolate-bombom w-fit bg-chocolate-mantecol border-chocolate-oscuro rounded-2xl text-chocolate-oscuro hover:bg-chocolate-oscuro hover:text-chocolate-blanco"}
+                    : "font-serif border border-solid shadow-sm cursor-pointer shadow-chocolate-bombom w-fit h-fit py-1 px-2 bg-chocolate-mantecol border-chocolate-oscuro rounded-2xl text-chocolate-oscuro hover:bg-chocolate-oscuro hover:text-chocolate-blanco"}
               >
                 {c}
               </button>
             })}
-            <button id="types" onClick={(event) => handleClick("Clear", event)} className="font-serif border border-solid shadow-sm cursor-pointer shadow-chocolate-bombom w-fit bg-chocolate-bombom border-chocolate-oscuro rounded-2xl text-chocolate-blanco">
+            <button id="types" onClick={(event) => handleClick("Clear", event)} className="px-2 py-1 font-serif border border-solid shadow-sm cursor-pointer shadow-chocolate-bombom w-fit h-fit bg-chocolate-bombom border-chocolate-oscuro rounded-2xl text-chocolate-blanco">
               Borrar todos los filtros
             </button>
           </div>

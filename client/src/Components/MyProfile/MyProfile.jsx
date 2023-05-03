@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import style from "./MyProfile.module.css"
 import { Link } from 'react-router-dom';
+import { Box, Container } from '@mui/material';
 
 const MyProfile = () => {
   const [user, setUser] = useState({
@@ -10,19 +11,20 @@ const MyProfile = () => {
     mail: '',
     phone: '',
     date_of_birth: '',
+    image: ''
   });
 
   useEffect(() => {
-    const userData = JSON.parse(sessionStorage.getItem('user'));
-    console.log('1',sessionStorage.getItem('user'));
+    const userData = JSON.parse(localStorage.getItem('user'));
+    console.log('1',localStorage.getItem('user'));
     setUser(userData);
   }, []);
 
-  const { id, name, surname, mail, phone, date_of_birth } = user;
+  const { id, name, surname, mail, phone, date_of_birth, image } = user;
 
   useEffect(() => {
     const updatedUserData = { ...user, name, surname };
-    sessionStorage.setItem('user', JSON.stringify(updatedUserData));
+    localStorage.setItem('user', JSON.stringify(updatedUserData));
     console.log('2',updatedUserData);
   }, [name, surname]);
 
@@ -31,7 +33,8 @@ const MyProfile = () => {
   return (
     <div className={style.container}>
       <div className={style.containerInfo}>
-        <div className={style.initials}>{initials}</div>
+        <div className={style.initials}><img src={image} alt={initials} className={style.initials} /></div>
+        <Link to="/editimage" className={style.button}>Editar</Link>
         <h2 className={style.nameSurname}>{name} {surname}</h2>
         
         <div className={style.containerInfo2}>

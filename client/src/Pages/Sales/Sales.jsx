@@ -1,15 +1,16 @@
-import s from './List.module.css'
+import s from './Sales.module.css'
 import SideBar from '../../Components/SideBar/SideBar'
-import DataTable from '../../Components/DataTable/DataTable'
+import SalesList from '../../Components/SalesList/SalesList'
+
 
 export default function Users(){
-
+    
     return (
         <div className={s.list}>
             <SideBar/>
             <div className={s.listContainer}>
-            <p className={s.top}>USUARIOS</p>
-            <DataTable/>
+            <p className={s.top}>VENTAS</p>
+            <SalesList/>
             </div>
         </div>
     )

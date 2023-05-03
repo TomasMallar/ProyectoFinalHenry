@@ -1,4 +1,4 @@
-const { Sale, Order, OrderItem, Product } = require('../../db');
+const { Sale, Order, OrderItem, Product, User, Cart, Purchase } = require('../../db');
 const mercadopago = require('mercadopago');
 
 mercadopago.configure({
@@ -7,7 +7,7 @@ mercadopago.configure({
 
 const handlePaymentNotification = async (req, res, next) => {
   const { topic, id } = req.query;
-  console.log('LLEGAMOS AL PAY NOTI:',topic, id)
+  console.log('LLEGAMOS AL PAY NOTI:', topic, id)
 
   if (topic === 'payment') {
     try {
@@ -45,15 +45,34 @@ const handlePaymentNotification = async (req, res, next) => {
 
       await order.update({ status: payment.body.status });
 
+      const userId = order.userId;
 
       if (payment.body.status === 'approved') {
         const orderItems = await OrderItem.findAll({ where: { orderId } });
-        
+
+        const arr = []
         orderItems.forEach(async (item) => {
           const product = await Product.findByPk(item.productId);
+          arr.push(product)
           const newTotalSold = product.totalSold + item.quantity;
-          await product.update({ totalSold: newTotalSold });
+          const newStock = product.stock - item.quantity;
+          await product.update({ totalSold: newTotalSold, stock: newStock });
         });
+
+        const productsId = arr.map(o => o.id)
+        for (const productId of productsId) {
+          await Purchase.findOrCreate({
+            where: {
+              userId: userId,
+              productId: productId
+            }
+          });
+        }
+        
+        const user = await User.findByPk(userId);
+        const cart = await Cart.findOne({ where: { userId } });
+        await cart.update({ products: [] });
+
       }
 
 
@@ -63,28 +82,6 @@ const handlePaymentNotification = async (req, res, next) => {
     }
   }
 
-  // if (topic === 'merchant_order') {
-  //   try {
-  //     console.log("LLEGAMOS AL MERCHANT ORDER")
-  //     const merchantOrder = await mercadopago.merchant_orders.findById(id);
-  //     const orderId = merchantOrder.external_reference;
-      
-  //     const [sale, created] = await Sale.findOrCreate({
-  //       where: {
-  //         orderId: orderId
-  //       }
-  //     });
-
-  //     console.log("ACA DEBERIA DE VER EL SALE", sale)
-  //     console.log("ACA DEBERIA DE VER EL AMOUNT", merchantOrder.total_amount)
-
-  //     await sale.update({amount: merchantOrder.total_amount});
-      
-  //   } catch (error) {
-  
-  //   }
-  // }
-
-  }
+}
 
 module.exports = { handlePaymentNotification };

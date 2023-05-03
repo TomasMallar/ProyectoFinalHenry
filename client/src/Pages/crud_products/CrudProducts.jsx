@@ -3,10 +3,11 @@ import { useEffect, useState } from "react"
 import { GetAllCategories, getProductsAdvanceController, DeleteProduct, EditedProduct, GetAllTypesWithId, GetAllIngredientWithId } from "../../Redux/Actions/Actions"
 import style from './crud_products.module.css'
 import { Link } from "react-router-dom"
-import ModalMailing from "../../Components/ModalMailing/ModalMailing"
+// import ModalMailing from "../../Components/ModalMailing/ModalMailing"
 import SideBar from "../../Components/SideBar/SideBar"
-
-
+import Fade from "react-reveal"
+import Pagination from '@mui/material/Pagination';
+import Stack from '@mui/material/Stack';
 
 export default function CrudProducts(props) {
     // const history = useHistory()
@@ -22,12 +23,13 @@ export default function CrudProducts(props) {
         edited: "",
         page: 1
     })
-    const [modalOpen, setModalOpen] = useState(false);
+    // const [modalOpen, setModalOpen] = useState(false);
 
 
     const allProducts = useSelector((state) => state.chocolates)
     const allCategories = useSelector((state) => state.categories)
     const allTypes = useSelector((state) => state.types)
+    const pages = useSelector((state) => state.chocolates.totalPages)
 
     useEffect(() => {
         dispatch(getProductsAdvanceController(queries.name, queries.category, queries.type, queries.orderBy, queries.orderDirection, queries.page))
@@ -62,129 +64,166 @@ export default function CrudProducts(props) {
         setQueries({ ...queries, edited: c })
     }
 
-    //-----------------------------------------Pages-----------------------------------
-    const handleonClickPages = (event) => {
-        if (event.target.value > 0 && event.target.value <= allProducts.totalPages) {
-            setQueries({ ...queries, page: event.target.value })
-        }
-
-    }
-    const totalPages = allProducts.totalPages
-    const TotalPagesArray = []
-    for (let i = 1; i <= totalPages; i++) {
-        TotalPagesArray.push(i)
-    }
-
-    const handleOpenModal = () => {
-        setModalOpen(true);
+    const handleChange = (event, value) => {
+        setQueries({ ...queries, page: value });
     };
-    const handleCloseModal = () => {
-        setModalOpen(false);
-    };
+
+    // const handleOpenModal = () => {
+    //     setModalOpen(true);
+    // };
+    // const handleCloseModal = () => {
+    //     setModalOpen(false);
+    // };
 
     return (
+        <div className="flex">
+            <SideBar />
+            <div className="ml-4">
+                <Fade cascade>
+                    <p className="relative inline-block w-full px-8 py-4 text-5xl font-bold leading-tight tracking-wide uppercase rounded-lg shadow-md text-chocolate-oscuro bg-chocolate-mantecol box h-fit">
+                        PRODUCTS
+                    </p>
+                    <div className="flex items-center justify-center p-3 h-fit ">
 
-        <>
-        <div className={style.cont}>
-            <SideBar/>
-        <div className={style.totalContainer}>
-            <p className={style.top}>PRODUCTS</p>
-            <div className={style.searchBar}>
-                <img className={style.img} alt="lupa" src="https://res.cloudinary.com/dgxs2jcyu/image/upload/v1681582108/lupa_yidfrt.png" />
-                <input type="search" name="name" value={queries.name} placeholder="Buscar Producto" onChange={handleInputChangeSearchBar} />
-                <Link to="/createProduct"> <button className={style.buttonNewProd}>AGREGAR NUEVO PRODUCTO</button></Link>
-                <Link to="/editCategoryTypeIngredient"> <button className={style.buttonNewProd}>EDITAR INGREDIENTES / TIPOS / CATEGORIAS</button></Link>
-                <div>
-                    <button className={style.buttonNewProd} onClick={handleOpenModal}>
-                        MAILING
-                    </button>
-                    {modalOpen && <ModalMailing onClose={handleCloseModal} />}
-                </div>
-            </div>
+                        <input type="search" name="name" value={queries.name} placeholder="Buscar Producto" onChange={handleInputChangeSearchBar} className="p-2 text-base border-none shadow-sm bg-chocolate-mantecol w-45 rounded-2xl text-chocolate-oscuro shadow-chocolate-bombom cursor-text focus:outline-chocolate-bombom" />
 
-            <div className={style.pagesButtons}>
-                {/* Buttons of the Pages */}
-                <button value={1} onClick={handleonClickPages}>Inicio</button>
-                <button value={queries.page - 1} onClick={handleonClickPages}>Página anterior</button>
-                {TotalPagesArray.map(p => {
-                    return <button value={p} onClick={handleonClickPages} className={Number(queries.page) === (p) ? style.selected : ''}> {p} </button>
-                })}
-                <button value={Number(queries.page) + 1} onClick={handleonClickPages}>Página Siguiente</button>
-                <button value={Number(allProducts.totalPages)} onClick={handleonClickPages}>Final</button>
-            </div>
+                        <Link to="/createProduct">
+                            <button className="p-1 ml-10 font-serif font-bold rounded-lg shadow-sm bg-chocolate-oscuro text-chocolate-blanco shadow-chocolate-claro hover:bg-chocolate-mantecol hover:text-chocolate-oscuro">
+                                AGREGAR NUEVO PRODUCTO
+                            </button>
+                        </Link>
+                        <Link to="/editCategoryTypeIngredient">
 
+                            <button className="p-1 ml-10 font-serif font-bold rounded-lg shadow-sm bg-chocolate-oscuro text-chocolate-blanco shadow-chocolate-claro hover:bg-chocolate-mantecol hover:text-chocolate-oscuro">
+                                EDITAR INGREDIENTES / TIPOS / CATEGORIAS
+                            </button>
+                        </Link>
+                        {/* <div>
+                            <button className="p-1 ml-10 font-serif font-bold rounded-lg shadow-sm bg-chocolate-oscuro text-chocolate-blanco shadow-chocolate-claro hover:bg-chocolate-mantecol hover:text-chocolate-oscuro" onClick={handleOpenModal}>
+                                MAILING
+                            </button>
 
-            <div className={style.container}>
-                <h3 className={style.cell}>ID</h3>
-                <h3 className={style.cell}>NOMBRE PRODUCTO</h3>
-                <h3 className={style.cell}>PRECIO</h3>
-                <h3 className={style.cell}>STOCK</h3>
-                <h3 className={style.cell}>IMAGEN</h3>
-                <h3 className={style.cell}>INGREDIENTES</h3>
-                <select className={style.cell} name="type" onChange={handleOnChangeFilter}>
-                    <option className={style.cell} value="TIPOS" defaultValue="TIPOS">TIPOS</option>
-                    {allTypes?.map(t => {
-                        return (
-                            <option className={style.cell} value={t.name}>{t.name}</option>
-                        )
-                    })}
-                </select>
-                <select className={style.cell} name="category" onChange={handleOnChangeFilter}>
-                    <option className={style.cell} value="CATEGORIAS" defaultValue="CATEGORIAS">CATEGORIAS</option>
-                    {allCategories.map(c => {
-                        return (
+                        </div> */}
+                    </div>
 
-                            <option className={style.cell} value={c.name}>{c.name}</option>
-                        )
-                    })}
-                </select>
+                    <div className="flex flex-row items-center justify-around border p-2.5 w-[80vw] mx-2.5 text-chocolate-blanco bg-chocolate-oscuro">
+                        <h3 className="">
+                            ID
+                        </h3>
+                        <h3 className="w-32 mr-2 text-sm text-center h-fit basis-36 ">
+                            NOMBRE PRODUCTO
+                        </h3>
+                        <h3 className="w-32 mr-2 text-sm text-center h-fit basis-36 ">
+                            PRECIO
+                        </h3>
+                        <h3 className="w-32 mr-2 text-sm text-center h-fit basis-36 ">
+                            STOCK
+                        </h3>
+                        <h3 className="w-32 mr-2 text-sm text-center h-fit basis-36 ">
+                            IMAGEN
+                        </h3>
+                        <h3 className="w-32 mr-2 text-sm text-center h-fit basis-36 ">
+                            INGREDIENTES
+                        </h3>
+                        <select className="w-32 mr-2 text-sm text-center h-fit basis-36  bg-chocolate-oscuro" name="type" onChange={handleOnChangeFilter}>
+                            <option className="w-32 mr-2 text-sm text-center h-fit basis-36  " value="TIPOS" defaultValue="TIPOS">
+                                TIPOS
+                            </option>
+                            {allTypes?.map(t => {
+                                return (
+                                    <option className="w-32 mr-2 text-sm text-center h-fit basis-36 " value={t.name}>
+                                        {t.name}
+                                    </option>
+                                )
+                            })}
+                        </select>
+                        <select className="w-32 mr-2 text-sm text-center h-fit basis-36 bg-chocolate-oscuro" name="category" onChange={handleOnChangeFilter}>
 
-                <h3 className={style.cell}>EDITAR</h3>
-                <h3 className={style.cell}>ELIMINAR</h3>
+                            <option className="w-32 mr-2 text-sm text-center h-fit basis-36 " value="CATEGORIAS" defaultValue="CATEGORIAS">
+                                CATEGORIAS
+                            </option>
+                            {allCategories.map(c => {
+                                return (
+                                    <option className="w-32 mr-2 text-sm text-center h-fit basis-36 bg-chocolate-oscuro" value={c.name}>
+                                        {c.name}
+                                    </option>
+                                )
+                            })}
+                        </select>
 
-            </div>
-            <div>
-                {allProducts.products?.map(c => {
-                    return (
-                        <div key={c.id} className={style.container}>
-                            <p className={style.cell}>{c.id}</p>
-                            <p className={style.cell}>{c.name}</p>
-                            <p className={style.cell}>{c.price}</p>
-                            <p className={style.cell}>{c.stock}</p>
-                            <img src={c.image} alt={c.name} className={style.image} />
-                            <div>
-                                {c.ingredients.length ? c.ingredients.map(i => {
-                                    return (
-                                        
-                                        <p className={style.cell}>{i}</p>
-                                    )
-                                }) : <p className={style.cell}>N/A</p>}
-                            </div>
-                            <div>
-                                {c.types.length ? c.types.map(t => {
-                                    return (
-                                        <p className={style.cell}>{t}</p>
-                                    )
-                                }) : <p className={style.cell}>N/A</p>}
-                            </div>
+                        <h3 className="w-32 mr-2 text-sm text-center h-fit basis-36 ">
+                            EDITAR
+                        </h3>
+                        <h3 className="w-32 mr-2 text-sm text-center h-fit basis-36 ">
+                            ELIMINAR
+                        </h3>
 
-                            <div>
-                                {c.categories.length ? c.categories.map(t => {
-                                    return (
-                                        <p className={style.cell}>{t}</p>
-                                    )
-                                }) : <p className={style.cell}>N/A</p>}
-                            </div>
+                    </div>
+                    <div>
+                        {allProducts.products?.map(c => {
+                            return (
+                                <div key={c.id} className="flex flex-row items-center justify-around border p-2.5 w-[80vw] mx-2.5">
+                                    <p className="w-32 mr-2 text-sm text-center h-fit basis-36 ">
+                                        {c.id}
+                                    </p>
+                                    <p className="w-32 mr-2 text-sm text-center h-fit basis-36 ">
+                                        {c.name}
+                                    </p>
+                                    <p className="w-32 mr-2 text-sm text-center h-fit basis-36 ">
+                                        {c.price}
+                                    </p>
+                                    <p className="w-32 mr-2 text-sm text-center h-fit basis-36 ">
+                                        {c.stock}
+                                    </p>
+                                    <img src={c.image} alt={c.name} className="w-24 h-16 " />
 
-                            <Link to="/editProduct"><button className={style.editButton} value={c} onClick={() => { handleOnClickEdit(c) }}>Editar</button> </Link>
-                            <button className={style.deleteButton} value={c.id} onClick={handleOnClickDelete}>Eliminar</button>
+                                    <div>
+                                        {c.ingredients.length ? c.ingredients.map(i => {
+                                            return (
 
-                        </div>
-                    )
-                })}
+                                                <p className="w-32 mr-2 text-sm text-center h-fit basis-36 ">{i}</p>
+                                            )
+                                        }) : <p className="w-32 mr-2 text-sm text-center h-fit basis-36 ">N/A</p>}
+                                    </div>
+
+                                    <div>
+                                        {c.types.length ? c.types.map(t => {
+                                            return (
+                                                <p className="w-32 mr-2 text-sm text-center h-fit basis-36 ">{t}</p>
+                                            )
+                                        }) : <p className="w-32 mr-2 text-sm text-center h-fit basis-36 ">N/A</p>}
+                                    </div>
+
+                                    <div>
+                                        {c.categories.length ? c.categories.map(t => {
+                                            return (
+                                                <p className="w-32 mr-2 text-sm text-center h-fit basis-36 ">{t}</p>
+                                            )
+                                        }) : <p className="w-32 mr-2 text-sm text-center h-fit basis-36 ">N/A</p>}
+                                    </div>
+
+                                    <Link to="/editProduct">
+                                        <button className="p-1 mx-6 font-serif font-bold rounded-lg shadow-sm bg-chocolate-oscuro text-chocolate-blanco shadow-chocolate-claro hover:bg-chocolate-mantecol hover:text-chocolate-oscuro" value={c} onClick={() => { handleOnClickEdit(c) }}>
+                                            Editar
+                                        </button>
+                                    </Link>
+
+                                    <button className="p-1 mx-6 font-serif font-bold rounded-lg shadow-sm bg-chocolate-oscuro text-chocolate-blanco shadow-chocolate-claro hover:bg-chocolate-mantecol hover:text-chocolate-oscuro" value={c.id} onClick={handleOnClickDelete}>
+                                        Eliminar
+                                    </button>
+
+                                </div>
+                            )
+                        })}
+                        {/* {modalOpen && <ModalMailing onClose={handleCloseModal} />} */}
+                    </div>
+
+                    <Stack spacing={2} className="my-2.5 items-center">
+                        <Pagination count={pages} onChange={handleChange} size="large" />
+                    </Stack>
+
+                </Fade>
             </div>
         </div>
-        </div>
-        </>
     )
 }
