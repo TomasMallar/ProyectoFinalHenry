@@ -1,4 +1,4 @@
-const { Sale, Order, OrderItem, Product } = require('../../db');
+const { Sale, Order, OrderItem, Product,User,Cart } = require('../../db');
 const mercadopago = require('mercadopago');
 
 mercadopago.configure({
@@ -55,7 +55,14 @@ const handlePaymentNotification = async (req, res, next) => {
           const newStock = product.stock - item.quantity;
           await product.update({ totalSold: newTotalSold, stock: newStock });
         });
-        localStorage.removeItem('cartItems');
+
+        const userId = order.userId;
+        const user = await User.findByPk(userId);
+        console.log("ESTE ES EL USER",user);
+        const cart = await Cart.findOne({ where: { userId } });
+        await cart.update({products:[]});
+
+
       }
 
 
