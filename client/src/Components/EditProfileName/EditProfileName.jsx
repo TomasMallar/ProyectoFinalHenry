@@ -5,19 +5,20 @@ import { Link } from 'react-router-dom';
 import { PutEditProfile } from '../../Redux/Actions/Actions';
 import { useDispatch } from 'react-redux';
 import { Redirect } from 'react-router-dom';
+import Swal from 'sweetalert2';
 
 const validate = (data) => {
-  const errors = {}; 
-  const regexName = /^([A-Za-zÁÉÍÓÚÑáéíóúñ]+[\s]?)+$/ //mayusculas minusculas acentos y nombres compuestos se aceptan 
+  const errors = {};
+  const regexName = /^([A-Za-zÁÉÍÓÚÑáéíóúñ]+[\s]?)+$/; //mayusculas minusculas acentos y nombres compuestos se aceptan
 
   if (!data.name) {
-    errors.name = 'Para enviar el dato debe estar completo'
-  } else if(!regexName.test(data.name)) {
-    errors.name = 'El nombre debe ser valido'
-  } 
+    errors.name = 'Para enviar el dato debe estar completo';
+  } else if (!regexName.test(data.name)) {
+    errors.name = 'El nombre debe ser valido';
+  }
 
   return errors;
-}
+};
 
 const EditProfileName = () => {
   const dispatch = useDispatch();
@@ -25,10 +26,7 @@ const EditProfileName = () => {
   const [errors, setErrors] = useState({});
   const [isProfileUpdated, setIsProfileUpdated] = useState(false);
 
-  const { name } = JSON.parse(
-    localStorage.getItem('user')
-  );
-
+  const { name } = JSON.parse(localStorage.getItem('user'));
 
   const id = localStorage.getItem('id');
 
@@ -39,9 +37,9 @@ const EditProfileName = () => {
     setErrors(
       validate({
         ...editProfile,
-        [property] : value,
+        [property]: value,
       })
-    )
+    );
 
     setEditProfile({
       ...editProfile,
@@ -49,28 +47,43 @@ const EditProfileName = () => {
     });
   };
 
-  useEffect(() => {
-    const userData = JSON.parse(localStorage.getItem('user'));
-    const updatedUserData = { ...userData, ...editProfile };
-    localStorage.setItem('user', JSON.stringify(updatedUserData));
-  }, [editProfile]);
- 
   const handleSubmit = (e) => {
     e.preventDefault();
-    
+
     if (Object.keys(editProfile).length === 0) {
-      alert('Por favor, complete los campos');
+      Swal.fire({
+        icon: 'warning',
+        title: 'Por favor, complete los campos',
+        showConfirmButton: false,
+        timer: 2000,
+      });
       return;
     }
 
-    if(!errors.name){
+    if (!errors.name) {
       dispatch(PutEditProfile(id, editProfile));
-      alert('Perfil editado');
-      setIsProfileUpdated(true);
-      setErrors('');
-      setEditProfile({});
+
+      const userData = JSON.parse(localStorage.getItem('user'));
+      const updatedUserData = { ...userData, ...editProfile };
+      localStorage.setItem('user', JSON.stringify(updatedUserData));
+
+      Swal.fire({
+        icon: 'success',
+        title: 'Perfil editado',
+        showConfirmButton: false,
+        timer: 2000,
+      }).then(() => {
+        setIsProfileUpdated(true);
+        setErrors('');
+        setEditProfile({});
+      });
     } else {
-      alert("Something went wrong. Please try again");
+      Swal.fire({
+        icon: 'error',
+        title: 'Algo salió mal, por favor intenta nuevamente',
+        showConfirmButton: false,
+        timer: 2000,
+      });
       setIsProfileUpdated(false);
     }
   };
@@ -79,24 +92,27 @@ const EditProfileName = () => {
     <Redirect to='/myprofile' />
   ) : (
     <div className={style.container}>
+      <h3 className={style.title}>Edita aquí tu nombre por favor:</h3>
       <form onSubmit={handleSubmit} className={style.form}>
         <div className={style.container}>
           <div className={style.campos}>
-                  <label htmlFor='name'>New name</label>
-                  <input
-                    name='name'
-                    value={editProfile.name}
-                    onChange={handleInputChange}
-                    type='text'
-                  />
+            <label htmlFor='name'>New name</label>
+            <input
+              name='name'
+              value={editProfile.name}
+              onChange={handleInputChange}
+              type='text'
+            />
           </div>
-        <p className={style.errors}>{errors.name}</p>
-        <button type='submit' className={style.button}>
-          Guardar
-        </button>
-        <Link to='/myprofile' className={style.buttonCancelar}>
-          Cancelar
-        </Link>
+          <p className={style.errors}>{errors.name}</p>
+          <div className={style.divButton}>
+            <button type='submit' className={style.button}>
+              Guardar
+            </button>
+            <Link to='/myprofile' className={style.buttonCancelar}>
+              Cancelar
+            </Link>
+          </div>
         </div>
       </form>
     </div>

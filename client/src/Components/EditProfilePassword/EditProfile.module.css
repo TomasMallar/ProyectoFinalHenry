@@ -1,8 +1,10 @@
-.container { 
+.container {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  /* justify-content: center; */
   align-items: center;
+  margin-top: 50px;
+  height: 70vh;
 }
 
 .campos {
@@ -12,7 +14,7 @@
   align-items: center;
   margin: 10px;
   border: 1px solid rgb(139, 134, 134);
-  width: 300px;
+  width: 500px;
   border-radius: 20px;
 }
 
@@ -27,7 +29,7 @@
   margin-bottom: 10px;
 }
 
-.divLabelInput{
+.divLabelInput {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -37,6 +39,7 @@
   font-size: 17px;
   font-weight: 600;
   margin-bottom: 5px;
+  margin-top: 20px;
 }
 
 .campos input {
@@ -45,6 +48,9 @@
   border-radius: 10px;
   padding-left: 10px;
   padding-right: 20px;
+  width: 400px;
+  margin-top: 20px;
+  margin-bottom: 20px;
 }
 
 .button {
@@ -58,7 +64,7 @@
   margin-left: 20px;
 }
 
-.buttonCancelar{
+.buttonCancelar {
   margin-bottom: 20px;
   padding-left: 16px;
   padding-right: 16px;
@@ -79,7 +85,7 @@
   color: white;
 }
 
-.errors{
+.errors {
   color: red;
   font-size: 14px;
 }
@@ -91,6 +97,18 @@
   padding-right: 16px;
   padding-top: 8px;
   padding-bottom: 8px;
-  background-color: bisque ;
+  background-color: bisque;
   border-radius: 20px;
+}
+
+.divButton {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.title {
+  font-size: 2rem;
+  font-weight: 600;
+  margin-top: 20px;
 }
