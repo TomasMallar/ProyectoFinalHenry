@@ -39,6 +39,7 @@ passport.use(
                 phone: "11222333",
                 date_of_birth: "2000-01-01",
                 rolId: roles.id,
+                image: profile.image,
             });
 
             // Retorna el nuevo usuario creado
