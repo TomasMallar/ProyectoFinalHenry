@@ -2,7 +2,7 @@ import { useSelector } from "react-redux"
 import style from '../createProduct/CreateProduct.module.css'
 import { useEffect, useState, useRef } from "react"
 import { useDispatch } from "react-redux"
-import { GetAllCategories, GetAllIngredient, GetAllTypes, PutProduct } from "../../Redux/Actions/Actions"
+import { GetAllCategories, GetAllIngredientWithId, GetAllTypesWithId, PutProduct } from "../../Redux/Actions/Actions"
 import Button from "../../Components/Button/Button"
 import { Link, useHistory } from "react-router-dom/cjs/react-router-dom.min"
 import CreateProdCard from "../createProduct/ProductCard"
@@ -19,11 +19,14 @@ export default function Edit() {
 
     const editedProduct = useSelector(state => state.editedProduct)
    
-    const types = useSelector((state) => state.types)
+    const stateTypes = useSelector((state) => state.types)
+    const types = stateTypes.map(t => t.name)
+
     const statecategories = useSelector((state) => state.categories)
     const categories = statecategories.map(c => c.name)
-    const ingredients = useSelector((state) => state.ingredients)
-    console.log(editedProduct, "soy editedProd")
+    const stateIngredients = useSelector((state) => state.ingredients)
+    const ingredients = stateIngredients.map(i => i.name)
+    console.log(types, categories, ingredients, "somos lo que se filta")
 
     const [selectedIngredients, setSelectedIngredients] = useState(editedProduct.ingredients)
     const [selectedTypes, setSelectedTypes] = useState(editedProduct.types)
@@ -44,8 +47,8 @@ export default function Edit() {
 
     useEffect(() => {
         dispatch(GetAllCategories())
-        dispatch(GetAllIngredient())
-        dispatch(GetAllTypes())
+        dispatch(GetAllIngredientWithId())
+        dispatch(GetAllIngredientWithId())
         setFinalEditedProduct ({...finalEditedProduct, types:selectedTypes, ingredients:selectedIngredients, categories:selectedCategories})
 
     }, [dispatch,selectedCategories, selectedIngredients, selectedTypes]
