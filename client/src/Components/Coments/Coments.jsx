@@ -14,6 +14,7 @@ const Coments = () => {
     const [commentsDeleted, setCommentsDeleted] = useState(false)
     const [commentsUpdated, setCommentsUpdated] = useState(false)
     const [editComment, setEditComment] = useState({ id: null, content: '' })
+
     const { id } = useParams()
     const [cont, setCont] = useState(0)
 

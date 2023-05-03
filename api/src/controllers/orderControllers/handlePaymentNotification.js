@@ -1,4 +1,4 @@
-const { Sale, Order, OrderItem, Product,User,Cart } = require('../../db');
+const { Sale, Order, OrderItem, Product, User, Cart, Purchase } = require('../../db');
 const mercadopago = require('mercadopago');
 
 mercadopago.configure({
@@ -7,7 +7,7 @@ mercadopago.configure({
 
 const handlePaymentNotification = async (req, res, next) => {
   const { topic, id } = req.query;
-  console.log('LLEGAMOS AL PAY NOTI:',topic, id)
+  console.log('LLEGAMOS AL PAY NOTI:', topic, id)
 
   if (topic === 'payment') {
     try {
@@ -45,23 +45,33 @@ const handlePaymentNotification = async (req, res, next) => {
 
       await order.update({ status: payment.body.status });
 
+      const userId = order.userId;
 
       if (payment.body.status === 'approved') {
         const orderItems = await OrderItem.findAll({ where: { orderId } });
-        
+
+        const arr = []
         orderItems.forEach(async (item) => {
           const product = await Product.findByPk(item.productId);
+          arr.push(product)
           const newTotalSold = product.totalSold + item.quantity;
           const newStock = product.stock - item.quantity;
           await product.update({ totalSold: newTotalSold, stock: newStock });
         });
 
-        const userId = order.userId;
+        const productsId = arr.map(o => o.id)
+        for (const productId of productsId) {
+          await Purchase.findOrCreate({
+            where: {
+              userId: userId,
+              productId: productId
+            }
+          });
+        }
+        
         const user = await User.findByPk(userId);
-        console.log("ESTE ES EL USER",user);
         const cart = await Cart.findOne({ where: { userId } });
-        await cart.update({products:[]});
-
+        await cart.update({ products: [] });
 
       }
 
@@ -72,6 +82,6 @@ const handlePaymentNotification = async (req, res, next) => {
     }
   }
 
-  }
+}
 
 module.exports = { handlePaymentNotification };
