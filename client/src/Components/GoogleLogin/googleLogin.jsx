@@ -31,11 +31,13 @@ function LoginButton() {
   const singInWithGoogle = () => {
 
     signInWithPopup(auth, provider).then(async (result) => {
+    console.log(result);
       const name = result._tokenResponse.firstName;
       const surname = result._tokenResponse.lastName;
       const mail = result._tokenResponse.email;
-
-      const data = { mail, surname, name };
+      const image = result._tokenResponse.photoUrl;
+      
+      const data = { mail, surname, name, image };
 
       try {
 
@@ -69,14 +71,14 @@ function LoginButton() {
 //-----------------------------------------FACEBOOK-----------------------------------------------------
 const  singInWithFacebook = () => {
   const fbProvider = new FacebookAuthProvider()
-      console.log(auth, fbProvider);
   signInWithPopup(auth, fbProvider)
   .then(async(result) => {
     console.log(result);
     const name = result._tokenResponse.firstName;
     const surname = result._tokenResponse.lastName;
     const mail = result._tokenResponse.email;
-    const data = { mail, surname, name };
+    const image = result._tokenResponse.photoUrl;
+    const data = { mail, surname, name, image };
   try {
     console.log(data, "data de Facebook");
       const response = await axios.post("http://localhost:3001/auth/google", data);

@@ -7,7 +7,8 @@ const path = require('path');
 const util = require('util');
 const { User, Rol } = require("../../db")
 
-const authGoogle = async ({ name, surname, mail }) => {
+const authGoogle = async ({ name, surname, mail, image }) => {
+  console.log(image, name);
     try {
       const passwordHash = await encrypt(`${mail}${process.env.JWT_SECRET}`);
 
@@ -17,7 +18,8 @@ const authGoogle = async ({ name, surname, mail }) => {
             where: { mail },
             defaults: {
                 name, 
-                surname, 
+                surname,
+                image, 
                 password: passwordHash,
                 mail,
                 phone: "11222333",
