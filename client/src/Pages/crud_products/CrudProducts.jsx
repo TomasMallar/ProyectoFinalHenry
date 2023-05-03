@@ -106,7 +106,7 @@ export default function CrudProducts(props) {
                         </div> */}
                     </div>
 
-                    <div className="flex flex-row items-center justify-around border p-2.5 w-[80vw] mx-2.5 text-chocolate-blanco bg-chocolate-bombom">
+                    <div className="flex flex-row items-center justify-around border p-2.5 w-[80vw] mx-2.5 text-chocolate-blanco bg-chocolate-bombom rounded">
                         <h3 className="">
                             ID
                         </h3>
@@ -162,7 +162,7 @@ export default function CrudProducts(props) {
                     <div>
                         {allProducts.products?.map(c => {
                             return (
-                                <div key={c.id} className="flex flex-row items-center justify-around border p-2.5 w-[80vw] mx-2.5">
+                                <div key={c.id} className="flex flex-row items-center justify-around border p-2.5 w-[80vw] mx-2.5 rounded">
                                     <p className="w-32 mr-2 text-sm text-center h-fit basis-36 ">
                                         {c.id}
                                     </p>
