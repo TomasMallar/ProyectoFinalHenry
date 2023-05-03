@@ -87,14 +87,13 @@ export default function CrudProducts(props) {
 
                         <input type="search" name="name" value={queries.name} placeholder="Buscar Producto" onChange={handleInputChangeSearchBar} className="p-2 text-base border-none shadow-sm bg-chocolate-mantecol w-45 rounded-2xl text-chocolate-oscuro shadow-chocolate-bombom cursor-text focus:outline-chocolate-bombom" />
 
-                        <Link to="/createProduct">
-                            <button className="p-1 ml-10 font-serif font-bold rounded-lg shadow-sm bg-chocolate-oscuro text-chocolate-blanco shadow-chocolate-claro hover:bg-chocolate-mantecol hover:text-chocolate-oscuro">
+                        <Link to="/createProduct" className="ml-10 w-fit h-fit">
+                            <button className="p-1 font-serif font-bold rounded-lg shadow-sm bg-chocolate-oscuro text-chocolate-blanco shadow-chocolate-claro hover:bg-chocolate-mantecol hover:text-chocolate-oscuro">
                                 AGREGAR NUEVO PRODUCTO
                             </button>
                         </Link>
-                        <Link to="/editCategoryTypeIngredient">
-
-                            <button className="p-1 ml-10 font-serif font-bold rounded-lg shadow-sm bg-chocolate-oscuro text-chocolate-blanco shadow-chocolate-claro hover:bg-chocolate-mantecol hover:text-chocolate-oscuro">
+                        <Link to="/editCategoryTypeIngredient" className="ml-10 w-fit h-fit">
+                            <button className="p-1 font-serif font-bold rounded-lg shadow-sm bg-chocolate-oscuro text-chocolate-blanco shadow-chocolate-claro hover:bg-chocolate-mantecol hover:text-chocolate-oscuro">
                                 EDITAR INGREDIENTES / TIPOS / CATEGORIAS
                             </button>
                         </Link>
@@ -208,7 +207,7 @@ export default function CrudProducts(props) {
                                         </button>
                                     </Link>
 
-                                    <button className="p-1 mx-6 font-serif font-bold rounded-lg shadow-sm bg-chocolate-oscuro text-chocolate-blanco shadow-chocolate-claro hover:bg-chocolate-mantecol hover:text-chocolate-oscuro" value={c.id} onClick={handleOnClickDelete}>
+                                    <button className="p-1 mx-6 font-serif font-bold rounded-lg shadow-sm bg-red text-chocolate-blanco shadow-chocolate-claro hover:bg-LightRed " value={c.id} onClick={handleOnClickDelete}>
                                         Eliminar
                                     </button>
 

@@ -174,7 +174,7 @@ export default function EditCategoryTypeIngredient() {
                                     </button>
                                 </div>
                                 <div className="table-cell p-2.5  text-center break-all">
-                                    <button className="inline-block px-5 py-2 mx-1 ml-20 text-base text-center duration-300 ease-in border-none rounded shadow-lg bg-chocolate-bombom text-chocolate-blanco hover:bg-chocolate-oscuro hover:shadow-xl hover:text-chocolate-blanco" value={element.id} onClick={handleDelete}>
+                                    <button className="inline-block px-5 py-2 mx-1 ml-20 text-base text-center duration-300 ease-in border-none rounded shadow-lg bg-red text-chocolate-blanco hover:bg-LightRed hover:shadow-xl hover:text-chocolate-blanco" value={element.id} onClick={handleDelete}>
                                         Eliminar
                                     </button>
                                 </div>

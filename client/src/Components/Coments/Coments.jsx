@@ -122,7 +122,7 @@ const Coments = () => {
                 <div className='flex items-center my-6 justify-evenly'>
                     <textarea type="text" placeholder='Escribe un comentario...' onChange={onChangeHandler} maxlength="150" className="p-4 mb-2 text-base border-none shadow-sm bg-chocolate-mantecol w-[70%] h-28 rounded-2xl text-chocolate-oscuro shadow-chocolate-bombom cursor-text focus:outline-chocolate-bombom" />
 
-                    <button onClick={postComment} className='p-1 m-2 font-serif font-bold rounded-lg shadow-sm bg-chocolate-claro text-chocolate-oscuro shadow-chocolate-claro hover:bg-chocolate-blanco'>
+                    <button onClick={postComment} className='p-1 m-2 font-serif font-bold rounded-lg shadow-sm bg-chocolate-claro text-chocolate-oscuro shadow-chocolate-claro hover:bg-chocolate-bombom'>
                         Publicar
                     </button>
                 </div>
@@ -149,7 +149,7 @@ const Coments = () => {
                                 {editComment.id === comment.id ? (
                                     <form onSubmit={editCommentSubmit} >
                                         <textarea value={editComment.content} onChange={(event) => setEditComment({ ...editComment, content: event.target.value })} maxlength="150" className="p-4 mb-2 text-base border-none shadow-sm bg-chocolate-mantecol w-[70%] h-28 rounded-2xl text-chocolate-oscuro shadow-chocolate-bombom cursor-text focus:outline-chocolate-bombom" />
-                                        <button name={comment.id} type="submit" className='p-1 m-2 font-serif font-bold rounded-lg shadow-sm bg-chocolate-claro text-chocolate-oscuro shadow-chocolate-claro hover:bg-chocolate-blanco'>
+                                        <button name={comment.id} type="submit" className='p-1 m-2 font-serif font-bold rounded-lg shadow-sm bg-chocolate-claro text-chocolate-oscuro shadow-chocolate-claro hover:bg-chocolate-bombom'>
                                             Guardar
                                         </button>
                                     </form>
@@ -160,10 +160,10 @@ const Coments = () => {
                                 )}
                                 {((comment.userId === userId) || (userRol  === 2)) && (
                                     <div className='flex items-center justify-end'>
-                                        <button onClick={() => editCommentHandler(comment)} className='p-1 m-2 font-serif font-bold rounded-lg shadow-sm bg-chocolate-claro text-chocolate-oscuro shadow-chocolate-claro hover:bg-chocolate-blanco'>
+                                        <button onClick={() => editCommentHandler(comment)} className='p-1 m-2 font-serif font-bold rounded-lg shadow-sm bg-chocolate-claro text-chocolate-oscuro shadow-chocolate-claro hover:bg-chocolate-bombom'>
                                             Editar
                                         </button>
-                                        <button name={comment.id} onClick={deleteComment} className='p-1 m-2 font-serif font-bold rounded-lg shadow-sm bg-chocolate-claro text-chocolate-oscuro shadow-chocolate-claro hover:bg-chocolate-blanco'>
+                                        <button name={comment.id} onClick={deleteComment} className='p-1 m-2 font-serif font-bold rounded-lg shadow-sm bg-red text-chocolate-blanco shadow-chocolate-claro hover:bg-LightRed'>
                                             Eliminar
                                         </button>
                                     </div>
