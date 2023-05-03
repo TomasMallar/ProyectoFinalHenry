@@ -3,6 +3,9 @@ import { DeleteElement, getProductsAdvanceController,GetAllCategories, GetAllIng
 import { useState, useEffect } from 'react'
 import { addIngredientCategoryType } from '../../Redux/Actions/Actions'
 import style from './editCTI.module.css'
+import { Link } from 'react-router-dom'
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import Validations from './validations'
 
 
 export default function EditCategoryTypeIngredient() {
@@ -16,11 +19,20 @@ export default function EditCategoryTypeIngredient() {
     const [idToEdit, setIdToEdit] = useState(0);
     const [showModal, setShowModal] = useState(false);
     const [searchBar, setSearchBar] = useState("")
+    const [errors, setErrors] = useState("")
+    const [errorsModal, setErrorsModal] = useState(false)
+    const [failModal, setFailsModal] = useState(false)
+    const [deleteModal, setDeleteModal] = useState(false)
+
+
+
     useEffect(() => {
         dispatch(GetAllIngredientWithId())
         dispatch(GetAllCategories())
         dispatch(GetAllTypesWithId())
         dispatch(getProductsAdvanceController())
+       setErrors( Validations(searchBar))
+
 
     }, [dispatch, searchBar])
 
@@ -46,18 +58,26 @@ export default function EditCategoryTypeIngredient() {
 
     const handleOnClickAdd = (event) => {
         const objToAdd = { name: searchBar }
+        setErrors(Validations(searchBar))
+        if(errors==="Ingrese un ingrediente válido"){
+            setFailsModal(true)
+        }else{
         dispatch(addIngredientCategoryType(objToAdd, toAdd))
-        setSearchBar("")
-        setToEdit([])
-        setToAdd("")
+        // setSearchBar("")
+        // setErrors("")
+        // setToEdit([])
+        // setToAdd("")
+        setErrorsModal(true)
+        }
 
     }
 
     const handleDelete = (event) => {
         const id = event.target.value
         dispatch(DeleteElement(id, toAdd))
-        setToEdit([])
-        setToAdd("")
+        // setToEdit([])
+        // setToAdd("")
+        setDeleteModal(true)
 
     }
     const handleEdit = (event) => {
@@ -67,18 +87,41 @@ export default function EditCategoryTypeIngredient() {
     }
     const handleOnChangeEdit = (event) => {
         setInputEdit(event.target.value)
+        setErrors(Validations(event.target.value))
     }
 
     const handleSave = () => {
         const objChanged = {
             name: inputEdit
         }
+        if(errors){
+setFailsModal(true)     
+   }else{
         dispatch(PutElement(objChanged, idToEdit, toAdd))
         setShowModal(false);
+        // setInputEdit("")
+        // setToEdit([])
+        // setToAdd("")
+        // setErrors("")
+        setErrorsModal(true)
+        }
+    }
+    const handleSaveOk = (event) => {
+        setSearchBar("")
         setInputEdit("")
         setToEdit([])
         setToAdd("")
+        setErrors("")
+        setErrorsModal(false)
+        setDeleteModal(false)
+        
     }
+    const handleSaveFail = (event) => {
+       
+       setFailsModal(false)
+        
+    }
+
     const handleOnChangeSearchBar = (event) => {
         setSearchBar(event.target.value)
 
@@ -87,7 +130,6 @@ export default function EditCategoryTypeIngredient() {
             setToEdit(searched)
         } else if (toAdd === "types") {
             const searched = allTypes.filter(e => e.name.includes(event.target.value))
-            console.log("soy allTypes", allTypes, "y searched", searched)
             setToEdit(searched)
         } else if (toAdd === "categories") {
             const searched = allCategories.filter(e => e.name.includes(event.target.value))
@@ -96,10 +138,12 @@ export default function EditCategoryTypeIngredient() {
 
     }
     return (
-        <div>
+        <div className={style.page}>
+           <Link to="/crudProducts"> <button  className={style.buttonGoBack} ><ArrowBackIcon/>VOLVER A PRODUCTOS</button></Link>
             <button onClick={handleOnClickEdit} className={style.buttonEditElement} value={"ingredient"}>EDITAR INGREDIENTE </button>
             <button onClick={handleOnClickEdit} className={style.buttonEditElement} value={"categories"}>EDITAR CATEGORÍA </button>
             <button  onClick={handleOnClickEdit} className={style.buttonEditElement} value={"types"}>EDITAR TIPO </button>
+
             <div className={style.addContainer}>
                 {toAdd !== "" && <div>
                     <br />
@@ -134,6 +178,26 @@ export default function EditCategoryTypeIngredient() {
                     <input type="text" value={inputEdit} onChange={handleOnChangeEdit} />
                     <button onClick={handleSave}>Guardar</button>
                     <button onClick={() => setShowModal(false)}>Cancelar</button>
+                </div>
+             
+            </div>
+
+            <div className={style.modal} style={{ display: errorsModal ? 'flex' : 'none' }}>
+                <div className={style.modalContent}>
+                    <h2>Elemento añadido!!</h2>
+                    <button onClick={handleSaveOk}>OK</button>
+                </div>
+            </div>
+            <div className={style.modal} style={{ display: failModal ? 'flex' : 'none' }}>
+                <div className={style.modalContent}>
+                    <h2>Agrege un elemento válido!!</h2>
+                    <button onClick={handleSaveFail}>OK</button>
+                </div>
+            </div>
+            <div className={style.modal} style={{ display: deleteModal ? 'flex' : 'none' }}>
+                <div className={style.modalContent}>
+                    <h2>Elemento eliminado!</h2>
+                    <button onClick={handleSaveOk}>OK</button>
                 </div>
             </div>
         </div>

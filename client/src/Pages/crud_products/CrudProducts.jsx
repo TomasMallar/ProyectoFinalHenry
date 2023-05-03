@@ -3,7 +3,7 @@ import { useEffect, useState } from "react"
 import { GetAllCategories, getProductsAdvanceController, DeleteProduct, EditedProduct, GetAllTypesWithId, GetAllIngredientWithId } from "../../Redux/Actions/Actions"
 import style from './crud_products.module.css'
 import { Link } from "react-router-dom"
-import ModalMailing from "../../Components/ModalMailing/ModalMailing"
+// import ModalMailing from "../../Components/ModalMailing/ModalMailing"
 import SideBar from "../../Components/SideBar/SideBar"
 import Fade from "react-reveal"
 import Pagination from '@mui/material/Pagination';
@@ -23,7 +23,7 @@ export default function CrudProducts(props) {
         edited: "",
         page: 1
     })
-    const [modalOpen, setModalOpen] = useState(false);
+    // const [modalOpen, setModalOpen] = useState(false);
 
 
     const allProducts = useSelector((state) => state.chocolates)
@@ -68,12 +68,12 @@ export default function CrudProducts(props) {
         setQueries({ ...queries, page: value });
     };
 
-    const handleOpenModal = () => {
-        setModalOpen(true);
-    };
-    const handleCloseModal = () => {
-        setModalOpen(false);
-    };
+    // const handleOpenModal = () => {
+    //     setModalOpen(true);
+    // };
+    // const handleCloseModal = () => {
+    //     setModalOpen(false);
+    // };
 
     return (
         <div className="flex">
@@ -98,15 +98,15 @@ export default function CrudProducts(props) {
                                 EDITAR INGREDIENTES / TIPOS / CATEGORIAS
                             </button>
                         </Link>
-                        <div>
+                        {/* <div>
                             <button className="p-1 ml-10 font-serif font-bold rounded-lg shadow-sm bg-chocolate-oscuro text-chocolate-blanco shadow-chocolate-claro hover:bg-chocolate-mantecol hover:text-chocolate-oscuro" onClick={handleOpenModal}>
                                 MAILING
                             </button>
 
-                        </div>
+                        </div> */}
                     </div>
 
-                    <div className="flex flex-row items-center justify-around border p-2.5 w-[80vw] mx-2.5">
+                    <div className="flex flex-row items-center justify-around border p-2.5 w-[80vw] mx-2.5 text-chocolate-blanco bg-chocolate-oscuro">
                         <h3 className="">
                             ID
                         </h3>
@@ -125,8 +125,8 @@ export default function CrudProducts(props) {
                         <h3 className="w-32 mr-2 text-sm text-center h-fit basis-36 ">
                             INGREDIENTES
                         </h3>
-                        <select className="w-32 mr-2 text-sm text-center h-fit basis-36 " name="type" onChange={handleOnChangeFilter}>
-                            <option className="w-32 mr-2 text-sm text-center h-fit basis-36 " value="TIPOS" defaultValue="TIPOS">
+                        <select className="w-32 mr-2 text-sm text-center h-fit basis-36  bg-chocolate-oscuro" name="type" onChange={handleOnChangeFilter}>
+                            <option className="w-32 mr-2 text-sm text-center h-fit basis-36  " value="TIPOS" defaultValue="TIPOS">
                                 TIPOS
                             </option>
                             {allTypes?.map(t => {
@@ -137,14 +137,14 @@ export default function CrudProducts(props) {
                                 )
                             })}
                         </select>
-                        <select className="w-32 mr-2 text-sm text-center h-fit basis-36 " name="category" onChange={handleOnChangeFilter}>
+                        <select className="w-32 mr-2 text-sm text-center h-fit basis-36 bg-chocolate-oscuro" name="category" onChange={handleOnChangeFilter}>
 
                             <option className="w-32 mr-2 text-sm text-center h-fit basis-36 " value="CATEGORIAS" defaultValue="CATEGORIAS">
                                 CATEGORIAS
                             </option>
                             {allCategories.map(c => {
                                 return (
-                                    <option className="w-32 mr-2 text-sm text-center h-fit basis-36 " value={c.name}>
+                                    <option className="w-32 mr-2 text-sm text-center h-fit basis-36 bg-chocolate-oscuro" value={c.name}>
                                         {c.name}
                                     </option>
                                 )
@@ -215,7 +215,7 @@ export default function CrudProducts(props) {
                                 </div>
                             )
                         })}
-                        {modalOpen && <ModalMailing onClose={handleCloseModal} />}
+                        {/* {modalOpen && <ModalMailing onClose={handleCloseModal} />} */}
                     </div>
 
                     <Stack spacing={2} className="my-2.5 items-center">
