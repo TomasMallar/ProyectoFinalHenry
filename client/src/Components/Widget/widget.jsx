@@ -34,6 +34,8 @@ case "user" :
         isMoney:false,
        link: "see all users",
        path:"/users",
+       value:8,
+       percentage:700,
        icon: (
         <PeopleAltOutlinedIcon className={style.icon} style = {{color:'crimson', backgroundColor:"rgba(255,0,0,0.2)"}}/>
        )
