@@ -200,7 +200,7 @@ export default function Edit() {
                                     })}
                                 </datalist>
                                 <button onClick={handleOnClickAddCategory} className="p-1 font-serif font-bold rounded-lg shadow-sm bg-chocolate-claro text-chocolate-oscuro shadow-chocolate-claro hover:bg-chocolate-mantecol">
-                                    Añadir Categoria
+                                    Añadir Categoriaaaa
                                 </button>
                                 <Fade bottom opposite cascade >
                                     <span className="p-0 m-0 text-xs text-chocolate-bombom">{errors.categories}</span>
