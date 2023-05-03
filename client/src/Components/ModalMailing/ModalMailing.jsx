@@ -1,19 +1,24 @@
 import { useState } from "react";
 import styles from './ModalMailing.module.css'
 import axios from "axios";
+import * as React from 'react';
+import CircularProgress from '@mui/material/CircularProgress';
+import Box from '@mui/material/Box';
 
 export default function ModalMailing({ onClose }) {
   const [subject, setSubject] = useState('');
   const [message, setMessage] = useState('');
+  const [loader, setLoader] = useState(false)
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    setLoader(true)
     const data = { subject, text: message };
-    console.log(data, "soy lo que se manda en el mail")
     try {
       const response = await axios.post('http://localhost:3001/email/choconews', data);
       console.log(response.data);
       onClose();
+      setLoader(false)
     } catch (error) {
       console.error('There was a problem with the axios request:', error);
     }
@@ -56,6 +61,15 @@ export default function ModalMailing({ onClose }) {
           </div>
         </form>
       </div>
+      
+        { loader && 
+    
+      <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', backgroundColor: 'rgba(0, 0, 0, 0.6)' }}>
+        <CircularProgress />
+      </Box>
+   
+}
+   
     </div>
   );
 };
