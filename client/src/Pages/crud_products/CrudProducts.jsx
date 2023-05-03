@@ -208,7 +208,7 @@ export default function CrudProducts(props) {
                                     </Link>
 
                                     <button className="p-1 mx-6 font-serif font-bold rounded-lg shadow-sm bg-red text-chocolate-blanco shadow-chocolate-claro hover:bg-LightRed " value={c.id} onClick={handleOnClickDelete}>
-                                        Eliminar
+                                        Elimina
                                     </button>
 
                                 </div>
