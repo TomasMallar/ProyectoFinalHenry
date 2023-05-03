@@ -45,7 +45,7 @@ case "user" :
     case "order" : 
     data = {
         title:"VTA SEMESTRAL",
-        isMoney:false,
+        isMoney:true,
        link: "Ver Todas las Ventas",
        icon: (
         <ShoppingCartOutlinedIcon className={style.icon} style = {{color:'goldenrod', backgroundColor:"rgba(218,165,32,0.2)"}}/>
