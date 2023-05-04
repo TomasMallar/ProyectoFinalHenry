@@ -242,7 +242,7 @@ export default function Edit() {
                                 <Fade bottom opposite cascade >
                                     <span className="p-0 m-0 text-xs text-chocolate-bombom">{errors.ingredients}</span>
                                 </Fade>
-                                <div className="flex flex-col flex-wrap items-start justify-end w-full mt-2 ml-1 max-h-36">
+                                <div className="flex flex-col flex-wrap items-start justify-end w-full mt-2 ml-2 max-h-36 ">
                                     {
                                         selectedIngredients?.map((ingred) => {
                                             return (

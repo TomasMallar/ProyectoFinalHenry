@@ -149,7 +149,7 @@ const Detail = () => {
                                     Stock: {ChocolateDetail.stock}
                                 </p>
                                 <div className="basis-1/3">
-                                    <ButtonMP title={ChocolateDetail.name} unit_price={ChocolateDetail.price} />
+                                    {/* <ButtonMP title={ChocolateDetail.name} unit_price={ChocolateDetail.price} /> */}
                                 </div>
                                 <button className="p-1 m-2 font-serif font-bold rounded-lg shadow-sm bg-chocolate-claro text-chocolate-oscuro shadow-chocolate-claro hover:bg-chocolate-blanco basis-1/3" onClick={() => addToCart(ChocolateDetail)}>
                                     AGREGAR AL CARRO

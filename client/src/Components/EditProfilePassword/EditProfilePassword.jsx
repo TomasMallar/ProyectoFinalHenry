@@ -6,6 +6,7 @@ import { PutEditProfile } from '../../Redux/Actions/Actions';
 import { useDispatch } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import Swal from 'sweetalert2';
+import { Fade } from "react-reveal"
 
 const validate = (data) => {
   const errors = {};
@@ -102,43 +103,59 @@ const EditProfilePassword = () => {
   return isProfileUpdated ? (
     <Redirect to='/myprofile' />
   ) : (
-    <div className={style.container}>
-      <h3 className={style.title}>Edita aquí tu contraseña por favor:</h3>
-      <form onSubmit={handleSubmit} className={style.form}>
-        <div className={style.container}>
-          <div className={style.campos}>
-            <label htmlFor='password'>New password</label>
-            <input
-              name='password'
-              value={editProfile.password}
-              onChange={handleInputChange}
-              type='password'
-            />
-          </div>
+    <Fade>
+      <div className="flex flex-col items-center h-screen pt-12 font-serif bg-chocolate-blanco">
+        <h3 className="mt-5 text-4xl font-bold">
+          Edita aquí tu contraseña por favor:
+        </h3>
+        <form onSubmit={handleSubmit}>
+          <div className="flex flex-col items-center pt-12 ">
+            <div className="flex flex-col justify-center items-center m-2.5 rounded-3xl border w-[500px] h-36">
+              <label htmlFor='password' className='text-xl font-bold'>
+                New password
+              </label>
+              <input
+                name='password'
+                value={editProfile.password}
+                onChange={handleInputChange}
+                type='password'
+                className="flex flex-col justify-between p-2 mb-3 text-base border-none shadow-sm rounded-2xl bg-chocolate-mantecol w-44 text-chocolate-oscuro shadow-chocolate-bombom focus:outline focus:outline-chocolate-oscuro"
+              />
+            </div>
 
-          <div className={style.campos}>
-            <label htmlFor='confirmPassword'>Confirm new password</label>
-            <input
-              name='confirmPassword'
-              value={confirmPassword}
-              onChange={handleInputChange}
-              type='password'
-            />
-          </div>
+            <div className="flex flex-col justify-center items-center m-2.5 rounded-3xl border w-[500px] h-36">
+              <label htmlFor='confirmPassword' className='text-xl font-bold'>
+                Confirm new password
+              </label>
+              <input
+                name='confirmPassword'
+                value={confirmPassword}
+                onChange={handleInputChange}
+                type='password'
+                className="flex flex-col justify-between p-2 mb-3 text-base border-none shadow-sm rounded-2xl bg-chocolate-mantecol w-44 text-chocolate-oscuro shadow-chocolate-bombom focus:outline focus:outline-chocolate-oscuro"
+              />
+            </div>
+            <Fade bottom oppsite cascade>
+              <p className="p-0 m-0 text-base text-chocolate-oscuro">
+                {errors.password}
+              </p>
+              <p className="p-0 m-0 text-base text-chocolate-oscuro">
+                {errors.confirmPassword}
+              </p>
+            </Fade>
+            <div>
 
-          <p className={style.errors}>{errors.password}</p>
-          <p className={style.errors}>{errors.confirmPassword}</p>
-          <div className={style.divButton}>
-            <button type='submit' className={style.button}>
-              Guardar
-            </button>
-            <Link to='/myprofile' className={style.buttonCancelar}>
-              Cancelar
-            </Link>
+              <button type='submit' className="p-1.5 m-2 font-serif font-bold rounded-lg shadow-sm bg-chocolate-oscuro text-chocolate-blanco shadow-chocolate-claro hover:bg-chocolate-bombom">
+                Guardar
+              </button>
+              <Link to='/myprofile' className="p-2 m-2 font-serif font-bold rounded-lg shadow-sm bg-chocolate-oscuro text-chocolate-blanco shadow-chocolate-claro hover:bg-chocolate-bombom">
+                Cancelar
+              </Link>
+            </div>
           </div>
-        </div>
-      </form>
-    </div>
+        </form>
+      </div>
+    </Fade>
   );
 };
 
