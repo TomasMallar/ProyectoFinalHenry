@@ -7,6 +7,7 @@ import jwt_decode from 'jwt-decode';
 import { Redirect } from 'react-router-dom';
 import axios from 'axios';
 import style from './EditProfileImage.module.css'
+import { Fade } from 'react-reveal';
 
 const EditProfileImage = () => {
     const dispatch = useDispatch();
@@ -87,28 +88,32 @@ const EditProfileImage = () => {
     return isProfileUpdated ? (
         <Redirect to='/myprofile' />
     ) : (
-        <div >
-            <form onSubmit={handleSubmit} >
-                <div >
-                    <div>
-                        <div className={style.containerImage}>
-                            <img src={previewSource 
-                            ? previewSource 
-                            : "https://i.pinimg.com/564x/88/b4/4e/88b44e2f78161c673f92346540e1ebee.jpg"
-                            } className={style.image}/>
+        <Fade>
+            <div className='flex items-start justify-center w-screen h-screen bg-chocolate-blanco'>
+                <form onSubmit={handleSubmit} className='mt-12'>
+                    <div >
+                        <div >
+                            <div className="w-full h-full">
+                                <img src={previewSource
+                                    ? previewSource
+                                    : "https://i.pinimg.com/564x/88/b4/4e/88b44e2f78161c673f92346540e1ebee.jpg"
+                                } className="border rounded-full w-96 h-96" />
+                            </div>
+                            <input type="file" name="image" onChange={handleFileInputChange} value={fileInputState} className="p-1 mt-5 mb-3 font-serif font-bold rounded-lg shadow-sm bg-chocolate-claro text-chocolate-oscuro shadow-chocolate-claro hover:bg-chocolate-mantecol" />
                         </div>
-                        <input type="file" name="image" onChange={handleFileInputChange} value={fileInputState} />
-                        <button type="button" onClick={handleSubmitFile}>aceptar</button>
+                        <div className='my-5'>
+                            <button type="button" onClick={handleSubmitFile} className="p-1 mx-3 font-serif font-bold rounded-lg shadow-sm bg-chocolate-claro text-chocolate-oscuro shadow-chocolate-claro hover:bg-chocolate-mantecol">aceptar</button>
+                            <button type='submit' className="p-1 mx-3 font-serif font-bold rounded-lg shadow-sm bg-chocolate-claro text-chocolate-oscuro shadow-chocolate-claro hover:bg-chocolate-mantecol">
+                                Guardar
+                            </button>
+                            <Link to='/myprofile' className="p-1 mx-3 font-serif font-bold rounded-lg shadow-sm bg-chocolate-claro text-chocolate-oscuro shadow-chocolate-claro hover:bg-chocolate-mantecol">
+                                Cancelar
+                            </Link>
+                        </div>
                     </div>
-                    <button type='submit'>
-                        Guardar
-                    </button>
-                    <Link to='/myprofile' >
-                        Cancelar
-                    </Link>
-                </div>
-            </form>
-        </div>
+                </form>
+            </div>
+        </Fade>
     );
 }
 
